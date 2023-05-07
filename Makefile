@@ -6,7 +6,7 @@
 #    By: amouly <amouly@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 15:27:43 by llion             #+#    #+#              #
-#    Updated: 2023/05/07 02:10:54 by llion            ###   ########.fr        #
+#    Updated: 2023/05/07 02:37:17 by llion            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ obj/%.o : src/%.c
 
 
 $(NAME) : $(OBJ) 
+	@ctags -R
 	@make -sC libft
 	@gcc  $(FLAGS) $(OBJ) $(LIBFT) $(HEADERS) -o $(NAME)	
 ifeq ($(UNAME),Linux)
