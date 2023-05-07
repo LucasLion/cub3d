@@ -6,7 +6,7 @@
 /*   By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:59:49 by llion             #+#    #+#             */
-/*   Updated: 2023/05/07 17:44:10 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/07 18:34:03 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,9 @@ char	**get_map(char **file)
 		return (NULL);
 	while (file[i])
 	{
-		if (file[i][0] != 'R' && file[i][0] != 'N' && file[i][0] != 'S' && file[i][0] != 'W' && file[i][0] != 'E' && file[i][0] != 'F' && file[i][0] != 'C')
+		if (file[i][0] != 'R' && file[i][0] != 'N' && file[i][0] != 'S' \
+				&& file[i][0] != 'W' && file[i][0] != 'E' && file[i][0] != 'F' \
+				&& file[i][0] != 'C' && file[i][0] != '\n')
 		{
 			map[j] = ft_strdup(file[i]);
 			j++;

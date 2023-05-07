@@ -6,7 +6,7 @@
 #    By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/07 02:18:57 by llion             #+#    #+#              #
-#    Updated: 2023/05/07 02:47:38 by llion            ###   ########.fr        #
+#    Updated: 2023/05/07 18:54:37 by llion            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,6 @@ respecte les règles de carte
     - utiliser get_next_line pour stocker la map dans un tableau de strings
     - Verrifier que la map est entouree de murs
     - Verifier qu'il n'y a pas d'elements etrangers dans la map (0, 1, N, S, W, E)
-    - Verifier qu'il n'y a rien apres la map
+    - Verifier qu'il n'y a qu'un seul joueur
 
 - Se renseigner sur la technologie du raycasting

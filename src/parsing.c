@@ -6,7 +6,7 @@
 /*   By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 17:31:32 by llion             #+#    #+#             */
-/*   Updated: 2023/05/07 17:42:48 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/07 18:55:33 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,34 @@ int	parse_description(char **description)
 }
 
 
-int	parse_map(char **map)
+int	parse_elems(char **map)
 {
-	// TODO 
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'N' \
+					&& map[i][j] != 'S' && map[i][j] != 'E' \
+					&& map[i][j] != 'W' && map[i][j] != ' ' && map[i][j] != '\n')
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
+int	parse_borders(char **map)
+{
 	(void)map;
+	// TODO
+	// Check if the map is surrounded by walls
+	// Find a way to check if the last line in the example is valid
 	return (1);
 }
 
@@ -35,7 +59,10 @@ int	parsing(char **file)
 
 	description = get_description(file);
 	map = get_map(file);
-	if (parse_description(description) == 0 || parse_map(map) == 0)
+	// TODO
+	// Check if there is only one player
+	if (parse_description(description) == 0 || parse_elems(map) == 0 \
+			|| parse_borders(map) == 0)
 	{
 		ft_freetab(description);
 		ft_freetab(map);

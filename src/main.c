@@ -6,7 +6,7 @@
 /*   By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/05/07 17:42:39 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/07 19:13:24 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(void)
 	if (parsing(file) == 0)
 	{
 		ft_freetab(file);
-		ft_error("Error: Invalid map\n");
+		ft_error("Error: Invalid map");
 		return (-1);
 	}
 	ft_freetab(file);

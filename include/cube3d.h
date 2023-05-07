@@ -6,7 +6,7 @@
 /*   By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/07 17:37:50 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/07 18:39:45 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ char	**get_file();
 char	**get_description(char **map);
 char	**get_map(char **map);
 int		parsing(char **file);
+int		parse_borders(char **map);
 
 #endif
