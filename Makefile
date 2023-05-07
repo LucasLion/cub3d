@@ -6,7 +6,7 @@
 #    By: amouly <amouly@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 15:27:43 by llion             #+#    #+#              #
-#    Updated: 2023/05/07 17:04:34 by llion            ###   ########.fr        #
+#    Updated: 2023/05/07 17:22:16 by llion            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ MLX			= MLX42/build/libmlx42.a
 HEADERS		= -I include -I libft -L \
 				/Users/llion/.brew/Cellar/glfw/3.3.8/lib \
 				-ldl -lglfw -pthread -lm
-SRC			=	main.c		\
+SRC			=	main.c			\
+				extracting.c 	\
 				parsing.c 	
 MAP			= maps/map.cub
 OBJ			= ${addprefix obj/,${notdir ${SRC:.c=.o}}}

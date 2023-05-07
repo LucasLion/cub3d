@@ -6,7 +6,7 @@
 /*   By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/07 17:12:08 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/07 17:37:50 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ int		get_nb_lines_in_map_file(int fd);
 char	**get_file();
 char	**get_description(char **map);
 char	**get_map(char **map);
+int		parsing(char **file);
 
 #endif
