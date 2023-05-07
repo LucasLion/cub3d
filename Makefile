@@ -6,21 +6,23 @@
 #    By: amouly <amouly@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 15:27:43 by llion             #+#    #+#              #
-#    Updated: 2023/05/07 03:36:28 by llion            ###   ########.fr        #
+#    Updated: 2023/05/07 17:04:34 by llion            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cube3d 
-CC = gcc
-FLAGS = -Wall -Werror -Wextra -ggdb3
-LIBFT = ./libft/libft.a 
-HEADERS = -I include -I libft libmlx42.a -L \
-		  /Users/llion/.brew/Cellar/glfw/3.3.8/lib \
-		  -ldl -lglfw -pthread -lm
-SRC = 	main.c
-MAP = maps/map.cub
-UNAME := $(shell uname)
-OBJ = ${addprefix obj/,${notdir ${SRC:.c=.o}}}
+NAME		= cube3d 
+CC			= gcc
+FLAGS		= -Wall -Werror -Wextra -ggdb3
+LIBFT		= libft/libft.a 
+MLX			= MLX42/build/libmlx42.a
+HEADERS		= -I include -I libft -L \
+				/Users/llion/.brew/Cellar/glfw/3.3.8/lib \
+				-ldl -lglfw -pthread -lm
+SRC			=	main.c		\
+				parsing.c 	
+MAP			= maps/map.cub
+OBJ			= ${addprefix obj/,${notdir ${SRC:.c=.o}}}
+UNAME		:= $(shell uname)
 
 all :  ${NAME}
 
@@ -28,20 +30,18 @@ obj/%.o : src/%.c
 	@mkdir -p obj
 	@${CC} ${FLAGS} ${HEADERS} -c $< -o $@
 
-
 $(NAME) : $(OBJ) 
 	@ctags -R
 	@make -sC libft
-	@gcc  $(FLAGS) $(OBJ) $(LIBFT) $(HEADERS) -o $(NAME)	
+	@gcc  $(FLAGS) $(OBJ) $(LIBFT) $(MLX) $(HEADERS) -o $(NAME)	
 ifeq ($(UNAME),Linux)
 	@echo -e "-----> cube3d        \033[32mCOMPILED\033[0m"
 endif
 ifeq ($(UNAME),Darwin)
 	@echo "-----> cube3d        \033[32mCOMPILED\033[0m"
 endif
-	
 
-debug : $(OBJ) $(OBJBONUS) 
+debug : $(OBJ)
 	@make -sC libft
 	@gcc ${FLAGS} ${OBJ} ${LIBFT} ${HEADERS} -fsanitize=address -o ${NAME}  ${READLINE}
 ifeq ($(UNAME),Linux)
@@ -53,7 +53,7 @@ endif
 
 clean :
 	@make clean -sC libft
-	@rm -f ${OBJS} objs/%.o ${OBJBONUS} 
+	@rm -rf $(OBJ)
 ifeq ($(UNAME),Linux)
 	@echo -e "-----> objects          \033[32mREMOVED\033[0m"
 endif
@@ -62,7 +62,7 @@ ifeq ($(UNAME),Darwin)
 endif
 
 fclean : clean
-	@rm -rf ${NAME} *.dSYM
+	@rm -rf $(NAME) *.dSYM
 	@make fclean -sC libft
 ifeq ($(UNAME),Linux)
 	@echo -e "-----> cube3d        \033[32mREMOVED\033[0m"
@@ -72,7 +72,8 @@ ifeq ($(UNAME),Darwin)
 endif
 
 run:
-	@./${NAME} ${MAP}
+	@./$(NAME) $(MAP)
+
 re : fclean all
 
-.PHONY : all clean fclean re
+.PHONY : all clean fclean run debug re

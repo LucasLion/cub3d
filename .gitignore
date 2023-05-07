@@ -1,6 +1,6 @@
 *.o
 *.out
 *.dSYM/
-libmlx42.a
 MLX42/
 tags
+cube3d

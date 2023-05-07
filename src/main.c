@@ -6,29 +6,22 @@
 /*   By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/05/07 03:36:42 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/07 17:13:09 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3d.h"
 
-int	main(int argc, char **argv)
+int	main(void)
 {
-	(void)argc;
-	(void)argv;
-	int		i;
-	int		fd;
-	char	*line;
+	char	**map;
+	//char	**description;
+	char	**file;
 
-	i = 0;
-	fd = open("maps/map1.cub", O_RDONLY);
-	printf("fd: %d\n", fd);		
-
-	line = get_next_line(fd);
-	while (line)
-	{
-		line = get_next_line(fd);
-		printf("%s", line);
-		i++;
-	}
+	file = get_file();
+	//description = get_description(file);
+	map = get_map(file);
+	for (int i = 0; i < ft_tablen(map); i++)
+		printf("%s", map[i]);
+	return (0);
 }
