@@ -6,11 +6,11 @@
 /*   By: llion <llion@student.42mulhouse.fr >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:56:46 by llion             #+#    #+#             */
-/*   Updated: 2023/03/28 00:27:49 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/07 03:22:50 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
 char	*get_next_line(int fd)
 {

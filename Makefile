@@ -6,20 +6,19 @@
 #    By: amouly <amouly@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 15:27:43 by llion             #+#    #+#              #
-#    Updated: 2023/05/07 02:37:17 by llion            ###   ########.fr        #
+#    Updated: 2023/05/07 03:36:28 by llion            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cube3d 
 CC = gcc
-#FLAGS = -Wall -Werror -Wextra -ggdb3
-FLAGS = -ggdb3
+FLAGS = -Wall -Werror -Wextra -ggdb3
 LIBFT = ./libft/libft.a 
 HEADERS = -I include -I libft libmlx42.a -L \
 		  /Users/llion/.brew/Cellar/glfw/3.3.8/lib \
 		  -ldl -lglfw -pthread -lm
 SRC = 	main.c
-
+MAP = maps/map.cub
 UNAME := $(shell uname)
 OBJ = ${addprefix obj/,${notdir ${SRC:.c=.o}}}
 
@@ -72,6 +71,8 @@ ifeq ($(UNAME),Darwin)
 	@echo "-----> cube3d        \033[32mREMOVED\033[0m"
 endif
 
+run:
+	@./${NAME} ${MAP}
 re : fclean all
 
 .PHONY : all clean fclean re

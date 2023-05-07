@@ -6,11 +6,11 @@
 /*   By: llion <llion@student.42mulhouse.fr >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 15:14:21 by llion             #+#    #+#             */
-/*   Updated: 2023/03/28 00:25:42 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/07 03:25:30 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
 int	find_new_line(t_gnl_list *tank)
 {
@@ -71,9 +71,9 @@ int	len(char *str)
 	return (i);
 }
 
-t_list	*ft_lstlast(t_list *lst)
+t_gnl_list	*ft_lstlast_gnl(t_gnl_list *lst)
 {
-	t_list	*tmp;
+	t_gnl_list	*tmp;
 
 	tmp = lst;
 	while (tmp && tmp->next)
