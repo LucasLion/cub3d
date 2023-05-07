@@ -6,7 +6,7 @@
 #    By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/07 02:18:57 by llion             #+#    #+#              #
-#    Updated: 2023/05/07 18:54:37 by llion            ###   ########.fr        #
+#    Updated: 2023/05/08 00:47:16 by llion            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@
 ### Maps
 
 - [  ] map entouree de murs
-- [  ] Mis à part la description de la map, chaque type d’élément peut être séparée par une ou plusieurs lignes vides.
+- [OK] Mis à part la description de la map, chaque type d’élément peut être séparée par une ou plusieurs lignes vides.
 - [  ]La description de la carte sera toujours en dernier dans le fichier, le reste des
 éléments peut être dans n’importe quel ordre.
 - [  ]Sauf pour la map elle-même, les informations de chaque élément peuvent être
