@@ -6,18 +6,18 @@
 #    By: amouly <amouly@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 15:27:43 by llion             #+#    #+#              #
-#    Updated: 2023/05/07 17:22:16 by llion            ###   ########.fr        #
+#    Updated: 2023/05/08 15:49:09 by llion            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= cube3d 
+NAME		= cub3d 
 CC			= gcc
 FLAGS		= -Wall -Werror -Wextra -ggdb3
 LIBFT		= libft/libft.a 
 MLX			= MLX42/build/libmlx42.a
-HEADERS		= -I include -I libft -L \
-				/Users/llion/.brew/Cellar/glfw/3.3.8/lib \
-				-ldl -lglfw -pthread -lm
+HEADERS		= -I include -I libft #-L \
+				#/Users/llion/.brew/Cellar/glfw/3.3.8/lib -pthread
+				#-ldl -lglfw -lm
 SRC			=	main.c			\
 				extracting.c 	\
 				parsing.c 	
@@ -32,14 +32,13 @@ obj/%.o : src/%.c
 	@${CC} ${FLAGS} ${HEADERS} -c $< -o $@
 
 $(NAME) : $(OBJ) 
-	@ctags -R
 	@make -sC libft
 	@gcc  $(FLAGS) $(OBJ) $(LIBFT) $(MLX) $(HEADERS) -o $(NAME)	
 ifeq ($(UNAME),Linux)
 	@echo -e "-----> cube3d        \033[32mCOMPILED\033[0m"
 endif
 ifeq ($(UNAME),Darwin)
-	@echo "-----> cube3d        \033[32mCOMPILED\033[0m"
+	@echo "-----> cube3d           \033[32mCOMPILED\033[0m"
 endif
 
 debug : $(OBJ)
@@ -49,7 +48,7 @@ ifeq ($(UNAME),Linux)
 	@echo -e  "-----> cube3d \033[31m(DEBUG)\033[32mCOMPILED\033[0m"
 endif
 ifeq ($(UNAME),Darwin)
-	@echo "-----> cube3d \033[31m(DEBUG)\033[32mCOMPILED\033[0m"
+	@echo "-----> cube3d    \033[31m(DEBUG)\033[32mCOMPILED\033[0m"
 endif
 
 clean :
@@ -69,7 +68,7 @@ ifeq ($(UNAME),Linux)
 	@echo -e "-----> cube3d        \033[32mREMOVED\033[0m"
 endif
 ifeq ($(UNAME),Darwin)
-	@echo "-----> cube3d        \033[32mREMOVED\033[0m"
+	@echo "-----> cube3d           \033[32mREMOVED\033[0m"
 endif
 
 run:
