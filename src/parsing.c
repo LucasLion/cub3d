@@ -6,49 +6,33 @@
 /*   By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 17:31:32 by llion             #+#    #+#             */
-/*   Updated: 2023/05/08 16:29:57 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/08 18:19:20 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3d.h"
 
-int	parse_file(int argc, char **av)
-{
-	int		i;
-
-	i = 0;
-	if (argc != 2)
-		return (ft_error("The program needs map PATH as parameter"));
-	while (av[1][i])
-		i++;
-	if (av[1][i - 1] != 'b' || av[1][i - 2] != 'u' || av[1][i - 3] != 'c' \
-			|| av[1][i - 4] != '.')
-		return (ft_error("Wrong extension"));
-	return (1);
-}
-
 int	parse_infos(char **d, t_textures *t)
 {
 	int		i;
-	char	*tmp;
 
 	i = 0;
 	while (i < ft_tablen(d))
 	{
-		tmp = d[i];
-		if (ft_strlen(tmp) > 3 && tmp[0] == 'N' && tmp[1] == 'O' && tmp[2] == ' ')
-			t->NO = ft_strtrim(tmp + 3, " ");
-		else if (ft_strlen(tmp) > 3 && tmp[0] == 'S' && tmp[1] == 'O' && tmp[2] == ' ')
-			t->SO = ft_strtrim(tmp + 3, " ");
-		else if (ft_strlen(tmp) > 3 && tmp[0] == 'W' && tmp[1] == 'E' && tmp[2] == ' ')
-			t->WE = ft_strtrim(tmp + 3, " ");
-		else if (ft_strlen(tmp) > 3 && tmp[0] == 'E' && tmp[1] == 'A' && tmp[2] == ' ')
-			t->EA = ft_strtrim(tmp + 3, " ");
-		else if (ft_strlen(tmp) > 2 && tmp[0] == 'F' && tmp[1] == ' ')
-			t->fl = ft_strtrim(tmp + 1, " ");
-		else if (ft_strlen(tmp) > 2 && tmp[0] == 'C' && tmp[1] == ' ')
-			t->cl = ft_strtrim(tmp + 1, " ");
-		else if (tmp[0] == '\n' && ++i)
+		printf("d[i]: %s", d[i]);
+		if (ft_strlen(d[i]) > 3 && d[i][0] == 'N' && d[i][1] == 'O' && d[i][2] == ' ')
+			t->NO = ft_strtrim(d[i] + 3, " ");
+		else if (ft_strlen(d[i]) > 3 && d[i][0] == 'S' && d[i][1] == 'O' && d[i][2] == ' ')
+			t->SO = ft_strtrim(d[i] + 3, " ");
+		else if (ft_strlen(d[i]) > 3 && d[i][0] == 'W' && d[i][1] == 'E' && d[i][2] == ' ')
+			t->WE = ft_strtrim(d[i] + 3, " ");
+		else if (ft_strlen(d[i]) > 3 && d[i][0] == 'E' && d[i][1] == 'A' && d[i][2] == ' ')
+			t->EA = ft_strtrim(d[i] + 3, " ");
+		else if (ft_strlen(d[i]) > 2 && d[i][0] == 'F' && d[i][1] == ' ')
+			t->fl = ft_strtrim(d[i] + 1, " ");
+		else if (ft_strlen(d[i]) > 2 && d[i][0] == 'C' && d[i][1] == ' ')
+			t->cl = ft_strtrim(d[i] + 1, " ");
+		else if (d[i][0] == '\n' && ++i)
 			continue ;
 		else
 			return (ft_error("Wrong informations"));
@@ -56,7 +40,6 @@ int	parse_infos(char **d, t_textures *t)
 	}
 	return (1);
 }
-
 
 int	parse_elems(char **map)
 {
@@ -71,7 +54,8 @@ int	parse_elems(char **map)
 		{
 			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'N' \
 					&& map[i][j] != 'S' && map[i][j] != 'E' \
-					&& map[i][j] != 'W' && map[i][j] != ' ' && map[i][j] != '\n')
+					&& map[i][j] != 'W' && map[i][j] != ' ' \
+					&& map[i][j] != '\n')
 			{
 				ft_error("Wrong element in the map");
 				return (0);
@@ -89,6 +73,23 @@ int	parse_borders(char **map)
 	// TODO
 	// Check if the map is surrounded by walls
 	// Find a way to check if the last line in the example is valid
+	return (1);
+}
+
+int	parse_lines(char **map, t_textures *t)
+{
+	// TODO
+	// ca ne marche pas quand ca devrait marcher
+	int	i;
+
+	i = 0;
+	while (map[i])
+		i++;
+	printf("i: %d\nlines: %d\n", i, t->lines_before_map);
+	if (i != t->lines_before_map)
+		return (ft_error("Wrong description"));
+	get_nb_lines_in_map_file(int fd, char **av)
+
 	return (1);
 }
 
@@ -131,7 +132,8 @@ int	parsing(char **file)
 	t = ft_calloc(sizeof(t_textures), 1);
 	description = get_description(file, t);
 	map = get_map(file, t);
-	if (parse_infos(description, t) == 0 || parse_elems(map) == 0 \
+	if (parse_lines(map, t) == 0 || parse_infos(description, t) == 0 \
+			|| parse_elems(map) == 0 \
 			|| parse_borders(map) == 0 || parse_number_players(map) != 1)
 		ret = 0;
 	else

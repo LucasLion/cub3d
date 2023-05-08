@@ -6,7 +6,7 @@
 #    By: amouly <amouly@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 15:27:43 by llion             #+#    #+#              #
-#    Updated: 2023/05/08 15:49:09 by llion            ###   ########.fr        #
+#    Updated: 2023/05/08 16:46:34 by llion            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ HEADERS		= -I include -I libft #-L \
 				#-ldl -lglfw -lm
 SRC			=	main.c			\
 				extracting.c 	\
-				parsing.c 	
+				parsing.c 		\
+				parsing2.c
 MAP			= maps/map.cub
 OBJ			= ${addprefix obj/,${notdir ${SRC:.c=.o}}}
 UNAME		:= $(shell uname)

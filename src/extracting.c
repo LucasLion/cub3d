@@ -6,13 +6,13 @@
 /*   By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:59:49 by llion             #+#    #+#             */
-/*   Updated: 2023/05/08 16:00:46 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/08 17:20:29 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3d.h"
 
-int	get_nb_lines_in_map_file(int fd, char ** av)
+int	get_nb_lines_in_map_file(int fd, char **av)
 {
 	int		num_lines;
 	char	*line;
@@ -28,6 +28,28 @@ int	get_nb_lines_in_map_file(int fd, char ** av)
 	}
 	free(line);
 	return (num_lines);
+}
+
+int	get_nb_lines_before_map(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	// TODO 
+	// faire en sorte que les lignes qui n'ont rien a faire dans le fichier fassent une erreur
+	while (map[i])
+	{
+		if (map[i][0] == 'R' || map[i][0] == 'N' || map[i][0] == 'S' \
+			|| map[i][0] == 'W' || map[i][0] == 'E' || map[i][0] == 'F' \
+			|| map[i][0] == 'C' || map[i][0] == '\n')
+		{
+			j++;
+		}
+		i++;
+	}
+	return (j);
 }
 
 char	**get_file(int argc, char **av)
@@ -57,27 +79,7 @@ char	**get_file(int argc, char **av)
 	return (map);
 }
 
-int	get_nb_lines_before_map(char **map)
-{
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	while (map[i])
-	{
-		if (map[i][0] == 'R' || map[i][0] == 'N' || map[i][0] == 'S'	\
-			|| map[i][0] == 'W' || map[i][0] == 'E' || map[i][0] == 'F' \
-			|| map[i][0] == 'C' || map[i][0] == '\n')
-		{
-			j++;
-		}
-		i++;
-	}
-	return (j);
-}
-
-char **get_description(char **map, t_textures *t)
+char	**get_description(char **file, t_textures *t)
 {
 	int		i;
 	int		j;
@@ -86,31 +88,32 @@ char **get_description(char **map, t_textures *t)
 
 	i = 0;
 	j = 0;
-	t->lines_before_map = get_nb_lines_before_map(map);
+	t->lines_before_map = get_nb_lines_before_map(file);
 	description = ft_calloc(sizeof(char *), t->lines_before_map + 1);
 	if (!description)
 		return (NULL);
-	while (map[i])
+	while (file[i])
 	{
-		if (map[i][0] == 'R' || map[i][0] == 'N' || map[i][0] == 'S'	\
-			|| map[i][0] == 'W' || map[i][0] == 'E' || map[i][0] == 'F' \
-			|| map[i][0] == 'C' || map[i][0] == '\n')
+		if (file[i][0] == 'R' || file[i][0] == 'N' || file[i][0] == 'S' \
+			|| file[i][0] == 'W' || file[i][0] == 'E' || file[i][0] == 'F' \
+			|| file[i][0] == 'C' || file[i][0] == '\n')
 		{
-			tmp = ft_strdup(map[i]);
+			tmp = ft_strdup(file[i]);
 			description[j] = ft_strtrim(tmp, " ");
 			free(tmp);
 			j++;
 		}
 		i++;
 	}
+	printf("nblinebfmap: %d\n", t->lines_before_map);
 	return (description);
 }
 
 char	**get_map(char **file, t_textures *t)
 {
-	int i;
-	int j;
-	char **map;
+	int		i;
+	int		j;
+	char	**map;
 
 	i = t->lines_before_map;
 	j = 0;
@@ -119,8 +122,8 @@ char	**get_map(char **file, t_textures *t)
 		return (NULL);
 	while (file[i])
 	{
-		if (file[i][0] != 'R' && file[i][0] != 'N' && file[i][0] != 'S'		\
-			&& file[i][0] != 'W' && file[i][0] != 'E' && file[i][0] != 'F'	\
+		if (file[i][0] != 'R' && file[i][0] != 'N' && file[i][0] != 'S' \
+			&& file[i][0] != 'W' && file[i][0] != 'E' && file[i][0] != 'F' \
 			&& file[i][0] != 'C' && file[i][0] != '\n')
 		{
 			map[j] = ft_strdup(file[i]);
@@ -128,5 +131,7 @@ char	**get_map(char **file, t_textures *t)
 		}
 		i++;
 	}
+	for (int i = 0; i < ft_tablen(map); i++)
+		printf("%s", map[i]);
 	return (map);
 }
