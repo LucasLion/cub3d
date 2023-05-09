@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+        */
+/*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 17:31:32 by llion             #+#    #+#             */
-/*   Updated: 2023/05/08 18:19:20 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/09 15:03:03 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	parse_lines(char **map, t_textures *t)
 	printf("i: %d\nlines: %d\n", i, t->lines_before_map);
 	if (i != t->lines_before_map)
 		return (ft_error("Wrong description"));
-	get_nb_lines_in_map_file(int fd, char **av)
+	//get_nb_lines_in_map_file(int fd, char **av)
 
 	return (1);
 }
