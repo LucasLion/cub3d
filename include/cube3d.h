@@ -6,7 +6,7 @@
 /*   By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/10 17:57:34 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/10 21:05:34 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ int		parse_elems_in_map(char **map);
 int		parsing(char **file, t_textures *t);
 int		parse_borders(char **map);
 int		parse_number_players(char **map);
+int		parse_file(int argc, char **argv);
 
 #endif

@@ -6,17 +6,17 @@
 #    By: amouly <amouly@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 15:27:43 by llion             #+#    #+#              #
-#    Updated: 2023/05/09 14:36:54 by amouly           ###   ########.fr        #
+#    Updated: 2023/05/10 21:32:37 by llion            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= cub3d 
 CC			= gcc
 FLAGS		= -Wall -Werror -Wextra -ggdb3
-LIBFT		= libft/libft.a 
-#MLX			= MLX42/build/libmlx42.a
+LIBFT		= libft/libft.a
+#MLX		= MLX42/build/libmlx42.a
 MLX			= libmlx42.a
-HEADERS		= -I include -I libft #-L \
+HEADERS		= -I include -L ./libft -I.libft/include #-L \
 				#/Users/llion/.brew/Cellar/glfw/3.3.8/lib -pthread
 				#-ldl -lglfw -lm
 SRC			=	main.c			\
@@ -33,24 +33,29 @@ obj/%.o : src/%.c
 	@mkdir -p obj
 	@${CC} ${FLAGS} ${HEADERS} -c $< -o $@
 
-$(NAME) : $(OBJ) 
-	@make -sC libft
-	@gcc  $(FLAGS) $(OBJ) $(LIBFT) $(MLX) $(HEADERS) -o $(NAME)	
+$(NAME) : $(OBJ) $(LIBFT) 
+	@$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(MLX) $(HEADERS) -o $(NAME)	
 ifeq ($(UNAME),Linux)
-	@echo -e "-----> cube3d        \033[32mCOMPILED\033[0m"
+	@echo -e "-----> cube3d           \033[32mCOMPILED\033[0m"
 endif
 ifeq ($(UNAME),Darwin)
-	@echo "-----> cube3d           \033[32mCOMPILED\033[0m"
+	@echo "-----> cube3d              \033[32mCOMPILED\033[0m"
 endif
+
+$(LIBFT): libft/Makefile
+	@make -sC libft
+
+libft/Makefile: libft/src/*.c libft/include/*.h
+	@touch libft/Makefile
 
 debug : $(OBJ)
 	@make -sC libft
 	@gcc ${FLAGS} ${OBJ} ${LIBFT} ${HEADERS} -fsanitize=address -o ${NAME}  ${READLINE}
 ifeq ($(UNAME),Linux)
-	@echo -e  "-----> cube3d \033[31m(DEBUG)\033[32mCOMPILED\033[0m"
+	@echo -e  "-----> cube3d    \033[31m(DEBUG)\033[32mCOMPILED\033[0m"
 endif
 ifeq ($(UNAME),Darwin)
-	@echo "-----> cube3d    \033[31m(DEBUG)\033[32mCOMPILED\033[0m"
+	@echo "-----> cube3d       \033[31m(DEBUG)\033[32mCOMPILED\033[0m"
 endif
 
 clean :
@@ -67,10 +72,10 @@ fclean : clean
 	@rm -rf $(NAME) *.dSYM
 	@make fclean -sC libft
 ifeq ($(UNAME),Linux)
-	@echo -e "-----> cube3d        \033[32mREMOVED\033[0m"
+	@echo -e "-----> cube3d           \033[32mREMOVED\033[0m"
 endif
 ifeq ($(UNAME),Darwin)
-	@echo "-----> cube3d           \033[32mREMOVED\033[0m"
+	@echo "-----> cube3d              \033[32mREMOVED\033[0m"
 endif
 
 run:
