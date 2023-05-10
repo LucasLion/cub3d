@@ -6,7 +6,7 @@
 /*   By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:59:49 by llion             #+#    #+#             */
-/*   Updated: 2023/05/07 18:34:03 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/10 16:39:09 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,50 +50,24 @@ char	**get_file()
 	return (map);
 }
 
-char **get_description(char **map)
+int	get_map(char **f, t_textures *t, int i)
 {
-	int i;
-	int j;
-	char **description;
-
-	i = 0;
+	int	j;
+	
 	j = 0;
-	description = ft_calloc(sizeof(char *), 7);
-	if (!description)
-		return (NULL);
-	while (map[i])
+	t->map = ft_calloc(ft_tablen(f) - i + 1, sizeof(char *));
+	if (!t->map)
+		return (0);
+	while (f[i])
 	{
-		if (map[i][0] == 'R' || map[i][0] == 'N' || map[i][0] == 'S' || map[i][0] == 'W' || map[i][0] == 'E' || map[i][0] == 'F' || map[i][0] == 'C')
+		if (f[i][0] == '\n')
+			i++;
+		else 
 		{
-			description[j] = ft_strdup(map[i]);
+			t->map[j] = ft_strdup(f[i]);
+			i++;
 			j++;
 		}
-		i++;
 	}
-	return (description);
-}
-
-char	**get_map(char **file)
-{
-	int i;
-	int j;
-	char **map;
-
-	i = 0;
-	j = 0;
-	map = ft_calloc(sizeof(char *), ft_tablen(file) + 1);
-	if (!map)
-		return (NULL);
-	while (file[i])
-	{
-		if (file[i][0] != 'R' && file[i][0] != 'N' && file[i][0] != 'S' \
-				&& file[i][0] != 'W' && file[i][0] != 'E' && file[i][0] != 'F' \
-				&& file[i][0] != 'C' && file[i][0] != '\n')
-		{
-			map[j] = ft_strdup(file[i]);
-			j++;
-		}
-		i++;
-	}
-	return (map);
+	return (1);
 }

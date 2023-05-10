@@ -6,7 +6,7 @@
 /*   By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/08 00:44:53 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/10 16:34:53 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,20 @@ typedef struct	s_textures
 	char	*SO;
 	char	*WE;
 	char	*EA;
+	char	**map;
+	int		nb_elems;
 }				t_textures;
 
 int		get_nb_lines_in_map_file(int fd);
 char	**get_file();
 char	**get_description(char **map);
-char	**get_map(char **map);
+int		get_map(char **map, t_textures *t, int i);
 
 /* ----------- PARSING ----------- */
 
-int		parse_infos(char **infos);
-int		parse_elems(char **map);
-int		parsing(char **file);
+int		parse_infos(char **infos, t_textures *t);
+int		parse_elems_in_map(char **map);
+int		parsing(char **file, t_textures *t);
 int		parse_borders(char **map);
 int		parse_number_players(char **map);
 

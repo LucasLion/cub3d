@@ -6,7 +6,7 @@
 #    By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/07 02:18:57 by llion             #+#    #+#              #
-#    Updated: 2023/05/08 00:47:16 by llion            ###   ########.fr        #
+#    Updated: 2023/05/10 04:15:21 by llion            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,3 +50,13 @@ respecte les règles de carte
     - Verifier qu'il n'y a qu'un seul joueur
 
 - Se renseigner sur la technologie du raycasting
+
+### Raycasting etapes
+
+- Creer un background
+- Creer un point (personnage)
+- permettre les deplacements du point
+- dessiner la map avec le tableau de strings (appeler cette fonction avant le joueur)
+- ajouter les lignes pour visualiser les carres
+- permettre la rotation du joueur
+    - 
