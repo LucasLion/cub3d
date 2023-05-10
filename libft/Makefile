@@ -6,9 +6,18 @@
 #    By: llion <llion@student.42mulhouse.fr >       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/27 19:07:53 by llion             #+#    #+#              #
-#    Updated: 2023/05/10 21:31:57 by llion            ###   ########.fr        #
+#    Updated: 2023/05/10 23:37:24 by llion            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+#
+UNAME		:= $(shell uname)
+define echo
+@if [ "$(UNAME)" = "Linux" ]; then \
+	echo -e "\033[$(3)m[$(1)]\033[0m\t$(2)"; \
+else \
+	echo "\033[$(3)m[$(1)]\033[0m\t$(2)"; \
+fi
+endef
 
 SRCS		= src/ft_isalpha.c      \
 			  src/ft_isdigit.c      \
@@ -87,7 +96,6 @@ OBJS 		= ${addprefix objs/,${notdir ${SRCS:.c=.o}}}
 AR			= ar rc
 RM			= rm -f
 LIB			= ranlib
-UNAME		:= $(shell uname)
 
 all:		$(NAME)
 
@@ -99,31 +107,15 @@ objs/%.o : 	src/%.c
 $(NAME):	$(OBJS)
 			@$(AR) $(NAME) $(OBJS) 
 			@$(LIB) $(NAME)
-ifeq ($(UNAME),Linux)
-	@echo -e "-----> librairy libft   \033[32mCREATED\033[0m"
-endif
-ifeq ($(UNAME),Darwin)
-	@echo "-----> librairy libft   \033[32mCREATED\033[0m"
-endif
-
+			$(call echo,MODIFIED,libft,34)
 
 clean:		
 			@$(RM) $(OBJS) objs/%.o
-ifeq ($(UNAME),Linux)
-	@echo -e "-----> librairy objects \033[32mREMOVED\033[0m"
-endif
-ifeq ($(UNAME),Darwin)
-	@echo "-----> librairy objects \033[32mREMOVED\033[0m"
-endif
+			$(call echo,REMOVED,libft objects,31)
 
 fclean:		clean
 			@$(RM) $(NAME)
-ifeq ($(UNAME),Linux)
-	@echo -e "-----> libft            \033[32mREMOVED\033[0m"
-endif
-ifeq ($(UNAME),Darwin)
-	@echo "-----> libft            \033[32mREMOVED\033[0m"
-endif
+			$(call echo,REMOVED,libft,31)
 
 re:			fclean all
 
