@@ -6,7 +6,7 @@
 /*   By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 17:31:32 by llion             #+#    #+#             */
-/*   Updated: 2023/05/10 18:11:37 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/10 21:04:34 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ int	parse_number_players(char **map)
 
 int	parsing(char **file, t_textures *t)
 {
+	printf("parsing\n");
 	if (parse_infos(file, t) == 0 || parse_elems_in_map(t->map) == 0 \
 			|| parse_borders(t->map) == 0 || parse_number_players(t->map) != 1)
 		return (0);
