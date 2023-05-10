@@ -6,7 +6,7 @@
 /*   By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/05/10 21:06:45 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/10 23:44:36 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 int	ft_error(char *str)
 {
 	printf("%s\n", str);
+	return (0);
+}
+
+int	free_function(char **file, t_textures *t)
+{
+	ft_freetab(file);
+	ft_freetab(t->map);
+	free(t);
 	return (0);
 }
 
@@ -27,12 +35,10 @@ int	main(int argc, char **argv)
 	file = get_file();
 	if (parsing(file, t) == 0 || parse_file(argc, argv) == 0)
 	{
-		ft_freetab(file);
-		free(t);
+		free_function(file, t);
 		ft_error("Error: Invalid map");
 		return (-1);
 	}
-	ft_freetab(file);
-	free(t);
+	free_function(file, t);
 	return (0);
 }
