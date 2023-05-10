@@ -6,9 +6,18 @@
 #    By: amouly <amouly@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 15:27:43 by llion             #+#    #+#              #
-#    Updated: 2023/05/10 21:32:37 by llion            ###   ########.fr        #
+#    Updated: 2023/05/10 23:36:11 by llion            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+UNAME		:= $(shell uname)
+define echo
+@if [ "$(UNAME)" = "Linux" ]; then \
+	echo -e "\033[$(3)m[$(1)]\033[0m\t$(2)"; \
+else \
+	echo "\033[$(3)m[$(1)]\033[0m\t$(2)"; \
+fi
+endef
 
 NAME		= cub3d 
 CC			= gcc
@@ -25,7 +34,6 @@ SRC			=	main.c			\
 				parsing2.c
 MAP			= maps/map.cub
 OBJ			= ${addprefix obj/,${notdir ${SRC:.c=.o}}}
-UNAME		:= $(shell uname)
 
 all :  ${NAME}
 
@@ -35,12 +43,7 @@ obj/%.o : src/%.c
 
 $(NAME) : $(OBJ) $(LIBFT) 
 	@$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(MLX) $(HEADERS) -o $(NAME)	
-ifeq ($(UNAME),Linux)
-	@echo -e "-----> cube3d           \033[32mCOMPILED\033[0m"
-endif
-ifeq ($(UNAME),Darwin)
-	@echo "-----> cube3d              \033[32mCOMPILED\033[0m"
-endif
+	$(call echo,COMPILED,cub3d,32)
 
 $(LIBFT): libft/Makefile
 	@make -sC libft
@@ -51,32 +54,17 @@ libft/Makefile: libft/src/*.c libft/include/*.h
 debug : $(OBJ)
 	@make -sC libft
 	@gcc ${FLAGS} ${OBJ} ${LIBFT} ${HEADERS} -fsanitize=address -o ${NAME}  ${READLINE}
-ifeq ($(UNAME),Linux)
-	@echo -e  "-----> cube3d    \033[31m(DEBUG)\033[32mCOMPILED\033[0m"
-endif
-ifeq ($(UNAME),Darwin)
-	@echo "-----> cube3d       \033[31m(DEBUG)\033[32mCOMPILED\033[0m"
-endif
+	$(call echo,COMPILED,cub3d,33) 
 
 clean :
 	@make clean -sC libft
 	@rm -rf $(OBJ)
-ifeq ($(UNAME),Linux)
-	@echo -e "-----> objects          \033[32mREMOVED\033[0m"
-endif
-ifeq ($(UNAME),Darwin)
-	@echo "-----> objects          \033[32mREMOVED\033[0m"
-endif
+	$(call echo,REMOVED,objects,31)
 
 fclean : clean
 	@rm -rf $(NAME) *.dSYM
 	@make fclean -sC libft
-ifeq ($(UNAME),Linux)
-	@echo -e "-----> cube3d           \033[32mREMOVED\033[0m"
-endif
-ifeq ($(UNAME),Darwin)
-	@echo "-----> cube3d              \033[32mREMOVED\033[0m"
-endif
+	$(call echo,REMOVED,cub3d,31)
 
 run:
 	@./$(NAME) $(MAP)
