@@ -6,7 +6,7 @@
 /*   By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 17:31:32 by llion             #+#    #+#             */
-/*   Updated: 2023/05/10 17:08:31 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/10 17:43:55 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,11 @@ int	check_spaces(char c, char **m, int i, int j)
 			|| (m[i + 1][j] != '1' && m[i + 1][j] != ' ' && m[i + 1][j] != 0) \
 			|| (m[i - 1][j] != '1' && m[i - 1][j] != ' ' && m[i - 1][j] != 0))
 		{
+			printf("i = %d, j = %d\n", i, j);
+			printf("m[i][j + 1] = ---%c---\n", m[i][j + 1]);
+			printf("m[i][j - 1] = ---%c---\n", m[i][j - 1]);
+			printf("m[i + 1][j] = ---%c---\n", m[i + 1][j]);
+			printf("m[i - 1][j] = ---%c---\n", m[i - 1][j]);
 			return (0);
 		}
 	}
@@ -84,7 +89,7 @@ int	check_spaces(char c, char **m, int i, int j)
 int	parse_borders(char **map)
 {
 	int		i;
-	size_t	j;
+	int	j;
 
 	i = 0;
 	while (map[i])
@@ -95,7 +100,7 @@ int	parse_borders(char **map)
 		while (map[i][j])
 		{
 			if (i == 0 || i == ft_tablen(map) - 1 || j == 0 \
-					|| j == ft_strlen(map[i]) - 2)
+					|| j == (int)ft_strlen(map[i]) - 2)
 			{
 				// TODO
 				// lorsque un zero depasse du cadre il ne trouve pas l'erreur

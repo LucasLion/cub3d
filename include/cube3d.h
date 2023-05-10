@@ -6,7 +6,7 @@
 /*   By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/10 16:34:53 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/10 17:22:23 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct	s_textures
 	int		nb_elems;
 }				t_textures;
 
+int		ft_error(char *str);
 int		get_nb_lines_in_map_file(int fd);
 char	**get_file();
 char	**get_description(char **map);
