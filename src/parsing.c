@@ -6,7 +6,7 @@
 /*   By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 17:31:32 by llion             #+#    #+#             */
-/*   Updated: 2023/05/11 15:34:52 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/11 16:00:26 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,6 @@ int	parse_elems_in_map(char **map)
 
 int	check_spaces(char c, char **m, int i, int j)
 {
-	//if (c == ' ')
-	//{
-	//	if ((m[i][j + 1] != '1' && m[i][j + 1] != ' ' && m[i][j + 1] != 0 && m[i][j + 1] != '\n') \
-	//		|| (m[i][j - 1] != '1' && m[i][j - 1] != ' ' && m[i][j - 1] != 0 && m[i][j - 1] != '\n') \
-	//		|| (m[i + 1][j] != '1' && m[i + 1][j] != ' ' && m[i + 1][j] != 0 && m[i + 1][j] != '\n') \
-	//		|| (m[i - 1][j] != '1' && m[i - 1][j] != ' ' && m[i - 1][j] != 0 && m[i - 1][j] != '\n'))
-	//		return (0);
-	//}
 	if (c == '0')
 	{
 		if ((m[i][j + 1] == ' ' || m[i][j + 1] == 0 || m[i][j + 1] == '\n') \
@@ -103,15 +95,11 @@ int	parse_borders(char **map)
 			if (i == 0 || i == ft_tablen(map) - 1 || j == 0 \
 					|| j == (int)ft_strlen(map[i]) - 2)
 			{
-				// TODO
-				// lorsque un zero depasse du cadre il ne trouve pas l'erreur
 				if (map[i][j] != '1' && map[i][j] != ' ' && map[i][j] != '\n')	
 					return (0);
 			}
 			else if (check_spaces(map[i][j], map, i, j) == 0)
-			{
 				return (0);
-			}
 			j++;
 		}
 		i++;

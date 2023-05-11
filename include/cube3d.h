@@ -6,7 +6,7 @@
 /*   By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/10 21:05:34 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/11 15:58:35 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ typedef struct	s_textures
 	char	*SO;
 	char	*WE;
 	char	*EA;
+	int		f_r;
+	int		f_g;
+	int		f_b;
+	int		c_r;
+	int		c_g;
+	int		c_b;
 	char	**map;
 	int		nb_elems;
 }				t_textures;
