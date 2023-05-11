@@ -6,7 +6,7 @@
 #    By: amouly <amouly@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 15:27:43 by llion             #+#    #+#              #
-#    Updated: 2023/05/11 15:59:41 by llion            ###   ########.fr        #
+#    Updated: 2023/05/11 17:07:15 by llion            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,9 @@ HEADERS		= -Iinclude -I.libft/include -lglfw -L /Users/$$USER/.brew/Cellar/glfw/
 			  # -pthread# -ldl -lglfw -lm
 SRC			=	main.c			\
 				extracting.c 	\
+				parsing2.c		\
 				parsing.c 		\
-				parsing2.c
+				display_map.c 		
 MAP			= maps/map.cub
 OBJ			= $(addprefix obj/,$(notdir $(SRC:.c=.o)))
 
@@ -49,10 +50,9 @@ $(LIBFT): libft/Makefile
 libft/Makefile: libft/src/*.c libft/include/*.h
 	@touch libft/Makefile
 
-debug : $(OBJ)
-	@make -sC libft
-	@gcc $(FLAGS) $(OBJ) $(LIBFT) $(HEADERS) -fsanitize=address -o $(NAME)  $(READLINE)
-	$(call echo,COMPILED,cub3d,33) 
+debug: $(OBJ) $(LIBFT)
+	@$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(MLX) $(HEADERS) -fsanitize=address -o $(NAME)	
+	$(call echo,COMPILED,cub3d,33)
 
 clean :
 	@make clean -sC libft

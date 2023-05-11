@@ -6,11 +6,11 @@
 /*   By: llion <llion@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/05/11 16:07:57 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/11 17:55:23 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cube3d.h"
+#include "../include/cub3d.h"
 
 int	ft_error(char *str)
 {
@@ -18,27 +18,64 @@ int	ft_error(char *str)
 	return (0);
 }
 
-int	free_function(char **file, t_textures *t)
+int	free_function(char **file, t_cub *c)
 {
 	ft_freetab(file);
-	ft_freetab(t->map);
-	free(t);
+	ft_freetab(c->map);
+	free(c->t);
+	free(c);
 	return (0);
+}
+
+int	map_width(char **map)
+{
+	int	i;
+	int	width;
+
+	i = 0;
+	width = 0 ;
+	width = ft_strlen(map[i]);
+	while (map[i])
+	{
+		if (ft_strlen(map[i]) > width)
+			width = ft_strlen(map[i]);
+		i++;
+	}
+	return (width);
+}
+
+void	init_cub(t_cub *c, char **file)
+{
+	c->t = ft_calloc(1, sizeof(t_textures));
+	c->tilesize = 16;
+	c->nb_line_map_start = get_nb_line_map_start(file, c);
+	c->t->nb_elems = 0;
+	c->map = get_map(file, c->nb_line_map_start);
+	c->map_height = ft_tablen(c->map) * c->tilesize;
+	c->map_width = map_width(c->map) * c->tilesize;
 }
 
 int	main(int argc, char **argv)
 {
 	char	**file;
-	t_textures	*t;
+	t_cub	*c;
 
-	t = ft_calloc(1, sizeof(t_textures));
-	file = get_file();
-	if (parsing(file, t) == 0 || parse_file(argc, argv) == 0)
+	c = ft_calloc(1, sizeof(t_cub));
+	if (parse_file(argc, argv))
+		file = get_file();
+	else
 	{
-		free_function(file, t);
+		ft_error("Invalid file\n");
+		return (-1);
+	}
+	init_cub(c, file);
+	if (parsing(file, c) == 0 || parse_file(argc, argv) == 0)
+	{
+		free_function(file, c);
 		ft_error("Error: Invalid map");
 		return (-1);
 	}
-	free_function(file, t);
+	display_2d_map(c);
+	free_function(file, c);
 	return (0);
 }
