@@ -1,6 +1,7 @@
 *.o
 *.out
 *.dSYM/
+.vscode/
 MLX42/
 tags
 cub3d

@@ -6,7 +6,7 @@
 /*   By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/11 17:38:50 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/12 15:41:22 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@ typedef struct	s_textures
 	int		nb_elems;
 }				t_textures;
 
+typedef struct	s_player
+{
+	int			x_start;
+	int			y_start;
+	mlx_image_t	*img;
+
+}				t_player;
+
 typedef struct	s_cub
 {
 	int			screen_width;
@@ -44,9 +52,9 @@ typedef struct	s_cub
 	int			tilesize;
 	mlx_t		*mlx;
 	char		**map;
-	t_textures	*t;
-	
+	t_textures	*t;	
 	int			nb_line_map_start;
+	t_player	*player;
 }				t_cub;
 
 int		ft_error(char *str);
@@ -68,6 +76,8 @@ int		parse_file(int argc, char **argv);
 
 /* ----------- DISPLAY ----------- */
 
-int	display_2d_map(t_cub *c);
+int			display_2d_map(t_cub *c);
+void		move_player(mlx_key_data_t keydata, void *param);
+t_player	*init_player(t_cub *c, int i, int j);
 
 #endif

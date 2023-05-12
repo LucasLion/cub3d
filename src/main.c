@@ -6,7 +6,7 @@
 /*   By: llion <llion@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/05/11 17:55:23 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/12 15:41:29 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,27 @@ int	map_width(char **map)
 			width = ft_strlen(map[i]);
 		i++;
 	}
-	return (width);
+	return (width - 1);
 }
 
 void	init_cub(t_cub *c, char **file)
 {
 	c->t = ft_calloc(1, sizeof(t_textures));
-	c->tilesize = 16;
+	c->tilesize = 40;
 	c->nb_line_map_start = get_nb_line_map_start(file, c);
 	c->t->nb_elems = 0;
 	c->map = get_map(file, c->nb_line_map_start);
 	c->map_height = ft_tablen(c->map) * c->tilesize;
 	c->map_width = map_width(c->map) * c->tilesize;
+}
+
+void	hook(mlx_key_data_t keydata, void *param)
+{
+	t_cub *c;
+
+	c = param;
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+		mlx_close_window(c->mlx);
 }
 
 int	main(int argc, char **argv)
@@ -76,6 +85,8 @@ int	main(int argc, char **argv)
 		return (-1);
 	}
 	display_2d_map(c);
+	mlx_key_hook(c->mlx, &move_player, c);
+	mlx_loop(c->mlx);
 	free_function(file, c);
 	return (0);
 }

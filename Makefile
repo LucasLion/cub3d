@@ -6,7 +6,7 @@
 #    By: amouly <amouly@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 15:27:43 by llion             #+#    #+#              #
-#    Updated: 2023/05/11 17:07:15 by llion            ###   ########.fr        #
+#    Updated: 2023/05/12 16:12:56 by llion            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,15 +21,17 @@ endef
 
 NAME		= cub3d 
 CC			= gcc
+RM			= rm -rf
 FLAGS		= -Wall -Werror -Wextra -ggdb3
 LIBFT		= libft/libft.a
 MLX			= MLX42/build/libmlx42.a
-HEADERS		= -Iinclude -I.libft/include -lglfw -L /Users/$$USER/.brew/Cellar/glfw/3.3.8/lib
-			  # -pthread# -ldl -lglfw -lm
+HEADERS		= -Iinclude -I.libft/include -L/Users/$$USER/.brew/Cellar/glfw/3.3.8/lib -lglfw  \
+			  #-ldl -lglfw -lm
 SRC			=	main.c			\
 				extracting.c 	\
 				parsing2.c		\
 				parsing.c 		\
+				player.c 		\
 				display_map.c 		
 MAP			= maps/map.cub
 OBJ			= $(addprefix obj/,$(notdir $(SRC:.c=.o)))
@@ -38,10 +40,10 @@ all :  ${NAME}
 
 obj/%.o : src/%.c
 	@mkdir -p obj
-	@$(CC) ${HEADERS} -c $< -o $@
+	@$(CC) -c $< -o $@
 
 $(NAME) : $(OBJ) $(LIBFT)
-	@$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(MLX) $(HEADERS) -o $(NAME)	
+	@$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(HEADERS) $(MLX) -o $(NAME)	
 	$(call echo,COMPILED,cub3d,32)
 
 $(LIBFT): libft/Makefile
@@ -56,17 +58,17 @@ debug: $(OBJ) $(LIBFT)
 
 clean :
 	@make clean -sC libft
-	@rm -rf $(OBJ)
+	@$(RM) $(OBJ)
 	$(call echo,REMOVED,objects,31)
 
 fclean : clean
-	@rm -rf $(NAME) *.dSYM
+	@$(RM) $(NAME) *.dSYM
 	@make fclean -sC libft
 	$(call echo,REMOVED,cub3d,31)
 
-run:
+r:
 	@./$(NAME) $(MAP)
 
 re : fclean all
 
-.PHONY : all clean fclean run debug re
+.PHONY : all clean fclean r libft/Makefile debug re
