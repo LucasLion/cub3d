@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llion <llion@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/05/12 15:41:29 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/12 16:40:17 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,6 @@ void	init_cub(t_cub *c, char **file)
 	c->map_width = map_width(c->map) * c->tilesize;
 }
 
-void	hook(mlx_key_data_t keydata, void *param)
-{
-	t_cub *c;
-
-	c = param;
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		mlx_close_window(c->mlx);
-}
 
 int	main(int argc, char **argv)
 {

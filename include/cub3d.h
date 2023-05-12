@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+        */
+/*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/12 15:41:22 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/12 16:37:20 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
+#include "MLX42.h"
+//#include "MLX42_Int.h"
+//#include "MLX42_input.h"
 
 typedef struct	s_textures
 {
