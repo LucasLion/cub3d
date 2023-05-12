@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/12 16:37:20 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/12 17:41:30 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct	s_player
 {
 	int			x_start;
 	int			y_start;
+	int			is_moving;
 	mlx_image_t	*img;
 
 }				t_player;
@@ -82,5 +83,5 @@ int		parse_file(int argc, char **argv);
 int			display_2d_map(t_cub *c);
 void		move_player(mlx_key_data_t keydata, void *param);
 t_player	*init_player(t_cub *c, int i, int j);
-
+void		ft_hook(void *param);
 #endif
