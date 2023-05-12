@@ -6,7 +6,7 @@
 #    By: llion <llion@student.42mulhouse.fr >       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/27 19:07:53 by llion             #+#    #+#              #
-#    Updated: 2023/05/10 23:37:24 by llion            ###   ########.fr        #
+#    Updated: 2023/05/11 14:16:28 by llion            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 #
@@ -107,7 +107,7 @@ objs/%.o : 	src/%.c
 $(NAME):	$(OBJS)
 			@$(AR) $(NAME) $(OBJS) 
 			@$(LIB) $(NAME)
-			$(call echo,MODIFIED,libft,34)
+			$(call echo,COMPILED,libft,34)
 
 clean:		
 			@$(RM) $(OBJS) objs/%.o

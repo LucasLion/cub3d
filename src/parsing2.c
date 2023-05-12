@@ -6,11 +6,11 @@
 /*   By: llion <llion@student.42mulhouse.fr >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 16:43:14 by llion             #+#    #+#             */
-/*   Updated: 2023/05/08 16:44:13 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/11 17:14:21 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cube3d.h"
+#include "../include/cub3d.h"
 
 int	parse_file(int argc, char **av)
 {
