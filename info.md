@@ -13,8 +13,8 @@
 - [  ] Pouvoir changer les couleurs du sol et plafond
 - [  ] Rotation de la camera avec fleches gauche et droite
 - [  ] W A S D permettent de se deplacer
-- [  ] ESC et croix rouge quittent le programme proprement
-- [  ] map entouree de murs
+- [OK] ESC et croix rouge quittent le programme proprement
+- [OK] map entouree de murs
 
 ## Parsing
 
@@ -22,16 +22,21 @@
 - [OK] Verifier qu'il n'y a pas d'elements etrangers dans la map (0, 1, N, S, W, E)
 - [OK] Verifier qu'il n'y a qu'un seul joueur
 - [OK] Verifier qu'il n'y a pas d'autres lignes que les lignes demandées
-- [  ] Verrifier que la map est entouree de murs
+- [OK] Verrifier que la map est entouree de murs
 
 ## Raycasting etapes
 
-- [  ] Creer un background
-- [  ] Creer un point (personnage)
-- [  ] permettre les deplacements du point
-- [  ] dessiner la map avec le tableau de strings (appeler cette fonction avant le joueur)
-- [  ] ajouter les lignes pour visualiser les carres
-- [  ] permettre la rotation du joueur
+- [OK] Creer un background
+- [OK] Creer un point (personnage)
+- [OK] permettre les deplacements du point
+- [OK] dessiner la map avec le tableau de strings (appeler cette fonction avant le joueur)
+- [OK] ajouter les lignes pour visualiser les carres
+- [  ] tracer un trait devant le joueur qui s'arrete au premier mur
+- [  ] convertir la taille du trait en une ligne de pixels de la bonne taille selon la distance
+- [  ] placer ces lignes au centre de la fenetre
+- [  ] selon l'orientation des murs, placer des ombres
+- [  ] gerer le probleme de fish-eye avec pi
+- [  ] ajouter des textures
 
 ## Bonus
 
