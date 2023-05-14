@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/14 13:27:13 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/14 15:53:20 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,17 @@ void	move_player(mlx_key_data_t keydata, void *param)
 void	check_movement(t_cub *c)
 {
 	if (c->player->is_moving == 1)
+	{
 		c->player->img->instances[0].y -= 1;
+		c->player->line->instances[0].y -= 1;
+	}
 	else if (c->player->is_moving == 2)
 		c->player->img->instances[0].x -= 1;
 	else if (c->player->is_moving == 3)
+	{
 		c->player->img->instances[0].y += 1;
+		c->player->line->instances[0].y += 1;
+	}
 	else if (c->player->is_moving == 4)
 		c->player->img->instances[0].x += 1;
 }
@@ -120,7 +126,7 @@ void	put_player_L(t_cub *c, int x, int y)
 void	put_player_square(t_cub *c, int x, int y)
 {
 	c->player->img = mlx_new_image(c->mlx, c->tilesize, c->tilesize);
-	if (!c->player->img || (mlx_image_to_window(c->mlx, c->player->img, y * c->tilesize + (0.5 * c->tilesize) - (c->tilesize * 0.1), x*c->tilesize + (0.5 * c->tilesize) - (c->tilesize * 0.1)) < 0))
+	if (!c->player->img || (mlx_image_to_window(c->mlx, c->player->img, (y + 0.4) * c->tilesize, (x + 0.4) * c->tilesize) < 0))
 		return ;
 	int i;
 	int	j;
@@ -137,7 +143,28 @@ void	put_player_square(t_cub *c, int x, int y)
 		i++;
 	}
 }
-
+void draw_line(t_cub *c, int x, int y)
+{
+	double pixels;
+	double deltaX;
+	double deltaY;
+	
+	pixels =c->player->leng_line;
+	deltaX = c->player->end_x - c->player->start_x;
+	deltaY = c->player->end_y - c->player->start_y;
+	c->player->line = mlx_new_image(c->mlx, c->map_width , c->map_height);
+	if (!c->player->line|| (mlx_image_to_window(c->mlx, c->player->line,c->tilesize * 0.1, c->tilesize * 0.1) < 0))
+		return ;
+	deltaX /= pixels;
+	deltaY /= pixels;
+	while(pixels)
+	{
+		mlx_put_pixel(c->player->line, x, y, 0xff0456ff); 
+		x += deltaX;
+		y += deltaY;
+		--pixels;
+	}
+}
 
 int	display_2d_map(t_cub *c)
 {
@@ -156,14 +183,18 @@ int	display_2d_map(t_cub *c)
 		{
 			if (c->map[i][j] == '0' || c->map[i][j] == 'W' || c->map[i][j] == 'E' \
 				|| c->map[i][j] == 'S' || c->map[i][j] == 'N')
+			{
 				put_square(c, i, j, 0xffffffff);
+				if (c->map[i][j] != '0')
+					c->player = init_player(c, i, j);
+			}
 			else if (c->map[i][j] == '1')
 				put_square(c, i, j, 0x000000ff);
 			j++;
 		}
 		i++;
 	}
-	i = 0;
+	/*i = 0;
 	while (c->map[i])
 	{
 		j = 0;
@@ -178,7 +209,7 @@ int	display_2d_map(t_cub *c)
 			j++;
 		}
 		i++;
-	}
+	}*/
 	return (1);
 
 }
