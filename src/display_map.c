@@ -6,11 +6,26 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/12 18:37:51 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/14 13:27:13 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+void	rotate_player(mlx_key_data_t keydata, void *param)
+{
+	t_cub	*c;
+
+	c = param;
+	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
+		c->player->is_moving = 2;
+	if (keydata.key == MLX_KEY_A && keydata.action == MLX_RELEASE)
+		c->player->is_moving = 0;
+	if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
+		c->player->is_moving = 4;
+	if (keydata.key == MLX_KEY_D && keydata.action == MLX_RELEASE)
+		c->player->is_moving = 0;
+}
 
 void	move_player(mlx_key_data_t keydata, void *param)
 {
@@ -78,7 +93,7 @@ void	put_square(t_cub *c, int x, int y, long int color)
 	}
 }
 
-void	put_player(t_cub *c, int x, int y)
+void	put_player_L(t_cub *c, int x, int y)
 {
 	c->player->img = mlx_new_image(c->mlx, c->tilesize, c->tilesize);
 	if (!c->player->img || (mlx_image_to_window(c->mlx, c->player->img, y * c->tilesize + (0.5 * c->tilesize) - (c->tilesize * 0.1), x*c->tilesize + (0.5 * c->tilesize) - (c->tilesize * 0.2)) < 0))
@@ -102,7 +117,7 @@ void	put_player(t_cub *c, int x, int y)
 	}
 }
 
-void	put_arrow(t_cub *c, int x, int y)
+void	put_player_square(t_cub *c, int x, int y)
 {
 	c->player->img = mlx_new_image(c->mlx, c->tilesize, c->tilesize);
 	if (!c->player->img || (mlx_image_to_window(c->mlx, c->player->img, y * c->tilesize + (0.5 * c->tilesize) - (c->tilesize * 0.1), x*c->tilesize + (0.5 * c->tilesize) - (c->tilesize * 0.1)) < 0))
@@ -121,8 +136,8 @@ void	put_arrow(t_cub *c, int x, int y)
 		}
 		i++;
 	}
-	mlx_put_pixel(c->player->img, 0, 0, 0xf00fffff); 
 }
+
 
 int	display_2d_map(t_cub *c)
 {
@@ -158,7 +173,7 @@ int	display_2d_map(t_cub *c)
 				|| c->map[i][j] == 'S' || c->map[i][j] == 'N')
 			{
 				c->player = init_player(c, i, j);
-				put_player(c, i, j);
+				put_player_L(c, i, j);
 			}
 			j++;
 		}

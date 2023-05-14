@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/12 17:41:30 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/14 11:59:56 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
+#include <math.h>
 #include "MLX42.h"
 //#include "MLX42_Int.h"
 //#include "MLX42_input.h"
@@ -43,6 +44,9 @@ typedef struct	s_player
 	int			x_start;
 	int			y_start;
 	int			is_moving;
+	float		ang;
+	float		delta_x;
+	float		delta_y;
 	mlx_image_t	*img;
 
 }				t_player;
