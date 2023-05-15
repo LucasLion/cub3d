@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/15 14:23:30 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/15 14:46:24 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,10 +172,12 @@ void	put_player_square(t_cub *c, int x, int y)
 }
 int	wall_or_empty(t_cub *c, int x , int y)
 {
-	int i = x / c->tilesize;
-	int j ;
-	printf("x : %f et y : %f", x, y);
-	printf
+	//int i = x / c->tilesize;
+	//int j ;
+	(void)c;
+	(void)x;
+	(void)y;
+	return (0);
 }
 
 void draw_line(t_cub *c, int x, int y)
