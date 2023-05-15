@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/15 15:11:37 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/15 15:17:15 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct	s_cub
 	int			map_width;
 	int			map_height;
 	int			tilesize;
+	int			test;
 	mlx_t		*mlx;
 	char		**map;
 	t_textures	*t;	
