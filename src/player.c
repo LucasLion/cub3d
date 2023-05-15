@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 15:06:29 by llion             #+#    #+#             */
-/*   Updated: 2023/05/15 15:06:47 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/15 17:02:45 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 t_player	*init_player(t_cub *c, int i, int j)
 {
 	t_player	*player;
-	mlx_image_t	*img;
 
 	player = ft_calloc(1, sizeof(t_player));
 	player->img = mlx_new_image(c->mlx, c->tilesize, c->tilesize);

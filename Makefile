@@ -6,7 +6,7 @@
 #    By: amouly <amouly@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 15:27:43 by llion             #+#    #+#              #
-#    Updated: 2023/05/12 17:12:05 by amouly           ###   ########.fr        #
+#    Updated: 2023/05/15 17:02:04 by amouly           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,10 @@ SRC			=	main.c			\
 				parsing2.c		\
 				parsing.c 		\
 				player.c 		\
-				display_map.c 		
+				display_map.c 	\
+				movement.c		\
+				line.c
+					
 MAP			= maps/map.cub
 OBJ			= $(addprefix obj/,$(notdir $(SRC:.c=.o)))
 
