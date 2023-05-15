@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/15 13:52:12 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/15 14:23:30 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,14 @@ void	move_player(mlx_key_data_t keydata, void *param)
 		c->player->is_moving = 4;
 	if (keydata.key == MLX_KEY_D && keydata.action == MLX_RELEASE)
 		c->player->is_moving = 0;
+	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
+		c->player->is_moving = 5;
+	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_RELEASE)
+		c->player->is_moving = 0;
+	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
+		c->player->is_moving = 6;
+	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_RELEASE)
+		c->player->is_moving = 0;
 }
 
 void	check_movement(t_cub *c)
@@ -60,15 +68,32 @@ void	check_movement(t_cub *c)
 		c->player->line->instances[0].y -= 1;
 	}
 	else if (c->player->is_moving == 2)
-		c->player->ang -= 0.1;
+	{
+		c->player->img->instances[0].x -= 1;
+		c->player->line->instances[0].x -= 1;
+	}
 	else if (c->player->is_moving == 3)
 	{
 		c->player->img->instances[0].y += 1;
 		c->player->line->instances[0].y += 1;
 	}
 	else if (c->player->is_moving == 4)
+	{
+		c->player->img->instances[0].x += 1;
+		c->player->line->instances[0].x += 1;
+	}
+	if (c->player->is_moving == 5)
+	{
+		c->player->ang -= 0.1;
+		if (c->player->ang < 0)
+			c->player->ang += (2 * PI);
+	}
+	else if (c->player->is_moving == 6)
+	{
 		c->player->ang += 0.1;
-	printf("%f\n", c->player->ang);
+		if (c->player->ang > (2 * PI))
+			c->player->ang -= (2 * PI);
+	}
 }
 
 void	ft_hook(void *param)
@@ -145,6 +170,14 @@ void	put_player_square(t_cub *c, int x, int y)
 		i++;
 	}
 }
+int	wall_or_empty(t_cub *c, int x , int y)
+{
+	int i = x / c->tilesize;
+	int j ;
+	printf("x : %f et y : %f", x, y);
+	printf
+}
+
 void draw_line(t_cub *c, int x, int y)
 {
 	t_line	line;
