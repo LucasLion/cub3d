@@ -6,19 +6,19 @@
 /*   By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:59:49 by llion             #+#    #+#             */
-/*   Updated: 2023/05/12 14:30:04 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/15 15:11:53 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int	get_nb_lines_in_map_file(int fd)
+int	get_nb_lines_in_map_file(int fd, char **argv)
 {
 	int		num_lines;
 	char	*line;
 
 	num_lines = 0;
-	fd = open("maps/map1.cub", O_RDONLY);
+	fd = open(argv[1], O_RDONLY);
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -57,17 +57,19 @@ int	get_nb_line_map_start(char **f, t_cub *c)
 	}
 	return (i);
 }
-char	**get_file()
+char	**get_file(char **argv)
 {
 	char	**map;
 	int		i;
 	char	*line;
 	int		fd;
 
-	fd = open("maps/map1.cub", O_RDONLY);
+	fd = open(argv[1], O_RDONLY);
 	i = 0;
-	map = ft_calloc(sizeof(char *), get_nb_lines_in_map_file(fd) + 1);
-	while (i < get_nb_lines_in_map_file(fd))
+	map = ft_calloc(sizeof(char *), get_nb_lines_in_map_file(fd, argv) + 1);
+	if (map == NULL)
+		return (NULL);
+	while (i < get_nb_lines_in_map_file(fd, argv))
 	{
 		line = get_next_line(fd);
 		map[i] = ft_strdup(line);

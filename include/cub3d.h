@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/15 15:06:00 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/15 15:17:15 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,9 @@ typedef struct	s_cub
 }				t_cub;
 
 int		ft_error(char *str);
-int		get_nb_lines_in_map_file(int fd);
+int		get_nb_lines_in_map_file(int fd, char **argv);
 int	get_nb_line_map_start(char **f, t_cub *c);
-char	**get_file();
+char	**get_file(char **argv);
 char	**get_description(char **map);
 char	**get_map(char **file, int i);
 
