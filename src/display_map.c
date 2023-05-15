@@ -6,104 +6,12 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/15 14:23:30 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/15 16:59:03 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	rotate_player(mlx_key_data_t keydata, void *param)
-{
-	t_cub	*c;
-
-	c = param;
-	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
-		c->player->is_moving = 2;
-	if (keydata.key == MLX_KEY_A && keydata.action == MLX_RELEASE)
-		c->player->is_moving = 0;
-	if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
-		c->player->is_moving = 4;
-	if (keydata.key == MLX_KEY_D && keydata.action == MLX_RELEASE)
-		c->player->is_moving = 0;
-}
-
-void	move_player(mlx_key_data_t keydata, void *param)
-{
-	t_cub	*c;
-
-	c = param;
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		mlx_close_window(c->mlx);
-	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
-		c->player->is_moving = 1;
-	if (keydata.key == MLX_KEY_W && keydata.action == MLX_RELEASE)
-		c->player->is_moving = 0;
-	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
-		c->player->is_moving = 2;
-	if (keydata.key == MLX_KEY_A && keydata.action == MLX_RELEASE)
-		c->player->is_moving = 0;
-	if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
-		c->player->is_moving = 3;
-	if (keydata.key == MLX_KEY_S && keydata.action == MLX_RELEASE)
-		c->player->is_moving = 0;
-	if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
-		c->player->is_moving = 4;
-	if (keydata.key == MLX_KEY_D && keydata.action == MLX_RELEASE)
-		c->player->is_moving = 0;
-	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
-		c->player->is_moving = 5;
-	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_RELEASE)
-		c->player->is_moving = 0;
-	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
-		c->player->is_moving = 6;
-	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_RELEASE)
-		c->player->is_moving = 0;
-}
-
-void	check_movement(t_cub *c)
-{
-	if (c->player->is_moving == 1)
-	{
-		c->player->img->instances[0].y -= 1;
-		c->player->line->instances[0].y -= 1;
-	}
-	else if (c->player->is_moving == 2)
-	{
-		c->player->img->instances[0].x -= 1;
-		c->player->line->instances[0].x -= 1;
-	}
-	else if (c->player->is_moving == 3)
-	{
-		c->player->img->instances[0].y += 1;
-		c->player->line->instances[0].y += 1;
-	}
-	else if (c->player->is_moving == 4)
-	{
-		c->player->img->instances[0].x += 1;
-		c->player->line->instances[0].x += 1;
-	}
-	if (c->player->is_moving == 5)
-	{
-		c->player->ang -= 0.1;
-		if (c->player->ang < 0)
-			c->player->ang += (2 * PI);
-	}
-	else if (c->player->is_moving == 6)
-	{
-		c->player->ang += 0.1;
-		if (c->player->ang > (2 * PI))
-			c->player->ang -= (2 * PI);
-	}
-}
-
-void	ft_hook(void *param)
-{
-	t_cub *c;
-
-	c = param;
-	check_movement(c);
-	draw_line(c, c->player->img->instances[0].x, c->player->img->instances[0].y);
-}
 void	put_square(t_cub *c, int x, int y, long int color)
 {
 	int	i;
@@ -120,30 +28,6 @@ void	put_square(t_cub *c, int x, int y, long int color)
 		while (j < c->tilesize - 1)
 		{
 			mlx_put_pixel(img, i, j, color); 
-			j++;
-		}
-		i++;
-	}
-}
-
-void	put_player_L(t_cub *c, int x, int y)
-{
-	c->player->img = mlx_new_image(c->mlx, c->tilesize, c->tilesize);
-	if (!c->player->img || (mlx_image_to_window(c->mlx, c->player->img, y * c->tilesize + (0.5 * c->tilesize) - (c->tilesize * 0.1), x*c->tilesize + (0.5 * c->tilesize) - (c->tilesize * 0.2)) < 0))
-		return ;
-	int i;
-	int	j;
-
-	i = 0;
-	while (i < (c->tilesize * 0.4))
-	{
-		j = 0;
-		while (j < (c->tilesize * 0.4))
-		{
-			if (i == 0 )
-				mlx_put_pixel(c->player->img, i, j, 0xff0456ff);
-			if (j == (c->tilesize * 0.2))
-				mlx_put_pixel(c->player->img, i, j, 0xff0456ff);
 			j++;
 		}
 		i++;
@@ -168,39 +52,6 @@ void	put_player_square(t_cub *c, int x, int y)
 			j++;
 		}
 		i++;
-	}
-}
-int	wall_or_empty(t_cub *c, int x , int y)
-{
-	int i = x / c->tilesize;
-	int j ;
-	printf("x : %f et y : %f", x, y);
-	printf
-}
-
-void draw_line(t_cub *c, int x, int y)
-{
-	t_line	line;
-	if (c->player->line)
-		mlx_delete_image(c->mlx, c->player->line);
-	line.len_line = c->tilesize * 0.5;
-	line.start_x = y;
-	line.start_y = x;
-	line.end_x =  (cos(c->player->ang) * line.len_line) + y ;
-	line.end_y = - ((sin(c->player->ang) * line.len_line)) + x ;
-	line.delta_x = line.end_x - line.start_x;
-	line.delta_y = line.end_y - line.start_y;
-	c->player->line = mlx_new_image(c->mlx, c->map_width , c->map_height);
-	if (!c->player->line|| (mlx_image_to_window(c->mlx, c->player->line,c->tilesize * 0.1, c->tilesize * 0.1) < 0))
-		return ;
-	line.delta_x /= line.len_line;
-	line.delta_y /= line.len_line;
-	while(line.len_line)
-	{
-		mlx_put_pixel(c->player->line, line.start_y, line.start_x, 0xff0456ff); 
-		line.start_y += line.delta_x;
-		line.start_x += line.delta_y;
-		--line.len_line;
 	}
 }
 
