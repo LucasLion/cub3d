@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/14 11:59:56 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/15 13:42:18 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include <fcntl.h>
 #include <math.h>
 #include "MLX42.h"
+#define PI 3.14159
 //#include "MLX42_Int.h"
 //#include "MLX42_input.h"
 
@@ -39,15 +40,26 @@ typedef struct	s_textures
 	int		nb_elems;
 }				t_textures;
 
+typedef struct	s_line
+{
+	double		start_x;
+	double		start_y;
+	double 		end_x;
+	double		end_y;
+	double		delta_x;
+	double		delta_y;
+	int			len_line;
+	
+}				t_line;
+
 typedef struct	s_player
 {
-	int			x_start;
-	int			y_start;
+	int			x_pos;
+	int			y_pos;
 	int			is_moving;
-	float		ang;
-	float		delta_x;
-	float		delta_y;
+	double		ang;
 	mlx_image_t	*img;
+	mlx_image_t	*line;
 
 }				t_player;
 
@@ -88,4 +100,7 @@ int			display_2d_map(t_cub *c);
 void		move_player(mlx_key_data_t keydata, void *param);
 t_player	*init_player(t_cub *c, int i, int j);
 void		ft_hook(void *param);
+void		put_player_L(t_cub *c, int x, int y);
+void 		draw_line(t_cub *c, int x, int y);
+void		put_player_square(t_cub *c, int x, int y);
 #endif
