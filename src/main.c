@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/05/14 15:54:27 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/15 13:51:15 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	main(int argc, char **argv)
 	}
 	display_2d_map(c);
 	put_player_square(c, c->player->x_pos, c->player->y_pos);
+	c->player->line = NULL;
 	draw_line(c, c->player->img->instances[0].x, c->player->img->instances[0].y);
 	mlx_key_hook(c->mlx, &move_player, c);
 	mlx_loop_hook(c->mlx, &ft_hook, c);

@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/14 15:38:48 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/15 13:42:18 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include <fcntl.h>
 #include <math.h>
 #include "MLX42.h"
+#define PI 3.14159
 //#include "MLX42_Int.h"
 //#include "MLX42_input.h"
 
@@ -39,17 +40,24 @@ typedef struct	s_textures
 	int		nb_elems;
 }				t_textures;
 
+typedef struct	s_line
+{
+	double		start_x;
+	double		start_y;
+	double 		end_x;
+	double		end_y;
+	double		delta_x;
+	double		delta_y;
+	int			len_line;
+	
+}				t_line;
+
 typedef struct	s_player
 {
 	int			x_pos;
 	int			y_pos;
 	int			is_moving;
-	int			leng_line;
 	double		ang;
-	double		start_x;
-	double		start_y;
-	double		end_x;
-	double		end_y;
 	mlx_image_t	*img;
 	mlx_image_t	*line;
 

@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/14 15:53:20 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/15 13:52:12 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,15 @@ void	check_movement(t_cub *c)
 		c->player->line->instances[0].y -= 1;
 	}
 	else if (c->player->is_moving == 2)
-		c->player->img->instances[0].x -= 1;
+		c->player->ang -= 0.1;
 	else if (c->player->is_moving == 3)
 	{
 		c->player->img->instances[0].y += 1;
 		c->player->line->instances[0].y += 1;
 	}
 	else if (c->player->is_moving == 4)
-		c->player->img->instances[0].x += 1;
+		c->player->ang += 0.1;
+	printf("%f\n", c->player->ang);
 }
 
 void	ft_hook(void *param)
@@ -76,6 +77,7 @@ void	ft_hook(void *param)
 
 	c = param;
 	check_movement(c);
+	draw_line(c, c->player->img->instances[0].x, c->player->img->instances[0].y);
 }
 void	put_square(t_cub *c, int x, int y, long int color)
 {
@@ -145,24 +147,27 @@ void	put_player_square(t_cub *c, int x, int y)
 }
 void draw_line(t_cub *c, int x, int y)
 {
-	double pixels;
-	double deltaX;
-	double deltaY;
-	
-	pixels =c->player->leng_line;
-	deltaX = c->player->end_x - c->player->start_x;
-	deltaY = c->player->end_y - c->player->start_y;
+	t_line	line;
+	if (c->player->line)
+		mlx_delete_image(c->mlx, c->player->line);
+	line.len_line = c->tilesize * 0.5;
+	line.start_x = y;
+	line.start_y = x;
+	line.end_x =  (cos(c->player->ang) * line.len_line) + y ;
+	line.end_y = - ((sin(c->player->ang) * line.len_line)) + x ;
+	line.delta_x = line.end_x - line.start_x;
+	line.delta_y = line.end_y - line.start_y;
 	c->player->line = mlx_new_image(c->mlx, c->map_width , c->map_height);
 	if (!c->player->line|| (mlx_image_to_window(c->mlx, c->player->line,c->tilesize * 0.1, c->tilesize * 0.1) < 0))
 		return ;
-	deltaX /= pixels;
-	deltaY /= pixels;
-	while(pixels)
+	line.delta_x /= line.len_line;
+	line.delta_y /= line.len_line;
+	while(line.len_line)
 	{
-		mlx_put_pixel(c->player->line, x, y, 0xff0456ff); 
-		x += deltaX;
-		y += deltaY;
-		--pixels;
+		mlx_put_pixel(c->player->line, line.start_y, line.start_x, 0xff0456ff); 
+		line.start_y += line.delta_x;
+		line.start_x += line.delta_y;
+		--line.len_line;
 	}
 }
 
@@ -194,22 +199,5 @@ int	display_2d_map(t_cub *c)
 		}
 		i++;
 	}
-	/*i = 0;
-	while (c->map[i])
-	{
-		j = 0;
-		while (c->map[i][j])
-		{
-			if (c->map[i][j] == 'W' || c->map[i][j] == 'E' \
-				|| c->map[i][j] == 'S' || c->map[i][j] == 'N')
-			{
-				c->player = init_player(c, i, j);
-				put_player_L(c, i, j);
-			}
-			j++;
-		}
-		i++;
-	}*/
 	return (1);
-
 }
