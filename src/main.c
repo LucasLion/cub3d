@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/05/15 15:17:32 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/15 17:41:29 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	map_width(char **map)
 void	init_cub(t_cub *c, char **file)
 {
 	c->t = ft_calloc(1, sizeof(t_textures));
-	c->tilesize = 50;
+	c->tilesize = 150;
 	c->nb_line_map_start = get_nb_line_map_start(file, c);
 	c->t->nb_elems = 0;
 	c->map = get_map(file, c->nb_line_map_start);
