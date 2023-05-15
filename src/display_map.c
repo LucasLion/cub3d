@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/15 14:23:30 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/15 15:08:20 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,26 +170,31 @@ void	put_player_square(t_cub *c, int x, int y)
 		i++;
 	}
 }
-int	wall_or_empty(t_cub *c, int x , int y)
+int	wall_or_empty(t_cub *c, double x , double y)
 {
 	int i = x / c->tilesize;
-	int j ;
+	int j = y / c->tilesize;
 	printf("x : %f et y : %f", x, y);
-	printf
+	printf("i : %d et j : %d", i, j);
+	c->test = 1;
+	return (0);
 }
 
 void draw_line(t_cub *c, int x, int y)
 {
 	t_line	line;
+
 	if (c->player->line)
 		mlx_delete_image(c->mlx, c->player->line);
-	line.len_line = c->tilesize * 0.5;
+	line.len_line = 60;
 	line.start_x = y;
 	line.start_y = x;
 	line.end_x =  (cos(c->player->ang) * line.len_line) + y ;
 	line.end_y = - ((sin(c->player->ang) * line.len_line)) + x ;
 	line.delta_x = line.end_x - line.start_x;
 	line.delta_y = line.end_y - line.start_y;
+	if (c->test == 0)
+		wall_or_empty(c ,line.end_x, line.end_y );
 	c->player->line = mlx_new_image(c->mlx, c->map_width , c->map_height);
 	if (!c->player->line|| (mlx_image_to_window(c->mlx, c->player->line,c->tilesize * 0.1, c->tilesize * 0.1) < 0))
 		return ;
@@ -202,6 +207,7 @@ void draw_line(t_cub *c, int x, int y)
 		line.start_x += line.delta_y;
 		--line.len_line;
 	}
+	
 }
 
 int	display_2d_map(t_cub *c)
