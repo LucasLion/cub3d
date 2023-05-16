@@ -6,12 +6,13 @@
 /*   By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:59:49 by llion             #+#    #+#             */
-/*   Updated: 2023/05/15 15:11:53 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/16 16:16:33 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
+// TODO corriger l'endroit ou on calcule le nombre de lignes avant la map
 int	get_nb_lines_in_map_file(int fd, char **argv)
 {
 	int		num_lines;
@@ -29,6 +30,7 @@ int	get_nb_lines_in_map_file(int fd, char **argv)
 	free(line);
 	return (num_lines);
 }
+
 int	get_nb_line_map_start(char **f, t_cub *c)
 {
 	int		i;
@@ -43,7 +45,10 @@ int	get_nb_line_map_start(char **f, t_cub *c)
 		while (f[i][j] == ' ')
 			j++;
 		if (f[i][j] == '\n')
+		{
 			i++;
+			continue;
+		}
 		if (!((f[i][j] == 'N' && f[i][j + 1] == 'O') || (f[i][j] == 'S' \
 				&& f[i][j + 1] == 'O') || (f[i][j] == 'W' \
 				&& f[i][j + 1] == 'E') || (f[i][j] == 'E' \
@@ -88,16 +93,21 @@ char	**get_map(char **f, int i)
 	map = ft_calloc(ft_tablen(f) - i + 1, sizeof(char *));
 	if (!map)
 		return (0);
-	while (f[i])
+	if (f[i])
 	{
-		if (f[i][0] == '\n')
-			i++;
-		else 
+		while (f[i])
 		{
-			map[j] = ft_strdup(f[i]);
-			i++;
-			j++;
+			if (f[i][0] == '\n')
+				i++;
+			else 
+			{
+				map[j] = ft_strdup(f[i]);
+				i++;
+				j++;
+			}
 		}
 	}
+	else
+		return (NULL);
 	return (map);
 }

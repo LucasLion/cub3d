@@ -6,7 +6,7 @@
 /*   By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 17:31:32 by llion             #+#    #+#             */
-/*   Updated: 2023/05/12 16:11:44 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/16 16:10:50 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,18 @@ int	parse_infos(char **f, t_cub *c)
 		j = 0;
 		while (f[i][j] == ' ')
 			j++;
-		if (f[i][j] == '\n')
+		if (f[i][j] == '\n' || f[i][j] == '\0')
+		{
 			i++;
-		if (!((f[i][j] == 'N' && f[i][j + 1] == 'O') || (f[i][j] == 'S' \
+			continue ;
+		}
+		else if (!((f[i][j] == 'N' && f[i][j + 1] == 'O') || (f[i][j] == 'S' \
 				&& f[i][j + 1] == 'O') || (f[i][j] == 'W' \
 				&& f[i][j + 1] == 'E') || (f[i][j] == 'E' \
 				&& f[i][j + 1] == 'A') || (f[i][j] == 'F' \
 				&& f[i][j + 1] == ' ') || (f[i][j] == 'C' \
 				&& f[i][j + 1] == ' ')))
-			return (0);
+			return (ft_error("Wrong/Missing parameters"));
 		else
 			c->t->nb_elems++;
 		i++;
@@ -57,7 +60,7 @@ int	parse_elems_in_map(char **map)
 			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'N' \
 					&& map[i][j] != 'S' && map[i][j] != 'E' \
 					&& map[i][j] != 'W' && map[i][j] != ' ' && map[i][j] != '\n')
-				return (0);
+				return (ft_error("Invalid map (foreign chars)"));
 			j++;
 		}
 		i++;
@@ -73,7 +76,7 @@ int	check_spaces(char c, char **m, int i, int j)
 			|| (m[i][j - 1] == ' ' || m[i][j - 1] == 0 || m[i][j - 1] == '\n') \
 			|| (m[i + 1][j] == ' ' || m[i + 1][j] == 0 || m[i + 1][j] == '\n') \
 			|| (m[i - 1][j] == ' ' || m[i - 1][j] == 0 || m[i - 1][j] == '\n'))
-			return (0);
+			return (ft_error("Map needs to be closed"));
 	}
 	return (1);
 }
@@ -95,10 +98,10 @@ int	parse_borders(char **map)
 					|| j == (int)ft_strlen(map[i]) - 2)
 			{
 				if (map[i][j] != '1' && map[i][j] != ' ' && map[i][j] != '\n')	
-					return (0);
+					return (ft_error("Map needs to be closed"));
 			}
 			else if (check_spaces(map[i][j], map, i, j) == 0)
-				return (0);
+				return (ft_error("Map needs to be closed"));
 			j++;
 		}
 		i++;
@@ -127,14 +130,16 @@ int	parse_number_players(char **map)
 		i++;
 	}
 	if (nb_players != 1)
-		return (0);
+		return (ft_error("Wrong number of players"));
 	return (1);
 }
 
 int	parsing(char **file, t_cub *c)
 {
+	for (int i = 0; i < ft_tablen(c->map); i++)
+		printf("-> %s", c->map[i]);
 	if (parse_infos(file, c) == 0 || parse_elems_in_map(c->map) == 0 \
-			|| parse_borders(c->map) == 0 || parse_number_players(c->map) != 1)
+			|| parse_borders(c->map) == 0 || parse_number_players(c->map) == 0)
 		return (0);
 	return (1);
 }
