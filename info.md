@@ -51,3 +51,13 @@
 - [  ] Reformater le code avec une bonne gestion d'erreurs
 - [  ] Reflechir a des structures de donnees plus pertinentes
 - [  ] GNL leak
+
+## git gems
+
+- git add . && git commit -m "message" == git commit -am "message"
+- git config --global alias.ac "commit -am" ==> git ac "message"
+- git commit --amend -m "message corrige" (modifie le nom du predecent commit)
+- git add . && git commit --amend --no-edit (rajoute des fichiers au commit)
+- git stash list / git stash pop (reajoute au code) / git stash save "name" / git stash apply *index*
+- git log --graph --oneline --decorate
+- git checkout - (retourne sur la precedente branche)
