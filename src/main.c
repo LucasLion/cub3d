@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/05/15 15:17:32 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/16 16:17:00 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,18 @@ int	map_width(char **map)
 	return (width - 1);
 }
 
-void	init_cub(t_cub *c, char **file)
+int	init_cub(t_cub *c, char **file)
 {
 	c->t = ft_calloc(1, sizeof(t_textures));
 	c->tilesize = 50;
 	c->nb_line_map_start = get_nb_line_map_start(file, c);
 	c->t->nb_elems = 0;
 	c->map = get_map(file, c->nb_line_map_start);
+	if (!c->map)
+		return (ft_error("Empty file"));
 	c->map_height = ft_tablen(c->map) * c->tilesize;
 	c->map_width = map_width(c->map) * c->tilesize;
+	return (1);
 }
 
 
@@ -62,18 +65,15 @@ int	main(int argc, char **argv)
 	t_cub	*c;
 
 	c = ft_calloc(1, sizeof(t_cub));
-	if (parse_file(argc, argv))
+	if (parse_file(argc, argv) != 0)
 		file = get_file(argv);
 	else
-	{
-		ft_error("Invalid file\n");
 		return (-1);
-	}
-	init_cub(c, file);
-	if (parsing(file, c) == 0 || parse_file(argc, argv) == 0)
+	if (init_cub(c, file) == 0)
+		return (-1);
+	if (parsing(file, c) == 0)
 	{
 		free_function(file, c);
-		ft_error("Error: Invalid map");
 		return (-1);
 	}
 	display_2d_map(c);
