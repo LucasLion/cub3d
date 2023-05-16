@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/15 18:46:35 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/16 17:56:32 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,38 @@ void	get_xcross(t_cub *c, t_line *line)
 {
 	double	opp;
 
+	printf("ang: %f\n", c->player->ang);
 	if (c->player->ang >= 0 && c->player->ang < PI/2) 
 	{
-		opp = tan(c->player->ang - PI / 2) * ((int)(c->player->img->instances[0].y + 0.1 * c->tilesize) % c->tilesize);
+		printf("1\n");
+		opp = tan(c->player->ang) * ((int)(c->player->img->instances[0].y + 0.1 * c->tilesize) % c->tilesize);
 		line->end_x = c->player->img->instances[0].x - opp;
 		line->end_y = c->player->img->instances[0].y / c->tilesize * c->tilesize;
 	}
-	else if (c->player->ang >= PI/2 && c->player->ang < 2 * PI) 
+	else if (c->player->ang >= PI/2 && c->player->ang < PI) 
 	{
-		opp = tan(c->player->ang + PI / 2) * ((int)(c->player->img->instances[0].y + 0.1 * c->tilesize) % c->tilesize);
+		printf("2\n");
+		opp = tan(c->player->ang) * ((int)(c->player->img->instances[0].y + 0.1 * c->tilesize) % c->tilesize);
 		line->end_x = c->player->img->instances[0].x - opp;
 		line->end_y = c->player->img->instances[0].y / c->tilesize * (c->tilesize);
 	}
-	else if (c->player->ang >= PI && c->player->ang < PI*2/3) 
+	else if (c->player->ang >= PI && c->player->ang < (PI/2)*3) 
 	{
-		opp = tan(c->player->ang - PI) * ((int)(c->player->img->instances[0].y + 0.1 * c->tilesize) % c->tilesize);
-		line->end_x = c->player->img->instances[0].x - opp;
-		line->end_y = c->player->img->instances[0].y / c->tilesize * c->tilesize;
+		printf("3\n");
+		opp = tan(c->player->ang) * ((int)(c->player->img->instances[0].y + 0.1 * c->tilesize) % c->tilesize);
+		line->end_x = -(c->player->img->instances[0].x - opp);
+	//	line->end_y = c->player->img->instances[0].y / c->tilesize * c->tilesize;
+		printf("line->end: %f\n", line->end_y);
+		line->end_y = 250;
 	}
 	else
 	{
-		opp = tan(c->player->ang + PI) * ((int)(c->player->img->instances[0].y + 0.1 * c->tilesize) % c->tilesize);
-		line->end_x = c->player->img->instances[0].x - opp;
-		line->end_y = c->player->img->instances[0].y / c->tilesize * c->tilesize;
+		printf("4\n");
+		opp = tan(c->player->ang) * ((int)(c->player->img->instances[0].y + 0.1 * c->tilesize) % c->tilesize);
+		line->end_x =-( c->player->img->instances[0].x - opp);
+		//line->end_y = c->player->img->instances[0].y / c->tilesize * c->tilesize;
+		line->end_y = 250;
 	}
-	printf("angle: %f\n", c->player->ang *( 180 / PI));
 
 }
 
@@ -69,6 +76,7 @@ void draw_line(t_cub *c, int x, int y)
 	(void)y;
 
 	get_xcross(c, &line);
+
 	if (c->player->line)
 		mlx_delete_image(c->mlx, c->player->line);
 	line.len_line = 60;
