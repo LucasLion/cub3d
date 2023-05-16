@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/16 14:36:07 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/16 16:54:33 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 void draw_one_line(t_cub *c, t_point start, t_point end)
 {
-	double			delta_y;
-	double			delta_x;
+	float			delta_y;
+	float			delta_x;
 	long long int	length;
 	
 	delta_y = end.y - start.y;
@@ -40,7 +40,14 @@ void draw_line(t_cub *c, int x, int y)
 {
 	t_point	start;
 	t_point end;
+	double	ra;
+	double 	atan;
+	int 	y_offset;
+	double	x_offset;	
 
+	ra = c->player->ang;
+	atan = 1 / tan(ra); 
+	printf("ang : %f\n", ra);
 	if (c->player->line)
 		mlx_delete_image(c->mlx, c->player->line);
 	c->player->line = mlx_new_image(c->mlx, c->map_width , c->map_height);
@@ -48,9 +55,44 @@ void draw_line(t_cub *c, int x, int y)
 		return ;
 	start.x = x + (0.1 * c->tilesize);
 	start.y = y + (0.1 * c->tilesize);
+	if (ra > PI) 
+	{
+		end.y = (int)(start.y /c->tilesize) * c->tilesize + c->tilesize;
+		end.x = (end.y - start.y) * atan + start.x;
+		y_offset = c->tilesize;
+		x_offset = (y_offset * atan);	
+	}
+	if (ra < PI) 
+	{
+		end.y = ((int)(start.y /c->tilesize) * c->tilesize - 0.001);
+		end.x = (end.y - start.y) * atan + start.x;
+		y_offset = - (c->tilesize);
+		x_offset = -(y_offset * atan);	
+	}
+	if (ra == 0 || ra == PI) 
+	{
+		end.y = start.y;
+		end.x = start.x;
+	}
+	int dof = 0;
+	while(dof < c->map_height)
+	{
+		int i = end.y / c->tilesize;
+		int j = end.x / c->tilesize;
+		printf("i / j  : %d / %d map[i][j] : %c\n", i, j, c->map[i][j] );
+		printf("end x / y  : %f / %f\n", end.x, end.y );
+		if (c->map[i][j] == '1')
+			dof = c->map_height;
+		else	
+			{
+				end.x += x_offset;
+				end.y += y_offset;
+				dof++;
+			}
+	}
+	//end.x =  (cosf(c->player->ang) * 60) + start.x ;
+	//end.y =  (sinf(c->player->ang) * 60) + start.y ;
 	
-	end.x =  (cosf(c->player->ang) * 60) + start.x ;
-	end.y =  - (sinf(c->player->ang) * 60) + start.y ;
 	draw_one_line(c, start, end);	
 }
 

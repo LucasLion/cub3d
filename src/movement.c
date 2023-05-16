@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/15 16:58:41 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/16 16:46:39 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@ void	check_movement(t_cub *c)
 	}
 	if (c->player->is_moving == 5)
 	{
-		c->player->ang -= 0.1;
+		c->player->ang -= 0.01;
 		if (c->player->ang < 0)
 			c->player->ang += (2 * PI);
 	}
 	else if (c->player->is_moving == 6)
 	{
-		c->player->ang += 0.1;
+		c->player->ang += 0.01;
 		if (c->player->ang > (2 * PI))
 			c->player->ang -= (2 * PI);
 	}
@@ -87,5 +87,5 @@ void	ft_hook(void *param)
 
 	c = param;
 	check_movement(c);
-	draw_line(c, c->player->img->instances[0].x, c->player->img->instances[0].y);
+	//draw_line(c, c->player->img->instances[0].x, c->player->img->instances[0].y);
 }

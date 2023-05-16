@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/16 13:29:36 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/16 15:38:46 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ typedef struct	s_textures
 
 typedef struct	s_point
 {
-	double		x;
-	double		y;
+	float		x;
+	float		y;
 }				t_point;
 
 typedef struct	s_line
