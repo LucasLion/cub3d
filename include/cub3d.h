@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/16 16:23:12 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/17 12:17:01 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct	s_line
 {
 	double		start_x;
 	double		start_y;
-	double 		end_x;
+	double		end_x;
 	double		end_y;
 	double		delta_x;
 	double		delta_y;
