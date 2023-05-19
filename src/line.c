@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/16 16:54:33 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/19 12:44:15 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void draw_one_line(t_cub *c, t_point start, t_point end)
 
 
 
-void draw_line(t_cub *c, int x, int y)
+/*void draw_line(t_cub *c, int x, int y)
 {
 	t_point	start;
 	t_point end;
@@ -94,7 +94,7 @@ void draw_line(t_cub *c, int x, int y)
 	//end.y =  (sinf(c->player->ang) * 60) + start.y ;
 	
 	draw_one_line(c, start, end);	
-}
+}*/
 
 /*void draw_line(t_cub *c, int x, int y)
 {
@@ -123,6 +123,149 @@ void draw_line(t_cub *c, int x, int y)
 	}
 	
 }*/
+
+void draw_line(t_cub *c, int x, int y)
+{
+	t_point start;
+	t_point	end;
+
+	if (c->player->line)
+		mlx_delete_image(c->mlx, c->player->line);
+	start.x = x + (0.1 * c->tilesize);
+	start.y = y + (0.1 * c->tilesize);
+	end.x = start.x + c->player->player_x_dif;
+	end.y = start.y + c->player->player_y_dif;
+	c->player->line = mlx_new_image(c->mlx, c->map_width , c->map_height);
+	if (!c->player->line|| (mlx_image_to_window(c->mlx, c->player->line,0,0) < 0))
+		return ;
+	draw_one_line(c, start, end );
+	
+}
+void check_horizontal(t_cub *c, t_point *start, t_point *end)
+{
+	t_point offset;
+	float	ra = c->player->ang;
+	float	atan = -1 / tan(ra);
+	int dof = 0;
+	
+	if (ra > PI) 
+	{
+		end->y = (int)(start->y /c->tilesize) * c->tilesize + c->tilesize;
+		end->x = ((end->y - start->y) * atan) + start->x;
+		offset.y = c->tilesize;
+		offset.x = (offset.y * atan);	
+	}
+	if (ra < PI) 
+	{
+		end->y = ((int)(start->y /c->tilesize) * c->tilesize - 0.001);
+		end->x = (end->y - start->y) * atan + start->x;
+		offset.y = - c->tilesize;
+		offset.x = (offset.y * atan);	
+	}
+	while(dof < c->map_height)
+	{
+		int i = end->y / c->tilesize;
+		int j = end->x / c->tilesize;
+		if (c->map[i][j] == '1')
+			dof = c->map_height;
+		else	
+			{
+				end->x += offset.x;
+				end->y += offset.y;
+				dof++;
+			}
+	}
+}
+void check_vertical(t_cub *c, t_point *start, t_point *end)
+{
+	t_point offset;
+	float	ra = c->player->ang;
+	float	ntan = -tan(ra);
+	int dof = 0;
+	
+	printf ("YO");
+	if (ra > (PI / 2) && ra < (PI / 2 * 3)) 
+	{
+		end->x = (int)(start->x /c->tilesize) * c->tilesize - 0.001;
+		end->y = ((end->x - start->x) * ntan) + start->y;
+		offset.x = - c->tilesize;
+		offset.y = (offset.x * ntan);	
+	}
+	if (ra < (PI /2) || (ra > PI / 2 * 3)) 
+	{
+		end->x = ((int)(start->x /c->tilesize) * c->tilesize + c->tilesize);
+		end->y = (end->x - start->x) * ntan + start->y;
+		offset.x = c->tilesize;
+		offset.y = (offset.x * ntan);	
+	}
+	while(dof < c->map_width)
+	{
+		int i = end->y / c->tilesize;
+		int j = end->x / c->tilesize;
+		if (c->map[i][j] == '1')
+			dof = c->map_width;
+		else	
+			{
+				end->x += offset.x;
+				end->y += offset.y;
+				dof++;
+			}
+	}
+}
+
+void draw_ray(t_cub *c, int x, int y)
+{
+	t_point start;
+	t_point	end;
+	//t_point offset;
+	//float	ra = c->player->ang;;
+	//float	atan = -1 / tan(ra);
+	//int dof = 0;
+
+	start.x = x + (0.1 * c->tilesize);
+	start.y = y + (0.1 * c->tilesize);
+	end.x = x + (0.1 * c->tilesize);
+	end.y = y + (0.1 * c->tilesize);
+	//check_horizontal(c, &start, &end);
+	check_vertical(c, &start, &end);
+	/*if (ra > PI) 
+	{
+		end.y = (int)(start.y /c->tilesize) * c->tilesize + c->tilesize;
+		end.x = ((end.y - start.y) * atan) + start.x;
+		offset.y = c->tilesize;
+		offset.x = (offset.y * atan);	
+	}
+	if (ra < PI) 
+	{
+		end.y = ((int)(start.y /c->tilesize) * c->tilesize - 0.001);
+		end.x = (end.y - start.y) * atan + start.x;
+		offset.y = - c->tilesize;
+		offset.x = (offset.y * atan);	
+	}
+	while(dof < c->map_height)
+	{
+		int i = end.y / c->tilesize;
+		int j = end.x / c->tilesize;
+		if (c->map[i][j] == '1')
+			dof = c->map_height;
+		else	
+			{
+				end.x += offset.x;
+				end.y += offset.y;
+				dof++;
+			}
+	}*/
+	
+	if (c->player->line)
+		mlx_delete_image(c->mlx, c->player->line);
+	start.x = x + (0.1 * c->tilesize);
+	start.y = y + (0.1 * c->tilesize);
+	c->player->line = mlx_new_image(c->mlx, c->map_width , c->map_height);
+	if (!c->player->line|| (mlx_image_to_window(c->mlx, c->player->line,0,0) < 0))
+		return ;
+	draw_one_line(c, start, end );
+}
+
 
 
 
