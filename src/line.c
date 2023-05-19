@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/19 12:44:15 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/19 13:25:02 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,11 +162,26 @@ void check_horizontal(t_cub *c, t_point *start, t_point *end)
 		offset.y = - c->tilesize;
 		offset.x = (offset.y * atan);	
 	}
+	if (ra == PI) 
+	{
+		end->y = start->y;
+		end->x = ((int)(start->x /c->tilesize) * c->tilesize - 0.001);
+		offset.y = 0;
+		offset.x = - c->tilesize;	
+	}
+	if ( ra == 0) 
+	{
+		end->y = start->y;
+		end->x = ((int)(start->x /c->tilesize) * c->tilesize + c->tilesize);
+		offset.y = 0;
+		offset.x = c->tilesize;	
+	}
+	// segfault a checker dans la boucle while
 	while(dof < c->map_height)
 	{
 		int i = end->y / c->tilesize;
 		int j = end->x / c->tilesize;
-		if (c->map[i][j] == '1')
+		if (i > 0 && j > 0  && i < c->map_height && j < c->map_width && c->map[i][j] == '1')
 			dof = c->map_height;
 		else	
 			{
@@ -183,7 +198,6 @@ void check_vertical(t_cub *c, t_point *start, t_point *end)
 	float	ntan = -tan(ra);
 	int dof = 0;
 	
-	printf ("YO");
 	if (ra > (PI / 2) && ra < (PI / 2 * 3)) 
 	{
 		end->x = (int)(start->x /c->tilesize) * c->tilesize - 0.001;
@@ -198,12 +212,14 @@ void check_vertical(t_cub *c, t_point *start, t_point *end)
 		offset.x = c->tilesize;
 		offset.y = (offset.x * ntan);	
 	}
+	// segfault a checker dans la boucle while
 	while(dof < c->map_width)
 	{
 		int i = end->y / c->tilesize;
 		int j = end->x / c->tilesize;
-		if (c->map[i][j] == '1')
-			dof = c->map_width;
+		printf ("i = %d et j = %d\n", i, j);
+		if (i < 0 || j < 0  || i > c->map_height || j > c->map_width || c->map[i][j] == '1')
+			break;
 		else	
 			{
 				end->x += offset.x;
@@ -216,7 +232,8 @@ void check_vertical(t_cub *c, t_point *start, t_point *end)
 void draw_ray(t_cub *c, int x, int y)
 {
 	t_point start;
-	t_point	end;
+	t_point	end_vert;
+	t_point	end_hor;
 	//t_point offset;
 	//float	ra = c->player->ang;;
 	//float	atan = -1 / tan(ra);
@@ -224,38 +241,8 @@ void draw_ray(t_cub *c, int x, int y)
 
 	start.x = x + (0.1 * c->tilesize);
 	start.y = y + (0.1 * c->tilesize);
-	end.x = x + (0.1 * c->tilesize);
-	end.y = y + (0.1 * c->tilesize);
-	//check_horizontal(c, &start, &end);
-	check_vertical(c, &start, &end);
-	/*if (ra > PI) 
-	{
-		end.y = (int)(start.y /c->tilesize) * c->tilesize + c->tilesize;
-		end.x = ((end.y - start.y) * atan) + start.x;
-		offset.y = c->tilesize;
-		offset.x = (offset.y * atan);	
-	}
-	if (ra < PI) 
-	{
-		end.y = ((int)(start.y /c->tilesize) * c->tilesize - 0.001);
-		end.x = (end.y - start.y) * atan + start.x;
-		offset.y = - c->tilesize;
-		offset.x = (offset.y * atan);	
-	}
-	while(dof < c->map_height)
-	{
-		int i = end.y / c->tilesize;
-		int j = end.x / c->tilesize;
-		if (c->map[i][j] == '1')
-			dof = c->map_height;
-		else	
-			{
-				end.x += offset.x;
-				end.y += offset.y;
-				dof++;
-			}
-	}*/
-	
+	//check_horizontal(c, &start, &end_hor);
+	check_vertical(c, &start, &end_vert);
 	if (c->player->line)
 		mlx_delete_image(c->mlx, c->player->line);
 	start.x = x + (0.1 * c->tilesize);
@@ -263,7 +250,11 @@ void draw_ray(t_cub *c, int x, int y)
 	c->player->line = mlx_new_image(c->mlx, c->map_width , c->map_height);
 	if (!c->player->line|| (mlx_image_to_window(c->mlx, c->player->line,0,0) < 0))
 		return ;
-	draw_one_line(c, start, end );
+	//if (sqrt(((end_hor.y - start.y)* (end_hor.y - start.y)) + ((end_hor.x - start.x) * (end_hor.x - start.x)))
+	//			< sqrt(((end_vert.y - start.y)* (end_vert.y - start.y)) + ((end_vert.x - start.x) * (end_vert.x - start.x))))
+	//	draw_one_line(c, start, end_hor);
+	//else 
+		draw_one_line(c, start, end_vert);
 }
 
 
