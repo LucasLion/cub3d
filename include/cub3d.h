@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/17 12:17:01 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/22 11:37:11 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ typedef struct	s_textures
 	int		nb_elems;
 }				t_textures;
 
+typedef struct	s_point
+{
+	float		x;
+	float		y;
+}				t_point;
+
 typedef struct	s_line
 {
 	double		start_x;
@@ -56,8 +62,10 @@ typedef struct	s_player
 {
 	int			x_pos;
 	int			y_pos;
+	float		player_x_dif;
+	float		player_y_dif;
 	int			is_moving;
-	double		ang;
+	float		ang;
 	mlx_image_t	*img;
 	mlx_image_t	*line;
 
@@ -113,5 +121,6 @@ void		ft_hook(void *param);
 
 void 		draw_line(t_cub *c, int x, int y);
 int			wall_or_empty(t_cub *c, int x , int y);
+void 		draw_ray(t_cub *c, int x, int y);
 
 #endif

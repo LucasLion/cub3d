@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 15:06:29 by llion             #+#    #+#             */
-/*   Updated: 2023/05/17 13:13:27 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/22 11:37:32 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_player	*init_player(t_cub *c, int i, int j)
 	else if (c->map[i][j] == 'N')
 		player->ang = PI / 2;
 	else if (c->map[i][j] == 'S')
-		player->ang = (PI / 2) * 3;
+		player->ang = PI / 2 * 3 ;
 	else if (c->map[i][j] == 'W')
 		player->ang = PI;
 	return (player);

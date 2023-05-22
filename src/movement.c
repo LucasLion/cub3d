@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   movement.c                                         :+:      :+:    :+:   */
+/*   Movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/17 12:06:38 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/22 11:37:23 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,18 +67,27 @@ void	check_movement(t_cub *c)
 {
 	if (c->player->is_moving & 0x01)
 	{
-		c->player->img->instances[0].y -= 1;
-		c->player->line->instances[0].y -= 1;
+		//c->player->img->instances[0].y -= 1;
+		//c->player->line->instances[0].y -= 1;
+		c->player->img->instances[0].x += c->player->player_x_dif * 0.005;
+		c->player->img->instances[0].y += c->player->player_y_dif * 0.005;
+		c->player->line->instances[0].y += c->player->player_y_dif * 0.005;
+		c->player->line->instances[0].x += c->player->player_x_dif * 0.005;
 	}
-	else if (c->player->is_moving & 0x02)
+	// A et D ok
+	else if (c->player->is_moving == 2)
 	{
 		c->player->img->instances[0].x -= 1;
 		c->player->line->instances[0].x -= 1;
 	}
 	else if (c->player->is_moving & 0x04)
 	{
-		c->player->img->instances[0].y += 1;
-		c->player->line->instances[0].y += 1;
+		//c->player->img->instances[0].y += 1;
+		//c->player->line->instances[0].y += 1;
+		c->player->img->instances[0].x -= c->player->player_x_dif * 0.005;
+		c->player->img->instances[0].y -= c->player->player_y_dif * 0.005;
+		c->player->line->instances[0].y -= c->player->player_y_dif * 0.005;
+		c->player->line->instances[0].x -= c->player->player_x_dif * 0.005;
 	}
 	else if (c->player->is_moving & 0x08)
 	{
@@ -87,13 +96,17 @@ void	check_movement(t_cub *c)
 	}
 	if (c->player->is_moving & 0x10)
 	{
-		c->player->ang -= 0.03;
+		c->player->ang -= 0.01;
+		c->player->player_x_dif = cosf(c->player->ang) * 40;
+		c->player->player_y_dif = - sinf(c->player->ang) * 40;
 		if (c->player->ang < 0)
 			c->player->ang += (2 * PI);
 	}
 	else if (c->player->is_moving & 0x20)
 	{
-		c->player->ang += 0.03;
+		c->player->ang += 0.01;
+		c->player->player_x_dif = cosf(c->player->ang) * 40;
+		c->player->player_y_dif = - sinf(c->player->ang) * 40;
 		if (c->player->ang > (2 * PI))
 			c->player->ang -= (2 * PI);
 	}
@@ -106,5 +119,9 @@ void	ft_hook(void *param)
 
 	c = param;
 	check_movement(c);
-	draw_line(c, c->player->img->instances[0].x, c->player->img->instances[0].y);
+	//draw_line(c, c->player->img->instances[0].x, c->player->img->instances[0].y);
+	draw_ray(c, c->player->img->instances[0].x, c->player->img->instances[0].y);
+	printf ("ang : %f\n", c->player->ang);
+	printf ("deviation x and y : %f et %f\n", c->player->player_x_dif, c->player->player_y_dif);
+	
 }

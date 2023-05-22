@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/16 16:22:35 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/22 11:37:16 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	put_player_square(t_cub *c, int x, int y)
 		}
 		i++;
 	}
+	
 }
 
 int	display_2d_map(t_cub *c)
