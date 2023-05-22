@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/22 11:37:23 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/22 12:21:16 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,11 @@ void	check_movement(t_cub *c)
 		//c->player->line->instances[0].y -= 1;
 		c->player->img->instances[0].x += c->player->player_x_dif * 0.005;
 		c->player->img->instances[0].y += c->player->player_y_dif * 0.005;
-		c->player->line->instances[0].y += c->player->player_y_dif * 0.005;
-		c->player->line->instances[0].x += c->player->player_x_dif * 0.005;
 	}
 	// A et D ok
 	else if (c->player->is_moving == 2)
 	{
 		c->player->img->instances[0].x -= 1;
-		c->player->line->instances[0].x -= 1;
 	}
 	else if (c->player->is_moving & 0x04)
 	{
@@ -86,13 +83,10 @@ void	check_movement(t_cub *c)
 		//c->player->line->instances[0].y += 1;
 		c->player->img->instances[0].x -= c->player->player_x_dif * 0.005;
 		c->player->img->instances[0].y -= c->player->player_y_dif * 0.005;
-		c->player->line->instances[0].y -= c->player->player_y_dif * 0.005;
-		c->player->line->instances[0].x -= c->player->player_x_dif * 0.005;
 	}
 	else if (c->player->is_moving & 0x08)
 	{
 		c->player->img->instances[0].x += 1;
-		c->player->line->instances[0].x += 1;
 	}
 	if (c->player->is_moving & 0x10)
 	{
@@ -120,7 +114,7 @@ void	ft_hook(void *param)
 	c = param;
 	check_movement(c);
 	//draw_line(c, c->player->img->instances[0].x, c->player->img->instances[0].y);
-	draw_ray(c, c->player->img->instances[0].x, c->player->img->instances[0].y);
+	draw_rays(c, c->player->img->instances[0].x, c->player->img->instances[0].y);
 	printf ("ang : %f\n", c->player->ang);
 	printf ("deviation x and y : %f et %f\n", c->player->player_x_dif, c->player->player_y_dif);
 	

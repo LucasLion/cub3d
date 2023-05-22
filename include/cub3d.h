@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/22 11:37:11 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/22 12:07:59 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct	s_player
 	int			is_moving;
 	float		ang;
 	mlx_image_t	*img;
-	mlx_image_t	*line;
+	mlx_image_t	*rays;
 
 }				t_player;
 
@@ -121,6 +121,6 @@ void		ft_hook(void *param);
 
 void 		draw_line(t_cub *c, int x, int y);
 int			wall_or_empty(t_cub *c, int x , int y);
-void 		draw_ray(t_cub *c, int x, int y);
+void 		draw_rays(t_cub *c, int x, int y);
 
 #endif
