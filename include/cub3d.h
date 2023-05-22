@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/19 12:08:39 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/22 11:37:11 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct	s_line
 {
 	double		start_x;
 	double		start_y;
-	double 		end_x;
+	double		end_x;
 	double		end_y;
 	double		delta_x;
 	double		delta_y;
@@ -88,7 +88,7 @@ typedef struct	s_cub
 
 int		ft_error(char *str);
 int		get_nb_lines_in_map_file(int fd, char **argv);
-int	get_nb_line_map_start(char **f, t_cub *c);
+int		get_nb_line_map_start(char **f, t_cub *c);
 char	**get_file(char **argv);
 char	**get_description(char **map);
 char	**get_map(char **file, int i);

@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 15:06:29 by llion             #+#    #+#             */
-/*   Updated: 2023/05/22 10:22:54 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/22 11:37:32 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ t_player	*init_player(t_cub *c, int i, int j)
 	player->img = mlx_new_image(c->mlx, c->tilesize, c->tilesize);
 	player->x_pos = i;
 	player->y_pos = j;
-	player->ang = 0;
-	if (c->map[i][j] == 'N')
+	if (c->map[i][j] == 'E')
+		player->ang = 0;
+	else if (c->map[i][j] == 'N')
 		player->ang = PI / 2;
 	else if (c->map[i][j] == 'S')
 		player->ang = PI / 2 * 3 ;

@@ -6,7 +6,7 @@
 #    By: amouly <amouly@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 15:27:43 by llion             #+#    #+#              #
-#    Updated: 2023/05/15 17:02:04 by amouly           ###   ########.fr        #
+#    Updated: 2023/05/17 11:11:19 by llion            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ RM			= rm -rf
 FLAGS		= -Wall -Werror -Wextra -ggdb3
 LIBFT		= libft/libft.a
 MLX			= MLX42/build/libmlx42.a
-HEADERS		= -Iinclude -I.libft/include -L/Users/$$USER/.brew/Cellar/glfw/3.3.8/lib -lglfw  \
+HEADERS		= -Iinclude -Ilibft/include -L/Users/$(USER)/.brew/Cellar/glfw/3.3.8/lib -lglfw  \
 			  #-ldl -lglfw -lm
 SRC			=	main.c			\
 				extracting.c 	\
@@ -45,17 +45,17 @@ obj/%.o : src/%.c
 	@mkdir -p obj
 	@$(CC) -c $< -o $@
 
-$(NAME) : $(OBJ) $(LIBFT)
-	@$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(HEADERS) $(MLX) -o $(NAME)	
+$(NAME) : $(OBJ) $(LIBFT) $(MLX)
+	@$(CC) $(FLAGS) $(OBJ) -Llibft -lft $(HEADERS) $(MLX) -o $(NAME)	
 	$(call echo,COMPILED,cub3d,32)
 
 $(LIBFT): libft/Makefile
-	@make -sC libft
+	@$(MAKE) -sC libft
 
 libft/Makefile: libft/src/*.c libft/include/*.h
-	@touch libft/Makefile
+	@$(MAKE) -C libft
 
-debug: $(OBJ) $(LIBFT)
+debug: $(OBJ) $(LIBFT) $(MLX)
 	@$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(MLX) $(HEADERS) -fsanitize=address -o $(NAME)	
 	$(call echo,COMPILED,cub3d,33)
 
