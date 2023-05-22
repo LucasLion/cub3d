@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/19 12:08:39 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/22 11:24:26 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct	s_player
 	int			is_moving;
 	float		ang;
 	mlx_image_t	*img;
-	mlx_image_t	*line;
+	mlx_image_t	**rays;
 
 }				t_player;
 
@@ -88,7 +88,7 @@ typedef struct	s_cub
 
 int		ft_error(char *str);
 int		get_nb_lines_in_map_file(int fd, char **argv);
-int	get_nb_line_map_start(char **f, t_cub *c);
+int		get_nb_line_map_start(char **f, t_cub *c);
 char	**get_file(char **argv);
 char	**get_description(char **map);
 char	**get_map(char **file, int i);
@@ -121,6 +121,7 @@ void		ft_hook(void *param);
 
 void 		draw_line(t_cub *c, int x, int y);
 int			wall_or_empty(t_cub *c, int x , int y);
-void 		draw_ray(t_cub *c, int x, int y);
+void 		draw_rays(t_cub *c, int x, int y);
+void 		draw__one_ray(t_cub *c, int x, int y, float ang)
 
 #endif
