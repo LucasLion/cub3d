@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 15:06:29 by llion             #+#    #+#             */
-/*   Updated: 2023/05/22 15:45:36 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/22 17:05:32 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ t_player	*init_player(t_cub *c, int i, int j)
 
 	player = ft_calloc(1, sizeof(t_player));
 	player->img = mlx_new_image(c->mlx, c->tilesize, c->tilesize);
-	player->i_pos = i;
-	player->j_pos = j;
-	player->x_pos = j * c->tilesize + (0.4 * c->tilesize);
-	player->y_pos = i * c->tilesize + (0.4 * c->tilesize);
+	player->m_pos.x = i;
+	player->m_pos.y = j;
+	player->p_pos.x = j * c->tilesize + (c->tilesize / 2);
+	player->p_pos.y = i * c->tilesize + (c->tilesize / 2);
 	c->view_ang = 80;
 	player->speed = 3;
 	if (c->map[i][j] == 'E')

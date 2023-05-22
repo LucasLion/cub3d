@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/22 15:57:20 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/22 17:05:36 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,17 @@ void	press_key(mlx_key_data_t keydata, void *param)
 	c = param;
 		if (keydata.key == MLX_KEY_W)
 			c->player->is_moving |= 0x01;
-		else if (keydata.key == MLX_KEY_A)
-			c->player->is_moving |= 0x02;
-		else if (keydata.key == MLX_KEY_S)
+		if (keydata.key == MLX_KEY_S)
 			c->player->is_moving |= 0x04;
-		else if (keydata.key == MLX_KEY_D)
+		if (keydata.key == MLX_KEY_S)
+			c->player->is_moving |= 0x04;
+		if (keydata.key == MLX_KEY_A)
+			c->player->is_moving |= 0x02;
+		if (keydata.key == MLX_KEY_D)
 			c->player->is_moving |= 0x08;
-		else if (keydata.key == MLX_KEY_RIGHT)
+		if (keydata.key == MLX_KEY_RIGHT)
 			c->player->is_moving |= 0x10;
-		else if (keydata.key == MLX_KEY_LEFT)
+		if (keydata.key == MLX_KEY_LEFT)
 			c->player->is_moving |= 0x20;
 }
 
@@ -38,15 +40,15 @@ void	release_key(mlx_key_data_t keydata, void *param)
 	c = param;
 	if (keydata.key == MLX_KEY_W)
 		c->player->is_moving &= ~0x01;
-	else if (keydata.key == MLX_KEY_A)
-		c->player->is_moving &= ~0x02;
-	else if (keydata.key == MLX_KEY_S)
+	if (keydata.key == MLX_KEY_S)
 		c->player->is_moving &= ~0x04;
-	else if (keydata.key == MLX_KEY_D)
+	if (keydata.key == MLX_KEY_A)
+		c->player->is_moving &= ~0x02;
+	if (keydata.key == MLX_KEY_D)
 		c->player->is_moving &= ~0x08;
-	else if (keydata.key == MLX_KEY_RIGHT)
+	if (keydata.key == MLX_KEY_RIGHT)
 		c->player->is_moving &= ~0x10;
-	else if (keydata.key == MLX_KEY_LEFT)
+	if (keydata.key == MLX_KEY_LEFT)
 		c->player->is_moving &= ~0x20;
 }
 
@@ -67,25 +69,23 @@ void	check_movement(t_player *p)
 {
 	if (p->is_moving & 0x01)
 	{
-		p->x_pos += cos(p->ang) * p->speed;
-		p->y_pos += -sin(p->ang) * p->speed; 
+		p->p_pos.x += cos(p->ang);
+		p->p_pos.y += -sin(p->ang);
 	}
 	else if (p->is_moving == 0x02)
 	{
-		//p->x_pos -= p->speed;
-		p->x_pos -= -cos(p->ang + (PI / 2)) * p->speed;
-		p->y_pos -= sin(p->ang + (PI / 2)) * p->speed;
+		p->p_pos.x -= -cos(p->ang + (PI / 2));
+		p->p_pos.y -= sin(p->ang + (PI / 2));
 	}
 	else if (p->is_moving & 0x04)
 	{
-		p->x_pos -= cos(p->ang) * p->speed;
-		p->y_pos -= -sin(p->ang) * p->speed; 
+		p->p_pos.x -= cos(p->ang);
+		p->p_pos.y -= -sin(p->ang);
 	}
 	else if (p->is_moving & 0x08)
 	{
-		//p->y_pos += p->speed;
-		p->x_pos += cos(p->ang - (PI / 2)) * p->speed;
-		p->y_pos += -sin(p->ang - (PI / 2)) * p->speed; 
+		p->p_pos.x += cos(p->ang - (PI / 2));
+		p->p_pos.y += -sin(p->ang - (PI / 2));
 	}
 	if (p->is_moving & 0x10)
 	{
@@ -101,13 +101,11 @@ void	check_movement(t_player *p)
 	}
 }
 
-
 void	ft_hook(void *param)
 {
 	t_cub *c;
 
 	c = param;
 	check_movement(c->player);
-	draw_rays(c, c->player->x_pos, c->player->y_pos);
-	
+	draw_rays(c, c->player->p_pos.x, c->player->p_pos.y);
 }

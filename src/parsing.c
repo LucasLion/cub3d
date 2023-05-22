@@ -6,7 +6,7 @@
 /*   By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 17:31:32 by llion             #+#    #+#             */
-/*   Updated: 2023/05/16 16:10:50 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/22 16:27:52 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,8 +136,6 @@ int	parse_number_players(char **map)
 
 int	parsing(char **file, t_cub *c)
 {
-	for (int i = 0; i < ft_tablen(c->map); i++)
-		printf("-> %s", c->map[i]);
 	if (parse_infos(file, c) == 0 || parse_elems_in_map(c->map) == 0 \
 			|| parse_borders(c->map) == 0 || parse_number_players(c->map) == 0)
 		return (0);

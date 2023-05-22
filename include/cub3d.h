@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/22 15:45:12 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/22 17:05:39 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,14 @@ typedef struct	s_textures
 
 typedef struct	s_point
 {
-	float		x;
-	float		y;
+	double		x;
+	double		y;
 }				t_point;
 
 typedef struct	s_player
 {
-	double		i_pos;
-	double		j_pos;
-	double		x_pos;
-	double		y_pos;
+	t_point		p_pos;
+	t_point		m_pos;
 	float		player_x_dif;
 	float		player_y_dif;
 	int			is_moving;
@@ -106,6 +104,7 @@ t_player	*init_player(t_cub *c, int i, int j);
 void		move_player(mlx_key_data_t keydata, void *param);
 void		check_movement(t_player *c);
 void		ft_hook(void *param);
+void		collision(t_cub *c, t_player *p);
 
 
 /* ----------- LINE----------- */
