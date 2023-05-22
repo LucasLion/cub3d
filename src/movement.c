@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Movement.c                                         :+:      :+:    :+:   */
+/*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/22 12:21:16 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/22 12:46:35 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	check_movement(t_cub *c)
 	}
 	if (c->player->is_moving & 0x10)
 	{
-		c->player->ang -= 0.01;
+		c->player->ang -= 0.04;
 		c->player->player_x_dif = cosf(c->player->ang) * 40;
 		c->player->player_y_dif = - sinf(c->player->ang) * 40;
 		if (c->player->ang < 0)
@@ -98,7 +98,7 @@ void	check_movement(t_cub *c)
 	}
 	else if (c->player->is_moving & 0x20)
 	{
-		c->player->ang += 0.01;
+		c->player->ang += 0.04;
 		c->player->player_x_dif = cosf(c->player->ang) * 40;
 		c->player->player_y_dif = - sinf(c->player->ang) * 40;
 		if (c->player->ang > (2 * PI))
