@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/22 13:19:11 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/22 13:32:31 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void check_horizontal(t_cub *c, t_point *start, t_point *end, float ang)
 	}
 	int lim_i = c->map_height / c->tilesize;
 	int lim_j = c->map_width / c->tilesize;
-	while (dof < lim_j)
+	while (dof < lim_i)
 	{
 		if (end->y >= 0 && end->y < c->map_height && end->x >= 0 && end->x < c->map_width )
 		{
@@ -105,7 +105,7 @@ void check_vertical(t_cub *c, t_point *start, t_point *end, float ang)
 	}
 	int lim_i = c->map_height / c->tilesize;
 	int lim_j = c->map_width / c->tilesize;
-	while (dof < (lim_i))
+	while (dof < (lim_j))
 	{
 		if (end->y >= 0 && end->y < c->map_height && end->x >= 0 && end->x < c->map_width )
 		{
@@ -165,9 +165,9 @@ void draw_rays(t_cub *c, int x, int y)
 	while (i < c->view_ang)
 	{
 		if (ang >= 2 * PI)
-			ang = 0 - ang;
-		else if (ang <= 0)
-			ang = (2 * PI) + ang;
+			ang -= 2 * PI;
+		else if (ang < 0)
+			ang += (2 * PI);
 		draw_one_ray(c, x, y, ang);
 		ang += one_deg;
 		i++;

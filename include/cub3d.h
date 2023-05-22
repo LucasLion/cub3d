@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/22 13:18:26 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/22 13:39:27 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct	s_player
 	float		player_y_dif;
 	int			is_moving;
 	float		ang;
+	int			speed;
 	mlx_image_t	*img;
 	mlx_image_t	*rays;
 
@@ -114,7 +115,7 @@ void		put_player_square(t_cub *c, int x, int y);
 /* ----------- MOVEMENT ----------- */
 
 void		move_player(mlx_key_data_t keydata, void *param);
-void		check_movement(t_cub *c);
+void		check_movement(t_player *c);
 void		ft_hook(void *param);
 
 

@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 15:06:29 by llion             #+#    #+#             */
-/*   Updated: 2023/05/22 13:18:35 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/22 14:02:09 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_player	*init_player(t_cub *c, int i, int j)
 	player->x_pos = i;
 	player->y_pos = j;
 	c->view_ang = 80;
+	player->speed = 3;
 	if (c->map[i][j] == 'E')
 		player->ang = 0;
 	else if (c->map[i][j] == 'N')

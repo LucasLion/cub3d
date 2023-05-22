@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/22 12:46:35 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/22 14:02:31 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,46 +63,37 @@ void	move_player(mlx_key_data_t keydata, void *param)
 		release_key(keydata, param);
 }
 
-void	check_movement(t_cub *c)
+void	check_movement(t_player *p)
 {
-	if (c->player->is_moving & 0x01)
+	if (p->is_moving & 0x01)
 	{
-		//c->player->img->instances[0].y -= 1;
-		//c->player->line->instances[0].y -= 1;
-		c->player->img->instances[0].x += c->player->player_x_dif * 0.005;
-		c->player->img->instances[0].y += c->player->player_y_dif * 0.005;
+		p->img->instances[0].x += cosf(p->ang) * p->speed;
+		p->img->instances[0].y += -sinf(p->ang) * p->speed; 
 	}
-	// A et D ok
-	else if (c->player->is_moving == 2)
+	else if (p->is_moving == 2)
 	{
-		c->player->img->instances[0].x -= 1;
+		p->img->instances[0].x -= p->speed;
 	}
-	else if (c->player->is_moving & 0x04)
+	else if (p->is_moving & 0x04)
 	{
-		//c->player->img->instances[0].y += 1;
-		//c->player->line->instances[0].y += 1;
-		c->player->img->instances[0].x -= c->player->player_x_dif * 0.005;
-		c->player->img->instances[0].y -= c->player->player_y_dif * 0.005;
+		p->img->instances[0].x -= cosf(p->ang) * p->speed;
+		p->img->instances[0].y -= -sinf(p->ang) * p->speed; 
 	}
-	else if (c->player->is_moving & 0x08)
+	else if (p->is_moving & 0x08)
 	{
-		c->player->img->instances[0].x += 1;
+		p->img->instances[0].x += p->speed;
 	}
-	if (c->player->is_moving & 0x10)
+	if (p->is_moving & 0x10)
 	{
-		c->player->ang -= 0.04;
-		c->player->player_x_dif = cosf(c->player->ang) * 40;
-		c->player->player_y_dif = - sinf(c->player->ang) * 40;
-		if (c->player->ang < 0)
-			c->player->ang += (2 * PI);
+		p->ang -= 0.04;
+		if (p->ang < 0)
+			p->ang += (2 * PI);
 	}
-	else if (c->player->is_moving & 0x20)
+	else if (p->is_moving & 0x20)
 	{
-		c->player->ang += 0.04;
-		c->player->player_x_dif = cosf(c->player->ang) * 40;
-		c->player->player_y_dif = - sinf(c->player->ang) * 40;
-		if (c->player->ang > (2 * PI))
-			c->player->ang -= (2 * PI);
+		p->ang += 0.04;
+		if (p->ang > (2 * PI))
+			p->ang -= (2 * PI);
 	}
 }
 
@@ -112,8 +103,7 @@ void	ft_hook(void *param)
 	t_cub *c;
 
 	c = param;
-	check_movement(c);
-	//draw_line(c, c->player->img->instances[0].x, c->player->img->instances[0].y);
+	check_movement(c->player);
 	draw_rays(c, c->player->img->instances[0].x, c->player->img->instances[0].y);
 	printf ("ang : %f\n", c->player->ang);
 	printf ("deviation x and y : %f et %f\n", c->player->player_x_dif, c->player->player_y_dif);
