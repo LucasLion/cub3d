@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/22 11:25:25 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/22 11:54:14 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void draw_one_line(t_cub *c, t_point start, t_point end)
 	delta_y /= length;
 	while(length)
 	{
-		mlx_put_pixel(c->player->rays, start.x, start.y, 0xff0456ff); 
+		if (mlx_put_pixel(c->player->rays, start.x, start.y, 0xff0456ff) == NULL)
+			printf("SALUT\n"); 
 		start.y += delta_y;
 		start.x += delta_x;
 		--length;
@@ -159,7 +160,7 @@ void check_vertical(t_cub *c, t_point *start, t_point *end, float ang)
 	}
 }
 
-void draw__one_ray(t_cub *c, int x, int y, float ang, int i)
+void draw__one_ray(t_cub *c, int x, int y, float ang)
 {
 	t_point start;
 	t_point	end_vert;
@@ -169,11 +170,11 @@ void draw__one_ray(t_cub *c, int x, int y, float ang, int i)
 	start.y = y + (0.1 * c->tilesize);
 	check_horizontal(c, &start, &end_hor, ang);
 	check_vertical(c, &start, &end_vert, ang);
-	if (c->player->rays)
-		mlx_delete_image(c->mlx, c->player->rays);
-	c->player->rays = mlx_new_image(c->mlx, c->map_width , c->map_height);
-	if (!c->player->rays|| (mlx_image_to_window(c->mlx, c->player->rays,0,0) < 0))
-		return ;
+	//if (c->player->rays)
+	//	mlx_delete_image(c->mlx, c->player->rays);
+//	c->player->rays = mlx_new_image(c->mlx, c->map_width , c->map_height);
+//	if (!c->player->rays|| (mlx_image_to_window(c->mlx, c->player->rays,0,0) < 0))
+//		return ;
 	if (sqrt(((end_hor.y - start.y)* (end_hor.y - start.y)) + ((end_hor.x - start.x) * (end_hor.x - start.x)))
 				< sqrt(((end_vert.y - start.y)* (end_vert.y - start.y)) + ((end_vert.x - start.x) * (end_vert.x - start.x))))
 		draw_one_line(c, start, end_hor);
@@ -190,6 +191,11 @@ void draw_rays(t_cub *c, int x, int y)
 	one_deg = 0.0174;
 	i = 0;
 	ang = c->player->ang - (one_deg * 30);
+	if (c->player->rays)
+		mlx_delete_image(c->mlx, c->player->rays);
+	c->player->rays = mlx_new_image(c->mlx, c->map_width , c->map_height);
+	if (!c->player->rays|| (mlx_image_to_window(c->mlx, c->player->rays,0,0) < 0))
+		return ;
 	while(i < 60)
 	{
 		draw__one_ray(c, x, y, ang);
