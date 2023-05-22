@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/22 13:39:27 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/22 15:45:12 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,12 @@ typedef struct	s_point
 	float		y;
 }				t_point;
 
-typedef struct	s_line
-{
-	double		start_x;
-	double		start_y;
-	double		end_x;
-	double		end_y;
-	double		delta_x;
-	double		delta_y;
-	int			len_line;
-	
-}				t_line;
-
 typedef struct	s_player
 {
-	int			x_pos;
-	int			y_pos;
+	double		i_pos;
+	double		j_pos;
+	double		x_pos;
+	double		y_pos;
 	float		player_x_dif;
 	float		player_y_dif;
 	int			is_moving;
@@ -110,7 +100,6 @@ int		parse_file(int argc, char **argv);
 void		put_square(t_cub *c, int x, int y, long int color);
 int			display_2d_map(t_cub *c);
 t_player	*init_player(t_cub *c, int i, int j);
-void		put_player_square(t_cub *c, int x, int y);
 
 /* ----------- MOVEMENT ----------- */
 
@@ -123,6 +112,6 @@ void		ft_hook(void *param);
 
 void 		draw_line(t_cub *c, int x, int y);
 int			wall_or_empty(t_cub *c, int x , int y);
-void 		draw_rays(t_cub *c, int x, int y);
+void 		draw_rays(t_cub *c, double x, double y);
 
 #endif

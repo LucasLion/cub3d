@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/22 13:32:31 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/22 15:44:05 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void check_vertical(t_cub *c, t_point *start, t_point *end, float ang)
 	}
 }
 
-void draw_one_ray(t_cub *c, int x, int y, float ang)
+void draw_one_ray(t_cub *c, double x, double y, float ang)
 {
 	t_point start;
 	t_point	end_vert;
@@ -148,7 +148,7 @@ void draw_one_ray(t_cub *c, int x, int y, float ang)
 		draw_one_line(c, start, end_vert);
 }
 
-void draw_rays(t_cub *c, int x, int y)
+void draw_rays(t_cub *c, double x, double y)
 {
 	int i;
 	float ang;

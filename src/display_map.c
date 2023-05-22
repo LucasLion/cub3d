@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/22 12:59:33 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/22 15:45:19 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,6 @@ void	put_square(t_cub *c, int x, int y, long int color)
 		}
 		i++;
 	}
-}
-
-void	put_player_square(t_cub *c, int x, int y)
-{
-	c->player->img = mlx_new_image(c->mlx, c->tilesize, c->tilesize);
-	if (!c->player->img || (mlx_image_to_window(c->mlx, c->player->img, (y + 0.4) * c->tilesize, (x + 0.4) * c->tilesize) < 0))
-		return ;
-	int i;
-	int	j;
-
-	i = 0;
-	while (i < (c->tilesize * 0.2))
-	{
-		j = 0;
-		while (j < (c->tilesize * 0.2))
-		{
-			mlx_put_pixel(c->player->img, i, j, 0xff0456ff); 
-			j++;
-		}
-		i++;
-	}
-	
 }
 
 int	display_2d_map(t_cub *c)
