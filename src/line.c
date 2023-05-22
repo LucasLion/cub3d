@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/22 12:18:06 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/22 13:19:11 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,6 @@ void check_horizontal(t_cub *c, t_point *start, t_point *end, float ang)
 		offset.y = - c->tilesize;
 		offset.x = (offset.y * atan);	
 	}
-	if (ra == PI) 
-	{
-		end->y = start->y;
-		end->x = ((int)(start->x /c->tilesize) * c->tilesize - 0.001);
-		offset.y = 0;
-		offset.x = - c->tilesize;	
-	}
-	if ( ra == 0) 
-	{
-		end->y = start->y;
-		end->x = ((int)(start->x /c->tilesize) * c->tilesize + c->tilesize);
-		offset.y = 0;
-		offset.x = c->tilesize;	
-	}
 	int lim_i = c->map_height / c->tilesize;
 	int lim_j = c->map_width / c->tilesize;
 	while (dof < lim_j)
@@ -116,20 +102,6 @@ void check_vertical(t_cub *c, t_point *start, t_point *end, float ang)
 		end->y = (end->x - start->x) * ntan + start->y;
 		offset.x = c->tilesize;
 		offset.y = (offset.x * ntan);	
-	}
-	if (ra == PI / 2) 
-	{
-		end->x = start->x;
-		end->y = ((int)(start->y /c->tilesize) * c->tilesize - 0.001);
-		offset.x = 0;
-		offset.y = - c->tilesize;	
-	}
-	if ( ra == PI / 2 * 3) 
-	{
-		end->x = start->x;
-		end->y = ((int)(start->x /c->tilesize) * c->tilesize + c->tilesize);
-		offset.x = 0;
-		offset.y = c->tilesize;	
 	}
 	int lim_i = c->map_height / c->tilesize;
 	int lim_j = c->map_width / c->tilesize;
@@ -184,14 +156,18 @@ void draw_rays(t_cub *c, int x, int y)
 
 	i = 0;
 	one_deg = 0.0174;
-	ang = c->player->ang;
+	ang = c->player->ang - (c->view_ang / 2 * one_deg);
 	if (c->player->rays)
 		mlx_delete_image(c->mlx, c->player->rays);
 	c->player->rays = mlx_new_image(c->mlx, c->map_width , c->map_height);
 	if (!c->player->rays|| (mlx_image_to_window(c->mlx, c->player->rays,0,0) < 0))
 		return ;
-	while (i < 1)
+	while (i < c->view_ang)
 	{
+		if (ang >= 2 * PI)
+			ang = 0 - ang;
+		else if (ang <= 0)
+			ang = (2 * PI) + ang;
 		draw_one_ray(c, x, y, ang);
 		ang += one_deg;
 		i++;
