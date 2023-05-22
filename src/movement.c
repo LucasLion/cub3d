@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/22 14:02:31 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/22 15:57:20 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,21 +67,25 @@ void	check_movement(t_player *p)
 {
 	if (p->is_moving & 0x01)
 	{
-		p->img->instances[0].x += cosf(p->ang) * p->speed;
-		p->img->instances[0].y += -sinf(p->ang) * p->speed; 
+		p->x_pos += cos(p->ang) * p->speed;
+		p->y_pos += -sin(p->ang) * p->speed; 
 	}
-	else if (p->is_moving == 2)
+	else if (p->is_moving == 0x02)
 	{
-		p->img->instances[0].x -= p->speed;
+		//p->x_pos -= p->speed;
+		p->x_pos -= -cos(p->ang + (PI / 2)) * p->speed;
+		p->y_pos -= sin(p->ang + (PI / 2)) * p->speed;
 	}
 	else if (p->is_moving & 0x04)
 	{
-		p->img->instances[0].x -= cosf(p->ang) * p->speed;
-		p->img->instances[0].y -= -sinf(p->ang) * p->speed; 
+		p->x_pos -= cos(p->ang) * p->speed;
+		p->y_pos -= -sin(p->ang) * p->speed; 
 	}
 	else if (p->is_moving & 0x08)
 	{
-		p->img->instances[0].x += p->speed;
+		//p->y_pos += p->speed;
+		p->x_pos += cos(p->ang - (PI / 2)) * p->speed;
+		p->y_pos += -sin(p->ang - (PI / 2)) * p->speed; 
 	}
 	if (p->is_moving & 0x10)
 	{
@@ -104,8 +108,6 @@ void	ft_hook(void *param)
 
 	c = param;
 	check_movement(c->player);
-	draw_rays(c, c->player->img->instances[0].x, c->player->img->instances[0].y);
-	printf ("ang : %f\n", c->player->ang);
-	printf ("deviation x and y : %f et %f\n", c->player->player_x_dif, c->player->player_y_dif);
+	draw_rays(c, c->player->x_pos, c->player->y_pos);
 	
 }
