@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/22 17:05:39 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/23 11:07:47 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ typedef struct	s_cub
 	int			map_height;
 	int			tilesize;
 	int			view_ang;
-	int			test;
 	mlx_t		*mlx;
 	char		**map;
+	double		*rays_len;
 	t_textures	*t;	
 	int			nb_line_map_start;
 	t_player	*player;
@@ -96,7 +96,9 @@ int		parse_file(int argc, char **argv);
 /* ----------- DISPLAY ----------- */
 
 void		put_square(t_cub *c, int x, int y, long int color);
+int			display(t_cub *c);
 int			display_2d_map(t_cub *c);
+int			display_3d_map(t_cub *c);
 t_player	*init_player(t_cub *c, int i, int j);
 
 /* ----------- MOVEMENT ----------- */

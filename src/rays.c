@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line.c                                             :+:      :+:    :+:   */
+/*   rays.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/22 16:56:18 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/23 10:51:55 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,21 +131,30 @@ void check_vertical(t_cub *c, t_point *start, t_point *end, float ang)
 	}
 }
 
-void draw_one_ray(t_cub *c, double x, double y, float ang)
+void draw_one_ray(t_cub *c, double x, double y, float ang, int i)
 {
 	t_point start;
 	t_point	end_vert;
 	t_point	end_hor;
+	double	vlen;
+	double	hlen;
 
 	start.x = x + (0.1 * c->tilesize);
 	start.y = y + (0.1 * c->tilesize);
 	check_horizontal(c, &start, &end_hor, ang);
 	check_vertical(c, &start, &end_vert, ang);
-	if (sqrt(((end_hor.y - start.y)* (end_hor.y - start.y)) + ((end_hor.x - start.x) * (end_hor.x - start.x)))
-				<= sqrt(((end_vert.y - start.y)* (end_vert.y - start.y)) + ((end_vert.x - start.x) * (end_vert.x - start.x))))
+	vlen = sqrt(((end_vert.y - start.y)* (end_vert.y - start.y)) + ((end_vert.x - start.x) * (end_vert.x - start.x)));
+	hlen = sqrt(((end_hor.y - start.y)* (end_hor.y - start.y)) + ((end_hor.x - start.x) * (end_hor.x - start.x)));
+	if (hlen <= vlen)
+	{
 		draw_one_line(c, start, end_hor);
+		c->rays_len[i] = hlen;
+	}
 	else 
+	{
 		draw_one_line(c, start, end_vert);
+		c->rays_len[i] = vlen;
+	}
 }
 
 void draw_rays(t_cub *c, double x, double y)
@@ -168,7 +177,7 @@ void draw_rays(t_cub *c, double x, double y)
 			ang -= 2 * PI;
 		else if (ang < 0)
 			ang += (2 * PI);
-		draw_one_ray(c, x, y, ang);
+		draw_one_ray(c, x, y, ang, i);
 		ang += one_deg;
 		i++;
 	}
