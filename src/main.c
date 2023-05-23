@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/05/23 11:56:46 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/23 12:03:11 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,6 @@ int	map_width(char **map)
 int	init_cub(t_cub *c, char **file)
 {
 	c->t = ft_calloc(1, sizeof(t_textures));
-	c->img = mlx_new_image(c->mlx, c->map_width , c->map_height * 2);
-	if (!c->img|| (mlx_image_to_window(c->mlx, c->img,0,0) < 0))
-		return  0;
 	c->view_ang = 80;
 	c->tilesize = 16;
 	c->nb_line_map_start = get_nb_line_map_start(file, c);
@@ -60,6 +57,12 @@ int	init_cub(t_cub *c, char **file)
 		return (ft_error("Empty file"));
 	c->map_height = ft_tablen(c->map) * c->tilesize;
 	c->map_width = map_width(c->map) * c->tilesize;
+	c->mlx = mlx_init(c->map_width, c->map_height * 2, "CUB3D", true);
+	if (!c->mlx)
+		return (EXIT_FAILURE);
+	c->img = mlx_new_image(c->mlx, c->map_width , c->map_height * 2);
+	if (!c->img || (mlx_image_to_window(c->mlx, c->img,0,0) < 0))
+		return  0;
 	return (1);
 }
 

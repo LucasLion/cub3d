@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/23 11:50:59 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/23 12:03:15 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,6 @@ int	display_3d_map(t_cub *c)
 
 int	display(t_cub *c)
 {
-	c->mlx = mlx_init(c->map_width, c->map_height * 2, "CUB3D", true);
-	if (!c->mlx)
-		return (EXIT_FAILURE);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	display_2d_map(c);
 	return (1);
