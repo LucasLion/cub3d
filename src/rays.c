@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/23 12:32:56 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/23 13:15:00 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,30 +27,6 @@ void draw_one_line(mlx_image_t *image, t_point start, t_point end)
 	
 	while(length)
 	{
-		mlx_put_pixel(image, start.x, start.y, 0xff0456ff); 
-		start.y += delta_y;
-		start.x += delta_x;
-		--length;
-	}
-}
-void draw_one_line_3d(mlx_image_t *image, t_point start, t_point end)
-{
-	float			delta_y;
-	float			delta_x;
-	long long int	length;
-	
-	delta_y = end.y - start.y;
-	delta_x = end.x - start.x;
-	length = sqrt((delta_y * delta_y) + (delta_x * delta_x));
-	delta_x /= length;
-	delta_y /= length;
-	
-	while(length)
-	{
-		printf("image ==>%p", image);
-		printf("x  valeur : %f et pointeur ==>%p", start.x , &start.x);
-		printf("y  valeur : %f et pointeur ==>%p\n", start.y, &start.y);
-		
 		mlx_put_pixel(image, start.x, start.y, 0xff0456ff); 
 		start.y += delta_y;
 		start.x += delta_x;
@@ -176,19 +152,30 @@ void draw_one_ray(t_cub *c, float ang, int i)
 	}
 }
 
+void	fish_eye(t_cub *c, float ang, int i)
+{
+	float	diff;
+
+	diff = c->player->ang - ang;
+	if (diff < 0)
+		diff += 2 * PI;
+	if (diff > 2 * PI)
+		diff -= 2 * PI;
+	c->rays_len[i] = c->rays_len[i] * cos(diff);
+}
+
 void draw_rays(t_cub *c)
 {
 	int i;
 	float ang;
 	float one_deg;
-	t_point player_pos;
 
 	i = 0;
 	one_deg = 0.0174;
 	ang = c->player->ang - (c->view_ang / 2 * one_deg);
 	if (c->img)
 		mlx_delete_image(c->mlx, c->img);
-	c->img = mlx_new_image(c->mlx, c->screen_width , c->screen_height);
+	c->img = mlx_new_image(c->mlx, c->screen_width , c->screen_height * 2);
 	if (!c->img|| (mlx_image_to_window(c->mlx, c->img,0,0) < 0))
 		return ;
 	while (i < c->view_ang)
@@ -198,6 +185,7 @@ void draw_rays(t_cub *c)
 		else if (ang < 0)
 			ang += (2 * PI);
 		draw_one_ray(c, ang, i);
+		fish_eye(c, ang, i);
 		ang += one_deg;
 		i++;
 	}
