@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/23 12:12:20 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/23 13:28:25 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void		collision(t_cub *c, t_player *p);
 /* ----------- LINE----------- */
 
 void 		draw_line(t_cub *c, int x, int y);
-void 		draw_one_line(mlx_image_t *image, t_point start, t_point end);
+void 		draw_one_line(mlx_image_t *image, t_point start, t_point end, long unsigned int c);
 void 		draw_one_line_3d(mlx_image_t *image, t_point start, t_point end);
 int			wall_or_empty(t_cub *c, int x , int y);
 void 		draw_rays(t_cub *c);

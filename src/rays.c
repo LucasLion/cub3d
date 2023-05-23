@@ -6,18 +6,18 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/23 13:15:00 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/23 13:37:28 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
 
-void draw_one_line(mlx_image_t *image, t_point start, t_point end)
+void draw_one_line(mlx_image_t *image, t_point start, t_point end, long unsigned color)
 {
-	float			delta_y;
-	float			delta_x;
-	long long int	length;
+	float				delta_y;
+	float				delta_x;
+	long long int		length;
 	
 	delta_y = end.y - start.y;
 	delta_x = end.x - start.x;
@@ -27,7 +27,7 @@ void draw_one_line(mlx_image_t *image, t_point start, t_point end)
 	
 	while(length)
 	{
-		mlx_put_pixel(image, start.x, start.y, 0xff0456ff); 
+		mlx_put_pixel(image, start.x, start.y, color); 
 		start.y += delta_y;
 		start.x += delta_x;
 		--length;
@@ -142,12 +142,12 @@ void draw_one_ray(t_cub *c, float ang, int i)
 	hlen = sqrt(((end_h.y - p.y)* (end_h.y - p.y)) + ((end_h.x - p.x) * (end_h.x - p.x)));
 	if (hlen <= vlen)
 	{
-		draw_one_line(c->img, p, end_h);
+		draw_one_line(c->img, p, end_h, 0xff0000ff);
 		c->rays_len[i] = hlen;
 	}
 	else 
 	{
-		draw_one_line(c->img, p, end_v);
+		draw_one_line(c->img, p, end_v, 0xff0000ff);
 		c->rays_len[i] = vlen;
 	}
 }
