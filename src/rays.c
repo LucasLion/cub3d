@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/23 11:57:56 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/23 12:32:56 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void draw_one_line(mlx_image_t *image, t_point start, t_point end)
 	length = sqrt((delta_y * delta_y) + (delta_x * delta_x));
 	delta_x /= length;
 	delta_y /= length;
+	
 	while(length)
 	{
 		mlx_put_pixel(image, start.x, start.y, 0xff0456ff); 
@@ -31,7 +32,30 @@ void draw_one_line(mlx_image_t *image, t_point start, t_point end)
 		start.x += delta_x;
 		--length;
 	}
+}
+void draw_one_line_3d(mlx_image_t *image, t_point start, t_point end)
+{
+	float			delta_y;
+	float			delta_x;
+	long long int	length;
 	
+	delta_y = end.y - start.y;
+	delta_x = end.x - start.x;
+	length = sqrt((delta_y * delta_y) + (delta_x * delta_x));
+	delta_x /= length;
+	delta_y /= length;
+	
+	while(length)
+	{
+		printf("image ==>%p", image);
+		printf("x  valeur : %f et pointeur ==>%p", start.x , &start.x);
+		printf("y  valeur : %f et pointeur ==>%p\n", start.y, &start.y);
+		
+		mlx_put_pixel(image, start.x, start.y, 0xff0456ff); 
+		start.y += delta_y;
+		start.x += delta_x;
+		--length;
+	}
 }
 
 void check_horizontal(t_cub *c, t_point *start, t_point *end, float ang)
@@ -55,17 +79,15 @@ void check_horizontal(t_cub *c, t_point *start, t_point *end, float ang)
 		offset.y = - c->tilesize;
 		offset.x = (offset.y * atan);	
 	}
-	int lim_i = c->map_height / c->tilesize;
-	int lim_j = c->map_width / c->tilesize;
-	while (dof < lim_i)
+	while (dof < c->map_height)
 	{
-		if (end->y >= 0 && end->y < c->map_height && end->x >= 0 && end->x < c->map_width )
+		if (end->y >= 0 && end->y < c->screen_height && end->x >= 0 && end->x < c->screen_width )
 		{
 			int i = end->y / c->tilesize;
 			int j = end->x / c->tilesize;
-			if (i < 0 || j <  0  || i > lim_i || j > lim_j || (c->map[i][j] == '1') )
+			if (i < 0 || j <  0  || i > c->map_height || j > c->map_width || (c->map[i][j] == '1') )
 			{
-				dof = lim_j;
+				dof = c->map_height;
 				break;
 			}
 			else	
@@ -77,7 +99,7 @@ void check_horizontal(t_cub *c, t_point *start, t_point *end, float ang)
 		}
 		else	
 		{
-			dof = lim_j;
+			dof = c->map_height;
 			break;
 		}
 	}
@@ -103,17 +125,15 @@ void check_vertical(t_cub *c, t_point *start, t_point *end, float ang)
 		offset.x = c->tilesize;
 		offset.y = (offset.x * ntan);	
 	}
-	int lim_i = c->map_height / c->tilesize;
-	int lim_j = c->map_width / c->tilesize;
-	while (dof < (lim_j))
+	while (dof < (c->map_width))
 	{
-		if (end->y >= 0 && end->y < c->map_height && end->x >= 0 && end->x < c->map_width )
+		if (end->y >= 0 && end->y < c->screen_height && end->x >= 0 && end->x < c->screen_width)
 		{
 			int i = end->y / c->tilesize;
 			int j = end->x / c->tilesize;
-			if (i < 0 || j <  0  || i > lim_i || j > lim_j || (c->map[i][j] == '1') )
+			if (i < 0 || j <  0  || i > c->map_height || j > c->map_width || (c->map[i][j] == '1') )
 			{
-				dof = lim_i;
+				dof = c->map_width;
 				break;
 			}
 			else	
@@ -125,7 +145,7 @@ void check_vertical(t_cub *c, t_point *start, t_point *end, float ang)
 		}
 		else	
 		{
-			dof = lim_i;
+			dof = c->map_width;
 			break;
 		}
 	}
@@ -168,7 +188,7 @@ void draw_rays(t_cub *c)
 	ang = c->player->ang - (c->view_ang / 2 * one_deg);
 	if (c->img)
 		mlx_delete_image(c->mlx, c->img);
-	c->img = mlx_new_image(c->mlx, c->map_width , c->map_height);
+	c->img = mlx_new_image(c->mlx, c->screen_width , c->screen_height);
 	if (!c->img|| (mlx_image_to_window(c->mlx, c->img,0,0) < 0))
 		return ;
 	while (i < c->view_ang)

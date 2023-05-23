@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/23 12:03:15 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/23 12:27:08 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	display_3d_map(t_cub *c)
 	t_point		start;
 	t_point		end;
 
-	start.y = c->map_height * c->tilesize;
+	start.y = c->map_height;
 	start.x = 0;
 	i = 0;
 	j = 0;
@@ -78,12 +78,14 @@ int	display_3d_map(t_cub *c)
 		j = 0;
 		while(j < c->map_width / c->view_ang * c->tilesize)
 		{
-			line_height = c->map_height * c->map_width * c->map_height * c->tilesize / c->rays_len[i];
-			if (line_height > c->map_height * c->tilesize)
-				line_height = c->map_height * c->tilesize;
+			line_height = c->map_height * c->map_width / c->rays_len[i] * c->screen_height;
+			if (line_height > c->map_height )
+				line_height = c->map_height;
+			printf("lineH : %d", line_height);
+			printf("map height %d et map wodth %d", c->map_height, c->map_width);
 			end.x = start.x;
 			end.y = start.y + line_height;
-			draw_one_line(c->img, start, end);
+			draw_one_line_3d(c->img, start, end);
 			j++;
 		}
 		start.x += c->map_width / c->view_ang * c->tilesize;
