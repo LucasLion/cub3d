@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/22 16:27:25 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/23 11:07:45 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,6 @@ int	display_2d_map(t_cub *c)
 	int			i;
 	int 		j;
 
-	c->mlx = mlx_init(c->map_width, c->map_height, "CUB3D", true);
-	if (!c->mlx)
-		return (EXIT_FAILURE);
-	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	i = 0;
 	while (c->map[i])
 	{
@@ -62,5 +58,22 @@ int	display_2d_map(t_cub *c)
 		}
 		i++;
 	}
+	return (1);
+}
+
+int	display_3d_map(t_cub *c)
+{
+	for (int i = 0; i < c->view_ang; i++)
+		printf("===> %f\n", c->rays_len[i]);
+	return (1);
+}
+
+int	display(t_cub *c)
+{
+	c->mlx = mlx_init(c->map_width, c->map_height * 2, "CUB3D", true);
+	if (!c->mlx)
+		return (EXIT_FAILURE);
+	mlx_set_setting(MLX_STRETCH_IMAGE, true);
+	display_2d_map(c);
 	return (1);
 }
