@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/23 11:07:45 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/23 12:27:08 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,39 @@ int	display_2d_map(t_cub *c)
 
 int	display_3d_map(t_cub *c)
 {
-	for (int i = 0; i < c->view_ang; i++)
-		printf("===> %f\n", c->rays_len[i]);
+	int			i;
+	int			j;
+	int			line_height;
+	t_point		start;
+	t_point		end;
+
+	start.y = c->map_height;
+	start.x = 0;
+	i = 0;
+	j = 0;
+	while(i < c->view_ang)
+	{
+		j = 0;
+		while(j < c->map_width / c->view_ang * c->tilesize)
+		{
+			line_height = c->map_height * c->map_width / c->rays_len[i] * c->screen_height;
+			if (line_height > c->map_height )
+				line_height = c->map_height;
+			printf("lineH : %d", line_height);
+			printf("map height %d et map wodth %d", c->map_height, c->map_width);
+			end.x = start.x;
+			end.y = start.y + line_height;
+			draw_one_line_3d(c->img, start, end);
+			j++;
+		}
+		start.x += c->map_width / c->view_ang * c->tilesize;
+		i++;
+	}
 	return (1);
 }
 
 int	display(t_cub *c)
 {
-	c->mlx = mlx_init(c->map_width, c->map_height * 2, "CUB3D", true);
-	if (!c->mlx)
-		return (EXIT_FAILURE);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	display_2d_map(c);
 	return (1);

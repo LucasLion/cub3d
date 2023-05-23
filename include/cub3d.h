@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/23 11:07:47 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/23 12:12:20 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ typedef struct	s_player
 	int			is_moving;
 	float		ang;
 	int			speed;
-	mlx_image_t	*img;
-	mlx_image_t	*rays;
 
 }				t_player;
 
@@ -74,6 +72,8 @@ typedef struct	s_cub
 	t_textures	*t;	
 	int			nb_line_map_start;
 	t_player	*player;
+	mlx_image_t	*img;
+	
 }				t_cub;
 
 int		ft_error(char *str);
@@ -112,7 +112,9 @@ void		collision(t_cub *c, t_player *p);
 /* ----------- LINE----------- */
 
 void 		draw_line(t_cub *c, int x, int y);
+void 		draw_one_line(mlx_image_t *image, t_point start, t_point end);
+void 		draw_one_line_3d(mlx_image_t *image, t_point start, t_point end);
 int			wall_or_empty(t_cub *c, int x , int y);
-void 		draw_rays(t_cub *c, double x, double y);
+void 		draw_rays(t_cub *c);
 
 #endif
