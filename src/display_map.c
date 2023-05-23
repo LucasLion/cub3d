@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/23 13:11:20 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/23 13:37:29 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,11 @@ int	display_3d_map(t_cub *c)
 	int			line_height;
 	t_point		start;
 	t_point		end;
+	long unsigned int	color;
 
 	start.x = 0;
 	i = c->view_ang - 1;
+	color = 0xff0000ff;
 	while(i >= 0)
 	{
 		j = 0;
@@ -86,7 +88,8 @@ int	display_3d_map(t_cub *c)
 				line_height = c->screen_height;
 			end.x = start.x;
 			end.y = start.y + line_height;
-			draw_one_line(c->img, start, end);
+			draw_one_line(c->img, start, end, color + (line_height / 2));
+			printf("endy: %f\n", end.y);
 			j++;
 			start.x++;
 		}
