@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/05/23 12:28:08 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/23 15:38:05 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,7 @@ int	init_cub(t_cub *c, char **file)
 	c->mlx = mlx_init(c->screen_width, c->screen_height * 2, "CUB3D", true);
 	if (!c->mlx)
 		return (EXIT_FAILURE);
-	c->img = mlx_new_image(c->mlx, c->map_width , c->screen_height * 2);
-	if (!c->img || (mlx_image_to_window(c->mlx, c->img,0,0) < 0))
-		return  0;
+	c->img3d = mlx_new_image(c->mlx, c->screen_width , c->screen_height);
 	return (1);
 }
 
@@ -87,7 +85,7 @@ int	main(int argc, char **argv)
 		return (-1);
 	}
 	display(c);
-	c->img = NULL;
+	c->img2d = NULL;
 	mlx_key_hook(c->mlx, &move_player, c);
 	mlx_loop_hook(c->mlx, &ft_hook, c);
 	mlx_loop(c->mlx);

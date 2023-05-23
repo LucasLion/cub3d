@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/23 13:37:28 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/23 14:59:48 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,12 +142,12 @@ void draw_one_ray(t_cub *c, float ang, int i)
 	hlen = sqrt(((end_h.y - p.y)* (end_h.y - p.y)) + ((end_h.x - p.x) * (end_h.x - p.x)));
 	if (hlen <= vlen)
 	{
-		draw_one_line(c->img, p, end_h, 0xff0000ff);
+		draw_one_line(c->img2d, p, end_h, 0xff0000ff);
 		c->rays_len[i] = hlen;
 	}
 	else 
 	{
-		draw_one_line(c->img, p, end_v, 0xff0000ff);
+		draw_one_line(c->img2d, p, end_v, 0xff0000ff);
 		c->rays_len[i] = vlen;
 	}
 }
@@ -173,10 +173,10 @@ void draw_rays(t_cub *c)
 	i = 0;
 	one_deg = 0.0174;
 	ang = c->player->ang - (c->view_ang / 2 * one_deg);
-	if (c->img)
-		mlx_delete_image(c->mlx, c->img);
-	c->img = mlx_new_image(c->mlx, c->screen_width , c->screen_height * 2);
-	if (!c->img|| (mlx_image_to_window(c->mlx, c->img,0,0) < 0))
+	if (c->img2d)
+		mlx_delete_image(c->mlx, c->img2d);
+	c->img2d = mlx_new_image(c->mlx, c->screen_width , c->screen_height);
+	if (!c->img2d|| (mlx_image_to_window(c->mlx, c->img2d,0,c->screen_height) < 0))
 		return ;
 	while (i < c->view_ang)
 	{
