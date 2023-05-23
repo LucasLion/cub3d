@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/23 15:36:16 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/23 17:04:39 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ int	display_2d_map(t_cub *c)
 			{
 				put_square(c, i, j, 0xffffffff);
 				if (c->map[i][j] != '0')
-					c->player = init_player(c, i, j);
+				{
+					c->player->m_pos.x = i;
+					c->player->m_pos.y = j;
+				}
 			}
 			else if (c->map[i][j] == '1')
 				put_square(c, i, j, 0x000000ff);
@@ -67,11 +70,11 @@ void	line_offset(t_cub *c)
 
 int	display_3d_map(t_cub *c)
 {
-	int			i;
-	int			j;
-	int			line_height;
-	t_point		start;
-	t_point		end;
+	int					i;
+	int					j;
+	int					line_height;
+	t_point				start;
+	t_point				end;
 	long unsigned int	color;
 
 	start.x = 0;
@@ -88,8 +91,7 @@ int	display_3d_map(t_cub *c)
 		while(j < c->screen_width / c->view_ang)
 		{
 			line_height = c->map_width / c->rays_len[i] * c->screen_height;
-			//start.y = c->screen_height - (line_height / 2);
-			start.y = 0;
+			start.y = c->screen_height - (line_height / 2);
 			if (line_height > c->screen_height)
 				line_height = c->screen_height;
 			end.x = start.x;

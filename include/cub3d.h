@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/23 14:23:00 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/23 17:04:41 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void		put_square(t_cub *c, int x, int y, long int color);
 int			display(t_cub *c);
 int			display_2d_map(t_cub *c);
 int			display_3d_map(t_cub *c);
-t_player	*init_player(t_cub *c, int i, int j);
+t_player	*init_player(t_cub *c);
 
 /* ----------- MOVEMENT ----------- */
 
