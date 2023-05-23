@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/23 11:07:45 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/23 11:50:59 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,32 @@ int	display_2d_map(t_cub *c)
 
 int	display_3d_map(t_cub *c)
 {
-	for (int i = 0; i < c->view_ang; i++)
-		printf("===> %f\n", c->rays_len[i]);
+	int			i;
+	int			j;
+	int			line_height;
+	t_point		start;
+	t_point		end;
+
+	start.y = c->map_height * c->tilesize;
+	start.x = 0;
+	i = 0;
+	j = 0;
+	while(i < c->view_ang)
+	{
+		j = 0;
+		while(j < c->map_width / c->view_ang * c->tilesize)
+		{
+			line_height = c->map_height * c->map_width * c->map_height * c->tilesize / c->rays_len[i];
+			if (line_height > c->map_height * c->tilesize)
+				line_height = c->map_height * c->tilesize;
+			end.x = start.x;
+			end.y = start.y + line_height;
+			draw_one_line(c->img, start, end);
+			j++;
+		}
+		start.x += c->map_width / c->view_ang * c->tilesize;
+		i++;
+	}
 	return (1);
 }
 

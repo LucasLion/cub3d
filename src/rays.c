@@ -6,14 +6,14 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/23 10:51:55 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/23 11:57:56 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
 
-void draw_one_line(t_cub *c, t_point start, t_point end)
+void draw_one_line(mlx_image_t *image, t_point start, t_point end)
 {
 	float			delta_y;
 	float			delta_x;
@@ -26,7 +26,7 @@ void draw_one_line(t_cub *c, t_point start, t_point end)
 	delta_y /= length;
 	while(length)
 	{
-		mlx_put_pixel(c->player->rays, start.x, start.y, 0xff0456ff); 
+		mlx_put_pixel(image, start.x, start.y, 0xff0456ff); 
 		start.y += delta_y;
 		start.x += delta_x;
 		--length;
@@ -131,45 +131,45 @@ void check_vertical(t_cub *c, t_point *start, t_point *end, float ang)
 	}
 }
 
-void draw_one_ray(t_cub *c, double x, double y, float ang, int i)
+void draw_one_ray(t_cub *c, float ang, int i)
 {
-	t_point start;
-	t_point	end_vert;
-	t_point	end_hor;
+	t_point	end_v;
+	t_point	end_h;
 	double	vlen;
 	double	hlen;
+	t_point p;
 
-	start.x = x + (0.1 * c->tilesize);
-	start.y = y + (0.1 * c->tilesize);
-	check_horizontal(c, &start, &end_hor, ang);
-	check_vertical(c, &start, &end_vert, ang);
-	vlen = sqrt(((end_vert.y - start.y)* (end_vert.y - start.y)) + ((end_vert.x - start.x) * (end_vert.x - start.x)));
-	hlen = sqrt(((end_hor.y - start.y)* (end_hor.y - start.y)) + ((end_hor.x - start.x) * (end_hor.x - start.x)));
+	p = c->player->p_pos;
+	check_horizontal(c, &p, &end_h, ang);
+	check_vertical(c, &p, &end_v, ang);
+	vlen = sqrt(((end_v.y - p.y)* (end_v.y - p.y)) + ((end_v.x - p.x) * (end_v.x - p.x)));
+	hlen = sqrt(((end_h.y - p.y)* (end_h.y - p.y)) + ((end_h.x - p.x) * (end_h.x - p.x)));
 	if (hlen <= vlen)
 	{
-		draw_one_line(c, start, end_hor);
+		draw_one_line(c->img, p, end_h);
 		c->rays_len[i] = hlen;
 	}
 	else 
 	{
-		draw_one_line(c, start, end_vert);
+		draw_one_line(c->img, p, end_v);
 		c->rays_len[i] = vlen;
 	}
 }
 
-void draw_rays(t_cub *c, double x, double y)
+void draw_rays(t_cub *c)
 {
 	int i;
 	float ang;
 	float one_deg;
+	t_point player_pos;
 
 	i = 0;
 	one_deg = 0.0174;
 	ang = c->player->ang - (c->view_ang / 2 * one_deg);
-	if (c->player->rays)
-		mlx_delete_image(c->mlx, c->player->rays);
-	c->player->rays = mlx_new_image(c->mlx, c->map_width , c->map_height);
-	if (!c->player->rays|| (mlx_image_to_window(c->mlx, c->player->rays,0,0) < 0))
+	if (c->img)
+		mlx_delete_image(c->mlx, c->img);
+	c->img = mlx_new_image(c->mlx, c->map_width , c->map_height);
+	if (!c->img|| (mlx_image_to_window(c->mlx, c->img,0,0) < 0))
 		return ;
 	while (i < c->view_ang)
 	{
@@ -177,7 +177,7 @@ void draw_rays(t_cub *c, double x, double y)
 			ang -= 2 * PI;
 		else if (ang < 0)
 			ang += (2 * PI);
-		draw_one_ray(c, x, y, ang, i);
+		draw_one_ray(c, ang, i);
 		ang += one_deg;
 		i++;
 	}

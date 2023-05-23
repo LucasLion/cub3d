@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/05/23 10:51:56 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/23 11:56:46 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ int	map_width(char **map)
 int	init_cub(t_cub *c, char **file)
 {
 	c->t = ft_calloc(1, sizeof(t_textures));
+	c->img = mlx_new_image(c->mlx, c->map_width , c->map_height * 2);
+	if (!c->img|| (mlx_image_to_window(c->mlx, c->img,0,0) < 0))
+		return  0;
 	c->view_ang = 80;
 	c->tilesize = 16;
 	c->nb_line_map_start = get_nb_line_map_start(file, c);
@@ -79,7 +82,7 @@ int	main(int argc, char **argv)
 		return (-1);
 	}
 	display(c);
-	c->player->rays = NULL;
+	c->img = NULL;
 	mlx_key_hook(c->mlx, &move_player, c);
 	mlx_loop_hook(c->mlx, &ft_hook, c);
 	mlx_loop(c->mlx);
