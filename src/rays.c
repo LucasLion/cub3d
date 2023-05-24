@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/24 14:32:11 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/24 15:33:41 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void draw_one_line(t_cub *c, mlx_image_t *image, t_point start, t_point end, lon
 	{
 		while(length)
 		{
+			// TODO FAUX
 			if ((start.x < (c->screen_width - 1) &&  start.x > 0) \
 					&& (start.y < (c->screen_height - 1) && start.y > 0))
 				mlx_put_pixel(image, start.x, start.y, color); 
@@ -164,7 +165,7 @@ void	fish_eye(t_cub *c, float ang, int i)
 		diff += 2 * PI;
 	if (diff > 2 * PI)
 		diff -= 2 * PI;
-	c->rays_len[i] = c->rays_len[i] * cos(diff) * 0.99999999;
+	c->rays_len[i] = c->rays_len[i] * cos(diff) * FOV;
 }
 
 void draw_rays(t_cub *c)
@@ -174,7 +175,8 @@ void draw_rays(t_cub *c)
 	float one_deg;
 
 	i = 0;
-	one_deg = 0.0174;
+	//one_deg = 0.0174;
+	one_deg = 0.0054;
 	ang = c->player->ang - (c->view_ang / 2 * one_deg);
 	if (c->img2d)
 		mlx_delete_image(c->mlx, c->img2d);

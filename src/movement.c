@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/24 14:27:59 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/24 15:25:01 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,28 +67,25 @@ void	move_player(mlx_key_data_t keydata, void *param)
 
 void	check_movement(t_player *p)
 {
-	float i;
-
-	i = p->speed;
 	if (p->is_moving & 0x01)
 	{
-		p->p_pos.x += cos(p->ang) * i;
-		p->p_pos.y += -sin(p->ang) * i;
+		p->p_pos.x += cos(p->ang) * SPEED;
+		p->p_pos.y += -sin(p->ang) * SPEED;
 	}
 	else if (p->is_moving == 0x02)
 	{
-		p->p_pos.x -= -cos(p->ang + (PI / 2)) * i;
-		p->p_pos.y -= sin(p->ang + (PI / 2)) * i;
+		p->p_pos.x -= -cos(p->ang + (PI / 2)) * SPEED;
+		p->p_pos.y -= sin(p->ang + (PI / 2)) * SPEED;
 	}
 	else if (p->is_moving & 0x04)
 	{
-		p->p_pos.x -= cos(p->ang) * i;
-		p->p_pos.y -= -sin(p->ang) * i;
+		p->p_pos.x -= cos(p->ang) * SPEED;
+		p->p_pos.y -= -sin(p->ang) * SPEED;
 	}
 	else if (p->is_moving & 0x08)
 	{
-		p->p_pos.x += cos(p->ang - (PI / 2)) * i;
-		p->p_pos.y += -sin(p->ang - (PI / 2)) * i;
+		p->p_pos.x += cos(p->ang - (PI / 2)) * SPEED;
+		p->p_pos.y += -sin(p->ang - (PI / 2)) * SPEED;
 	}
 	if (p->is_moving & 0x10)
 	{

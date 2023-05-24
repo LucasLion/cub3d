@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/24 14:32:36 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/24 15:21:58 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	display_3d_map(t_cub *c)
 	c->img3d = mlx_new_image(c->mlx, c->screen_width , c->screen_height);
 	if (!c->img3d || (mlx_image_to_window(c->mlx, c->img3d, 0, 0) < 0))
 		return 0;
-	c->img3d->instances[0].z = 1;
+	c->img3d->instances[0].z = 0;
 	while(i >= 0)
 	{
 		j = 0;

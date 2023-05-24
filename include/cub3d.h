@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/24 14:28:45 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/24 15:32:25 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@
 #include <fcntl.h>
 #include <math.h>
 #include "MLX42.h"
+
 #define PI 3.14159
-#define SPEED 2.5
+#define SPEED 3
+#define FOV 3.4
+
 //#include "MLX42_Int.h"
 //#include "MLX42_input.h"
 
