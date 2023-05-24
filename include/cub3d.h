@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/23 17:04:41 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/24 10:41:47 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ t_player	*init_player(t_cub *c);
 void		move_player(mlx_key_data_t keydata, void *param);
 void		check_movement(t_player *c);
 void		ft_hook(void *param);
-void		collision(t_cub *c, t_player *p);
+int			player_out(t_cub *c);
 
 
 /* ----------- LINE----------- */
