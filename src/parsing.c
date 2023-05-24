@@ -6,7 +6,7 @@
 /*   By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 17:31:32 by llion             #+#    #+#             */
-/*   Updated: 2023/05/23 10:39:47 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/24 10:49:25 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,10 +124,7 @@ int	parse_number_players(char **map)
 		{
 			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E' \
 					|| map[i][j] == 'W')
-			{
-				printf("nb: %d\n", nb_players);
 				nb_players++;
-			}
 			j++;
 		}
 		i++;

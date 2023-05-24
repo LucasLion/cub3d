@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/23 13:28:25 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/24 10:41:47 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ typedef struct	s_cub
 	t_textures	*t;	
 	int			nb_line_map_start;
 	t_player	*player;
-	mlx_image_t	*img;
+	mlx_image_t	*img2d;
+	mlx_image_t	*img3d;
 	
 }				t_cub;
 
@@ -99,14 +100,14 @@ void		put_square(t_cub *c, int x, int y, long int color);
 int			display(t_cub *c);
 int			display_2d_map(t_cub *c);
 int			display_3d_map(t_cub *c);
-t_player	*init_player(t_cub *c, int i, int j);
+t_player	*init_player(t_cub *c);
 
 /* ----------- MOVEMENT ----------- */
 
 void		move_player(mlx_key_data_t keydata, void *param);
 void		check_movement(t_player *c);
 void		ft_hook(void *param);
-void		collision(t_cub *c, t_player *p);
+int			player_out(t_cub *c);
 
 
 /* ----------- LINE----------- */
