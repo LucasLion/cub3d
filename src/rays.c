@@ -6,14 +6,14 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/23 14:59:48 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/24 15:43:13 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
 
-void draw_one_line(mlx_image_t *image, t_point start, t_point end, long unsigned color)
+void draw_one_line(t_cub *c, mlx_image_t *image, t_point start, t_point end, long unsigned color)
 {
 	float				delta_y;
 	float				delta_x;
@@ -24,13 +24,17 @@ void draw_one_line(mlx_image_t *image, t_point start, t_point end, long unsigned
 	length = sqrt((delta_y * delta_y) + (delta_x * delta_x));
 	delta_x /= length;
 	delta_y /= length;
-	
-	while(length)
 	{
-		mlx_put_pixel(image, start.x, start.y, color); 
-		start.y += delta_y;
-		start.x += delta_x;
-		--length;
+		while(length)
+		{
+			// TODO FAUX
+			if ((start.x < (c->screen_width - 1) &&  start.x > 0) \
+					&& (start.y < (c->screen_height - 1) && start.y > 0))
+				mlx_put_pixel(image, start.x, start.y, color); 
+			start.y += delta_y;
+			start.x += delta_x;
+			--length;
+		}
 	}
 }
 
@@ -49,7 +53,7 @@ void check_horizontal(t_cub *c, t_point *start, t_point *end, float ang)
 		offset.x = (offset.y * atan);	
 	}
 	if (ra < PI) 
-	{
+{
 		end->y = ((int)(start->y /c->tilesize) * c->tilesize - 0.001);
 		end->x = (end->y - start->y) * atan + start->x;
 		offset.y = - c->tilesize;
@@ -142,12 +146,12 @@ void draw_one_ray(t_cub *c, float ang, int i)
 	hlen = sqrt(((end_h.y - p.y)* (end_h.y - p.y)) + ((end_h.x - p.x) * (end_h.x - p.x)));
 	if (hlen <= vlen)
 	{
-		draw_one_line(c->img2d, p, end_h, 0xff0000ff);
+		draw_one_line(c, c->img2d, p, end_h, 0xff0000ff);
 		c->rays_len[i] = hlen;
 	}
 	else 
 	{
-		draw_one_line(c->img2d, p, end_v, 0xff0000ff);
+		draw_one_line(c, c->img2d, p, end_v, 0xff0000ff);
 		c->rays_len[i] = vlen;
 	}
 }
@@ -161,7 +165,7 @@ void	fish_eye(t_cub *c, float ang, int i)
 		diff += 2 * PI;
 	if (diff > 2 * PI)
 		diff -= 2 * PI;
-	c->rays_len[i] = c->rays_len[i] * cos(diff);
+	c->rays_len[i] = c->rays_len[i] * cos(diff) * FOV;
 }
 
 void draw_rays(t_cub *c)
@@ -171,12 +175,13 @@ void draw_rays(t_cub *c)
 	float one_deg;
 
 	i = 0;
-	one_deg = 0.0174;
+	//one_deg = 0.0174;
+	one_deg = 0.0054;
 	ang = c->player->ang - (c->view_ang / 2 * one_deg);
 	if (c->img2d)
 		mlx_delete_image(c->mlx, c->img2d);
 	c->img2d = mlx_new_image(c->mlx, c->screen_width , c->screen_height);
-	if (!c->img2d|| (mlx_image_to_window(c->mlx, c->img2d,0,c->screen_height) < 0))
+	if (!c->img2d || (mlx_image_to_window(c->mlx, c->img2d, 0, c->screen_height) < 0))
 		return ;
 	while (i < c->view_ang)
 	{
@@ -190,9 +195,3 @@ void draw_rays(t_cub *c)
 		i++;
 	}
 }
-
-
-
-
-
-

@@ -6,7 +6,11 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/05/23 14:57:47 by amouly           ###   ########.fr       */
+=======
+/*   Updated: 2023/05/24 15:32:25 by llion            ###   ########.fr       */
+>>>>>>> 769afec8fcea2266b243f1d93fe4d7f8b7c7f759
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +25,11 @@
 #include <fcntl.h>
 #include <math.h>
 #include "MLX42.h"
+
 #define PI 3.14159
+#define SPEED 3
+#define FOV 3.4
+
 //#include "MLX42_Int.h"
 //#include "MLX42_input.h"
 
@@ -54,7 +62,7 @@ typedef struct	s_player
 	float		player_y_dif;
 	int			is_moving;
 	float		ang;
-	int			speed;
+	float		speed;
 
 }				t_player;
 
@@ -97,23 +105,22 @@ int		parse_file(int argc, char **argv);
 /* ----------- DISPLAY ----------- */
 
 void		put_square(t_cub *c, int x, int y, long int color);
-int			display(t_cub *c);
 int			display_2d_map(t_cub *c);
 int			display_3d_map(t_cub *c);
-t_player	*init_player(t_cub *c, int i, int j);
+t_player	*init_player(t_cub *c);
 
 /* ----------- MOVEMENT ----------- */
 
 void		move_player(mlx_key_data_t keydata, void *param);
 void		check_movement(t_player *c);
 void		ft_hook(void *param);
-void		collision(t_cub *c, t_player *p);
+int			player_out(t_cub *c);
 
 
 /* ----------- LINE----------- */
 
 void 		draw_line(t_cub *c, int x, int y);
-void 		draw_one_line(mlx_image_t *image, t_point start, t_point end, long unsigned int c);
+void 		draw_one_line(t_cub *cub, mlx_image_t *image, t_point start, t_point end, long unsigned int c);
 void 		draw_one_line_3d(mlx_image_t *image, t_point start, t_point end);
 int			wall_or_empty(t_cub *c, int x , int y);
 void 		draw_rays(t_cub *c);

@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/05/23 15:38:05 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/24 15:43:17 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_error(char *str)
 {
-	printf("%s\n", str);
-	return (0);
+	printf("%s\nExiting...\n", str);
+	exit(EXIT_FAILURE);
 }
 
 int	free_function(char **file, t_cub *c)
@@ -47,8 +47,8 @@ int	map_width(char **map)
 int	init_cub(t_cub *c, char **file)
 {
 	c->t = ft_calloc(1, sizeof(t_textures));
-	c->view_ang = 80;
-	c->tilesize = 60;
+	c->view_ang = 340;
+	c->tilesize = 40;
 	c->nb_line_map_start = get_nb_line_map_start(file, c);
 	c->t->nb_elems = 0;
 	c->map = get_map(file, c->nb_line_map_start);
@@ -60,9 +60,9 @@ int	init_cub(t_cub *c, char **file)
 	c->screen_height = c->map_height * c->tilesize;
 	c->screen_width = c->map_width * c->tilesize;
 	c->mlx = mlx_init(c->screen_width, c->screen_height * 2, "CUB3D", true);
+	c->player = ft_calloc(1, sizeof(t_player));
 	if (!c->mlx)
-		return (EXIT_FAILURE);
-	c->img3d = mlx_new_image(c->mlx, c->screen_width , c->screen_height);
+		return (ft_error("MLX failed"));
 	return (1);
 }
 
@@ -84,8 +84,9 @@ int	main(int argc, char **argv)
 		free_function(file, c);
 		return (-1);
 	}
-	display(c);
-	c->img2d = NULL;
+	mlx_set_setting(MLX_STRETCH_IMAGE, true);
+	display_2d_map(c);
+	init_player(c);
 	mlx_key_hook(c->mlx, &move_player, c);
 	mlx_loop_hook(c->mlx, &ft_hook, c);
 	mlx_loop(c->mlx);

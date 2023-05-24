@@ -6,29 +6,29 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 15:06:29 by llion             #+#    #+#             */
-/*   Updated: 2023/05/23 12:02:11 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/24 14:28:57 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-t_player	*init_player(t_cub *c, int i, int j)
+t_player	*init_player(t_cub *c)
 {
-	t_player	*player;
+	int			i;
+	int			j;
 
-	player = ft_calloc(1, sizeof(t_player));
-	player->m_pos.x = i;
-	player->m_pos.y = j;
-	player->p_pos.x = j * c->tilesize + (c->tilesize / 2);
-	player->p_pos.y = i * c->tilesize + (c->tilesize / 2);
-	player->speed = 3;
+	i = c->player->m_pos.x;
+	j = c->player->m_pos.y;
+	c->player->p_pos.x = j * c->tilesize + (c->tilesize / 2);
+	c->player->p_pos.y = i * c->tilesize + (c->tilesize / 2);
+	c->player->speed = SPEED; 
 	if (c->map[i][j] == 'E')
-		player->ang = 0;
+		c->player->ang = 0;
 	else if (c->map[i][j] == 'N')
-		player->ang = PI / 2;
+		c->player->ang = PI / 2;
 	else if (c->map[i][j] == 'S')
-		player->ang = PI / 2 * 3 ;
+		c->player->ang = PI / 2 * 3 ;
 	else if (c->map[i][j] == 'W')
-		player->ang = PI;
-	return (player);
+		c->player->ang = PI;
+	return (c->player);
 }

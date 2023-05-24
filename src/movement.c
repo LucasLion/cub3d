@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/23 15:31:25 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/24 15:42:21 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,23 +69,23 @@ void	check_movement(t_player *p)
 {
 	if (p->is_moving & 0x01)
 	{
-		p->p_pos.x += cos(p->ang);
-		p->p_pos.y += -sin(p->ang);
+		p->p_pos.x += cos(p->ang) * SPEED;
+		p->p_pos.y += -sin(p->ang) * SPEED;
 	}
 	else if (p->is_moving == 0x02)
 	{
-		p->p_pos.x -= -cos(p->ang + (PI / 2));
-		p->p_pos.y -= sin(p->ang + (PI / 2));
+		p->p_pos.x -= -cos(p->ang + (PI / 2)) * SPEED;
+		p->p_pos.y -= sin(p->ang + (PI / 2)) * SPEED;
 	}
 	else if (p->is_moving & 0x04)
 	{
-		p->p_pos.x -= cos(p->ang);
-		p->p_pos.y -= -sin(p->ang);
+		p->p_pos.x -= cos(p->ang) * SPEED;
+		p->p_pos.y -= -sin(p->ang) * SPEED;
 	}
 	else if (p->is_moving & 0x08)
 	{
-		p->p_pos.x += cos(p->ang - (PI / 2));
-		p->p_pos.y += -sin(p->ang - (PI / 2));
+		p->p_pos.x += cos(p->ang - (PI / 2)) * SPEED;
+		p->p_pos.y += -sin(p->ang - (PI / 2)) * SPEED;
 	}
 	if (p->is_moving & 0x10)
 	{
@@ -101,6 +101,13 @@ void	check_movement(t_player *p)
 	}
 }
 
+int	player_out(t_cub *c)
+{
+	if (c->player->p_pos.x <= 0 | c->player->p_pos.y <= 0 | c->player->p_pos.x >= c->screen_width | c->player->p_pos.y >= c->screen_height)
+		return (ft_error("YOU WENT OFF OF THE MAP YOU FOOL!!\nVANISH NOW..."));
+	return (1);
+}
+
 void	ft_hook(void *param)
 {
 	t_cub *c;
@@ -108,5 +115,8 @@ void	ft_hook(void *param)
 	c = param;
 	check_movement(c->player);
 	draw_rays(c);
+	//if (c->img3d)
+	//	mlx_delete_image(c->mlx, c->img3d);
 	display_3d_map(c);
+	player_out(c);
 }

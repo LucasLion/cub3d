@@ -11,8 +11,8 @@
       espaces sont une partie valable de la carte, c’est à vous de les gérer correctement. Vous devez pouvoir parser n’importe quelle sorte de carte, tant qu’elle
       respecte les règles de carte
 - [  ] Pouvoir changer les couleurs du sol et plafond
-- [  ] Rotation de la camera avec fleches gauche et droite
-- [  ] W A S D permettent de se deplacer
+- [OK] Rotation de la camera avec fleches gauche et droite
+- [OK] W A S D permettent de se deplacer
 - [OK] ESC et croix rouge quittent le programme proprement
 - [OK] map entouree de murs
 
@@ -31,9 +31,11 @@
 - [OK] permettre les deplacements du point
 - [OK] dessiner la map avec le tableau de strings (appeler cette fonction avant le joueur)
 - [OK] ajouter les lignes pour visualiser les carres
-- [  ] tracer un trait devant le joueur qui s'arrete au premier mur
-- [  ] convertir la taille du trait en une ligne de pixels de la bonne taille selon la distance
-- [  ] placer ces lignes au centre de la fenetre
+- [OK] tracer un trait devant le joueur qui s'arrete au premier mur
+- [OK] convertir la taille du trait en une ligne de pixels de la bonne taille selon la distance
+- [OK] placer ces lignes au centre de la fenetre
+- [  ] regler le probleme des lignes qui disparaissent quand leur hauteur est supperieure a la taille de l'ecran
+- [  ] changer la meniere de se deplacer (pouvoir avancer et translater en meme temps)
 - [  ] selon l'orientation des murs, placer des ombres
 - [  ] gerer le probleme de fish-eye avec pi
 - [  ] ajouter des textures
@@ -48,7 +50,7 @@
 
 ## Misc
 
-- [  ] Reformater le code avec une bonne gestion d'erreurs
+- [OK] Reformater le code avec une bonne gestion d'erreurs
 - [  ] Reflechir a des structures de donnees plus pertinentes
 - [  ] GNL leak
 
