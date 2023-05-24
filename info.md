@@ -34,10 +34,10 @@
 - [OK] tracer un trait devant le joueur qui s'arrete au premier mur
 - [OK] convertir la taille du trait en une ligne de pixels de la bonne taille selon la distance
 - [OK] placer ces lignes au centre de la fenetre
-- [  ] regler le probleme des lignes qui disparaissent quand leur hauteur est supperieure a la taille de l'ecran
+- [OK] regler le probleme des lignes qui disparaissent quand leur hauteur est supperieure a la taille de l'ecran
 - [  ] changer la meniere de se deplacer (pouvoir avancer et translater en meme temps)
 - [  ] selon l'orientation des murs, placer des ombres
-- [  ] gerer le probleme de fish-eye avec pi
+- [  ] gerer le probleme de fish-eye
 - [  ] ajouter des textures
 
 ## Bonus

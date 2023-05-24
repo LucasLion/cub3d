@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/05/24 15:33:14 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/24 15:42:20 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ int	init_cub(t_cub *c, char **file)
 	c->player = ft_calloc(1, sizeof(t_player));
 	if (!c->mlx)
 		return (ft_error("MLX failed"));
-	c->img2d = NULL;
-	c->img3d = NULL;
 	return (1);
 }
 
