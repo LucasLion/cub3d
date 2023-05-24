@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/05/24 10:54:38 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/24 10:56:19 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_error(char *str)
 {
-	printf("%s\nExiting...", str);
+	printf("%s\nExiting...\n", str);
 	exit(EXIT_FAILURE);
 }
 
