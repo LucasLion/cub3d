@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/24 15:32:25 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/24 18:39:36 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@
 
 #define PI 3.14159
 #define SPEED 3
-#define FOV 3.4
+#define FOV 12
+#define SCREEN_HEIGHT 750
+#define SCREEN_WIDTH 1500
 
 //#include "MLX42_Int.h"
 //#include "MLX42_input.h"
@@ -68,7 +70,8 @@ typedef struct	s_cub
 	int			screen_height;
 	int			map_width;
 	int			map_height;
-	int			tilesize;
+	int			tilesize_H;
+	int			tilesize_V;
 	int			view_ang;
 	mlx_t		*mlx;
 	char		**map;

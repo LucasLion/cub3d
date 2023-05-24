@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/24 15:38:06 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/24 18:33:51 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@ void draw_one_line(t_cub *c, mlx_image_t *image, t_point start, t_point end, lon
 	{
 		while(length)
 		{
-			// TODO FAUX
-			if ((start.x < (c->screen_width - 1) &&  start.x > 0) \
-					&& (start.y < (c->screen_height - 1) && start.y > 0))
+			if (((start.x < (c->map_width * c->tilesize_H) - 1) &&  start.x > 0) \
+					&& (start.y < ((c->map_height * c->tilesize_V) - 1) && start.y > 0))
 				mlx_put_pixel(image, start.x, start.y, color); 
 			start.y += delta_y;
 			start.x += delta_x;
@@ -37,6 +36,7 @@ void draw_one_line(t_cub *c, mlx_image_t *image, t_point start, t_point end, lon
 		}
 	}
 }
+
 
 void check_horizontal(t_cub *c, t_point *start, t_point *end, float ang)
 {
@@ -47,24 +47,24 @@ void check_horizontal(t_cub *c, t_point *start, t_point *end, float ang)
 	
 	if (ra > PI) 
 	{
-		end->y = (int)(start->y /c->tilesize) * c->tilesize + c->tilesize;
+		end->y = (int)(start->y /c->tilesize_V) * c->tilesize_V + c->tilesize_V;
 		end->x = ((end->y - start->y) * atan) + start->x;
-		offset.y = c->tilesize;
+		offset.y = c->tilesize_V;
 		offset.x = (offset.y * atan);	
 	}
 	if (ra < PI) 
-{
-		end->y = ((int)(start->y /c->tilesize) * c->tilesize - 0.001);
+	{
+		end->y = ((int)(start->y /c->tilesize_V) * c->tilesize_V - 0.001);
 		end->x = (end->y - start->y) * atan + start->x;
-		offset.y = - c->tilesize;
+		offset.y = - c->tilesize_V;
 		offset.x = (offset.y * atan);	
 	}
 	while (dof < c->map_height)
 	{
-		if (end->y >= 0 && end->y < c->screen_height && end->x >= 0 && end->x < c->screen_width )
+		if (end->y >= 0 && end->y < (c->map_height * c->tilesize_V) && end->x >= 0 && end->x < (c->map_width * c->tilesize_H) )
 		{
-			int i = end->y / c->tilesize;
-			int j = end->x / c->tilesize;
+			int i = end->y / c->tilesize_V;
+			int j = end->x / c->tilesize_H;
 			if (i < 0 || j <  0  || i > c->map_height || j > c->map_width || (c->map[i][j] == '1') )
 			{
 				dof = c->map_height;
@@ -93,24 +93,24 @@ void check_vertical(t_cub *c, t_point *start, t_point *end, float ang)
 	
 	if (ra > (PI / 2) && ra < (PI / 2 * 3)) 
 	{
-		end->x = (int)(start->x /c->tilesize) * c->tilesize - 0.001;
+		end->x = (int)(start->x /c->tilesize_H) * c->tilesize_H - 0.001;
 		end->y = ((end->x - start->x) * ntan) + start->y;
-		offset.x = - c->tilesize;
+		offset.x = - c->tilesize_H;
 		offset.y = (offset.x * ntan);	
 	}
 	if (ra < (PI /2) || (ra > PI / 2 * 3)) 
 	{
-		end->x = ((int)(start->x /c->tilesize) * c->tilesize + c->tilesize);
+		end->x = ((int)(start->x /c->tilesize_H) * c->tilesize_H + c->tilesize_H);
 		end->y = (end->x - start->x) * ntan + start->y;
-		offset.x = c->tilesize;
+		offset.x = c->tilesize_H;
 		offset.y = (offset.x * ntan);	
 	}
 	while (dof < (c->map_width))
 	{
-		if (end->y >= 0 && end->y < c->screen_height && end->x >= 0 && end->x < c->screen_width)
+		if (end->y >= 0 && end->y < (c->map_height * c->tilesize_V) && end->x >= 0 && end->x < (c->map_width * c->tilesize_H))
 		{
-			int i = end->y / c->tilesize;
-			int j = end->x / c->tilesize;
+			int i = end->y / c->tilesize_V;
+			int j = end->x / c->tilesize_H;
 			if (i < 0 || j <  0  || i > c->map_height || j > c->map_width || (c->map[i][j] == '1') )
 			{
 				dof = c->map_width;
@@ -175,13 +175,13 @@ void draw_rays(t_cub *c)
 	float one_deg;
 
 	i = 0;
-	//one_deg = 0.0174;
-	one_deg = 0.0054;
+	one_deg = 0.0174 / 2 / 2 / 2;
+	//one_deg = 0.0054;
 	ang = c->player->ang - (c->view_ang / 2 * one_deg);
 	if (c->img2d)
 		mlx_delete_image(c->mlx, c->img2d);
-	c->img2d = mlx_new_image(c->mlx, c->screen_width , c->screen_height);
-	if (!c->img2d || (mlx_image_to_window(c->mlx, c->img2d, 0, c->screen_height) < 0))
+	c->img2d = mlx_new_image(c->mlx, c->screen_width , c->screen_height / 2);
+	if (!c->img2d || (mlx_image_to_window(c->mlx, c->img2d, 0, c->screen_height / 2) < 0))
 		return ;
 	while (i < c->view_ang)
 	{

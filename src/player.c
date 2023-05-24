@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 15:06:29 by llion             #+#    #+#             */
-/*   Updated: 2023/05/24 15:54:24 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/24 17:14:53 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ t_player	*init_player(t_cub *c)
 
 	i = c->player->m_pos.x;
 	j = c->player->m_pos.y;
-	c->player->p_pos.x = j * c->tilesize + (c->tilesize / 2);
-	c->player->p_pos.y = i * c->tilesize + (c->tilesize / 2);
-	c->player->speed = SPEED; 
+	c->player->p_pos.x = j * c->tilesize_H + (c->tilesize_H / 2);
+	c->player->p_pos.y = i * c->tilesize_V + (c->tilesize_V / 2);
 	if (c->map[i][j] == 'E')
 		c->player->ang = 0;
 	else if (c->map[i][j] == 'N')
@@ -31,4 +30,5 @@ t_player	*init_player(t_cub *c)
 	else if (c->map[i][j] == 'W')
 		c->player->ang = PI;
 	return (c->player);
+	//c->player->is_moving = 1;
 }
