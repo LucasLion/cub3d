@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/05/24 16:00:25 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/24 16:54:59 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ int	map_width(char **map)
 int	init_cub(t_cub *c, char **file)
 {
 	c->t = ft_calloc(1, sizeof(t_textures));
-	c->view_ang = 340;
-	c->tilesize = 40;
+	c->view_ang = 60 * 2 * 2 * 2 ;
 	c->nb_line_map_start = get_nb_line_map_start(file, c);
 	c->t->nb_elems = 0;
 	c->map = get_map(file, c->nb_line_map_start);
@@ -57,9 +56,15 @@ int	init_cub(t_cub *c, char **file)
 		return (ft_error("Empty file"));
 	c->map_height = ft_tablen(c->map);
 	c->map_width = map_width(c->map);
-	c->screen_height = c->map_height * c->tilesize;
-	c->screen_width = c->map_width * c->tilesize;
-	c->mlx = mlx_init(c->screen_width, c->screen_height * 2, "CUB3D", true);
+	//c->tilesize = 40;
+	//c->screen_height = c->map_height * c->tilesize;
+	//c->screen_width = c->map_width * c->tilesize;
+	c->screen_height = SCREEN_HEIGHT;
+	c->screen_width = SCREEN_WIDTH;
+	c->tilesize_V = SCREEN_HEIGHT / c->map_height;
+	c->tilesize_H = SCREEN_WIDTH / c->map_width;
+	printf("tilesize H ==> %d et tilesize V  ==> %d\n", c->tilesize_H, c->tilesize_V);
+	c->mlx = mlx_init(c->screen_width, c->screen_height, "CUB3D", true);
 	c->player = ft_calloc(1, sizeof(t_player));
 	if (!c->mlx)
 		return (ft_error("MLX failed"));
@@ -87,6 +92,8 @@ int	main(int argc, char **argv)
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	display_2d_map(c);
 	init_player(c);
+	printf("tilesize H ==> %d et tilesize V  ==> %d\n", c->tilesize_H, c->tilesize_V);
+	printf("Player en pixel : x ==> %f et y ==> %f\n", c->player->p_pos.x, c->player->p_pos.y);
 	mlx_key_hook(c->mlx, &move_player, c);
 	mlx_loop_hook(c->mlx, &ft_hook, c);
 	mlx_loop(c->mlx);

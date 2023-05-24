@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+        */
+/*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 17:31:32 by llion             #+#    #+#             */
-/*   Updated: 2023/05/24 12:07:58 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/24 16:41:21 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	parse_elems_in_map(char **map)
 		while (map[i][j])
 		{
 			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'N' \
-					&& map[i][j] != 'S' && map[i][j] != 'E' \
+					&& map[i][j] != 'S' && map[i][j] != 'E' && map[i][j] != '\0'\
 					&& map[i][j] != 'W' && map[i][j] != ' ' && map[i][j] != '\n')
 				return (ft_error("Invalid map (foreign chars)"));
 			j++;

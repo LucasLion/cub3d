@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/24 16:00:36 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/24 16:46:52 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void	put_square(t_cub *c, int x, int y, long int color)
 	mlx_image_t	*img;
 
 	i = 0;
-	img = mlx_new_image(c->mlx, c->tilesize, c->tilesize);
-	if (!img || (mlx_image_to_window(c->mlx, img, y * c->tilesize, (x * c->tilesize) + c->screen_height) < 0))
+	img = mlx_new_image(c->mlx, c->tilesize_H, c->tilesize_V);
+	if (!img || (mlx_image_to_window(c->mlx, img, y * c->tilesize_H, (x * c->tilesize_V) + c->screen_height / 2) < 0))
 		return ;
-	while (i < c->tilesize - 1)
+	while (i < c->tilesize_H - 1)
 	{
 		j = 0;
-		while (j < c->tilesize - 1)
+		while (j < c->tilesize_V - 1)
 		{
 			mlx_put_pixel(img, i, j, color); 
 			j++;

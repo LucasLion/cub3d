@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/24 16:00:47 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/24 16:59:28 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,34 +67,42 @@ void	move_player(mlx_key_data_t keydata, void *param)
 
 void	check_movement(t_player *p)
 {
+	printf("YO\n");
 	if (p->is_moving & 0x01)
 	{
-		p->p_pos.x += cos(p->ang) * SPEED;
-		p->p_pos.y += -sin(p->ang) * SPEED;
+		printf("1\n");
+		p->p_pos.x += cos(p->ang);// * SPEED;
+		p->p_pos.y += -sin(p->ang);// * SPEED;
+		printf("YO\n");
 	}
 	else if (p->is_moving == 0x02)
 	{
+		printf("2\n");
 		p->p_pos.x -= -cos(p->ang + (PI / 2)) * SPEED;
 		p->p_pos.y -= sin(p->ang + (PI / 2)) * SPEED;
 	}
 	else if (p->is_moving & 0x04)
 	{
+		printf("131\n");
 		p->p_pos.x -= cos(p->ang) * SPEED;
 		p->p_pos.y -= -sin(p->ang) * SPEED;
 	}
 	else if (p->is_moving & 0x08)
 	{
+		printf("4\n");
 		p->p_pos.x += cos(p->ang - (PI / 2)) * SPEED;
 		p->p_pos.y += -sin(p->ang - (PI / 2)) * SPEED;
 	}
 	if (p->is_moving & 0x10)
 	{
+		printf("5\n");
 		p->ang -= 0.04;
 		if (p->ang < 0)
 			p->ang += (2 * PI);
 	}
 	else if (p->is_moving & 0x20)
 	{
+		printf("6\n");
 		p->ang += 0.04;
 		if (p->ang > (2 * PI))
 			p->ang -= (2 * PI);
