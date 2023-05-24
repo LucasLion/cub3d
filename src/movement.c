@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/24 10:53:18 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/24 14:27:59 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,25 +67,28 @@ void	move_player(mlx_key_data_t keydata, void *param)
 
 void	check_movement(t_player *p)
 {
+	float i;
+
+	i = p->speed;
 	if (p->is_moving & 0x01)
 	{
-		p->p_pos.x += cos(p->ang);
-		p->p_pos.y += -sin(p->ang);
+		p->p_pos.x += cos(p->ang) * i;
+		p->p_pos.y += -sin(p->ang) * i;
 	}
 	else if (p->is_moving == 0x02)
 	{
-		p->p_pos.x -= -cos(p->ang + (PI / 2));
-		p->p_pos.y -= sin(p->ang + (PI / 2));
+		p->p_pos.x -= -cos(p->ang + (PI / 2)) * i;
+		p->p_pos.y -= sin(p->ang + (PI / 2)) * i;
 	}
 	else if (p->is_moving & 0x04)
 	{
-		p->p_pos.x -= cos(p->ang);
-		p->p_pos.y -= -sin(p->ang);
+		p->p_pos.x -= cos(p->ang) * i;
+		p->p_pos.y -= -sin(p->ang) * i;
 	}
 	else if (p->is_moving & 0x08)
 	{
-		p->p_pos.x += cos(p->ang - (PI / 2));
-		p->p_pos.y += -sin(p->ang - (PI / 2));
+		p->p_pos.x += cos(p->ang - (PI / 2)) * i;
+		p->p_pos.y += -sin(p->ang - (PI / 2)) * i;
 	}
 	if (p->is_moving & 0x10)
 	{
@@ -115,8 +118,8 @@ void	ft_hook(void *param)
 	c = param;
 	check_movement(c->player);
 	draw_rays(c);
-	if (c->img3d)
-		mlx_delete_image(c->mlx, c->img3d);
-	//display_3d_map(c);
+	//if (c->img3d)
+	//	mlx_delete_image(c->mlx, c->img3d);
+	display_3d_map(c);
 	player_out(c);
 }

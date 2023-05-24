@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/05/24 10:56:19 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/24 13:59:32 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	init_cub(t_cub *c, char **file)
 {
 	c->t = ft_calloc(1, sizeof(t_textures));
 	c->view_ang = 80;
-	c->tilesize = 20;
+	c->tilesize = 40;
 	c->nb_line_map_start = get_nb_line_map_start(file, c);
 	c->t->nb_elems = 0;
 	c->map = get_map(file, c->nb_line_map_start);
@@ -62,7 +62,9 @@ int	init_cub(t_cub *c, char **file)
 	c->mlx = mlx_init(c->screen_width, c->screen_height * 2, "CUB3D", true);
 	c->player = ft_calloc(1, sizeof(t_player));
 	if (!c->mlx)
-		return (EXIT_FAILURE);
+		return (ft_error("MLX failed"));
+	c->img2d = NULL;
+	c->img3d = NULL;
 	return (1);
 }
 
@@ -84,7 +86,8 @@ int	main(int argc, char **argv)
 		free_function(file, c);
 		return (-1);
 	}
-	display(c);
+	mlx_set_setting(MLX_STRETCH_IMAGE, true);
+	display_2d_map(c);
 	init_player(c);
 	mlx_key_hook(c->mlx, &move_player, c);
 	mlx_loop_hook(c->mlx, &ft_hook, c);

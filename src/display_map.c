@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/24 10:34:46 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/24 14:32:36 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,29 +85,23 @@ int	display_3d_map(t_cub *c)
 	c->img3d = mlx_new_image(c->mlx, c->screen_width , c->screen_height);
 	if (!c->img3d || (mlx_image_to_window(c->mlx, c->img3d, 0, 0) < 0))
 		return 0;
+	c->img3d->instances[0].z = 1;
 	while(i >= 0)
 	{
 		j = 0;
 		while(j < c->screen_width / c->view_ang)
 		{
-			line_height = c->map_width / c->rays_len[i] * c->screen_height;
-			start.y = c->screen_height - (line_height / 2);
-			if (line_height > c->screen_height)
-				line_height = c->screen_height;
+			line_height = c->screen_width / c->rays_len[i] * c->map_height;;
+			start.y = (c->screen_height - line_height) / 2;
+			if (line_height >= c->screen_height)
+				line_height -= c->screen_height;
 			end.x = start.x;
-			end.y = line_height;
-			draw_one_line(c->img3d, start, end, color + (line_height / 2));
+			end.y = line_height + start.y;
+			draw_one_line(c, c->img3d, start, end, color);
 			j++;
 			start.x++;
 		}
 		i--;
 	}
-	return (1);
-}
-
-int	display(t_cub *c)
-{
-	mlx_set_setting(MLX_STRETCH_IMAGE, true);
-	display_2d_map(c);
 	return (1);
 }
