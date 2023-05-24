@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/24 15:42:44 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/24 16:00:36 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,6 @@ int	display_3d_map(t_cub *c)
 		{
 			line_height = c->screen_width / c->rays_len[i] * c->map_height;;
 			start.y = (c->screen_height - line_height) / 2;
-			if (line_height >= c->screen_height)
-				line_height -= c->screen_height;
 			end.x = start.x;
 			end.y = line_height + start.y;
 			draw_one_line(c, c->img3d, start, end, color);

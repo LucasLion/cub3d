@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/24 15:42:21 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/24 16:00:47 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,6 @@ void	ft_hook(void *param)
 	c = param;
 	check_movement(c->player);
 	draw_rays(c);
-	//if (c->img3d)
-	//	mlx_delete_image(c->mlx, c->img3d);
 	display_3d_map(c);
 	player_out(c);
 }
