@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/05/24 17:08:45 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/24 18:42:08 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	init_cub(t_cub *c, char **file)
 	//c->screen_width = c->map_width * c->tilesize;
 	c->screen_height = SCREEN_HEIGHT;
 	c->screen_width = SCREEN_WIDTH;
-	c->tilesize_V = SCREEN_HEIGHT / c->map_height;
+	c->tilesize_V = SCREEN_HEIGHT / c->map_height / 2;
 	c->tilesize_H = SCREEN_WIDTH / c->map_width;
 	c->mlx = mlx_init(c->screen_width, c->screen_height, "CUB3D", true);
 	c->player = ft_calloc(1, sizeof(t_player));
@@ -91,10 +91,6 @@ int	main(int argc, char **argv)
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	display_2d_map(c);
 	init_player(c);
-	printf("tilesize H ==> %d et tilesize V  ==> %d\n", c->tilesize_H, c->tilesize_V);
-	printf("Player en pixel : x ==> %f et y ==> %f\n", c->player->p_pos.y, c->player->p_pos.x);
-	printf("Player en case: x ==> %f et y ==> %f\n", c->player->m_pos.x, c->player->m_pos.y);
-	printf("Nombre de cases : largeur ==> %d et haueteur  ==> %d\n", c->map_width, c->map_height);
 	mlx_key_hook(c->mlx, &move_player, c);
 	mlx_loop_hook(c->mlx, &ft_hook, c);
 	mlx_loop(c->mlx);

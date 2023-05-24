@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/24 16:39:10 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/24 18:33:51 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void draw_one_line(t_cub *c, mlx_image_t *image, t_point start, t_point end, lon
 	{
 		while(length)
 		{
-			if ((start.x < (c->screen_width - 1) &&  start.x > 0) \
-					&& (start.y < (c->screen_height - 1) && start.y > 0))
+			if (((start.x < (c->map_width * c->tilesize_H) - 1) &&  start.x > 0) \
+					&& (start.y < ((c->map_height * c->tilesize_V) - 1) && start.y > 0))
 				mlx_put_pixel(image, start.x, start.y, color); 
 			start.y += delta_y;
 			start.x += delta_x;
@@ -36,6 +36,7 @@ void draw_one_line(t_cub *c, mlx_image_t *image, t_point start, t_point end, lon
 		}
 	}
 }
+
 
 void check_horizontal(t_cub *c, t_point *start, t_point *end, float ang)
 {
@@ -52,7 +53,7 @@ void check_horizontal(t_cub *c, t_point *start, t_point *end, float ang)
 		offset.x = (offset.y * atan);	
 	}
 	if (ra < PI) 
-{
+	{
 		end->y = ((int)(start->y /c->tilesize_V) * c->tilesize_V - 0.001);
 		end->x = (end->y - start->y) * atan + start->x;
 		offset.y = - c->tilesize_V;
@@ -60,7 +61,7 @@ void check_horizontal(t_cub *c, t_point *start, t_point *end, float ang)
 	}
 	while (dof < c->map_height)
 	{
-		if (end->y >= 0 && end->y < c->screen_height / 2 && end->x >= 0 && end->x < c->screen_width )
+		if (end->y >= 0 && end->y < (c->map_height * c->tilesize_V) && end->x >= 0 && end->x < (c->map_width * c->tilesize_H) )
 		{
 			int i = end->y / c->tilesize_V;
 			int j = end->x / c->tilesize_H;
@@ -106,7 +107,7 @@ void check_vertical(t_cub *c, t_point *start, t_point *end, float ang)
 	}
 	while (dof < (c->map_width))
 	{
-		if (end->y >= 0 && end->y < c->screen_height / 2 && end->x >= 0 && end->x < c->screen_width)
+		if (end->y >= 0 && end->y < (c->map_height * c->tilesize_V) && end->x >= 0 && end->x < (c->map_width * c->tilesize_H))
 		{
 			int i = end->y / c->tilesize_V;
 			int j = end->x / c->tilesize_H;
@@ -164,7 +165,7 @@ void	fish_eye(t_cub *c, float ang, int i)
 		diff += 2 * PI;
 	if (diff > 2 * PI)
 		diff -= 2 * PI;
-	c->rays_len[i] = c->rays_len[i] * cos(diff) * 0.8;
+	c->rays_len[i] = c->rays_len[i] * cos(diff) * FOV;
 }
 
 void draw_rays(t_cub *c)

@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/24 16:46:52 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/24 18:41:55 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	display_3d_map(t_cub *c)
 	color = 0xff0000ff;
 	if (c->img3d)
 		mlx_delete_image(c->mlx, c->img3d);
-	c->img3d = mlx_new_image(c->mlx, c->screen_width , c->screen_height);
+	c->img3d = mlx_new_image(c->mlx, c->screen_width , c->screen_height / 2);
 	if (!c->img3d || (mlx_image_to_window(c->mlx, c->img3d, 0, 0) < 0))
 		return 0;
 	c->img3d->instances[0].z = 0;
@@ -91,8 +91,10 @@ int	display_3d_map(t_cub *c)
 		j = 0;
 		while(j < c->screen_width / c->view_ang)
 		{
-			line_height = c->screen_width / c->rays_len[i] * c->map_height;;
-			start.y = (c->screen_height - line_height) / 2;
+			//TO DO Trouver le bon ratio avec la taille de l'ecran 
+			int ratio = 10; //valeur aui doit dependre de la taille de la map
+			line_height = c->screen_width / c->rays_len[i] * (c->map_height * ratio);
+			start.y = ((c->screen_height / 2) - line_height) / 2;
 			end.x = start.x;
 			end.y = line_height + start.y;
 			draw_one_line(c, c->img3d, start, end, color);
