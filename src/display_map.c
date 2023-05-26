@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/26 14:36:09 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/26 14:36:45 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	put_square(t_cub *c, int x, int y, long int color)
 		j = 0;
 		while (j < c->tilesize_V_2d - 1)
 		{
-	git 		mlx_put_pixel(img, i, j, color); 
+			mlx_put_pixel(img, i, j, color); 
 			j++;
 		}
 		i++;
