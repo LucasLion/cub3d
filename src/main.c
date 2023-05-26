@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/05/26 11:52:22 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/26 12:28:30 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	init_cub(t_cub *c, char **file)
 	c->t->nb_elems = 0;
 	c->map = get_map(file, c->nb_line_map_start);
 	c->rays_len = ft_calloc(c->view_ang, sizeof(double));
+	c->color_tab = ft_calloc(c->view_ang, sizeof(long unsigned int));
 	if (!c->map)
 		return (ft_error("Empty file"));
 	c->map_height = ft_tablen(c->map);
