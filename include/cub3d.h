@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/26 11:51:53 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/26 12:27:59 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct	s_cub
 	mlx_t				*mlx;
 	char				**map;
 	double				*rays_len;
+	long unsigned int	*color_tab;
 	long unsigned int	color;
 	t_textures			*t;	
 	int					nb_line_map_start;

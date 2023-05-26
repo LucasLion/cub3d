@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/26 11:59:48 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/26 12:41:19 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,11 +148,18 @@ void draw_one_ray(t_cub *c, float ang, int i)
 	{
 	//	draw_one_line(c, c->img2d, p, end_h, 0xff0000ff);
 		c->rays_len[i] = hlen;
+		c->color_tab[i] = c->color; // NORTH
+		if (ang > PI)
+		  c->color_tab[i] = 0x0000ffff; // SOUTH
+		
 	}
 	else 
 	{
 		//draw_one_line(c, c->img2d, p, end_v, 0xff0000ff);
 		c->rays_len[i] = vlen;
+		c->color_tab[i] = 0x00ff00ff; // EAST
+		if (ang > PI / 2 && ang < PI / 2 * 3)
+		  c->color_tab[i] = 0x000000ff; // WEST
 	}
 }
 
