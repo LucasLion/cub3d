@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/24 18:39:36 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/26 10:35:58 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 #include "MLX42.h"
 
 #define PI 3.14159
-#define SPEED 3
+#define SPEED 1.5
 #define FOV 12
-#define SCREEN_HEIGHT 750
-#define SCREEN_WIDTH 1500
+#define SCREEN_HEIGHT 1080
+#define SCREEN_WIDTH 1920
 
 //#include "MLX42_Int.h"
 //#include "MLX42_input.h"
