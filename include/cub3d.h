@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/24 18:39:36 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/26 11:51:53 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 #include "MLX42.h"
 
 #define PI 3.14159
-#define SPEED 3
-#define FOV 12
-#define SCREEN_HEIGHT 750
-#define SCREEN_WIDTH 1500
+#define FOV 20
+#define SCREEN_HEIGHT 1080
+#define SCREEN_WIDTH 1960
+#define SPEED 1.5
 
 //#include "MLX42_Int.h"
 //#include "MLX42_input.h"
@@ -66,21 +66,22 @@ typedef struct	s_player
 
 typedef struct	s_cub
 {
-	int			screen_width;
-	int			screen_height;
-	int			map_width;
-	int			map_height;
-	int			tilesize_H;
-	int			tilesize_V;
-	int			view_ang;
-	mlx_t		*mlx;
-	char		**map;
-	double		*rays_len;
-	t_textures	*t;	
-	int			nb_line_map_start;
-	t_player	*player;
-	mlx_image_t	*img2d;
-	mlx_image_t	*img3d;
+	int					screen_width;
+	int					screen_height;
+	int					map_width;
+	int					map_height;
+	int					tilesize_H;
+	int					tilesize_V;
+	int					view_ang;
+	mlx_t				*mlx;
+	char				**map;
+	double				*rays_len;
+	long unsigned int	color;
+	t_textures			*t;	
+	int					nb_line_map_start;
+	t_player			*player;
+	mlx_image_t			*img2d;
+	mlx_image_t			*img3d;
 	
 }				t_cub;
 
