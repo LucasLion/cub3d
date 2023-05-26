@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/05/26 12:28:30 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/26 13:23:49 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,15 @@ int	init_cub(t_cub *c, char **file)
 	c->map = get_map(file, c->nb_line_map_start);
 	c->rays_len = ft_calloc(c->view_ang, sizeof(double));
 	c->color_tab = ft_calloc(c->view_ang, sizeof(long unsigned int));
+	c->color = 0xff0000ff;
 	if (!c->map)
 		return (ft_error("Empty file"));
 	c->map_height = ft_tablen(c->map);
 	c->map_width = map_width(c->map);
-	c->color = 0xff0000ff;
-	c->screen_height = SCREEN_HEIGHT;
-	c->screen_width = SCREEN_WIDTH;
 	c->tilesize_V = SCREEN_HEIGHT / c->map_height;
+	c->tilesize_V_2d = c->tilesize_V / 8;
 	c->tilesize_H = SCREEN_WIDTH / c->map_width;
+	c->tilesize_H_2d = c->tilesize_H / 8;
 	c->mlx = mlx_init(SCREEN_WIDTH - (SCREEN_WIDTH % c->map_width), SCREEN_HEIGHT - (SCREEN_HEIGHT % c->map_height), "CUB3D", true);
 	c->player = ft_calloc(1, sizeof(t_player));
 	if (!c->mlx)
