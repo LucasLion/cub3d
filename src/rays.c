@@ -6,14 +6,14 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/26 09:13:13 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/26 11:59:48 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
 
-void draw_one_line(t_cub *c, mlx_image_t *image, t_point start, t_point end, long unsigned color)
+void draw_one_line(t_cub *c, mlx_image_t *image, t_point start, t_point end, long unsigned int color)
 {
 	float				delta_y;
 	float				delta_x;

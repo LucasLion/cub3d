@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/26 11:03:15 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/26 11:52:54 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,9 @@ int	display_3d_map(t_cub *c)
 	int					line_height;
 	t_point				start;
 	t_point				end;
-	long unsigned int	color;
 
 	start.x = 0;
 	i = c->view_ang - 1;
-	color = 0xff0000ff;
 	if (c->img3d)
 		mlx_delete_image(c->mlx, c->img3d);
 	c->img3d = mlx_new_image(c->mlx, SCREEN_WIDTH , SCREEN_HEIGHT);
@@ -115,14 +113,13 @@ int	display_3d_map(t_cub *c)
 		j = 0;
 		while(j <= c->screen_width / c->view_ang)
 		{
-			//TO DO Trouver le bon ratio avec la taille de l'ecran 
 			float ratio = 0.2; //valeur aui doit dependre de la taille de la map
 			//line_height = SCREEN_WIDTH / c->rays_len[i] * (c->map_height * ratio);
 			line_height = SCREEN_HEIGHT / c->rays_len[i] * c->tilesize_V * 8;
 			start.y = ((SCREEN_HEIGHT) - line_height) / 2;
 			end.x = start.x;
 			end.y = line_height + start.y;
-			draw_one_line(c, c->img3d, start, end, color);
+			draw_one_line(c, c->img3d, start, end, c->color);
 			draw_ceiling(c, start, end);
 			draw_floor(c, start, end);
 			j++;
