@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/26 14:03:22 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/27 14:12:30 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 #define SCREEN_HEIGHT 1080
 #define SCREEN_WIDTH 1960
 #define SPEED 8
+#define OFFSET_MAP_2D 80
 
 //#include "MLX42_Int.h"
 //#include "MLX42_input.h"

@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/26 14:36:45 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/27 14:09:28 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	put_square(t_cub *c, int x, int y, long int color)
 		}
 		i++;
 	}
-	if (!img || (mlx_image_to_window(c->mlx, img, 80 + y * c->tilesize_H_2d , 80 + x * c->tilesize_V_2d < 0)))
+	if (!img || (mlx_image_to_window(c->mlx, img, 80 + y * c->tilesize_H_2d , 80 + x * c->tilesize_V_2d ))< 0)
 		return ;
 	img->instances[0].z = 1;
 }
@@ -41,7 +41,6 @@ int	display_2d_map(t_cub *c)
 {
 	int			i;
 	int 		j;
-	int cases = 0; // a enlenver
 
 	i = 0;
 	while (c->map[i])
@@ -58,15 +57,9 @@ int	display_2d_map(t_cub *c)
 					c->player->m_pos.x = i;
 					c->player->m_pos.y = j;
 				}
-				cases++;
-				printf("case %d\n", cases);
 			}
 			else if (c->map[i][j] == '1')
-			{
 				put_square(c, i, j, 0x00000055);
-				cases++;
-				printf("case %d\n", cases);
-			}
 			j++;
 		}
 		i++;

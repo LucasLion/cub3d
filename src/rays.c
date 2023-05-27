@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/26 12:46:26 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/27 14:26:01 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,14 @@ void check_vertical(t_cub *c, t_point *start, t_point *end, float ang)
 		}
 	}
 }
+t_point	reduce_point(t_point p)
+{
+	p.x = p.x / 8;
+	p.y = p.y / 8;
+	return (p);
+}
+
+
 
 void draw_one_ray(t_cub *c, float ang, int i)
 {
@@ -146,7 +154,7 @@ void draw_one_ray(t_cub *c, float ang, int i)
 	hlen = sqrt(((end_h.y - p.y)* (end_h.y - p.y)) + ((end_h.x - p.x) * (end_h.x - p.x)));
 	if (hlen <= vlen)
 	{
-	//	draw_one_line(c, c->img2d, p, end_h, 0xff0000ff);
+		draw_one_line(c, c->img2d, reduce_point(p), reduce_point(end_h), 0xff0000ff);
 		c->rays_len[i] = hlen;
 		c->color_tab[i] = c->color; // NORTH
 		if (ang > PI)
@@ -155,7 +163,7 @@ void draw_one_ray(t_cub *c, float ang, int i)
 	}
 	else 
 	{
-		//draw_one_line(c, c->img2d, p, end_v, 0xff0000ff);
+		draw_one_line(c, c->img2d, reduce_point(p),reduce_point(end_v), 0xff0000ff);
 		c->rays_len[i] = vlen;
 		c->color_tab[i] = 0x00ff00ff; // EAST
 		if (ang > PI / 2 && ang < PI / 2 * 3)
@@ -183,13 +191,12 @@ void draw_rays(t_cub *c)
 
 	i = 0;
 	one_deg = 0.0174 / 2 / 2 / 2;
-	//one_deg = 0.0054;
 	ang = c->player->ang - (c->view_ang / 2 * one_deg);
-	//if (c->img2d)
-	//	mlx_delete_image(c->mlx, c->img2d);
-	//c->img2d = mlx_new_image(c->mlx, c->screen_width , c->screen_height / 2);
-	//if (!c->img2d || (mlx_image_to_window(c->mlx, c->img2d, 0, c->screen_height / 2) < 0))
-	//	return ;
+	if (c->img2d)
+		mlx_delete_image(c->mlx, c->img2d);
+	c->img2d = mlx_new_image(c->mlx, c->tilesize_H_2d * c->map_width , c->tilesize_V_2d * c->map_height);
+	if (!c->img2d || (mlx_image_to_window(c->mlx, c->img2d, 80, 80) < 0))
+		return ;
 	while (i < c->view_ang)
 	{
 		if (ang >= 2 * PI)
