@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/29 13:46:10 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/29 16:40:45 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,14 +112,13 @@ int	display_3d_map(t_cub *c)
 		j = 0;
 		while(j <= SCREEN_WIDTH / c->view_ang)
 		{
-			float ratio = 0.2; //valeur aui doit dependre de la taille de la map
-			//line_height = SCREEN_WIDTH / c->rays_len[i] * (c->map_height * ratio);
-			line_height = SCREEN_HEIGHT / c->rays_len[i] * c->tilesize_V * 8;
+			line_height = SCREEN_HEIGHT / c->rays_len[i] * c->tilesize_V;
 			start.y = ((SCREEN_HEIGHT) - line_height) / 2;
 			end.x = start.x;
 			end.y = line_height + start.y;
 			draw_ceiling(c, start, end);
 			draw_floor(c, start, end);
+			//float ty_step = 32.0 / float(line_height);
 			while (start.y < end.y)
 			{
 				if (((start.x < (c->map_width * c->tilesize_H) - 1) &&  start.x > 0) \

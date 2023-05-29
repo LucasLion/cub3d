@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/29 13:22:12 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/29 16:22:03 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #include "MLX42.h"
 
 #define PI 3.14159
+#define DEFINITION 8
 #define FOV 20
 #define SCREEN_HEIGHT 1080
 #define SCREEN_WIDTH 1960
@@ -82,17 +83,18 @@ typedef struct	s_cub
 	t_player			*player;
 	mlx_image_t			*img2d;
 	mlx_image_t			*img3d;
-	mlx_texture_t		*text_temp;
+	mlx_texture_t		*text_wall;
 	
 }				t_cub;
 
-int			ft_error(char *str);
-int			get_nb_lines_in_map_file(int fd, char **argv);
-int			get_nb_line_map_start(char **f, t_cub *c);
-char		**get_file(char **argv);
-char		**get_description(char **map);
-char		**get_map(char **file, int i);
-t_textures	*get_textures(char **file);
+int				ft_error(char *str);
+int				get_nb_lines_in_map_file(int fd, char **argv);
+int				get_nb_line_map_start(char **f, t_cub *c);
+char			**get_file(char **argv);
+char			**get_description(char **map);
+char			**get_map(char **file, int i);
+uint32_t		rgb_to_hexa(uint8_t red, uint8_t green, uint8_t blue, uint8_t transp);
+t_textures		*get_textures(char **file);
 
 /* ----------- PARSING ----------- */
 
