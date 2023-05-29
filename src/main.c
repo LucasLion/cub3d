@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/05/29 17:01:19 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/29 17:35:05 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,14 @@ int	init_cub(t_cub *c, char **file)
 	return (1);
 }
 
-
+int get_color(mlx_texture_t *t, int pixel )
+{
+	int r = t->pixels[pixel];
+	int g = t->pixels[pixel +1];
+	int b = t->pixels[pixel +2];
+	int a = t->pixels[pixel +3];
+	return (r << 24 | g << 16 | b << 8 | a );
+}
 int	main(int argc, char **argv)
 {
 	char	**file;
@@ -98,22 +105,16 @@ int	main(int argc, char **argv)
 	mlx_image_t *new;
 	new = mlx_new_image(c->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	int i = 0;
+	int pixel = 0;
+	int color = 0;
 	while (i < 64)
 	{
 		int j = 0;
 		while (j < 64)
 		{
-			int pixel =  (i * 64) + (j * 4);
-			printf ("pixel = %d\n", pixel);
-			uint8_t	red = c->text_wall->pixels[pixel];
-			printf("red : %d\n", c->text_wall->pixels[pixel]);
-			uint8_t	green = c->text_wall->pixels[pixel + 1];
-			printf("green : %d\n", c->text_wall->pixels[pixel+1]);
-			uint8_t	blue = c->text_wall->pixels[pixel + 2];
-			printf("blue : %d\n", c->text_wall->pixels[pixel+2]);
-			uint8_t	transp = c->text_wall->pixels[pixel + 3];
-			printf("alpha : %d\n", c->text_wall->pixels[pixel+3]);
-			mlx_put_pixel(new, i , j ,rgb_to_hexa(red, green, blue, transp ));
+			color = get_color (c->text_wall, pixel);
+			mlx_put_pixel(new, j , i , color );
+			pixel += 4;
 			j++;	
 		}
 		i ++;
