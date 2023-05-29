@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/27 14:09:28 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/29 12:28:03 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,28 +71,29 @@ void	draw_ceiling(t_cub *c, t_point start, t_point end)
 {
 	t_point sta_ceil;
 	t_point end_ceil;
-	long unsigned int	color;
-	color = 0xfffffff;
+	//long unsigned int	color;
+	//color = 0xfffffff;
+	//color = c->t->ceiling;
 
 	sta_ceil.y = 0;
 	sta_ceil.x = start.x;
 	end_ceil.y = start.y;
 	end_ceil.x = start.x;
-	draw_one_line(c, c->img3d, sta_ceil, end_ceil, color);
+	draw_one_line(c, c->img3d, sta_ceil, end_ceil, c->t->ceiling);
 }
 
 void	draw_floor(t_cub *c, t_point start, t_point end)
 {
 	t_point sta_floor;
 	t_point end_floor;
-	long unsigned int	color;
-	color = 0xffffffff;
+	//long unsigned int	color;
+	//color = 0xffffffff;
 
 	sta_floor.y = end.y;
 	sta_floor.x = start.x;
 	end_floor.y = SCREEN_HEIGHT;
 	end_floor.x = start.x;
-	draw_one_line(c, c->img3d, sta_floor, end_floor, color);
+	draw_one_line(c, c->img3d, sta_floor, end_floor, c->t->floor);
 }
 
 int	display_3d_map(t_cub *c)
