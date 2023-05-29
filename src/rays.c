@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/29 13:41:17 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/29 15:11:08 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,7 @@ void	fish_eye(t_cub *c, float ang, int i)
 		diff += 2 * PI;
 	if (diff > 2 * PI)
 		diff -= 2 * PI;
-	c->rays_len[i] = c->rays_len[i] * cos(diff) * FOV;
+	c->rays_len[i] = c->rays_len[i] * cos(diff);
 }
 
 void draw_rays(t_cub *c)

@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/29 13:46:10 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/29 15:11:49 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	put_square(t_cub *c, int x, int y, long int color)
 	img = mlx_new_image(c->mlx, c->tilesize_H_2d, c->tilesize_V_2d);
 	
 	
-	while (i < c->tilesize_H_2d - 1)
+	while (i < c->tilesize_H_2d)
 	{
 		j = 0;
-		while (j < c->tilesize_V_2d - 1)
+		while (j < c->tilesize_V_2d)
 		{
 			mlx_put_pixel(img, i, j, color); 
 			j++;
@@ -112,9 +112,7 @@ int	display_3d_map(t_cub *c)
 		j = 0;
 		while(j <= SCREEN_WIDTH / c->view_ang)
 		{
-			float ratio = 0.2; //valeur aui doit dependre de la taille de la map
-			//line_height = SCREEN_WIDTH / c->rays_len[i] * (c->map_height * ratio);
-			line_height = SCREEN_HEIGHT / c->rays_len[i] * c->tilesize_V * 8;
+			line_height = SCREEN_HEIGHT / c->rays_len[i] * c->tilesize_V * DEPTH;
 			start.y = ((SCREEN_HEIGHT) - line_height) / 2;
 			end.x = start.x;
 			end.y = line_height + start.y;
