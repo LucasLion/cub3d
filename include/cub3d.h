@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/29 12:30:36 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/29 13:22:12 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct	s_cub
 	t_player			*player;
 	mlx_image_t			*img2d;
 	mlx_image_t			*img3d;
+	mlx_texture_t		*text_temp;
 	
 }				t_cub;
 
