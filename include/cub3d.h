@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/26 12:27:59 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/29 12:30:36 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,20 @@
 #define FOV 20
 #define SCREEN_HEIGHT 1080
 #define SCREEN_WIDTH 1960
-#define SPEED 1.5
+#define SPEED 8
+#define OFFSET_MAP_2D 80
 
 //#include "MLX42_Int.h"
 //#include "MLX42_input.h"
 
 typedef struct	s_textures
 {
-	char	*NO;
-	char	*SO;
-	char	*WE;
-	char	*EA;
-	int		f_r;
-	int		f_g;
-	int		f_b;
-	int		c_r;
-	int		c_g;
-	int		c_b;
+	char			*NO;
+	char			*SO;
+	char			*WE;
+	char			*EA;
+	unsigned long	floor;
+	unsigned long	ceiling;
 	int		nb_elems;
 }				t_textures;
 
@@ -71,7 +68,9 @@ typedef struct	s_cub
 	int					map_width;
 	int					map_height;
 	int					tilesize_H;
+	int					tilesize_H_2d;
 	int					tilesize_V;
+	int					tilesize_V_2d;
 	int					view_ang;
 	mlx_t				*mlx;
 	char				**map;
@@ -86,12 +85,13 @@ typedef struct	s_cub
 	
 }				t_cub;
 
-int		ft_error(char *str);
-int		get_nb_lines_in_map_file(int fd, char **argv);
-int		get_nb_line_map_start(char **f, t_cub *c);
-char	**get_file(char **argv);
-char	**get_description(char **map);
-char	**get_map(char **file, int i);
+int			ft_error(char *str);
+int			get_nb_lines_in_map_file(int fd, char **argv);
+int			get_nb_line_map_start(char **f, t_cub *c);
+char		**get_file(char **argv);
+char		**get_description(char **map);
+char		**get_map(char **file, int i);
+t_textures	*get_textures(char **file);
 
 /* ----------- PARSING ----------- */
 
