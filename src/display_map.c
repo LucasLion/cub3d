@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/29 12:28:03 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/29 13:46:10 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,6 @@ void	draw_ceiling(t_cub *c, t_point start, t_point end)
 {
 	t_point sta_ceil;
 	t_point end_ceil;
-	//long unsigned int	color;
-	//color = 0xfffffff;
-	//color = c->t->ceiling;
 
 	sta_ceil.y = 0;
 	sta_ceil.x = start.x;
@@ -86,8 +83,6 @@ void	draw_floor(t_cub *c, t_point start, t_point end)
 {
 	t_point sta_floor;
 	t_point end_floor;
-	//long unsigned int	color;
-	//color = 0xffffffff;
 
 	sta_floor.y = end.y;
 	sta_floor.x = start.x;
@@ -123,9 +118,17 @@ int	display_3d_map(t_cub *c)
 			start.y = ((SCREEN_HEIGHT) - line_height) / 2;
 			end.x = start.x;
 			end.y = line_height + start.y;
-			draw_one_line(c, c->img3d, start, end, c->color_tab[i]);
 			draw_ceiling(c, start, end);
 			draw_floor(c, start, end);
+			while (start.y < end.y)
+			{
+				if (((start.x < (c->map_width * c->tilesize_H) - 1) &&  start.x > 0) \
+					&& (start.y < ((c->map_height * c->tilesize_V) - 1) && start.y > 0))
+					mlx_put_pixel(c->img3d, start.x, start.y, c->color_tab[i] );
+				start.y++;
+			}
+//			draw_one_line(c, c->img3d, start, end, c->color_tab[i]);
+			
 			j++;
 			start.x++;
 		}
