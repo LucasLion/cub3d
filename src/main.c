@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/05/29 13:25:04 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/30 11:30:35 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ int	init_cub(t_cub *c, char **file)
 {
 	c->t = get_textures(file);
 	c->color = 0xdc6400ff;
-	c->view_ang = 60 * 2 * 2 * 2 ;
+	//c->text_wall = ft_calloc(1, sizeof(mlx_texture_t));
+	//c->text_wall = NULL;
+	c->text_wall = mlx_load_png("./brick.png");
+	c->view_ang = 60 * DEFINITION ;
 	c->nb_line_map_start = get_nb_line_map_start(file, c);
 	c->t->nb_elems = 0;
 	c->map = get_map(file, c->nb_line_map_start);
@@ -69,7 +72,14 @@ int	init_cub(t_cub *c, char **file)
 	return (1);
 }
 
-
+int get_color(mlx_texture_t *t, int pixel )
+{
+	int r = t->pixels[pixel];
+	int g = t->pixels[pixel +1];
+	int b = t->pixels[pixel +2];
+	int a = t->pixels[pixel +3];
+	return (r << 24 | g << 16 | b << 8 | a );
+}
 int	main(int argc, char **argv)
 {
 	char	**file;
@@ -90,10 +100,33 @@ int	main(int argc, char **argv)
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	display_2d_map(c);
 	init_player(c);
+	/*printf ("largeur texture : %d\n", c->text_wall->width);
+	printf ("hauteur texture : %d", c->text_wall->height);
+	mlx_image_t *new;
+	new = mlx_new_image(c->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
+	int i = 0;
+	int pixel = 0;
+	int color = 0;
+	while (i < c->text_wall->height && i < SCREEN_HEIGHT - 50)
+	{
+		int j = 0;
+		while (j < c->text_wall->width && j < SCREEN_WIDTH - 50)
+		{
+			color = get_color (c->text_wall, pixel);
+			mlx_put_pixel(new, j , i , color );
+			pixel += 4;
+			j++;	
+		}
+		i ++;
+	}
+	if (!new || (mlx_image_to_window(c->mlx, new, 50 , 50))< 0)
+		return (1) ;
+	new->instances[0].z = 1;*/
 	mlx_key_hook(c->mlx, &move_player, c);
 	mlx_loop_hook(c->mlx, &ft_hook, c);
 	mlx_loop(c->mlx);
 	mlx_terminate(c->mlx);
+	mlx_delete_texture(c->text_wall);
 	free_function(file, c);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/29 15:11:08 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/30 12:01:29 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,11 +157,11 @@ void draw_one_ray(t_cub *c, float ang, int i)
 		draw_one_line(c, c->img2d, reduce_point(p), reduce_point(end_h), 0xff0000ff);
 		c->rays_len[i] = hlen;
 		c->color_tab[i] = c->color; // NORTH
-		//c->text_temp = mlx_load_png("./blue_wall.png");
+		//c->text_wall = mlx_load_png("./blue_wall.png");
 		if (ang > PI)
 		{
 			c->color_tab[i] = 0x0000ffff; // SOUTH
-		//	c->text_temp = mlx_load_png("./green_wall.png");
+			//c->text_wall = mlx_load_png("./green_wall.png");
 		}
 		
 	}
@@ -170,11 +170,11 @@ void draw_one_ray(t_cub *c, float ang, int i)
 		draw_one_line(c, c->img2d, reduce_point(p),reduce_point(end_v), 0xff0000ff);
 		c->rays_len[i] = vlen;
 		c->color_tab[i] = 0x00ff00ff; // EAST
-		//c->text_temp = mlx_load_png("./red_wall.png");
+		//c->text_wall = mlx_load_png("./red_wall.png");
 		if (ang > PI / 2 && ang < PI / 2 * 3)
 		{
 			c->color_tab[i] = 0xff00ffff; // WEST
-		//	c->text_temp = mlx_load_png("./yellow_wall.png");
+			//c->text_wall = mlx_load_png("./yellow_wall.png");
 		}
 	}
 }
@@ -198,7 +198,7 @@ void draw_rays(t_cub *c)
 	float one_deg;
 
 	i = 0;
-	one_deg = 0.0174 / 2 / 2 / 2;
+	one_deg = 0.0174 / DEFINITION;
 	ang = c->player->ang - (c->view_ang / 2 * one_deg);
 	if (c->img2d)
 		mlx_delete_image(c->mlx, c->img2d);

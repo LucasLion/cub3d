@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:59:49 by llion             #+#    #+#             */
-/*   Updated: 2023/05/29 12:27:13 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/29 16:21:40 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,25 @@ int get_textures_wall(char **file, t_textures *t)
 	return (0);
 }
 
-unsigned long	rgb_to_hexa(char *line, int transp)
+uint32_t	rgb_to_hexa(uint8_t red, uint8_t green, uint8_t blue, uint8_t transp)
+{
+	return ((red << 24) | (green  << 16) | (blue << 8) | (transp));
+}
+
+
+uint32_t	split_and_convert(char *line, uint8_t transp)
 {
 	char **tmp;
-	int red;
-	int green;
-	int blue;
+	uint8_t red;
+	uint8_t green;
+	uint8_t blue;
 	
 	tmp = ft_split(line, ',');
 	red = ft_atoi(tmp[0]);
 	green = ft_atoi(tmp[1]);
 	blue = ft_atoi(tmp[2]);
 	tmp = NULL;
-	return ((red << 24) | (green  << 16) | (blue << 8) | (transp));
+	return (rgb_to_hexa(red, green, blue, transp));
 
 }
 
@@ -66,12 +72,12 @@ int get_colors(char **file, t_textures *t)
 	{
 		if (file[i][0] == 'F')
 		{
-			t->floor = rgb_to_hexa(&(file[i][2]), 255);
+			t->floor = split_and_convert(&(file[i][2]), 255);
 			a++; 
 		}
 		if (file[i][0] == 'C')
 		{
-			t->ceiling = rgb_to_hexa(&(file[i][2]), 255);
+			t->ceiling = split_and_convert(&(file[i][2]), 255);
 			a++; 
 		}
 		i++;
