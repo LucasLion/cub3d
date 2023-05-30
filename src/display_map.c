@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/30 11:02:52 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/30 11:56:27 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,6 @@ int	display_3d_map(t_cub *c)
 	int x_structure = 0;
 	int y_structure = 0;
 	unsigned long color = 0;
-	int compteur = 0;
 	
 	
 	start.x = 0;
@@ -156,11 +155,6 @@ int	display_3d_map(t_cub *c)
 				x_structure = 0;
 			while (start.y < end.y)
 			{
-				/*if (compteur >= div)
-				{
-					compteur = 0;
-					y_structure ++;
-				}*/
 				if (y_structure >= c->text_wall->height)
 					y_structure = 0;
 				color = get_color_pixel (c->text_wall, x_structure, y_structure);
@@ -168,7 +162,7 @@ int	display_3d_map(t_cub *c)
 					&& (start.y < ((c->map_height * c->tilesize_V) - 1) && start.y > 0))
 					mlx_put_pixel(c->img3d, start.x, start.y, color );
 				start.y++;
-				y_structure++;
+				y_structure ++;
 			}
 //			draw_one_line(c, c->img3d, start, end, c->color_tab[i]);
 			
