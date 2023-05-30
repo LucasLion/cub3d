@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/29 16:22:35 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/30 09:33:10 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	ft_hook(void *param)
 
 	c = param;
 	check_movement(c->player);
-	//draw_rays(c);
-	//display_3d_map(c);
+	draw_rays(c);
+	display_3d_map(c);
 	player_out(c);
 }
