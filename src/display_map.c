@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/30 12:01:12 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/31 10:13:48 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ int	display_3d_map(t_cub *c)
 		j = 0;
 		while(j <= SCREEN_WIDTH / c->view_ang)
 		{
-			line_height = SCREEN_HEIGHT / c->rays_len[i] * c->tilesize_V * DEPTH;
+			line_height = SCREEN_HEIGHT / c->rays[i].len * c->tilesize_V * DEPTH;
 			start.y = ((SCREEN_HEIGHT) - line_height) / 2;
 			end.x = start.x;
 			end.y = line_height + start.y;
@@ -160,7 +160,7 @@ int	display_3d_map(t_cub *c)
 				color = get_color_pixel (c->text_wall, x_structure, y_structure);
 				if (((start.x < (c->map_width * c->tilesize_H) - 1) &&  start.x > 0) \
 					&& (start.y < ((c->map_height * c->tilesize_V) - 1) && start.y > 0))
-					mlx_put_pixel(c->img3d, start.x, start.y, color );
+					mlx_put_pixel(c->img3d, start.x, start.y, c->rays[i].color );
 				start.y++;
 				y_structure ++;
 			}

@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/30 12:02:49 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/31 10:15:36 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,22 @@
 //#include "MLX42_Int.h"
 //#include "MLX42_input.h"
 
+typedef struct	s_point
+{
+	double		x;
+	double		y;
+}				t_point;
+
+typedef struct	s_rays
+{
+	float 				ang;
+	double				len;
+	t_point				wall;
+	char				dir;
+	long unsigned int	color;	
+}				t_rays;
+
+
 typedef struct	s_textures
 {
 	char			*NO;
@@ -44,12 +60,6 @@ typedef struct	s_textures
 	unsigned long	ceiling;
 	int		nb_elems;
 }				t_textures;
-
-typedef struct	s_point
-{
-	double		x;
-	double		y;
-}				t_point;
 
 typedef struct	s_player
 {
@@ -76,8 +86,6 @@ typedef struct	s_cub
 	int					view_ang;
 	mlx_t				*mlx;
 	char				**map;
-	double				*rays_len;
-	long unsigned int	*color_tab;
 	long unsigned int	color;
 	t_textures			*t;	
 	int					nb_line_map_start;
@@ -85,6 +93,7 @@ typedef struct	s_cub
 	mlx_image_t			*img2d;
 	mlx_image_t			*img3d;
 	mlx_texture_t		*text_wall;
+	t_rays				*rays;
 	
 }				t_cub;
 
