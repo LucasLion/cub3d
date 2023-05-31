@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/05/31 10:15:24 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/31 11:38:15 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,11 @@ int	init_cub(t_cub *c, char **file)
 {
 	c->t = get_textures(file);
 	c->color = 0xdc6400ff;
-	c->text_wall = mlx_load_png("./brick.png");
+	c->textures = ft_calloc(4, sizeof(mlx_texture_t *));
+	c->textures[0] = mlx_load_png("./brick.png");
+	c->textures[1] = mlx_load_png("./brick2.png");
+	c->textures[2] = mlx_load_png("./brick3.png");
+	c->textures[3] = mlx_load_png("./brick4.png");
 	c->view_ang = 60 * DEFINITION ;
 	c->nb_line_map_start = get_nb_line_map_start(file, c);
 	c->t->nb_elems = 0;
@@ -123,7 +127,10 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(c->mlx, &ft_hook, c);
 	mlx_loop(c->mlx);
 	mlx_terminate(c->mlx);
-	mlx_delete_texture(c->text_wall);
+	mlx_delete_texture(c->textures[0]);
+	mlx_delete_texture(c->textures[1]);
+	mlx_delete_texture(c->textures[2]);
+	mlx_delete_texture(c->textures[3]);
 	free_function(file, c);
 	return (0);
 }
