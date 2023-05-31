@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/31 15:59:53 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/31 16:44:28 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int	display_3d_map(t_cub *c)
 	t_point				pix;
 	unsigned long 		color = 0;
 	int 				pixel;
+	mlx_texture_t		*texture;
 	
 	start.x = 0;
 	pix.x = 0;
@@ -122,15 +123,23 @@ int	display_3d_map(t_cub *c)
 			pix.y = 0;
 			if (c->rays[i].dir == 'N' || c->rays[i].dir == 'S')
 			{
-				pix.x =  (int) (c->rays[i].wall.x) % c->textures[0]->width;
+				texture = c->textures[0];
+				pix.x =  (int) (c->rays[i].wall.x) % texture->width;
 				if (c->rays[i].ang > PI)
-					pix.x = c->textures[0]->width - 1 - pix.x;
+				{
+					texture = c->textures[1];
+					pix.x = texture->width - 1 - pix.x;
+				}
 			}
 			else
 			{
-				pix.x =  (int) (c->rays[i].wall.y ) % c->textures[0]->width;
+				texture = c->textures[2];
+				pix.x =  (int) (c->rays[i].wall.y ) % texture->width;
 				if (c->rays[i].ang > PI / 2 && c->rays[i].ang < PI / 2 * 3)
-					pix.x = c->textures[0]->width - 1 - pix.x;
+				{
+					texture = c->textures[3];
+					pix.x = texture->width - 1 - pix.x;
+				}
 			}
 			line_height = SCREEN_HEIGHT / c->rays[i].len * c->tilesize_V * DEPTH;
 			start.y = ((SCREEN_HEIGHT) - line_height) / 2;
@@ -138,10 +147,10 @@ int	display_3d_map(t_cub *c)
 			end.y = line_height + start.y;
 			draw_ceiling(c, start, end);
 			draw_floor(c, start, end);
-			float ty_step = c->textures[0]->height / (float)line_height;
+			float ty_step = texture->height / (float)line_height;
 			while (pixel < line_height)
 			{
-				color = get_color_pixel (c->textures[0], pix.x, pix.y);
+				color = get_color_pixel (texture, pix.x, pix.y);
 				if (((start.x < (c->map_width * c->tilesize_H) - 1) &&  start.x > 0) \
 					&& (start.y + pixel < ((c->map_height * c->tilesize_V) - 1) && start.y + pixel > 0))
 					mlx_put_pixel(c->img3d, start.x, start.y + pixel, color );
