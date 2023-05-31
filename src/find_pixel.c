@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/31 11:58:19 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/31 12:42:26 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ unsigned long int get_pixel_north(t_cub *c, int i, int l_h, int p)
     float y;
     
     x = ((float)c->textures[0]->height / l_h * p);
-    y = ((float)c->textures[0]->width / c->tilesize_V * ((int)c->rays[i].wall.y % c->tilesize_V));
+    y = ((float)c->textures[0]->width / c->tilesize_H * ((int)c->rays[i].wall.y % c->tilesize_H));
     pos =  ((int) x * c->textures[0]->width + (int) y );
     return (pos);
 }
@@ -61,8 +61,8 @@ unsigned long int find_color_pixel(t_cub *c, int i, int l_h, int p)
     if (c->rays->dir == 'N')
     {
         pixel = get_pixel_north(c, i, l_h, p);
-       //return (get_color_v2 (c->textures[0], pixel ));
-        return (c->rays[i].color);
+       return (get_color_v2 (c->textures[0], pixel ));
+        //return (c->rays[i].color);
     }
     if (c->rays->dir == 'E')
     {

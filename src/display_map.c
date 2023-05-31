@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/31 12:11:06 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/31 12:43:59 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,12 +121,15 @@ int	display_3d_map(t_cub *c)
 			end.y = line_height + start.y;
 			draw_ceiling(c, start, end);
 			draw_floor(c, start, end);
-			while (start.y < end.y)
+			while (pixel < line_height)
 			{
+				
+				color = find_color_pixel(c, i, line_height, pixel);
 				if (((start.x < (c->map_width * c->tilesize_H) - 1) &&  start.x > 0) \
-					&& (start.y < ((c->map_height * c->tilesize_V) - 1) && start.y > 0))
-					mlx_put_pixel(c->img3d, start.x, start.y, c->rays[i].color );
-				start.y++;
+					&& (start.y + pixel < ((c->map_height * c->tilesize_V) - 1) && start.y + pixel > 0))
+					mlx_put_pixel(c->img3d, start.x, start.y + pixel, color );
+				pixel++;
+				
 			}
 			j++;
 			start.x++;
