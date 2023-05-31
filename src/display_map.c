@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/31 12:11:06 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/31 15:59:53 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,13 @@ int	display_3d_map(t_cub *c)
 	int					line_height;
 	t_point				start;
 	t_point				end;
-	unsigned long color = 0;
+	t_point				pix;
+	unsigned long 		color = 0;
+	int 				pixel;
 	
 	start.x = 0;
+	pix.x = 0;
+	
 	i = c->view_ang - 1;
 	if (c->img3d)
 		mlx_delete_image(c->mlx, c->img3d);
@@ -114,19 +118,35 @@ int	display_3d_map(t_cub *c)
 		j = 0;
 		while(j <= SCREEN_WIDTH / c->view_ang)
 		{
-			int pixel = 0;
+			pixel = 0;
+			pix.y = 0;
+			if (c->rays[i].dir == 'N' || c->rays[i].dir == 'S')
+			{
+				pix.x =  (int) (c->rays[i].wall.x) % c->textures[0]->width;
+				if (c->rays[i].ang > PI)
+					pix.x = c->textures[0]->width - 1 - pix.x;
+			}
+			else
+			{
+				pix.x =  (int) (c->rays[i].wall.y ) % c->textures[0]->width;
+				if (c->rays[i].ang > PI / 2 && c->rays[i].ang < PI / 2 * 3)
+					pix.x = c->textures[0]->width - 1 - pix.x;
+			}
 			line_height = SCREEN_HEIGHT / c->rays[i].len * c->tilesize_V * DEPTH;
 			start.y = ((SCREEN_HEIGHT) - line_height) / 2;
 			end.x = start.x;
 			end.y = line_height + start.y;
 			draw_ceiling(c, start, end);
 			draw_floor(c, start, end);
-			while (start.y < end.y)
+			float ty_step = c->textures[0]->height / (float)line_height;
+			while (pixel < line_height)
 			{
+				color = get_color_pixel (c->textures[0], pix.x, pix.y);
 				if (((start.x < (c->map_width * c->tilesize_H) - 1) &&  start.x > 0) \
-					&& (start.y < ((c->map_height * c->tilesize_V) - 1) && start.y > 0))
-					mlx_put_pixel(c->img3d, start.x, start.y, c->rays[i].color );
-				start.y++;
+					&& (start.y + pixel < ((c->map_height * c->tilesize_V) - 1) && start.y + pixel > 0))
+					mlx_put_pixel(c->img3d, start.x, start.y + pixel, color );
+				pixel++;
+				pix.y += ty_step;	
 			}
 			j++;
 			start.x++;
