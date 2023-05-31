@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/31 11:37:46 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/31 12:07:44 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,8 @@ void 		draw_one_line(t_cub *cub, mlx_image_t *image, t_point start, t_point end,
 void 		draw_one_line_3d(mlx_image_t *image, t_point start, t_point end);
 int			wall_or_empty(t_cub *c, int x , int y);
 void 		draw_rays(t_cub *c);
+
+/* ----------- FIND PIXEL ----------- */
 
 unsigned long int find_color_pixel(t_cub *c, int i, int l_h, int p);
 unsigned long get_color_pixel(mlx_texture_t *texture, int x_texture, int y_texture);
