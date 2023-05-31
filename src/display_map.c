@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/30 13:53:51 by llion            ###   ########.fr       */
+/*   Updated: 2023/05/31 12:11:06 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,31 +91,6 @@ void	draw_floor(t_cub *c, t_point start, t_point end)
 	draw_one_line(c, c->img3d, sta_floor, end_floor, c->t->floor);
 }
 
-unsigned long get_color_pixel(mlx_texture_t *texture, int x_texture, int y_texture)
-{
-	int r;
-	int g;
-	int b;
-	int a;
-	int pixel;
-
-	pixel = 4 * x_texture + (y_texture * texture->width * 4);
-	r = texture->pixels[pixel];
-	g = texture->pixels[pixel + 1];
-	b = texture->pixels[pixel + 2];
-	a = texture->pixels[pixel + 3];
-	return (r << 24 | g << 16 | b << 8 | a);
-
-}
-
-int get_color_v2(mlx_texture_t *t, int pixel )
-{
-	int r = t->pixels[pixel];
-	int g = t->pixels[pixel +1];
-	int b = t->pixels[pixel +2];
-	int a = t->pixels[pixel +3];
-	return (r << 24 | g << 16 | b << 8 | a);
-}
 
 int	display_3d_map(t_cub *c)
 {
@@ -124,11 +99,7 @@ int	display_3d_map(t_cub *c)
 	int					line_height;
 	t_point				start;
 	t_point				end;
-
-	int x_texture = 0;
-	int y_texture = 0;
 	unsigned long color = 0;
-	
 	
 	start.x = 0;
 	i = c->view_ang - 1;
@@ -141,38 +112,24 @@ int	display_3d_map(t_cub *c)
 	while(i >= 0)
 	{
 		j = 0;
-		y_texture = 0;
 		while(j <= SCREEN_WIDTH / c->view_ang)
 		{
-			line_height = SCREEN_HEIGHT / c->rays_len[i] * c->tilesize_V * DEPTH;
+			int pixel = 0;
+			line_height = SCREEN_HEIGHT / c->rays[i].len * c->tilesize_V * DEPTH;
 			start.y = ((SCREEN_HEIGHT) - line_height) / 2;
 			end.x = start.x;
 			end.y = line_height + start.y;
 			draw_ceiling(c, start, end);
 			draw_floor(c, start, end);
-			if (x_texture >= c->text_wall->width)
-				x_texture = 0;
 			while (start.y < end.y)
 			{
-				int k = 0;
-				float div = line_height / c->text_wall->height;
-				while (k < div)
-				{
-					color = get_color_pixel(c->text_wall, x_texture, y_texture);
-					//printf("color: %ld\n", color);
-					//printf("x: %d | y: %d\n", x_texture, y_texture);
-					if (((start.x < (c->map_width * c->tilesize_H) - 1) &&  start.x > 0) \
-						&& (start.y < ((c->map_height * c->tilesize_V) - 1) && start.y > 0))
-						mlx_put_pixel(c->img3d, start.x, start.y, color);
-					k++;
-					start.y++;
-				}
+				if (((start.x < (c->map_width * c->tilesize_H) - 1) &&  start.x > 0) \
+					&& (start.y < ((c->map_height * c->tilesize_V) - 1) && start.y > 0))
+					mlx_put_pixel(c->img3d, start.x, start.y, c->rays[i].color );
 				start.y++;
-				y_texture ++;
 			}
 			j++;
 			start.x++;
-			x_texture++;
 		}
 		i--;
 	}

@@ -6,7 +6,7 @@
 #    By: amouly <amouly@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 15:27:43 by llion             #+#    #+#              #
-#    Updated: 2023/05/29 11:29:14 by amouly           ###   ########.fr        #
+#    Updated: 2023/05/31 11:36:44 by amouly           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC			=	main.c			\
 				player.c 		\
 				display_map.c 	\
 				movement.c		\
+				find_pixel.c 	\
 				rays.c
 					
 MAP			= maps/map.cub
