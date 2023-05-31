@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/30 09:33:10 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/31 12:18:44 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ void	press_key(mlx_key_data_t keydata, void *param)
 	c = param;
 		if (keydata.key == MLX_KEY_W)
 			c->player->is_moving |= 0x01;
-		if (keydata.key == MLX_KEY_S)
-			c->player->is_moving |= 0x04;
 		if (keydata.key == MLX_KEY_S)
 			c->player->is_moving |= 0x04;
 		if (keydata.key == MLX_KEY_A)
@@ -72,15 +70,15 @@ void	check_movement(t_player *p)
 		p->p_pos.x += cos(p->ang) * SPEED;
 		p->p_pos.y += -sin(p->ang) * SPEED;
 	}
-	else if (p->is_moving == 0x02)
-	{
-		p->p_pos.x -= -cos(p->ang + (PI / 2)) * SPEED;
-		p->p_pos.y -= sin(p->ang + (PI / 2)) * SPEED;
-	}
 	else if (p->is_moving & 0x04)
 	{
 		p->p_pos.x -= cos(p->ang) * SPEED;
 		p->p_pos.y -= -sin(p->ang) * SPEED;
+	}
+	if (p->is_moving & 0x02)
+	{
+		p->p_pos.x -= -cos(p->ang + (PI / 2)) * SPEED;
+		p->p_pos.y -= sin(p->ang + (PI / 2)) * SPEED;
 	}
 	else if (p->is_moving & 0x08)
 	{
