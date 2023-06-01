@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/31 16:44:28 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/01 13:31:07 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	display_3d_map(t_cub *c)
 	i = c->view_ang - 1;
 	if (c->img3d)
 		mlx_delete_image(c->mlx, c->img3d);
-	c->img3d = mlx_new_image(c->mlx, SCREEN_WIDTH , SCREEN_HEIGHT);
+	c->img3d = mlx_new_image(c->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	if (!c->img3d || (mlx_image_to_window(c->mlx, c->img3d, 0, 0) < 0))
 		return 0;
 	c->img3d->instances[0].z = 0;
@@ -124,22 +124,26 @@ int	display_3d_map(t_cub *c)
 			if (c->rays[i].dir == 'N' || c->rays[i].dir == 'S')
 			{
 				texture = c->textures[0];
-				pix.x =  (int) (c->rays[i].wall.x) % texture->width;
+				pix.x =  (int)(c->rays[i].wall.x) % c->tilesize_H;
 				if (c->rays[i].ang > PI)
 				{
 					texture = c->textures[1];
-					pix.x = texture->width - 1 - pix.x;
+					pix.x = (c->tilesize_H - pix.x) * texture->width / c->tilesize_H;
 				}
+				else
+					pix.x = pix.x * texture->width / c->tilesize_H;
 			}
 			else
 			{
 				texture = c->textures[2];
-				pix.x =  (int) (c->rays[i].wall.y ) % texture->width;
+				pix.x =  (int)(c->rays[i].wall.y) % c->tilesize_V;
 				if (c->rays[i].ang > PI / 2 && c->rays[i].ang < PI / 2 * 3)
 				{
 					texture = c->textures[3];
-					pix.x = texture->width - 1 - pix.x;
+					pix.x = (c->tilesize_V - pix.x) * texture->width / c->tilesize_V;
 				}
+				else
+					pix.x = pix.x * texture->width / c->tilesize_V;
 			}
 			line_height = SCREEN_HEIGHT / c->rays[i].len * c->tilesize_V * DEPTH;
 			start.y = ((SCREEN_HEIGHT) - line_height) / 2;
@@ -150,10 +154,10 @@ int	display_3d_map(t_cub *c)
 			float ty_step = texture->height / (float)line_height;
 			while (pixel < line_height)
 			{
-				color = get_color_pixel (texture, pix.x, pix.y);
+				color = get_color_pixel(texture, pix.x, pix.y);
 				if (((start.x < (c->map_width * c->tilesize_H) - 1) &&  start.x > 0) \
 					&& (start.y + pixel < ((c->map_height * c->tilesize_V) - 1) && start.y + pixel > 0))
-					mlx_put_pixel(c->img3d, start.x, start.y + pixel, color );
+					mlx_put_pixel(c->img3d, start.x, start.y + pixel, color);
 				pixel++;
 				pix.y += ty_step;	
 			}

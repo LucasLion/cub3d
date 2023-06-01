@@ -10,7 +10,7 @@
 - [OK]La carte doit être parsée en accord avec ce qui est présenté dans le fichier. Les
       espaces sont une partie valable de la carte, c’est à vous de les gérer correctement. Vous devez pouvoir parser n’importe quelle sorte de carte, tant qu’elle
       respecte les règles de carte
-- [  ] Pouvoir changer les couleurs du sol et plafond
+- [OK] Pouvoir changer les couleurs du sol et plafond
 - [OK] Rotation de la camera avec fleches gauche et droite
 - [OK] W A S D permettent de se deplacer
 - [OK] ESC et croix rouge quittent le programme proprement
@@ -35,13 +35,13 @@
 - [OK] convertir la taille du trait en une ligne de pixels de la bonne taille selon la distance
 - [OK] placer ces lignes au centre de la fenetre
 - [OK] regler le probleme des lignes qui disparaissent quand leur hauteur est supperieure a la taille de l'ecran
-- [  ] Fonctionner a partir dune resolution donnée. Trouver la bonne formule pour la taille de la hauteur (dans dispaly 3D)
-- [  ] Re formater en remplacant tous les screen Height et screen width
+- [OK] Fonctionner a partir dune resolution donnée. Trouver la bonne formule pour la taille de la hauteur (dans dispaly 3D)
+- [OK] Re formater en remplacant tous les screen Height et screen width
 - [  ] rendre independant l'affichage de la 3d et de la map 3d
-- [  ] changer la meniere de se deplacer (pouvoir avancer et translater en meme temps)
+- [OK] changer la maniere de se deplacer (pouvoir avancer et translater en meme temps)
 - [  ] selon l'orientation des murs, placer des ombres
-- [  ] gerer le probleme de fish-eye
-- [  ] ajouter des textures
+- [OK] gerer le probleme de fish-eye
+- [OK] ajouter des textures
 
 ## Bonus
 
@@ -54,7 +54,7 @@
 ## Misc
 
 - [OK] Reformater le code avec une bonne gestion d'erreurs
-- [  ] Reflechir a des structures de donnees plus pertinentes
+- [OK] Reflechir a des structures de donnees plus pertinentes
 - [  ] GNL leak
 
 ## git gems

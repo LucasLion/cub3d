@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/31 12:10:50 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/01 14:12:28 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,10 @@
 
 #define PI 3.14159
 #define DEFINITION 8
-#define FOV 20
-#define DEPTH 1
-#define SCREEN_HEIGHT 1080
-#define SCREEN_WIDTH 1960
+#define DEPTH 1.7
+#define SCREEN_HEIGHT 600
+#define SCREEN_WIDTH 800
 #define SPEED 8
-#define OFFSET_MAP_2D 80
-
-//#include "MLX42_Int.h"
-//#include "MLX42_input.h"
 
 typedef struct	s_point
 {
@@ -88,11 +83,11 @@ typedef struct	s_cub
 	char				**map;
 	long unsigned int	color;
 	t_textures			*t;	
+	mlx_texture_t		**textures;
 	int					nb_line_map_start;
 	t_player			*player;
 	mlx_image_t			*img2d;
 	mlx_image_t			*img3d;
-	mlx_texture_t		**textures;
 	t_rays				*rays;
 	
 }				t_cub;
@@ -104,7 +99,7 @@ char			**get_file(char **argv);
 char			**get_description(char **map);
 char			**get_map(char **file, int i);
 uint32_t		rgb_to_hexa(uint8_t red, uint8_t green, uint8_t blue, uint8_t transp);
-t_textures		*get_textures(char **file);
+t_textures		*get_textures(t_cub *c, char **file);
 
 /* ----------- PARSING ----------- */
 

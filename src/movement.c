@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/31 12:18:44 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/01 13:11:35 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	press_key(mlx_key_data_t keydata, void *param)
 {
+
+
 	t_cub *c;
 
 	c = param;
