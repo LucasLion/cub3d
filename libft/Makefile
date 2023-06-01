@@ -6,7 +6,7 @@
 #    By: llion <llion@student.42mulhouse.fr >       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/27 19:07:53 by llion             #+#    #+#              #
-#    Updated: 2023/05/11 14:16:28 by llion            ###   ########.fr        #
+#    Updated: 2023/05/31 18:27:21 by llion            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 #
@@ -97,18 +97,17 @@ AR			= ar rc
 RM			= rm -f
 LIB			= ranlib
 
-all:		$(NAME)
-
-objs/%.o : 	src/%.c
-			@mkdir -p objs
-			@${CC} ${FLAGS} -I include -c $< -o $@
-	
+all:  $(NAME)
 
 $(NAME):	$(OBJS)
 			@$(AR) $(NAME) $(OBJS) 
 			@$(LIB) $(NAME)
 			$(call echo,COMPILED,libft,34)
 
+objs/%.o : 	src/%.c
+			@mkdir -p objs
+			@${CC} ${FLAGS} -I include -c $< -o $@
+	
 clean:		
 			@$(RM) $(OBJS) objs/%.o
 			$(call echo,REMOVED,libft objects,31)

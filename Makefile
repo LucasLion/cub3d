@@ -6,7 +6,7 @@
 #    By: amouly <amouly@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 15:27:43 by llion             #+#    #+#              #
-#    Updated: 2023/05/31 11:36:44 by amouly           ###   ########.fr        #
+#    Updated: 2023/05/31 18:29:48 by llion            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ FLAGS		= -Wall -Werror -Wextra -ggdb3
 LIBFT		= libft/libft.a
 MLX			= MLX42/build/libmlx42.a
 HEADERS		= -Iinclude -Ilibft/include -L/Users/$(USER)/.brew/Cellar/glfw/3.3.8/lib -lglfw  \
-			  #-ldl -lglfw -lm
+			  # -ldl -lglfw -lm
 SRC			=	main.c			\
 				extracting.c 	\
 				extracting2.c 	\
@@ -41,7 +41,7 @@ SRC			=	main.c			\
 MAP			= maps/map.cub
 OBJ			= $(addprefix obj/,$(notdir $(SRC:.c=.o)))
 
-all :  ${NAME}
+all:  $(NAME)
 
 obj/%.o : src/%.c
 	@mkdir -p obj
@@ -52,7 +52,7 @@ $(NAME) : $(OBJ) $(LIBFT) $(MLX)
 	$(call echo,COMPILED,cub3d,32)
 
 $(LIBFT): libft/Makefile
-	@$(MAKE) -sC libft
+	@$(MAKE) -C libft
 
 libft/Makefile: libft/src/*.c libft/include/*.h
 	@$(MAKE) -C libft
@@ -62,7 +62,7 @@ debug: $(OBJ) $(LIBFT) $(MLX)
 	$(call echo,COMPILED,cub3d,33)
 
 clean :
-	@make clean -sC libft
+	@make clean -C libft
 	@$(RM) $(OBJ)
 	$(call echo,REMOVED,objects,31)
 
@@ -71,7 +71,7 @@ fclean : clean
 	@make fclean -sC libft
 	$(call echo,REMOVED,cub3d,31)
 
-r:
+run:
 	@./$(NAME) $(MAP)
 
 re : fclean all

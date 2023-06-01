@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/05/31 12:10:50 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/31 17:59:37 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 #define PI 3.14159
 #define DEFINITION 8
 #define FOV 20
-#define DEPTH 1
+#define DEPTH 2
 #define SCREEN_HEIGHT 1080
-#define SCREEN_WIDTH 1960
+#define SCREEN_WIDTH 1920
 #define SPEED 8
 #define OFFSET_MAP_2D 80
 

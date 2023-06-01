@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/05/31 11:38:15 by amouly           ###   ########.fr       */
+/*   Updated: 2023/05/31 18:19:35 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	init_cub(t_cub *c, char **file)
 	c->textures[1] = mlx_load_png("./brick2.png");
 	c->textures[2] = mlx_load_png("./brick3.png");
 	c->textures[3] = mlx_load_png("./brick4.png");
-	c->view_ang = 60 * DEFINITION ;
+	c->view_ang = 60 * DEFINITION;
 	c->nb_line_map_start = get_nb_line_map_start(file, c);
 	c->t->nb_elems = 0;
 	c->map = get_map(file, c->nb_line_map_start);
