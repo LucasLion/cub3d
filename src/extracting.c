@@ -6,13 +6,12 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:59:49 by llion             #+#    #+#             */
-/*   Updated: 2023/05/29 10:52:39 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/01 11:01:14 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-// TODO corriger l'endroit ou on calcule le nombre de lignes avant la map
 int	get_nb_lines_in_map_file(int fd, char **argv)
 {
 	int		num_lines;

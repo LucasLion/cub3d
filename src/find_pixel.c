@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/05/31 12:42:26 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/01 10:09:24 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ unsigned long int find_color_pixel(t_cub *c, int i, int l_h, int p)
     if (c->rays->dir == 'N')
     {
         pixel = get_pixel_north(c, i, l_h, p);
-       return (get_color_v2 (c->textures[0], pixel ));
-        //return (c->rays[i].color);
+        return (get_color_v2 (c->textures[0], pixel));
     }
     if (c->rays->dir == 'E')
     {
