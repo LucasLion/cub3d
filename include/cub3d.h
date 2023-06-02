@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/06/02 16:44:53 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/02 16:51:09 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,9 @@ int				get_nb_line_map_start(char **f, t_cub *c);
 char			**get_file(char **argv);
 char			**get_description(char **map);
 char			**get_map(char **file, int i);
-uint32_t		rgb_to_hexa(uint8_t red, uint8_t green, uint8_t blue, uint8_t transp);
 t_textures		*get_textures(t_cub *c, char **file);
+int				free_function(char **file, t_cub *c);
+int				init_cub(t_cub *c, char **file);
 
 /* ----------- PARSING ----------- */
 
@@ -111,6 +112,7 @@ int		parsing(char **file, t_cub *c);
 int		parse_borders(char **map);
 int		parse_number_players(char **map);
 int		parse_file(int argc, char **argv);
+int		map_width(char **map);
 
 
 /* ----------- DISPLAY ----------- */
@@ -142,5 +144,12 @@ unsigned long int find_color_pixel(t_cub *c, int i, int l_h, int p);
 unsigned long get_color_pixel(mlx_texture_t *texture, int x_texture, int y_texture);
 unsigned long int get_color_v2(mlx_texture_t *t, int pixel );
 unsigned long int get_pixel_north(t_cub *c, int i, int l_h, int p);
+
+/* ----------- RAYS ----------- */
+
+void check_horizontal(t_cub *c, t_point *start, t_point *end, float ang);
+void check_vertical(t_cub *c, t_point *start, t_point *end, float ang);
+void vert_or_hor(t_cub *c, int i);
+t_point	reduce_point(t_point p, t_cub *c);
 
 #endif

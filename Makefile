@@ -6,7 +6,7 @@
 #    By: amouly <amouly@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 15:27:43 by llion             #+#    #+#              #
-#    Updated: 2023/05/31 18:29:48 by llion            ###   ########.fr        #
+#    Updated: 2023/06/02 13:50:06 by llion            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ FLAGS		= -Wall -Werror -Wextra -ggdb3
 LIBFT		= libft/libft.a
 MLX			= MLX42/build/libmlx42.a
 HEADERS		= -Iinclude -Ilibft/include -L/Users/$(USER)/.brew/Cellar/glfw/3.3.8/lib -lglfw  \
-			  # -ldl -lglfw -lm
+			   -ldl -lglfw -lm
 SRC			=	main.c			\
 				extracting.c 	\
 				extracting2.c 	\
@@ -36,6 +36,8 @@ SRC			=	main.c			\
 				display_map.c 	\
 				movement.c		\
 				find_pixel.c 	\
+				rays_check.c	\
+				utils.c			\
 				rays.c
 					
 MAP			= maps/map.cub

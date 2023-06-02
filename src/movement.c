@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/02 16:44:37 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/02 16:53:57 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,8 +128,6 @@ void check_D(t_cub	*c)
 
 void	check_movement(t_cub *c)
 {
-	t_point	futur_pos;
-	
 	if (c->player->is_moving & 0x01)
 		check_W(c);
 	else if (c->player->is_moving & 0x04)
@@ -154,7 +152,8 @@ void	check_movement(t_cub *c)
 
 int	player_out(t_cub *c)
 {
-	if (c->player->p_pos.x <= 0 | c->player->p_pos.y <= 0 | c->player->p_pos.x >= SCREEN_WIDTH | c->player->p_pos.y >=SCREEN_HEIGHT)
+	if (c->player->p_pos.x <= 0 || c->player->p_pos.y <= 0 \
+			|| c->player->p_pos.x >= SCREEN_WIDTH || c->player->p_pos.y >=SCREEN_HEIGHT)
 		return (ft_error("YOU WENT OFF OF THE MAP YOU FOOL!!\nVANISH NOW..."));
 	return (1);
 }

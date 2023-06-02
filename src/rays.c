@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/02 16:33:14 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/02 16:52:40 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,105 +37,6 @@ void draw_one_line(t_cub *c, mlx_image_t *image, t_point start, t_point end, lon
 	}
 }
 
-void check_horizontal(t_cub *c, t_point *start, t_point *end, float ang)
-{
-	t_point offset;
-	float	ra = ang;
-	float	atan = -1 / tan(ra);
-	int dof = 0;
-	
-	if (ra > PI) 
-	{
-		end->y = (int)(start->y /c->tilesize_V) * c->tilesize_V + c->tilesize_V;
-		end->x = ((end->y - start->y) * atan) + start->x;
-		offset.y = c->tilesize_V;
-		offset.x = (offset.y * atan);	
-	}
-	if (ra < PI) 
-	{
-		end->y = ((int)(start->y /c->tilesize_V) * c->tilesize_V - 0.001);
-		end->x = (end->y - start->y) * atan + start->x;
-		offset.y = - c->tilesize_V;
-		offset.x = (offset.y * atan);	
-	}
-	while (dof < c->map_height)
-	{
-		if (end->y >= 0 && end->y < (c->true_screen_height) && end->x >= 0 && end->x < (c->true_screen_width) )
-		{
-			int i = end->y / c->tilesize_V;
-			int j = end->x / c->tilesize_H;
-			if (i < 0 || j <  0  || i > c->map_height || j > c->map_width || (c->map[i][j] == '1') )
-			{
-				dof = c->map_height;
-				break;
-			}
-			else	
-			{
-				end->x += offset.x;
-				end->y += offset.y;
-				dof++;
-			}
-		}
-		else	
-		{
-			dof = c->map_height;
-			break;
-		}
-	}
-}
-void check_vertical(t_cub *c, t_point *start, t_point *end, float ang)
-{
-	t_point offset;
-	float	ra = ang;
-	float	ntan = -tan(ra);
-	int dof = 0;
-	
-	if (ra > (PI / 2) && ra < (PI / 2 * 3)) 
-	{
-		end->x = (int)(start->x /c->tilesize_H) * c->tilesize_H - 0.001;
-		end->y = ((end->x - start->x) * ntan) + start->y;
-		offset.x = - c->tilesize_H;
-		offset.y = (offset.x * ntan);	
-	}
-	if (ra < (PI /2) || (ra > PI / 2 * 3)) 
-	{
-		end->x = ((int)(start->x /c->tilesize_H) * c->tilesize_H + c->tilesize_H);
-		end->y = (end->x - start->x) * ntan + start->y;
-		offset.x = c->tilesize_H;
-		offset.y = (offset.x * ntan);	
-	}
-	while (dof < (c->map_width))
-	{
-		if (end->y >= 0 && end->y < (c->true_screen_height) && end->x >= 0 && end->x < (c->true_screen_width))
-		{
-			int i = end->y / c->tilesize_V;
-			int j = end->x / c->tilesize_H;
-			if (i < 0 || j <  0  || i > c->map_height || j > c->map_width || (c->map[i][j] == '1') )
-			{
-				dof = c->map_width;
-				break;
-			}
-			else	
-			{
-				end->x += offset.x;
-				end->y += offset.y;
-				dof++;
-			}
-		}
-		else	
-		{
-			dof = c->map_width;
-			break;
-		}
-	}
-}
-t_point	reduce_point(t_point p, t_cub *c)
-{
-	p.x =  (p.x) / c->tilesize_H * c->tilesize_H_2d;
-	p.y =  (p.y) /  c->tilesize_V * c->tilesize_V_2d;
-	return (p);
-}
-
 void	set_struct_ray_H(t_cub *c, int i, t_point wall_hit, double len_ray)
 {
 	c->rays[i].len = len_ray;
@@ -163,7 +64,6 @@ void	set_struct_ray_V(t_cub *c, int i, t_point wall_hit, double len_ray)
 		c->rays[i].dir = 'W'; 
 	}
 }
-
 
 void vert_or_hor(t_cub *c, int i)
 {
