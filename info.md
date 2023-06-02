@@ -23,6 +23,7 @@
 - [OK] Verifier qu'il n'y a qu'un seul joueur
 - [OK] Verifier qu'il n'y a pas d'autres lignes que les lignes demandées
 - [OK] Verrifier que la map est entouree de murs
+- [  ] Enlever le segfault quand il manque des textures ou des couleurs
 
 ## Raycasting etapes
 
@@ -37,7 +38,7 @@
 - [OK] regler le probleme des lignes qui disparaissent quand leur hauteur est supperieure a la taille de l'ecran
 - [OK] Fonctionner a partir dune resolution donnée. Trouver la bonne formule pour la taille de la hauteur (dans dispaly 3D)
 - [OK] Re formater en remplacant tous les screen Height et screen width
-- [  ] rendre independant l'affichage de la 3d et de la map 3d
+- [OK] rendre independant l'affichage de la 3d et de la map 3d
 - [OK] changer la maniere de se deplacer (pouvoir avancer et translater en meme temps)
 - [  ] selon l'orientation des murs, placer des ombres
 - [OK] gerer le probleme de fish-eye

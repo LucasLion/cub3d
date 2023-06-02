@@ -1,8 +1,8 @@
 
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO ./textures/unnamed.png
+SO ./textures/unnamed.png
+WE ./textures/unnamed.png
+EA ./textures/unnamed.png
 
 F 255,255,255
 C 0,191,255
