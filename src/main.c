@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/06/01 13:22:04 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/02 10:55:36 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,28 +101,6 @@ int	main(int argc, char **argv)
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	display_2d_map(c);
 	init_player(c);
-	/*printf ("largeur texture : %d\n", c->text_wall->width);
-	printf ("hauteur texture : %d", c->text_wall->height);
-	mlx_image_t *new;
-	new = mlx_new_image(c->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
-	int i = 0;
-	int pixel = 0;
-	int color = 0;
-	while (i < c->text_wall->height && i < SCREEN_HEIGHT - 50)
-	{
-		int j = 0;
-		while (j < c->text_wall->width && j < SCREEN_WIDTH - 50)
-		{
-			color = get_color (c->text_wall, pixel);
-			mlx_put_pixel(new, j , i , color );
-			pixel += 4;
-			j++;	
-		}
-		i ++;
-	}
-	if (!new || (mlx_image_to_window(c->mlx, new, 50 , 50))< 0)
-		return (1) ;
-	new->instances[0].z = 1;*/
 	mlx_key_hook(c->mlx, &move_player, c);
 	mlx_loop_hook(c->mlx, &ft_hook, c);
 	mlx_loop(c->mlx);

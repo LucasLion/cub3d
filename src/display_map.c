@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/01 13:31:07 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/02 10:16:19 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	put_square(t_cub *c, int x, int y, long int color)
 		}
 		i++;
 	}
-	if (!img || (mlx_image_to_window(c->mlx, img, 80 + y * c->tilesize_H_2d , 80 + x * c->tilesize_V_2d ))< 0)
+	if (!img || (mlx_image_to_window(c->mlx, img, y * c->tilesize_H_2d , x * c->tilesize_V_2d ))< 0)
 		return ;
 	img->instances[0].z = 1;
 }

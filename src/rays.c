@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/01 13:14:34 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/02 10:56:55 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void draw_one_line(t_cub *c, mlx_image_t *image, t_point start, t_point end, lon
 		}
 	}
 }
-
 
 void check_horizontal(t_cub *c, t_point *start, t_point *end, float ang)
 {
@@ -130,10 +129,10 @@ void check_vertical(t_cub *c, t_point *start, t_point *end, float ang)
 		}
 	}
 }
-t_point	reduce_point(t_point p)
+t_point	reduce_point(t_point p, t_cub *c)
 {
-	p.x = p.x / 8;
-	p.y = p.y / 8;
+	p.x =  (p.x) / c->tilesize_H * c->tilesize_H_2d;
+	p.y =  (p.y) /  c->tilesize_V * c->tilesize_V_2d;
 	return (p);
 }
 
@@ -181,12 +180,12 @@ void vert_or_hor(t_cub *c, int i)
 	hlen = sqrt(((end_h.y - p.y)* (end_h.y - p.y)) + ((end_h.x - p.x) * (end_h.x - p.x)));
 	if (hlen <= vlen)
 	{
-		draw_one_line(c, c->img2d, reduce_point(p), reduce_point(end_h), 0xff0000ff);
+		draw_one_line(c, c->img2d, reduce_point(p, c), reduce_point(end_h, c), 0xff0000ff);
 		set_struct_ray_H(c, i, end_h, hlen);
 	}
 	else 
 	{
-		draw_one_line(c, c->img2d, reduce_point(p),reduce_point(end_v), 0xff0000ff);
+		draw_one_line(c, c->img2d, reduce_point(p, c),reduce_point(end_v, c), 0xff0000ff);
 		set_struct_ray_V(c, i, end_v, vlen);
 	}
 }
@@ -214,7 +213,7 @@ void draw_rays(t_cub *c)
 	if (c->img2d)
 		mlx_delete_image(c->mlx, c->img2d);
 	c->img2d = mlx_new_image(c->mlx, c->tilesize_H_2d * c->map_width , c->tilesize_V_2d * c->map_height);
-	if (!c->img2d || (mlx_image_to_window(c->mlx, c->img2d, 80, 80) < 0))
+	if (!c->img2d || (mlx_image_to_window(c->mlx, c->img2d, 0, 0) < 0))
 		return ;
 	while (i < c->view_ang)
 	{
