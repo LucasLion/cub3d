@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/06/02 10:55:22 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/02 13:00:11 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ int				get_nb_line_map_start(char **f, t_cub *c);
 char			**get_file(char **argv);
 char			**get_description(char **map);
 char			**get_map(char **file, int i);
-uint32_t		rgb_to_hexa(uint8_t red, uint8_t green, uint8_t blue, uint8_t transp);
 t_textures		*get_textures(t_cub *c, char **file);
 
 /* ----------- PARSING ----------- */

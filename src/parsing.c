@@ -6,13 +6,47 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 17:31:32 by llion             #+#    #+#             */
-/*   Updated: 2023/06/02 10:23:00 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/02 13:23:09 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-
+//int rechercher_informations_valides(char **f, t_cub *c, int i)
+//{
+//    int j = 0;
+//    
+//    while (f[i][j] == ' ')
+//        j++;
+//    
+//	printf("i = %d\n", i);
+//	printf("f[i][j] = %c\n", f[i][j]);
+//	printf("c->t->nb_elems = %d\n", c->t->nb_elems);
+//    if (f[i][j] == '\n' || f[i][j] == '\0')
+//        return i + 1;
+//    else if (!((f[i][j] == 'N' && f[i][j + 1] == 'O') || (f[i][j] == 'S' && f[i][j + 1] == 'O') ||
+//               (f[i][j] == 'W' && f[i][j + 1] == 'E') || (f[i][j] == 'E' && f[i][j + 1] == 'A') ||
+//               (f[i][j] == 'F' && f[i][j + 1] == ' ') || (f[i][j] == 'C' && f[i][j + 1] == ' ')))
+//        return ft_error("Paramètres incorrects/manquants");
+//	else 
+//		c->t->nb_elems++;
+//    return (i + 1);
+//}
+//
+//int parse_infos(char **f, t_cub *c)
+//{
+//    int i = 1;
+//
+//    c->t->nb_elems = 0;
+//    while (i < ft_tablen(f) + 1 && c->t->nb_elems < 6)
+//    {
+//        i = rechercher_informations_valides(f, c, i);
+//        if (i == 0)
+//            return 0;
+//    }
+//    c->nb_line_map_start = i;
+//    return 1;
+//}
 int	parse_infos(char **f, t_cub *c)
 {
 	int		i;

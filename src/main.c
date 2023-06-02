@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/06/02 10:55:36 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/02 13:02:47 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ int	ft_error(char *str)
 
 int	free_function(char **file, t_cub *c)
 {
+	mlx_delete_texture(c->textures[0]);
+	mlx_delete_texture(c->textures[1]);
+	mlx_delete_texture(c->textures[2]);
+	mlx_delete_texture(c->textures[3]);
 	ft_freetab(file);
 	ft_freetab(c->map);
 	free(c->t);
@@ -105,10 +109,6 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(c->mlx, &ft_hook, c);
 	mlx_loop(c->mlx);
 	mlx_terminate(c->mlx);
-	mlx_delete_texture(c->textures[0]);
-	mlx_delete_texture(c->textures[1]);
-	mlx_delete_texture(c->textures[2]);
-	mlx_delete_texture(c->textures[3]);
 	free_function(file, c);
 	return (0);
 }

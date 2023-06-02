@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/01 13:11:35 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/02 13:06:22 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,28 +65,22 @@ void	move_player(mlx_key_data_t keydata, void *param)
 		release_key(keydata, param);
 }
 
+void	get_pos(t_player *p, float cos, float sin)
+{
+	p->p_pos.x += cos * SPEED;
+	p->p_pos.y += sin * SPEED;
+}
+
 void	check_movement(t_player *p)
 {
 	if (p->is_moving & 0x01)
-	{
-		p->p_pos.x += cos(p->ang) * SPEED;
-		p->p_pos.y += -sin(p->ang) * SPEED;
-	}
+		get_pos(p, cos(p->ang), -sin(p->ang));
 	else if (p->is_moving & 0x04)
-	{
-		p->p_pos.x -= cos(p->ang) * SPEED;
-		p->p_pos.y -= -sin(p->ang) * SPEED;
-	}
+		get_pos(p, -cos(p->ang), sin(p->ang));
 	if (p->is_moving & 0x02)
-	{
-		p->p_pos.x -= -cos(p->ang + (PI / 2)) * SPEED;
-		p->p_pos.y -= sin(p->ang + (PI / 2)) * SPEED;
-	}
+		get_pos(p, cos(p->ang + (PI / 2)), -sin(p->ang + (PI / 2)));
 	else if (p->is_moving & 0x08)
-	{
-		p->p_pos.x += cos(p->ang - (PI / 2)) * SPEED;
-		p->p_pos.y += -sin(p->ang - (PI / 2)) * SPEED;
-	}
+		get_pos(p, cos(p->ang - (PI / 2)), -sin(p->ang - (PI / 2)));
 	if (p->is_moving & 0x10)
 	{
 		p->ang -= 0.04;
@@ -103,7 +97,8 @@ void	check_movement(t_player *p)
 
 int	player_out(t_cub *c)
 {
-	if (c->player->p_pos.x <= 0 | c->player->p_pos.y <= 0 | c->player->p_pos.x >= SCREEN_WIDTH | c->player->p_pos.y >=SCREEN_HEIGHT)
+	if (c->player->p_pos.x <= 0 || c->player->p_pos.y <= 0 \
+			|| c->player->p_pos.x >= SCREEN_WIDTH || c->player->p_pos.y >=SCREEN_HEIGHT)
 		return (ft_error("YOU WENT OFF OF THE MAP YOU FOOL!!\nVANISH NOW..."));
 	return (1);
 }
