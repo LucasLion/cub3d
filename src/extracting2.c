@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:59:49 by llion             #+#    #+#             */
-/*   Updated: 2023/06/02 13:00:17 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/02 13:49:23 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int get_textures_wall(t_cub *c, char **file, t_textures *t)
 		ft_freetab(line);
 		i++;
 	}
-	printf("count = %d\n", count);
 	if (count == 4)
 		return (1);
 	return (0);
