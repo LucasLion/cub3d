@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/02 14:50:05 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/02 16:33:30 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	display_2d_map(t_cub *c)
 			if (c->map[i][j] == '0' || c->map[i][j] == 'W' || c->map[i][j] == 'E' \
 				|| c->map[i][j] == 'S' || c->map[i][j] == 'N')
 			{
-				put_square_big(c, i, j, 0xffffff55);
+				put_square(c, i, j, 0xffffff55);
 				if (c->map[i][j] != '0')
 				{
 					c->player->m_pos.x = i;
@@ -81,7 +81,7 @@ int	display_2d_map(t_cub *c)
 				}
 			}
 			else if (c->map[i][j] == '1')
-				put_square_big(c, i, j, 0x00000055);
+				put_square(c, i, j, 0x00000055);
 			j++;
 		}
 		i++;

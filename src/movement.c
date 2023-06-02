@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/02 16:07:01 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/02 16:44:37 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,60 +78,77 @@ int check_collision(float x, float y, t_cub *c)
 		return (1);
 }
 
+void check_W(t_cub	*c)
+{
+	t_point		futur_pos;
 
+	futur_pos.x = c->player->p_pos.x + cos(c->player->ang) * SPEED * 10;
+	futur_pos.y = c->player->p_pos.y - (sin(c->player->ang) * SPEED * 10);
+	if (check_collision(futur_pos.x, c->player->p_pos.y, c))
+		c->player->p_pos.x += cos(c->player->ang) * SPEED;
+	if (check_collision(c->player->p_pos.x, futur_pos.y, c))
+		c->player->p_pos.y -= sin(c->player->ang) * SPEED;
+}
 
+void check_S(t_cub	*c)
+{
+	t_point		futur_pos;
 
-void	check_movement(t_player *p, t_cub *c)
+	futur_pos.x = c->player->p_pos.x - cos(c->player->ang) * SPEED * 10;
+	futur_pos.y = c->player->p_pos.y + (sin(c->player->ang) * SPEED * 10);
+	if (check_collision(futur_pos.x, c->player->p_pos.y, c))
+		c->player->p_pos.x -= cos(c->player->ang) * SPEED;
+	if (check_collision(c->player->p_pos.x, futur_pos.y, c))
+		c->player->p_pos.y += sin(c->player->ang) * SPEED;
+}
+
+void check_A(t_cub	*c)
+{
+	t_point		futur_pos;
+
+	futur_pos.x = c->player->p_pos.x + cos(c->player->ang + (PI / 2)) * SPEED * 10;
+	futur_pos.y = c->player->p_pos.y - sin(c->player->ang + (PI / 2)) * SPEED * 10;
+	if (check_collision(futur_pos.x, c->player->p_pos.y, c))
+		c->player->p_pos.x += cos(c->player->ang + (PI / 2)) * SPEED;
+	if (check_collision(c->player->p_pos.x, futur_pos.y, c))
+		c->player->p_pos.y -= sin(c->player->ang + (PI / 2)) * SPEED;
+}
+
+void check_D(t_cub	*c)
+{
+	t_point		futur_pos;
+
+	futur_pos.x = c->player->p_pos.x + cos(c->player->ang - (PI / 2)) * SPEED * 10;
+	futur_pos.y = c->player->p_pos.y - sin(c->player->ang - (PI / 2)) * SPEED * 10;
+	if (check_collision(futur_pos.x, c->player->p_pos.y, c))
+		c->player->p_pos.x += cos(c->player->ang - (PI / 2)) * SPEED;
+	if (check_collision(c->player->p_pos.x, futur_pos.y, c))
+		c->player->p_pos.y -= sin(c->player->ang - (PI / 2)) * SPEED;
+}
+
+void	check_movement(t_cub *c)
 {
 	t_point	futur_pos;
 	
-	if (p->is_moving & 0x01)
+	if (c->player->is_moving & 0x01)
+		check_W(c);
+	else if (c->player->is_moving & 0x04)
+		check_S(c);
+	if (c->player->is_moving & 0x02)
+		check_A(c);
+	else if (c->player->is_moving & 0x08)
+		check_D(c);
+	if (c->player->is_moving & 0x10)
 	{
-		futur_pos.x = p->p_pos.x + cos(p->ang) * SPEED * 10;
-		futur_pos.y = p->p_pos.y - (sin(p->ang) * SPEED * 10);
-		if (check_collision(futur_pos.x, p->p_pos.y, c))
-			p->p_pos.x += cos(p->ang) * SPEED;
-		if (check_collision(p->p_pos.x, futur_pos.y, c))
-			p->p_pos.y -= sin(p->ang) * SPEED;
+		c->player->ang -= 0.04;
+		if (c->player->ang < 0)
+			c->player->ang += (2 * PI);
 	}
-	else if (p->is_moving & 0x04)
+	else if (c->player->is_moving & 0x20)
 	{
-		futur_pos.x = p->p_pos.x - cos(p->ang) * SPEED * 10;
-		futur_pos.y = p->p_pos.y + sin(p->ang) * SPEED * 10;
-		if (check_collision(futur_pos.x, p->p_pos.y, c))
-			p->p_pos.x -= cos(p->ang) * SPEED;
-		if (check_collision(p->p_pos.x, futur_pos.y, c))
-			p->p_pos.y += sin(p->ang) * SPEED;
-	}
-	if (p->is_moving & 0x02)
-	{
-		futur_pos.x = p->p_pos.x + cos(p->ang + (PI / 2)) * SPEED * 10;
-		futur_pos.y = p->p_pos.y - sin(p->ang + (PI / 2)) * SPEED * 10;
-		if (check_collision(futur_pos.x, p->p_pos.y, c))
-			p->p_pos.x += cos(p->ang + (PI / 2)) * SPEED;
-		if (check_collision(p->p_pos.x, futur_pos.y, c))
-			p->p_pos.y -= sin(p->ang + (PI / 2)) * SPEED;
-	}
-	else if (p->is_moving & 0x08)
-	{		
-		futur_pos.x = p->p_pos.x + cos(p->ang - (PI / 2)) * SPEED * 10;
-		futur_pos.y = p->p_pos.y - sin(p->ang - (PI / 2)) * SPEED * 10;
-		if (check_collision(futur_pos.x, p->p_pos.y, c))
-			p->p_pos.x += cos(p->ang - (PI / 2)) * SPEED;
-		if (check_collision(p->p_pos.x, futur_pos.y, c))
-			p->p_pos.y -= sin(p->ang - (PI / 2)) * SPEED;
-	}
-	if (p->is_moving & 0x10)
-	{
-		p->ang -= 0.04;
-		if (p->ang < 0)
-			p->ang += (2 * PI);
-	}
-	else if (p->is_moving & 0x20)
-	{
-		p->ang += 0.04;
-		if (p->ang > (2 * PI))
-			p->ang -= (2 * PI);
+		c->player->ang += 0.04;
+		if (c->player->ang > (2 * PI))
+			c->player->ang -= (2 * PI);
 	}
 }
 
@@ -147,8 +164,8 @@ void	ft_hook(void *param)
 	t_cub *c;
 
 	c = param;
-	check_movement(c->player, c);
+	check_movement(c);
 	draw_rays(c);
-	//display_3d_map(c);
+	display_3d_map(c);
 	player_out(c);
 }
