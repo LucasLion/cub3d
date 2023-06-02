@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/02 13:06:22 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/02 13:30:15 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,27 @@ void	get_pos(t_player *p, float cos, float sin)
 	p->p_pos.y += sin * SPEED;
 }
 
-void	check_movement(t_player *p)
+//void	check_movement(t_player *p)
+int check_collision(t_point future_pos, t_cub *c)
 {
+	int j;
+	int i;
+
+	j = future_pos.x / c->tilesize_H;
+	i = future_pos.y / c->tilesize_V;
+	if (c->map[i][j] == '1')
+		return (0);
+	else
+		return (1);
+}
+
+
+
+
+void	check_movement(t_player *p, t_cub *c)
+{
+	//t_point	futur_pos;
+	
 	if (p->is_moving & 0x01)
 		get_pos(p, cos(p->ang), -sin(p->ang));
 	else if (p->is_moving & 0x04)
@@ -108,7 +127,7 @@ void	ft_hook(void *param)
 	t_cub *c;
 
 	c = param;
-	check_movement(c->player);
+	check_movement(c->player, c);
 	draw_rays(c);
 	display_3d_map(c);
 	player_out(c);
