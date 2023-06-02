@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/02 10:16:19 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/02 14:14:51 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ int	display_3d_map(t_cub *c)
 	unsigned long 		color = 0;
 	int 				pixel;
 	mlx_texture_t		*texture;
+
+	int a = 0;
 	
 	start.x = 0;
 	pix.x = 0;
@@ -110,14 +112,14 @@ int	display_3d_map(t_cub *c)
 	i = c->view_ang - 1;
 	if (c->img3d)
 		mlx_delete_image(c->mlx, c->img3d);
-	c->img3d = mlx_new_image(c->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
+	c->img3d = mlx_new_image(c->mlx, c->true_screen_width, c->true_screen_height);
 	if (!c->img3d || (mlx_image_to_window(c->mlx, c->img3d, 0, 0) < 0))
 		return 0;
 	c->img3d->instances[0].z = 0;
 	while(i >= 0)
 	{
 		j = 0;
-		while(j <= SCREEN_WIDTH / c->view_ang)
+		while(j <= c->true_screen_width/ c->view_ang)
 		{
 			pixel = 0;
 			pix.y = 0;
@@ -145,8 +147,8 @@ int	display_3d_map(t_cub *c)
 				else
 					pix.x = pix.x * texture->width / c->tilesize_V;
 			}
-			line_height = SCREEN_HEIGHT / c->rays[i].len * c->tilesize_V * DEPTH;
-			start.y = ((SCREEN_HEIGHT) - line_height) / 2;
+			line_height = c->true_screen_height / c->rays[i].len * c->tilesize_V * DEPTH;
+			start.y = ((c->true_screen_height) - line_height) / 2;
 			end.x = start.x;
 			end.y = line_height + start.y;
 			draw_ceiling(c, start, end);
