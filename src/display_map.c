@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/02 12:51:39 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/02 16:52:47 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	put_square(t_cub *c, int x, int y, long int color)
 	i = 0;
 	img = mlx_new_image(c->mlx, c->tilesize_H_2d, c->tilesize_V_2d);
 	
-	
 	while (i < c->tilesize_H_2d)
 	{
 		j = 0;
@@ -33,6 +32,29 @@ void	put_square(t_cub *c, int x, int y, long int color)
 		i++;
 	}
 	if (!img || (mlx_image_to_window(c->mlx, img, y * c->tilesize_H_2d , x * c->tilesize_V_2d ))< 0)
+		return ;
+	img->instances[0].z = 1;
+}
+
+void	put_square_big(t_cub *c, int x, int y, long int color)
+{
+	int	i;
+	int	j;
+	mlx_image_t	*img;
+
+	i = 0;
+	img = mlx_new_image(c->mlx, c->tilesize_H, c->tilesize_V);
+	while (i < c->tilesize_H - 1)
+	{
+		j = 0;
+		while (j < c->tilesize_V - 1)
+		{
+			mlx_put_pixel(img, i, j, color); 
+			j++;
+		}
+		i++;
+	}
+	if (!img || (mlx_image_to_window(c->mlx, img, y * c->tilesize_H , x * c->tilesize_V ))< 0)
 		return ;
 	img->instances[0].z = 1;
 }
@@ -103,6 +125,8 @@ int	display_3d_map(t_cub *c)
 	unsigned long 		color = 0;
 	int 				pixel;
 	mlx_texture_t		*texture;
+
+	int a = 0;
 	
 	start.x = 0;
 	pix.x = 0;
@@ -110,14 +134,14 @@ int	display_3d_map(t_cub *c)
 	i = c->view_ang - 1;
 	if (c->img3d)
 		mlx_delete_image(c->mlx, c->img3d);
-	c->img3d = mlx_new_image(c->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
+	c->img3d = mlx_new_image(c->mlx, c->true_screen_width, c->true_screen_height);
 	if (!c->img3d || (mlx_image_to_window(c->mlx, c->img3d, 0, 0) < 0))
 		return 0;
 	c->img3d->instances[0].z = 0;
 	while(i >= 0)
 	{
 		j = 0;
-		while(j <= SCREEN_WIDTH / c->view_ang)
+		while(j <= c->true_screen_width/ c->view_ang)
 		{
 			pixel = 0;
 			pix.y = 0;
@@ -145,8 +169,8 @@ int	display_3d_map(t_cub *c)
 				else
 					pix.x = pix.x * texture->width / c->tilesize_V;
 			}
-			line_height = SCREEN_HEIGHT / c->rays[i].len * c->tilesize_V * DEPTH;
-			start.y = ((SCREEN_HEIGHT) - line_height) / 2;
+			line_height = c->true_screen_height / c->rays[i].len * c->tilesize_V * DEPTH;
+			start.y = ((c->true_screen_height) - line_height) / 2;
 			end.x = start.x;
 			end.y = line_height + start.y;
 			draw_ceiling(c, start, end);

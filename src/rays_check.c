@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays_check.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+        */
+/*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:46:22 by llion             #+#    #+#             */
-/*   Updated: 2023/06/02 13:48:29 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/02 16:52:14 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	loop_h(t_cub *c, t_point offset, int dof, t_point *end)
 {
 	while (dof < c->map_height)
 	{
-		if (end->y >= 0 && end->y < (c->map_height * c->tilesize_V) && end->x >= 0 && end->x < (c->map_width * c->tilesize_H) )
+		if (end->y >= 0 && end->y < (c->true_screen_height) && end->x >= 0 && end->x < (c->true_screen_width) )
 		{
 			int i = end->y / c->tilesize_V;
 			int j = end->x / c->tilesize_H;
@@ -69,7 +69,7 @@ void	loop_v(t_cub *c, t_point offset, int dof, t_point *end)
 {
 	while (dof < (c->map_width))
 	{
-		if (end->y >= 0 && end->y < (c->map_height * c->tilesize_V) && end->x >= 0 && end->x < (c->map_width * c->tilesize_H))
+		if (end->y >= 0 && end->y < (c->true_screen_height) && end->x >= 0 && end->x < (c->true_screen_width))
 		{
 			int i = end->y / c->tilesize_V;
 			int j = end->x / c->tilesize_H;

@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/06/02 13:51:46 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/02 16:51:09 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 #define PI 3.14159
 #define DEFINITION 8
 #define DEPTH 1.7
-#define SCREEN_HEIGHT 1080
-#define SCREEN_WIDTH 1920
-#define SPEED 8
+#define SCREEN_HEIGHT 600
+#define SCREEN_WIDTH 900
+#define SPEED 2
 
 typedef struct	s_point
 {
@@ -78,6 +78,8 @@ typedef struct	s_cub
 	int					tilesize_H_2d;
 	int					tilesize_V;
 	int					tilesize_V_2d;
+	int					true_screen_width;
+	int					true_screen_height;
 	int					view_ang;
 	mlx_t				*mlx;
 	char				**map;
@@ -123,7 +125,7 @@ t_player	*init_player(t_cub *c);
 /* ----------- MOVEMENT ----------- */
 
 void		move_player(mlx_key_data_t keydata, void *param);
-void		check_movement(t_player *p, t_cub *c);
+void		check_movement(t_cub *c);
 void		ft_hook(void *param);
 int			player_out(t_cub *c);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+        */
+/*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:50:12 by llion             #+#    #+#             */
-/*   Updated: 2023/06/02 13:50:30 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/02 16:50:42 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ int	init_cub(t_cub *c, char **file)
 	c->tilesize_V = SCREEN_HEIGHT / c->map_height;
 	c->tilesize_V_2d = c->tilesize_V / 8;
 	c->tilesize_H_2d = c->tilesize_H / 8;
-	c->mlx = mlx_init(SCREEN_WIDTH - (SCREEN_WIDTH % c->map_width), SCREEN_HEIGHT - (SCREEN_HEIGHT % c->map_height), "CUB3D", true);
+	c->true_screen_height = c->map_height * c->tilesize_V;
+	c->true_screen_width = c->map_width * c->tilesize_H;
+	c->mlx = mlx_init(c->true_screen_width, c->true_screen_height, "CUB3D", true);
 	c->player = ft_calloc(1, sizeof(t_player));
 	if (!c->mlx)
 		return (ft_error("MLX failed"));
