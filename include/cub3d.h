@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/06/02 10:55:22 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/02 12:50:38 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ t_player	*init_player(t_cub *c);
 /* ----------- MOVEMENT ----------- */
 
 void		move_player(mlx_key_data_t keydata, void *param);
-void		check_movement(t_player *c);
+void		check_movement(t_player *p, t_cub *c);
 void		ft_hook(void *param);
 int			player_out(t_cub *c);
 
