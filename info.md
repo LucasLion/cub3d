@@ -23,7 +23,7 @@
 - [OK] Verifier qu'il n'y a qu'un seul joueur
 - [OK] Verifier qu'il n'y a pas d'autres lignes que les lignes demandées
 - [OK] Verrifier que la map est entouree de murs
-- [  ] Enlever le segfault quand il manque des textures ou des couleurs
+- [OK] Enlever le segfault quand il manque des textures ou des couleurs
 
 ## Raycasting etapes
 
@@ -46,8 +46,8 @@
 
 ## Bonus
 
-- [  ] Collision contre les murs
-- [  ] Un système de minicarte.
+- [OK] Collision contre les murs
+- [OK] Un système de minicarte.
 - [  ] Porte qui peuvent être ouvertes/fermées.
 - [  ] Animations (des sprites animés).
 - [  ] Faites pivoter le point de vue avec la souris.

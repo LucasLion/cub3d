@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/06/03 14:29:31 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/03 15:32:31 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int get_color(mlx_texture_t *t, int pixel )
 	int a = t->pixels[pixel +3];
 	return (r << 24 | g << 16 | b << 8 | a );
 }
+
 int	main(int argc, char **argv)
 {
 	char	**file;
