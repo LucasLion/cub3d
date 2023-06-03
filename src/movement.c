@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/03 15:51:56 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/03 16:11:27 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	mouse_move(t_cub *c)
 	x = 0;
 	y = 0;
 	mlx_get_mouse_pos(c->mlx, &x, &y);
-	printf("x = %d, y = %d\n", x, y);
-	printf("SW = %d, SH = %d\n", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+	//printf("x = %d, y = %d\n", x, y);
+	//printf("SW = %d, SH = %d\n", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	c->player->ang -= (x - SCREEN_WIDTH / 2) * 0.0001;
 }
 
@@ -175,7 +175,7 @@ void	ft_hook(void *param)
 
 	c = param;
 	check_movement(c);
-	mouse_move(c);
+	//mouse_move(c);
 	draw_rays(c);
 	display_3d_map(c);
 	player_out(c);

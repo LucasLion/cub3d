@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/02 16:52:47 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/03 16:10:57 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,15 @@ int	display_3d_map(t_cub *c)
 					pix.x = pix.x * texture->width / c->tilesize_V;
 			}
 			line_height = c->true_screen_height / c->rays[i].len * c->tilesize_V * DEPTH;
+			if (line_height > SCREEN_HEIGHT)
+				line_height = SCREEN_HEIGHT;
+			//printf("line_height = %d\n", line_height);
+			//printf("c->true_screen_height = %d\n", c->true_screen_height);
+			//printf("c->rays[i].len = %f\n", c->rays[i].len);
+			//printf("c->tilesize_V = %d\n", c->tilesize_V);	
+			//printf("DEPTH = %f\n", DEPTH);
+			//printf("c->rays[i].len = %f\n", c->rays[i].len);
+			//printf("c->tilesize_V = %d\n", c->tilesize_V);
 			start.y = ((c->true_screen_height) - line_height) / 2;
 			end.x = start.x;
 			end.y = line_height + start.y;
