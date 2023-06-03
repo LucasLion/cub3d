@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/03 13:33:10 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/03 14:52:20 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,10 +155,10 @@ int	display_3d_map(t_cub *c)
 				if (c->rays[i].ang > PI)
 				{
 					texture = c->textures[1];
-					pix.x = (c->tilesize_H - pix.x) * texture->width / c->tilesize_H;
+					pix.x = (c->tilesize_H - pix.x - 1) * texture->width / c->tilesize_H;
 				}
 				else
-					pix.x = pix.x * texture->width / c->tilesize_H;
+					pix.x = pix.x * texture->width / c->tilesize_H ;
 			}
 			else
 			{
@@ -167,10 +167,10 @@ int	display_3d_map(t_cub *c)
 				if (c->rays[i].ang > PI / 2 && c->rays[i].ang < PI / 2 * 3)
 				{
 					texture = c->textures[3];
-					pix.x = (c->tilesize_V - pix.x) * texture->width / c->tilesize_V;
+					pix.x = (c->tilesize_V - pix.x - 1) * texture->width / c->tilesize_V;
 				}
 				else
-					pix.x = pix.x * texture->width / c->tilesize_V;
+					pix.x = pix.x * texture->width / c->tilesize_V ;
 			}
 			line_height = c->true_screen_height / c->rays[i].len * c->tilesize_V * DEPTH;
 			start.y = ((c->true_screen_height) - line_height) / 2;
@@ -182,9 +182,9 @@ int	display_3d_map(t_cub *c)
 			while (pixel < line_height)
 			{
 				color = get_color_pixel(texture, pix.x, pix.y);
-				if (((start.x < (c->map_width * c->tilesize_H) - 1) &&  start.x > 0) \
-					&& (start.y + pixel < ((c->map_height * c->tilesize_V) - 1) && start.y + pixel > 0))
-					mlx_put_pixel(c->img3d, start.x, start.y + pixel, 0xff0000ff);
+				if (((start.x < (c->true_screen_width) - 1) &&  start.x > 0) \
+					&& (start.y + pixel < ((c->true_screen_height) - 1) && start.y + pixel > 0))
+					mlx_put_pixel(c->img3d, start.x, start.y + pixel, color);
 				pixel++;
 				pix.y += ty_step;	
 			}
