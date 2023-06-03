@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/03 15:32:07 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/03 15:51:56 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,12 @@ void	mouse_move(t_cub *c)
 	int	x;
 	int y; 
 
-	//x = SCREEN_WIDTH / 2;
-	//y = SCREEN_HEIGHT / 2;
 	x = 0;
 	y = 0;
 	mlx_get_mouse_pos(c->mlx, &x, &y);
 	printf("x = %d, y = %d\n", x, y);
 	printf("SW = %d, SH = %d\n", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-	if (x > SCREEN_WIDTH / 2)
-	{
-		c->player->is_moving |= 0x10;
-		c->player->is_moving &= ~0x20;
-	}
-	else if (x < SCREEN_WIDTH / 2)
-	{
-		c->player->is_moving |= 0x20;
-		c->player->is_moving &= ~0x10;
-	}
-	else
-	{
-		c->player->is_moving &= ~0x10;
-		c->player->is_moving &= ~0x20;
-	}
+	c->player->ang -= (x - SCREEN_WIDTH / 2) * 0.0001;
 }
 
 void	press_key(mlx_key_data_t keydata, void *param)
