@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:46:22 by llion             #+#    #+#             */
-/*   Updated: 2023/06/02 16:52:14 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/03 12:16:58 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	loop_h(t_cub *c, t_point offset, int dof, t_point *end)
 		{
 			int i = end->y / c->tilesize_V;
 			int j = end->x / c->tilesize_H;
-			if (i < 0 || j <  0  || i > c->map_height || j > c->map_width || (c->map[i][j] == '1') )
+			if (i < 0 || j <  0  || i > c->map_height || j > c->map_width || (c->map[i][j] == '1') || (c->map[i][j] == '2'))
 			{
 				dof = c->map_height;
 				break;
@@ -73,7 +73,7 @@ void	loop_v(t_cub *c, t_point offset, int dof, t_point *end)
 		{
 			int i = end->y / c->tilesize_V;
 			int j = end->x / c->tilesize_H;
-			if (i < 0 || j <  0  || i > c->map_height || j > c->map_width || (c->map[i][j] == '1') )
+			if (i < 0 || j <  0  || i > c->map_height || j > c->map_width || (c->map[i][j] == '1') || (c->map[i][j] == '2') )
 			{
 				dof = c->map_width;
 				break;

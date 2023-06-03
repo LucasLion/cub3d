@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/02 16:52:47 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/03 13:33:10 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,10 @@ int	display_2d_map(t_cub *c)
 					c->player->m_pos.y = j;
 				}
 			}
-			else if (c->map[i][j] == '1')
+			else if (c->map[i][j] == '1' )
 				put_square(c, i, j, 0x00000055);
+			else if (c->map[i][j] == '2')
+				put_square(c, i, j, 0xff000055);
 			j++;
 		}
 		i++;
@@ -108,7 +110,7 @@ void	draw_floor(t_cub *c, t_point start, t_point end)
 
 	sta_floor.y = end.y;
 	sta_floor.x = start.x;
-	end_floor.y = SCREEN_HEIGHT;
+	end_floor.y = c->true_screen_height;
 	end_floor.x = start.x;
 	draw_one_line(c, c->img3d, sta_floor, end_floor, c->t->floor);
 }
@@ -132,11 +134,12 @@ int	display_3d_map(t_cub *c)
 	pix.x = 0;
 	
 	i = c->view_ang - 1;
-	if (c->img3d)
-		mlx_delete_image(c->mlx, c->img3d);
-	c->img3d = mlx_new_image(c->mlx, c->true_screen_width, c->true_screen_height);
-	if (!c->img3d || (mlx_image_to_window(c->mlx, c->img3d, 0, 0) < 0))
-		return 0;
+	//if (c->img3d)
+	//	mlx_delete_image(c->mlx, c->img3d);
+	//c->img3d = mlx_new_image(c->mlx, c->true_screen_width, c->true_screen_height);
+	//if (!c->img3d || (mlx_image_to_window(c->mlx, c->img3d, 0, 0) < 0))
+	//	return 0;
+	//
 	c->img3d->instances[0].z = 0;
 	while(i >= 0)
 	{
@@ -181,7 +184,7 @@ int	display_3d_map(t_cub *c)
 				color = get_color_pixel(texture, pix.x, pix.y);
 				if (((start.x < (c->map_width * c->tilesize_H) - 1) &&  start.x > 0) \
 					&& (start.y + pixel < ((c->map_height * c->tilesize_V) - 1) && start.y + pixel > 0))
-					mlx_put_pixel(c->img3d, start.x, start.y + pixel, color);
+					mlx_put_pixel(c->img3d, start.x, start.y + pixel, 0xff0000ff);
 				pixel++;
 				pix.y += ty_step;	
 			}
