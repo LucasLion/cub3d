@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/06/02 16:51:03 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/03 14:29:31 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ int	map_width(char **map)
 	int	width;
 
 	i = 0;
-	width = 0 ;
-	width = ft_strlen(map[i]);
+	width = 0;
 	while (map[i])
 	{
 		if (ft_strlen(map[i]) > width)
