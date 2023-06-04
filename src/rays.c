@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/04 09:37:46 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/04 11:49:26 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void draw_one_line(t_cub *c, mlx_image_t *image, t_point start, t_point end, lon
 {
 	float				delta_y;
 	float				delta_x;
-	long long int		length;
+	int					length;
 	
 	delta_y = end.y - start.y;
 	delta_x = end.x - start.x;
-	length = sqrt((delta_y * delta_y) + (delta_x * delta_x));
+	length = sqrt((delta_y * delta_y) + (delta_x * delta_x)) + 1;
 	delta_x /= length;
 	delta_y /= length;
 	{
@@ -81,13 +81,11 @@ void vert_or_hor(t_cub *c, int i)
 	if (hlen <= vlen)
 	{
 		draw_one_line(c, c->img2d, reduce_point(p, c), reduce_point(end_h, c), 0xff0000ff);
-		//draw_one_line(c, c->img2d, p, end_h, 0xff0000ff);
 		set_struct_ray_H(c, i, end_h, hlen);
 	}
 	else 
 	{
 		draw_one_line(c, c->img2d, reduce_point(p, c),reduce_point(end_v, c), 0xff0000ff);
-		//draw_one_line(c, c->img2d, p, end_v, 0xff0000ff);
 		set_struct_ray_V(c, i, end_v, vlen);
 	}
 }
@@ -115,7 +113,6 @@ void draw_rays(t_cub *c)
 	if (c->img2d)
 		mlx_delete_image(c->mlx, c->img2d);
 	c->img2d = mlx_new_image(c->mlx, c->tilesize_H_2d * c->map_width , c->tilesize_V_2d * c->map_height);
-	 //c->img2d = mlx_new_image(c->mlx, c->true_screen_width , c->true_screen_height);
 	if (!c->img2d || (mlx_image_to_window(c->mlx, c->img2d, 0, 0) < 0))
 		return ;
 	while (i < c->view_ang)

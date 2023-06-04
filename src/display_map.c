@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/03 14:52:20 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/04 11:48:23 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,6 @@ int	display_3d_map(t_cub *c)
 	unsigned long 		color = 0;
 	int 				pixel;
 	mlx_texture_t		*texture;
-
-	int a = 0;
 	
 	start.x = 0;
 	pix.x = 0;
@@ -173,18 +171,23 @@ int	display_3d_map(t_cub *c)
 					pix.x = pix.x * texture->width / c->tilesize_V ;
 			}
 			line_height = c->true_screen_height / c->rays[i].len * c->tilesize_V * DEPTH;
+			float ty_step = texture->height / (float)line_height;
 			start.y = ((c->true_screen_height) - line_height) / 2;
 			end.x = start.x;
 			end.y = line_height + start.y;
-			draw_ceiling(c, start, end);
-			draw_floor(c, start, end);
-			float ty_step = texture->height / (float)line_height;
-			while (pixel < line_height)
+			if (line_height <= c->true_screen_height)
 			{
-				color = get_color_pixel(texture, pix.x, pix.y);
+				draw_ceiling(c, start, end);
+				draw_floor(c, start, end);
+			}
+			while (pixel < line_height )
+			{ 
 				if (((start.x < (c->true_screen_width) - 1) &&  start.x > 0) \
 					&& (start.y + pixel < ((c->true_screen_height) - 1) && start.y + pixel > 0))
+				{
+					color = get_color_pixel(texture, pix.x, pix.y);
 					mlx_put_pixel(c->img3d, start.x, start.y + pixel, color);
+				}
 				pixel++;
 				pix.y += ty_step;	
 			}

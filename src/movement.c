@@ -6,16 +6,27 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/03 12:13:48 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/04 11:48:41 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
+void	mouse_move(t_cub *c)
+{
+	int	x;
+	int y; 
+
+	x = 0;
+	y = 0;
+	mlx_get_mouse_pos(c->mlx, &x, &y);
+	//printf("x = %d, y = %d\n", x, y);
+	//printf("SW = %d, SH = %d\n", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+	c->player->ang -= (x - SCREEN_WIDTH / 2) * 0.0001;
+}
+
 void	press_key(mlx_key_data_t keydata, void *param)
 {
-
-
 	t_cub *c;
 
 	c = param;
@@ -168,6 +179,7 @@ void	ft_hook(void *param)
 
 	c = param;
 	check_movement(c);
+	//mouse_move(c);
 	draw_rays(c);
 	display_3d_map(c);
 	player_out(c);

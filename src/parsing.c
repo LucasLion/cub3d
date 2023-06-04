@@ -6,7 +6,11 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 17:31:32 by llion             #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/06/03 12:14:52 by amouly           ###   ########.fr       */
+=======
+/*   Updated: 2023/06/04 11:39:52 by amouly           ###   ########.fr       */
+>>>>>>> a465106fc4593be7567a4f91751a7342cae62663
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +95,11 @@ int	parse_elems_in_map(char **map)
 		j = 0;
 		while (map[i][j])
 		{
+<<<<<<< HEAD
 			if (map[i][j] != '0' && map[i][j] != '1' &&  map[i][j] != '2' && map[i][j] != 'N' \
+=======
+			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != '2' && map[i][j] != 'N' \
+>>>>>>> a465106fc4593be7567a4f91751a7342cae62663
 					&& map[i][j] != 'S' && map[i][j] != 'E' && map[i][j] != '\0'\
 					&& map[i][j] != 'W' && map[i][j] != ' ' && map[i][j] != '\n')
 				return (ft_error("Invalid map (foreign chars)"));

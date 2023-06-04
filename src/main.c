@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/06/04 09:37:32 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/04 11:48:31 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ int	map_width(char **map)
 	int	width;
 
 	i = 0;
-	width = 0 ;
-	width = ft_strlen(map[i]);
+	width = 0;
 	while (map[i])
 	{
 		if (ft_strlen(map[i]) > width)
@@ -37,6 +36,7 @@ int get_color(mlx_texture_t *t, int pixel )
 	int a = t->pixels[pixel +3];
 	return (r << 24 | g << 16 | b << 8 | a );
 }
+
 int	main(int argc, char **argv)
 {
 	char	**file;
