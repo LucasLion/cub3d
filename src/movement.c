@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/03 16:11:27 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/04 11:43:08 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,11 @@ int check_collision(float x, float y, t_cub *c)
 	if (c->map[i][j] == '1')
 		return (0);
 	else
-		return (1);
+	{
+		if (c->map[i][j] == '2')
+			c->map[i][j] = '0';
+	}
+	return (1);
 }
 
 void check_W(t_cub	*c)

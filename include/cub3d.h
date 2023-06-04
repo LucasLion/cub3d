@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/06/02 16:51:09 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/04 11:45:49 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 #define PI 3.14159
 #define DEFINITION 8
 #define DEPTH 1.7
-#define SCREEN_HEIGHT 600
-#define SCREEN_WIDTH 900
-#define SPEED 2
+#define SCREEN_HEIGHT 1080
+#define SCREEN_WIDTH 1920
+#define SPEED 5
 
 typedef struct	s_point
 {

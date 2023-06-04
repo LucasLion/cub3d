@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/03 16:10:57 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/04 11:42:30 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ int	display_2d_map(t_cub *c)
 			}
 			else if (c->map[i][j] == '1')
 				put_square(c, i, j, 0x00000055);
+			else if (c->map[i][j] == '2')
+				put_square(c, i, j, 0xff000055);
 			j++;
 		}
 		i++;
@@ -125,8 +127,6 @@ int	display_3d_map(t_cub *c)
 	unsigned long 		color = 0;
 	int 				pixel;
 	mlx_texture_t		*texture;
-
-	int a = 0;
 	
 	start.x = 0;
 	pix.x = 0;
@@ -152,7 +152,7 @@ int	display_3d_map(t_cub *c)
 				if (c->rays[i].ang > PI)
 				{
 					texture = c->textures[1];
-					pix.x = (c->tilesize_H - pix.x) * texture->width / c->tilesize_H;
+					pix.x = (c->tilesize_H - pix.x - 1) * texture->width / c->tilesize_H;
 				}
 				else
 					pix.x = pix.x * texture->width / c->tilesize_H;
@@ -164,33 +164,29 @@ int	display_3d_map(t_cub *c)
 				if (c->rays[i].ang > PI / 2 && c->rays[i].ang < PI / 2 * 3)
 				{
 					texture = c->textures[3];
-					pix.x = (c->tilesize_V - pix.x) * texture->width / c->tilesize_V;
+					pix.x = (c->tilesize_V - pix.x - 1) * texture->width / c->tilesize_V;
 				}
 				else
 					pix.x = pix.x * texture->width / c->tilesize_V;
 			}
 			line_height = c->true_screen_height / c->rays[i].len * c->tilesize_V * DEPTH;
-			if (line_height > SCREEN_HEIGHT)
-				line_height = SCREEN_HEIGHT;
-			//printf("line_height = %d\n", line_height);
-			//printf("c->true_screen_height = %d\n", c->true_screen_height);
-			//printf("c->rays[i].len = %f\n", c->rays[i].len);
-			//printf("c->tilesize_V = %d\n", c->tilesize_V);	
-			//printf("DEPTH = %f\n", DEPTH);
-			//printf("c->rays[i].len = %f\n", c->rays[i].len);
-			//printf("c->tilesize_V = %d\n", c->tilesize_V);
+			float ty_step = texture->height / (float)line_height;
 			start.y = ((c->true_screen_height) - line_height) / 2;
 			end.x = start.x;
 			end.y = line_height + start.y;
-			draw_ceiling(c, start, end);
-			draw_floor(c, start, end);
-			float ty_step = texture->height / (float)line_height;
-			while (pixel < line_height)
+			if (line_height <= c->true_screen_height)
 			{
-				color = get_color_pixel(texture, pix.x, pix.y);
-				if (((start.x < (c->map_width * c->tilesize_H) - 1) &&  start.x > 0) \
-					&& (start.y + pixel < ((c->map_height * c->tilesize_V) - 1) && start.y + pixel > 0))
+				draw_ceiling(c, start, end);
+				draw_floor(c, start, end);
+			}
+			while (pixel < line_height )
+			{ 
+				if (((start.x < (c->true_screen_width) - 1) &&  start.x > 0) \
+					&& (start.y + pixel < ((c->true_screen_height) - 1) && start.y + pixel > 0))
+				{
+					color = get_color_pixel(texture, pix.x, pix.y);
 					mlx_put_pixel(c->img3d, start.x, start.y + pixel, color);
+				}
 				pixel++;
 				pix.y += ty_step;	
 			}
