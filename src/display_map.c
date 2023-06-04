@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/04 11:48:23 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/04 12:01:36 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,21 +175,36 @@ int	display_3d_map(t_cub *c)
 			start.y = ((c->true_screen_height) - line_height) / 2;
 			end.x = start.x;
 			end.y = line_height + start.y;
-			if (line_height <= c->true_screen_height)
+			if (line_height < c->true_screen_height)
 			{
 				draw_ceiling(c, start, end);
 				draw_floor(c, start, end);
-			}
-			while (pixel < line_height )
-			{ 
+				while (pixel < line_height )
+				{ 
 				if (((start.x < (c->true_screen_width) - 1) &&  start.x > 0) \
 					&& (start.y + pixel < ((c->true_screen_height) - 1) && start.y + pixel > 0))
+					{
+						color = get_color_pixel(texture, pix.x, pix.y);
+						mlx_put_pixel(c->img3d, start.x, start.y + pixel, color);
+					}
+					pixel++;
+					pix.y += ty_step;
+				}
+			}
+			else
+			{
+				pix.y = - (start.y * ty_step);
+				line_height = c->true_screen_height; 
+				while (pixel < line_height )
+				{ 
+				if (((start.x < (c->true_screen_width) - 1) &&  start.x > 0)) 
 				{
 					color = get_color_pixel(texture, pix.x, pix.y);
-					mlx_put_pixel(c->img3d, start.x, start.y + pixel, color);
+					mlx_put_pixel(c->img3d, start.x, pixel, color);
 				}
 				pixel++;
-				pix.y += ty_step;	
+				pix.y += ty_step;
+				}	
 			}
 			j++;
 			start.x++;
