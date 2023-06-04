@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/02 16:52:40 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/04 09:37:46 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void draw_rays(t_cub *c)
 	if (c->img2d)
 		mlx_delete_image(c->mlx, c->img2d);
 	c->img2d = mlx_new_image(c->mlx, c->tilesize_H_2d * c->map_width , c->tilesize_V_2d * c->map_height);
-	//c->img2d = mlx_new_image(c->mlx, c->true_screen_width , c->true_screen_height);
+	 //c->img2d = mlx_new_image(c->mlx, c->true_screen_width , c->true_screen_height);
 	if (!c->img2d || (mlx_image_to_window(c->mlx, c->img2d, 0, 0) < 0))
 		return ;
 	while (i < c->view_ang)
