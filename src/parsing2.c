@@ -6,7 +6,7 @@
 /*   By: llion <llion@student.42mulhouse.fr >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 16:43:14 by llion             #+#    #+#             */
-/*   Updated: 2023/05/24 12:39:33 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/05 14:44:03 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@ int	parse_file(int argc, char **av)
 		if (av[1][i - 1] != 'b' || av[1][i - 2] != 'u' || av[1][i - 3] != 'c' \
 				|| av[1][i - 4] != '.')
 			return (ft_error("Wrong extension or file"));
+		else
+		{
+			if (open(av[1], O_RDONLY) == -1)
+			{
+				ft_error("File does not exists");
+				return (0);
+			}
+		}
 		return (1);
 	}
 	else

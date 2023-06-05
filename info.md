@@ -50,13 +50,15 @@
 - [OK] Un système de minicarte.
 - [  ] Porte qui peuvent être ouvertes/fermées.
 - [  ] Animations (des sprites animés).
-- [  ] Faites pivoter le point de vue avec la souris.
+- [OK] Faites pivoter le point de vue avec la souris.
 
 ## Misc
 
 - [OK] Reformater le code avec une bonne gestion d'erreurs
 - [OK] Reflechir a des structures de donnees plus pertinentes
 - [  ] GNL leak
+- [  ] Gestions des leaks
+- [  ] norminette
 
 ## git gems
 
