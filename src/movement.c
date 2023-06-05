@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/05 14:52:22 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/05 17:52:00 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,28 @@ void	mouse_move(t_cub *c)
 	x -= c->true_screen_width / 2;
 	c->player->ang -= ((float)x / 400);
 	mlx_set_mouse_pos(c->mlx, c->true_screen_width / 2, c->true_screen_height / 2);
+}
+
+void	open_door(float i, float j, t_cub *c)
+{
+	int	k;
+	int l;
+	t_point		futur_pos;
+
+	futur_pos.x = c->player->p_pos.x + cos(c->player->ang) * SPEED * 10;
+	futur_pos.y = c->player->p_pos.y - (sin(c->player->ang) * SPEED * 10);
+	k = futur_pos.x / c->tilesize_H;
+	l = futur_pos.y / c->tilesize_V;
+	if (c->map[l][k] == '2')
+	{
+		c->map[l][k] = '3';
+		printf("coucou\n");
+	}
+	else if (c->map[l][k] == '3')
+	{
+		c->map[l][k] = '2';
+		printf("coucou\n");
+	}
 }
 
 void	press_key(mlx_key_data_t keydata, void *param)
@@ -40,6 +62,8 @@ void	press_key(mlx_key_data_t keydata, void *param)
 			c->player->is_moving |= 0x10;
 		if (keydata.key == MLX_KEY_LEFT)
 			c->player->is_moving |= 0x20;
+		if (keydata.key == MLX_KEY_SPACE)
+			c->player->is_moving |= 0x40;
 }
 
 void	release_key(mlx_key_data_t keydata, void *param)
@@ -59,6 +83,8 @@ void	release_key(mlx_key_data_t keydata, void *param)
 		c->player->is_moving &= ~0x10;
 	if (keydata.key == MLX_KEY_LEFT)
 		c->player->is_moving &= ~0x20;
+	if (keydata.key == MLX_KEY_SPACE)
+		c->player->is_moving &= ~0x40;
 }
 
 void	move_player(mlx_key_data_t keydata, void *param)
@@ -66,12 +92,15 @@ void	move_player(mlx_key_data_t keydata, void *param)
 	t_cub	*c;
 
 	c = param;
+	if (keydata.action == MLX_RELEASE && keydata.key == MLX_KEY_SPACE)
+		open_door(c->player->p_pos.x, c->player->p_pos.y, c);
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		mlx_close_window(c->mlx);
 	if (keydata.action == MLX_PRESS)
 		press_key(keydata, param);
 	if (keydata.action == MLX_RELEASE)
 		release_key(keydata, param);
+
 }
 
 int check_collision(float x, float y, t_cub *c)
@@ -81,13 +110,8 @@ int check_collision(float x, float y, t_cub *c)
 
 	j = x / c->tilesize_H;
 	i = y / c->tilesize_V;
-	if (c->map[i][j] == '1')
+	if (c->map[i][j] == '1' || c->map[i][j] == '2')
 		return (0);
-	else
-	{
-		if (c->map[i][j] == '2')
-			c->map[i][j] = '0';
-	}
 	return (1);
 }
 
@@ -149,6 +173,8 @@ void	check_movement(t_cub *c)
 		check_A(c);
 	else if (c->player->is_moving & 0x08)
 		check_D(c);
+	//if (c->player->is_moving & 0x40)
+	//	open_door(c->player->p_pos.x, c->player->p_pos.y, c);
 	if (c->player->is_moving & 0x10)
 	{
 		c->player->ang -= 0.04;
