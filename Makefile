@@ -6,7 +6,7 @@
 #    By: amouly <amouly@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 15:27:43 by llion             #+#    #+#              #
-#    Updated: 2023/06/02 13:50:06 by llion            ###   ########.fr        #
+#    Updated: 2023/06/05 10:18:42 by amouly           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRC			=	main.c			\
 				parsing.c 		\
 				player.c 		\
 				display_map.c 	\
+				display_3d.c	\
 				movement.c		\
 				find_pixel.c 	\
 				rays_check.c	\

@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 15:06:29 by llion             #+#    #+#             */
-/*   Updated: 2023/06/03 14:28:43 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/05 11:52:15 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,4 @@ t_player	*init_player(t_cub *c)
 	else if (c->map[i][j] == 'W')
 		c->player->ang = PI;
 	return (c->player);
-	//c->player->is_moving = 1;
 }

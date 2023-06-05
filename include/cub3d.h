@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/06/04 11:45:49 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/05 11:34:14 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 #define DEPTH 1.7
 #define SCREEN_HEIGHT 1080
 #define SCREEN_WIDTH 1920
-#define SPEED 5
+#define SPEED 6
 
 typedef struct	s_point
 {
@@ -87,6 +87,12 @@ typedef struct	s_cub
 	t_textures			*t;	
 	mlx_texture_t		**textures;
 	int					nb_line_map_start;
+	int					line_H;
+	t_point				start;
+	t_point				end;
+	t_point				pix;
+	long unsigned int	color_pix;
+	float 				ty_step;
 	t_player			*player;
 	mlx_image_t			*img2d;
 	mlx_image_t			*img3d;
