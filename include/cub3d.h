@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/06/05 11:34:14 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/05 14:26:39 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #include "MLX42.h"
 
 #define PI 3.14159
-#define DEFINITION 8
+#define DEFINITION 10
 #define DEPTH 1.7
 #define SCREEN_HEIGHT 1080
 #define SCREEN_WIDTH 1920
