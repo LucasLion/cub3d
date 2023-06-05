@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/06/05 10:56:28 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/05 11:34:14 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef struct	s_cub
 	t_point				end;
 	t_point				pix;
 	long unsigned int	color_pix;
+	float 				ty_step;
 	t_player			*player;
 	mlx_image_t			*img2d;
 	mlx_image_t			*img3d;
