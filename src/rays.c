@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/04 11:49:26 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/05 16:41:43 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	set_struct_ray_H(t_cub *c, int i, t_point wall_hit, double len_ray)
 		c->rays[i].color = 0x0000ffff;
 		c->rays[i].dir = 'S';
 	}
+	if (c->rays[i].h_door == 1)
+		c->rays[i].door = 1;
 }
 
 void	set_struct_ray_V(t_cub *c, int i, t_point wall_hit, double len_ray)
@@ -63,6 +65,8 @@ void	set_struct_ray_V(t_cub *c, int i, t_point wall_hit, double len_ray)
 		c->rays[i].color = 0xff00ffff;
 		c->rays[i].dir = 'W'; 
 	}
+	if (c->rays[i].v_door == 1)
+		c->rays[i].door = 1;
 }
 
 void vert_or_hor(t_cub *c, int i)
@@ -74,8 +78,8 @@ void vert_or_hor(t_cub *c, int i)
 	t_point p;
 
 	p = c->player->p_pos;
-	check_horizontal(c, &p, &end_h, c->rays[i].ang);
-	check_vertical(c, &p, &end_v, c->rays[i].ang);
+	check_horizontal(c, &p, &end_h, i);
+	check_vertical(c, &p, &end_v, i);
 	vlen = sqrt(((end_v.y - p.y)* (end_v.y - p.y)) + ((end_v.x - p.x) * (end_v.x - p.x)));
 	hlen = sqrt(((end_h.y - p.y)* (end_h.y - p.y)) + ((end_h.x - p.x) * (end_h.x - p.x)));
 	if (hlen <= vlen)
@@ -123,6 +127,9 @@ void draw_rays(t_cub *c)
 			c->rays[i].ang -= 2 * PI;
 		else if (c->rays[i].ang  < 0)
 			c->rays[i].ang  += (2 * PI);
+		c->rays[i].door = 0;
+		c->rays[i].h_door = 0;
+		c->rays[i].v_door = 0;
 		vert_or_hor(c, i);
 		fish_eye(c, i);
 		i++;

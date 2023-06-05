@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/05 13:04:01 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/05 16:39:12 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ void calculate_pix_x(t_cub *c, int i, mlx_texture_t **t)
 		}
 		else
 			c->pix.x = c->pix.x * (*t)->width / c->tilesize_V ;
+	}
+	if (c->rays[i].door == 1)
+	{
+		*t = c->textures[4];
+		//c->rays[i].door = 0;
 	}
 }
 

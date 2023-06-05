@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:50:12 by llion             #+#    #+#             */
-/*   Updated: 2023/06/05 14:44:43 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/05 16:39:20 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,12 @@ int	init_cub(t_cub *c, char **file)
 	c->t = get_textures(c, file);
 	if (c->t == NULL)
 		return (0);
-	c->textures = ft_calloc(4, sizeof(mlx_texture_t *));
+	c->textures = ft_calloc(5, sizeof(mlx_texture_t *));
 	c->textures[0] = mlx_load_png(c->t->NO);
 	c->textures[1] = mlx_load_png(c->t->SO);
 	c->textures[2] = mlx_load_png(c->t->WE);
 	c->textures[3] = mlx_load_png(c->t->EA);
+	c->textures[4] = mlx_load_png("./textures/door.png");
 	c->view_ang = 60 * DEFINITION;
 	c->t->nb_elems = 0;
 	c->map = get_map(file, c->nb_line_map_start);
