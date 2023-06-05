@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/06/05 14:26:39 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/05 16:29:28 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ typedef struct	s_rays
 	t_point				wall;
 	char				dir;
 	long unsigned int	color;	
+	int					door;
+	int					v_door;
+	int					h_door;
 }				t_rays;
 
 
@@ -153,8 +156,8 @@ unsigned long int get_pixel_north(t_cub *c, int i, int l_h, int p);
 
 /* ----------- RAYS ----------- */
 
-void check_horizontal(t_cub *c, t_point *start, t_point *end, float ang);
-void check_vertical(t_cub *c, t_point *start, t_point *end, float ang);
+void check_horizontal(t_cub *c, t_point *start, t_point *end, int ray);
+void check_vertical(t_cub *c, t_point *start, t_point *end, int ray);
 void vert_or_hor(t_cub *c, int i);
 t_point	reduce_point(t_point p, t_cub *c);
 

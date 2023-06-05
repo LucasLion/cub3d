@@ -6,48 +6,56 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:46:22 by llion             #+#    #+#             */
-/*   Updated: 2023/06/04 11:48:56 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/05 16:35:20 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	loop_h(t_cub *c, t_point offset, int dof, t_point *end)
+void	loop_h(t_cub *c, t_point offset, int ang, t_point *end)
 {
-	while (dof < c->map_height)
+	int	i;
+	int	j;
+	int	k;
+
+	k = 0;
+	while (k < c->map_height)
 	{
 		if (end->y >= 0 && end->y < (c->true_screen_height) && end->x >= 0 && end->x < (c->true_screen_width) )
 		{
-			int i = end->y / c->tilesize_V;
-			int j = end->x / c->tilesize_H;
+			i = end->y / c->tilesize_V;
+			j = end->x / c->tilesize_H;
 			if (i < 0 || j <  0  || i > c->map_height || j > c->map_width || (c->map[i][j] == '1') || (c->map[i][j] == '2'))
 			{
-				dof = c->map_height;
+				if (c->map[i][j] == '2')
+					c->rays[ang].h_door = 1;
+				k = c->map_height;
 				break;
 			}
 			else	
 			{
 				end->x += offset.x;
 				end->y += offset.y;
-				dof++;
+				k++;
 			}
 		}
 		else	
 		{
-			dof = c->map_height;
+			k = c->map_height;
 			break;
 		}
 	}
 }
 
-void check_horizontal(t_cub *c, t_point *start, t_point *end, float ang)
+void check_horizontal(t_cub *c, t_point *start, t_point *end, int ray)
 {
 	t_point offset;
-	int		i;
-	float	ra = ang;
-	float	atan = -1 / tan(ra);
+	float	ra;
+	float	atan;
 	
-	i = 0;
+	ra = c->rays[ray].ang;
+	atan = -1 / tan(ra);
+	
 	if (ra > PI) 
 	{
 		end->y = (int)(start->y /c->tilesize_V) * c->tilesize_V + c->tilesize_V;
@@ -62,44 +70,52 @@ void check_horizontal(t_cub *c, t_point *start, t_point *end, float ang)
 		offset.y = - c->tilesize_V;
 		offset.x = (offset.y * atan);	
 	}
-	loop_h(c, offset, i, end);
+	loop_h(c, offset, ray, end);
 }
 
-void	loop_v(t_cub *c, t_point offset, int dof, t_point *end)
+void	loop_v(t_cub *c, t_point offset, int ang, t_point *end)
 {
-	while (dof < (c->map_width))
+	int	i;
+	int	j;
+	int	k;
+
+	k = 0;
+	while (k < (c->map_width))
 	{
 		if (end->y >= 0 && end->y < (c->true_screen_height) && end->x >= 0 && end->x < (c->true_screen_width))
 		{
-			int i = end->y / c->tilesize_V;
-			int j = end->x / c->tilesize_H;
+			i = end->y / c->tilesize_V;
+			j = end->x / c->tilesize_H;
 			if (i < 0 || j <  0  || i > c->map_height || j > c->map_width || (c->map[i][j] == '1') || (c->map[i][j] == '2'))
 			{
-				dof = c->map_width;
+				if (c->map[i][j] == '2')
+					c->rays[ang].v_door = 1;
+				k = c->map_width;
 				break;
 			}
 			else	
 			{
 				end->x += offset.x;
 				end->y += offset.y;
-				dof++;
+				k++;
 			}
 		}
 		else	
 		{
-			dof = c->map_width;
+			k = c->map_width;
 			break;
 		}
 	}
 }
 
-void check_vertical(t_cub *c, t_point *start, t_point *end, float ang)
+void check_vertical(t_cub *c, t_point *start, t_point *end, int ray)
 {
 	t_point offset;
-	float	ra = ang;
-	float	ntan = -tan(ra);
-	int dof = 0;
-	
+	float	ra;
+	float	ntan;
+
+	ra = c->rays[ray].ang;
+	ntan = -tan(ra);
 	if (ra > (PI / 2) && ra < (PI / 2 * 3)) 
 	{
 		end->x = (int)(start->x /c->tilesize_H) * c->tilesize_H - 0.001;
@@ -114,7 +130,7 @@ void check_vertical(t_cub *c, t_point *start, t_point *end, float ang)
 		offset.x = c->tilesize_H;
 		offset.y = (offset.x * ntan);	
 	}
-	loop_v(c, offset, dof, end);
+	loop_v(c, offset, ray, end);
 }
 
 t_point	reduce_point(t_point p, t_cub *c)
