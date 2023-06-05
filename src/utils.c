@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:50:12 by llion             #+#    #+#             */
-/*   Updated: 2023/06/02 16:50:42 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/05 14:20:54 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,16 @@ int	ft_error(char *str)
 {
 	printf("%s\nExiting...\n", str);
 	exit(EXIT_FAILURE);
+}
+
+void cursor(t_cub *c)
+{
+	mlx_texture_t *t;
+	mlx_win_cursor_t *cursor;
+
+	t = mlx_load_png(c->t->NO);
+	cursor = mlx_create_cursor(t);
+	mlx_set_cursor_mode(c->mlx, MLX_MOUSE_HIDDEN);
 }
 
 int	free_function(char **file, t_cub *c)
@@ -35,7 +45,8 @@ int	init_cub(t_cub *c, char **file)
 {
 	c->nb_line_map_start = get_nb_line_map_start(file, c);
 	c->t = get_textures(c, file);
-	c->color = 0xdc6400ff;
+	if (c->t == NULL)
+		return (0);
 	c->textures = ft_calloc(4, sizeof(mlx_texture_t *));
 	c->textures[0] = mlx_load_png(c->t->NO);
 	c->textures[1] = mlx_load_png(c->t->SO);
@@ -57,6 +68,7 @@ int	init_cub(t_cub *c, char **file)
 	c->true_screen_width = c->map_width * c->tilesize_H;
 	c->mlx = mlx_init(c->true_screen_width, c->true_screen_height, "CUB3D", true);
 	c->player = ft_calloc(1, sizeof(t_player));
+	cursor(c);
 	if (!c->mlx)
 		return (ft_error("MLX failed"));
 	return (1);

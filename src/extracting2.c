@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:59:49 by llion             #+#    #+#             */
-/*   Updated: 2023/06/02 13:49:23 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/05 14:09:07 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,24 @@ uint32_t	split_and_convert(char *line, uint8_t transp)
 	return ((red << 24) | (green  << 16) | (blue << 8) | (transp));
 }
 
-void	trim(int *count, char **direction, char *texture)
+void	trim(int *count, char **direction, char *texture, int *err)
 {
+	int fd;
+	
 	*direction = ft_strtrim(texture, "\n");
+	fd = open(*direction,  O_RDONLY);
+	if (fd == - 1)
+	{
+		printf("Probleme avec path\n");
+		close(fd);
+		*err = 1;
+		return;
+	}
+	close (fd);
 	(*count)++;
 }
 
-int get_textures_wall(t_cub *c, char **file, t_textures *t)
+int get_textures_wall(t_cub *c, char **file, t_textures *t, int *err)
 {
 	int i;
 	int count;
@@ -45,13 +56,13 @@ int get_textures_wall(t_cub *c, char **file, t_textures *t)
 	{
 		line = ft_split(file[i], ' ');
 		if (ft_strncmp(line[0], "NO", 2) == 0)
-			trim(&count, &t->NO, line[1]);
+			trim(&count, &t->NO, line[1], err);
 		else if (ft_strncmp(line[0], "SO", 2) == 0)
-			trim(&count, &t->SO, line[1]);
+			trim(&count, &t->SO, line[1], err);
 		else if (ft_strncmp(line[0], "WE", 2) == 0)
-			trim(&count, &t->WE, line[1]);
+			trim(&count, &t->WE, line[1], err);
 		else if (ft_strncmp(line[0], "EA", 2) == 0)
-			trim(&count, &t->EA, line[1]);
+			trim(&count, &t->EA, line[1], err);
 		ft_freetab(line);
 		i++;
 	}
@@ -89,14 +100,32 @@ int get_colors(t_cub *c, char **file, t_textures *t)
 	return (0);
 }
 
+
 t_textures	*get_textures(t_cub *c, char **file)
 {
 	t_textures	*tmp;
-
+	int			error;
+	
+	error = 0;
 	tmp = ft_calloc(1, sizeof(t_textures));
-	if (get_textures_wall(c, file, tmp) == 0)
-		printf("probleme avec les textures\n");
+	if (get_textures_wall(c, file, tmp, &error) == 0)
+	{
+		printf("Pas le bon nombre de textures\n");
+		free (tmp);
+		tmp = NULL;
+	}
 	if (get_colors(c, file, tmp) == 0)
-		printf("probleme avec les couleurs\n");
+	{	
+		printf("Pas le bon nombre de couleurs\n");
+		free (tmp);
+		tmp = NULL;
+	}
+	if (error == 1)
+	{
+		free (tmp);
+		tmp = NULL;
+	}
 	return (tmp);	
 }
+
+
