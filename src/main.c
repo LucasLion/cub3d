@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/06/06 14:57:41 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/06 15:52:19 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int	main(int argc, char **argv)
 {
 	char	**file;
 	t_cub	*c;
+
 
 	c = ft_calloc(1, sizeof(t_cub));
 	if (parse_file(argc, argv) != 0)

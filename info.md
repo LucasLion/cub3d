@@ -51,6 +51,12 @@
 - [  ] Porte qui peuvent être ouvertes/fermées.
 - [  ] Animations (des sprites animés).
 - [OK] Faites pivoter le point de vue avec la souris.
+ 
+## BugFix
+
+- [  ] Capper hauteur de largeur d'ecran
+- [  ] input bulletproof
+- [  ] couleur de la map
 
 ## Misc
 

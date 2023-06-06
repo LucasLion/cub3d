@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/06/06 14:51:12 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/06 15:53:31 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 #define PI 3.14159
 #define DEFINITION 8
 #define DEPTH 1.7
-#define SCREEN_HEIGHT 1080
-#define SCREEN_WIDTH 800
+#define SCREEN_HEIGHT 800
+#define SCREEN_WIDTH 600
 #define SPEED 6
 
 typedef struct	s_point
@@ -62,15 +62,16 @@ typedef struct	s_textures
 
 typedef struct	s_player
 {
-	t_point		p_pos;
-	t_point		m_pos;
-	float		player_x_dif;
-	float		player_y_dif;
-	int			is_moving;
-	float		ang;
-	float		speed;
-
-}				t_player;
+	t_point			p_pos;
+	t_point			m_pos;
+	float			player_x_dif;
+	float			player_y_dif;
+	int				is_moving;
+	float			ang;
+	float			speed;
+	mlx_texture_t	**texture;
+	mlx_image_t		*img;
+	}				t_player;
 
 typedef struct	s_cub
 {
@@ -162,6 +163,8 @@ t_point	reduce_point(t_point p, t_cub *c);
 
 /* ----------- ANIMATIONS ----------- */
 
-int	animation(t_cub *c);
+int				animation(t_cub *c);
+mlx_texture_t	**load_animation(t_cub *c);
+void			draw_anim(t_cub *c, int x);
 
 #endif

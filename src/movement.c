@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/06 14:50:21 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/06 17:14:10 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	mouse_move(t_cub *c)
 	c->player->ang -= ((float)x / 400);
 	if (c->player->ang < 0)
 			c->player->ang += (2 * PI);
+	if (c->player->ang > 2 * PI)
+			c->player->ang -= (2 * PI);
 	mlx_set_mouse_pos(c->mlx, c->true_screen_width / 2, SCREEN_HEIGHT / 2);
 }
 
@@ -97,8 +99,26 @@ void	move_player(mlx_key_data_t keydata, void *param)
 	if (keydata.action == MLX_RELEASE)
 		release_key(keydata, param);
 	if (keydata.key == MLX_KEY_L && keydata.action == MLX_PRESS)
-	//if (mlx_is_key_down(c->mlx, MLX_KEY_L))
-		animation(c);
+	{
+		//if (c->player->img)
+		//	mlx_delete_image(c->mlx, c->player->img);
+		//animation(c);
+	mlx_delete_image(c->mlx, c->player->img);
+	c->player->img = mlx_texture_to_image(c->mlx, c->player->texture[0]);
+	mlx_image_to_window(c->mlx, c->player->img, 100, 100);
+	mlx_delete_image(c->mlx, c->player->img);
+	c->player->img = mlx_texture_to_image(c->mlx, c->player->texture[1]);
+	mlx_image_to_window(c->mlx, c->player->img, 100, 100);
+	mlx_delete_image(c->mlx, c->player->img);
+	c->player->img = mlx_texture_to_image(c->mlx, c->player->texture[2]);
+	mlx_image_to_window(c->mlx, c->player->img, 100, 100);
+	mlx_delete_image(c->mlx, c->player->img);
+	c->player->img = mlx_texture_to_image(c->mlx, c->player->texture[3]);
+	mlx_image_to_window(c->mlx, c->player->img, 100, 100);
+	mlx_delete_image(c->mlx, c->player->img);
+	c->player->img = mlx_texture_to_image(c->mlx, c->player->texture[4]);
+	mlx_image_to_window(c->mlx, c->player->img, 100, 100);
+	}
 
 }
 
@@ -190,7 +210,10 @@ int	player_out(t_cub *c)
 {
 	if (c->player->p_pos.x <= 0 || c->player->p_pos.y <= 0 \
 			|| c->player->p_pos.x >= c->true_screen_width || c->player->p_pos.y >= SCREEN_HEIGHT)
+	{
+		//printf("px: %f | py: %f | SW: %d | SH: %d\n", c->player->p_pos.x, c->player->p_pos.y,c->true_screen_width, SCREEN_HEIGHT);
 		return (ft_error("YOU WENT OFF OF THE MAP YOU FOOL!!\nVANISH NOW..."));
+	}
 	return (1);
 }
 
@@ -202,7 +225,7 @@ void	ft_hook(void *param)
 	check_movement(c);
 	mouse_move(c);
 	draw_rays(c);
-	display_3d_map(c);
+	//display_3d_map(c);
 	player_out(c);
 
 }
