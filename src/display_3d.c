@@ -6,11 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/06/06 14:47:26 by amouly           ###   ########.fr       */
-=======
-/*   Updated: 2023/06/06 12:50:26 by llion            ###   ########.fr       */
->>>>>>> 301ab53c69632da44a65a86d77b3467725738ff9
+/*   Updated: 2023/06/06 14:55:32 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,18 +77,10 @@ void draw_pixels(t_cub *c, mlx_texture_t *texture)
 	}
 }
 
-<<<<<<< HEAD
-void init_display_3d(t_cub *c, int *i)
-{
-	c->start.x = 0;
-	c->pix.x = 0;
-	*i = c->view_ang -1 ;
-=======
 void init_display_3d(t_cub *c)
 {
 	c->start.x = 0;
 	c->pix.x = 0;
->>>>>>> 301ab53c69632da44a65a86d77b3467725738ff9
 	if (c->img3d)
 		mlx_delete_image(c->mlx, c->img3d);
 	c->img3d = mlx_new_image(c->mlx, c->true_screen_width, SCREEN_HEIGHT);
@@ -106,14 +94,9 @@ int	display_3d_map(t_cub *c)
 	int					i;
 	int					j;
 	mlx_texture_t		*texture;
-<<<<<<< HEAD
 
-	init_display_3d(c, &i);
-=======
-	
 	i = c->view_ang - 1;
 	init_display_3d(c);
->>>>>>> 301ab53c69632da44a65a86d77b3467725738ff9
 	while(i >= 0)
 	{
 		j = 0;
@@ -134,4 +117,3 @@ int	display_3d_map(t_cub *c)
 	}
 	return (1);
 }
-
