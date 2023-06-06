@@ -6,7 +6,7 @@
 /*   By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 11:20:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/06 13:09:23 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/06 14:48:38 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,11 @@ int	animation(t_cub *c)
 {
 	static float	x = 0;
 
-	if (x >= 4)
-		x = 0;
-	draw_anim(c, x);
-	x += 0.2;
+	while (x <= 4)
+	{
+		draw_anim(c, x);
+		x += 0.2;
+	}
+	draw_anim(c, 0);
 	return (1);
 }
