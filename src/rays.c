@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/05 16:41:43 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/06 14:27:16 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void draw_one_line(t_cub *c, mlx_image_t *image, t_point start, t_point end, lon
 	{
 		while(length)
 		{
-			if (((start.x < (c->map_width * c->tilesize_H) - 1) &&  start.x > 0) \
-					&& (start.y < ((c->map_height * c->tilesize_V) - 1) && start.y > 0))
+			if (((start.x < (c->map_width * c->tilesize) - 1) &&  start.x > 0) \
+					&& (start.y < ((c->map_height * c->tilesize) - 1) && start.y > 0))
 				mlx_put_pixel(image, start.x, start.y, color); 
 			start.y += delta_y;
 			start.x += delta_x;
@@ -116,7 +116,7 @@ void draw_rays(t_cub *c)
 	c->rays[i].ang = c->player->ang - (c->view_ang / 2 * one_deg);
 	if (c->img2d)
 		mlx_delete_image(c->mlx, c->img2d);
-	c->img2d = mlx_new_image(c->mlx, c->tilesize_H_2d * c->map_width , c->tilesize_V_2d * c->map_height);
+	c->img2d = mlx_new_image(c->mlx, c->tilesize_2d * c->map_width , c->tilesize_2d * c->map_height);
 	if (!c->img2d || (mlx_image_to_window(c->mlx, c->img2d, 0, 0) < 0))
 		return ;
 	while (i < c->view_ang)
