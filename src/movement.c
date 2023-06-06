@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/06 13:09:27 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/06 13:11:05 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ void	mouse_move(t_cub *c)
 	mlx_set_mouse_pos(c->mlx, c->true_screen_width / 2, c->true_screen_height / 2);
 }
 
-void	open_door(float i, float j, t_cub *c)
+void	toggle_door(float i, float j, t_cub *c)
 {
 	int	k;
 	int l;
 	t_point		futur_pos;
 
-	futur_pos.x = c->player->p_pos.x + cos(c->player->ang) * SPEED * 10;
-	futur_pos.y = c->player->p_pos.y - (sin(c->player->ang) * SPEED * 10);
+	futur_pos.x = c->player->p_pos.x + cos(c->player->ang) * SPEED * 15;
+	futur_pos.y = c->player->p_pos.y - (sin(c->player->ang) * SPEED * 15);
 	k = futur_pos.x / c->tilesize_H;
 	l = futur_pos.y / c->tilesize_V;
 	if (c->map[l][k] == '2')
@@ -87,7 +87,7 @@ void	move_player(mlx_key_data_t keydata, void *param)
 
 	c = param;
 	if (keydata.action == MLX_RELEASE && keydata.key == MLX_KEY_SPACE)
-		open_door(c->player->p_pos.x, c->player->p_pos.y, c);
+		toggle_door(c->player->p_pos.x, c->player->p_pos.y, c);
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		mlx_close_window(c->mlx);
 	if (keydata.action == MLX_PRESS)
