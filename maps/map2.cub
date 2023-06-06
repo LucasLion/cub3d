@@ -4,8 +4,8 @@ NO ./textures/unnamed.png
     EA  ./textures/unnamed.png
 SO ./textures/unnamed.png
 
-F 255,0,0
-C 0,230,0
+F 195,203,110
+C 228,230,168
 
 1111111111111111111111111111
 10000000000000N0000000000001

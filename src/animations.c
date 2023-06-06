@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   animations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llion <llion@student.42mulhouse.fr>        +#+  +:+       +#+        */
+/*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 11:20:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/06 14:48:38 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/06 14:55:56 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	draw_anim(t_cub *c, int x)
 	else if (x == 4)
 		mlx_delete_image(c->mlx, img[3]);
 	printf("x: %d\n", x);
-	mlx_image_to_window(c->mlx, img[x], c->true_screen_width - 4 * img[x]->width, c->true_screen_height - img[x]->height);
+	mlx_image_to_window(c->mlx, img[x], c->true_screen_width - 4 * img[x]->width, SCREEN_HEIGHT - img[x]->height);
 }
 
 int	animation(t_cub *c)
