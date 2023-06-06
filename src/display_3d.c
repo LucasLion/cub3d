@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/05 16:39:12 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/06 13:08:02 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,14 @@ void draw_pixels(t_cub *c, mlx_texture_t *texture)
 	}
 }
 
-void init_display_3d(t_cub *c, int i)
+void init_display_3d(t_cub *c, int *i)
 {
 	c->start.x = 0;
 	c->pix.x = 0;
-	i = c->view_ang - 1;
+	*i = c->view_ang;
 	if (c->img3d)
 		mlx_delete_image(c->mlx, c->img3d);
-	c->img3d = mlx_new_image(c->mlx, c->true_screen_width, c->true_screen_height);
+	c->img3d = mlx_new_image(c->mlx, c->view_ang * 4, c->true_screen_height);
 	if (!c->img3d || (mlx_image_to_window(c->mlx, c->img3d, 0, 0) < 0))
 		return ;
 	c->img3d->instances[0].z = 1;
@@ -98,12 +98,17 @@ int	display_3d_map(t_cub *c)
 	int					i;
 	int					j;
 	mlx_texture_t		*texture;
-	
-	init_display_3d(c, i);
-	while(i >= 0)
+	int					modulo;
+
+	//modulo = c->true_screen_width % c->view_ang; 
+	init_display_3d(c, &i);
+	while(i > 0)
 	{
-		j = 0;
-		while(j <= c->true_screen_width/ c->view_ang)
+		//if (modulo > 0)
+			j = 0;
+		//else 
+		//	j = 1;
+		while(j < c->true_screen_width/ c->view_ang)
 		{
 			c->pix.y = 0;
 			calculate_pix_x(c, i, &texture);
@@ -116,6 +121,7 @@ int	display_3d_map(t_cub *c)
 			j++;
 			c->start.x++;
 		}
+
 		i--;
 	}
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/06/05 17:22:17 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/06 13:05:35 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 #include "MLX42.h"
 
 #define PI 3.14159
-#define DEFINITION 10
+#define DEFINITION 8
 #define DEPTH 1.7
-#define SCREEN_HEIGHT 1080
-#define SCREEN_WIDTH 1920
+#define SCREEN_HEIGHT 600
+#define SCREEN_WIDTH 800
 #define SPEED 6
 
 typedef struct	s_point
