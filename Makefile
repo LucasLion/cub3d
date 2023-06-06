@@ -6,7 +6,7 @@
 #    By: amouly <amouly@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 15:27:43 by llion             #+#    #+#              #
-#    Updated: 2023/06/05 14:35:07 by llion            ###   ########.fr        #
+#    Updated: 2023/06/06 11:19:55 by llion            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRC			=	main.c				\
 				find_pixel.c 		\
 				rays_check.c		\
 				utils.c				\
+				animations.c				\
 				rays.c
 					
 MAP			= maps/map.cub

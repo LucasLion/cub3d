@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/06 14:47:38 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/06 14:50:21 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,9 @@ void	move_player(mlx_key_data_t keydata, void *param)
 		press_key(keydata, param);
 	if (keydata.action == MLX_RELEASE)
 		release_key(keydata, param);
+	if (keydata.key == MLX_KEY_L && keydata.action == MLX_PRESS)
+	//if (mlx_is_key_down(c->mlx, MLX_KEY_L))
+		animation(c);
 
 }
 
@@ -201,4 +204,5 @@ void	ft_hook(void *param)
 	draw_rays(c);
 	display_3d_map(c);
 	player_out(c);
+
 }
