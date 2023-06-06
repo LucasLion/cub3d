@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/05 16:39:12 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/06 12:50:26 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,7 @@ void calculate_pix_x(t_cub *c, int i, mlx_texture_t **t)
 			c->pix.x = c->pix.x * (*t)->width / c->tilesize_V ;
 	}
 	if (c->rays[i].door == 1)
-	{
 		*t = c->textures[4];
-		//c->rays[i].door = 0;
-	}
 }
 
 
@@ -80,11 +77,10 @@ void draw_pixels(t_cub *c, mlx_texture_t *texture)
 	}
 }
 
-void init_display_3d(t_cub *c, int i)
+void init_display_3d(t_cub *c)
 {
 	c->start.x = 0;
 	c->pix.x = 0;
-	i = c->view_ang - 1;
 	if (c->img3d)
 		mlx_delete_image(c->mlx, c->img3d);
 	c->img3d = mlx_new_image(c->mlx, c->true_screen_width, c->true_screen_height);
@@ -99,7 +95,8 @@ int	display_3d_map(t_cub *c)
 	int					j;
 	mlx_texture_t		*texture;
 	
-	init_display_3d(c, i);
+	i = c->view_ang - 1;
+	init_display_3d(c);
 	while(i >= 0)
 	{
 		j = 0;

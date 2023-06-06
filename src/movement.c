@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/05 17:52:00 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/06 13:09:27 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,9 @@ void	open_door(float i, float j, t_cub *c)
 	k = futur_pos.x / c->tilesize_H;
 	l = futur_pos.y / c->tilesize_V;
 	if (c->map[l][k] == '2')
-	{
 		c->map[l][k] = '3';
-		printf("coucou\n");
-	}
 	else if (c->map[l][k] == '3')
-	{
 		c->map[l][k] = '2';
-		printf("coucou\n");
-	}
 }
 
 void	press_key(mlx_key_data_t keydata, void *param)
@@ -100,6 +94,8 @@ void	move_player(mlx_key_data_t keydata, void *param)
 		press_key(keydata, param);
 	if (keydata.action == MLX_RELEASE)
 		release_key(keydata, param);
+	if (mlx_is_key_down(c->mlx, MLX_KEY_L))
+		animation(c);
 
 }
 
@@ -173,8 +169,6 @@ void	check_movement(t_cub *c)
 		check_A(c);
 	else if (c->player->is_moving & 0x08)
 		check_D(c);
-	//if (c->player->is_moving & 0x40)
-	//	open_door(c->player->p_pos.x, c->player->p_pos.y, c);
 	if (c->player->is_moving & 0x10)
 	{
 		c->player->ang -= 0.04;
@@ -207,4 +201,5 @@ void	ft_hook(void *param)
 	draw_rays(c);
 	display_3d_map(c);
 	player_out(c);
+
 }

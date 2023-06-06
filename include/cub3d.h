@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/06/05 17:22:17 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/06 12:46:47 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "../libft/include/libft.h"
 #include "../include/MLX42.h"
 #include <stdio.h>
+#include <sys/time.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -25,8 +26,8 @@
 #define PI 3.14159
 #define DEFINITION 10
 #define DEPTH 1.7
-#define SCREEN_HEIGHT 1080
-#define SCREEN_WIDTH 1920
+#define SCREEN_HEIGHT 600
+#define SCREEN_WIDTH 800
 #define SPEED 6
 
 typedef struct	s_point
@@ -56,7 +57,7 @@ typedef struct	s_textures
 	char			*EA;
 	unsigned long	floor;
 	unsigned long	ceiling;
-	int		nb_elems;
+	int				nb_elems;
 }				t_textures;
 
 typedef struct	s_player
@@ -161,5 +162,9 @@ void check_horizontal(t_cub *c, t_point *start, t_point *end, int ray);
 void check_vertical(t_cub *c, t_point *start, t_point *end, int ray);
 void vert_or_hor(t_cub *c, int i);
 t_point	reduce_point(t_point p, t_cub *c);
+
+/* ----------- ANIMATIONS ----------- */
+
+int	animation(t_cub *c);
 
 #endif
