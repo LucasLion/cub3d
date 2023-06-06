@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/06/06 15:47:26 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/06 17:36:09 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,10 @@ int	main(int argc, char **argv)
 	else
 		return (-1);
 	if (init_cub(c, file) == 0)
+	{
+		free_function(file, c);
 		return (-1);
+	}
 	if (parsing(file, c) == 0)
 	{
 		free_function(file, c);

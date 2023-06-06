@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:50:12 by llion             #+#    #+#             */
-/*   Updated: 2023/06/06 15:39:30 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/06 17:40:05 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,16 @@ void cursor(t_cub *c)
 
 int	free_function(char **file, t_cub *c)
 {
-	mlx_delete_texture(c->textures[0]);
-	mlx_delete_texture(c->textures[1]);
-	mlx_delete_texture(c->textures[2]);
-	mlx_delete_texture(c->textures[3]);
+	if (c->t != NULL)
+	{
+		mlx_delete_texture(c->textures[0]);
+		mlx_delete_texture(c->textures[1]);
+		mlx_delete_texture(c->textures[2]);
+		mlx_delete_texture(c->textures[3]);
+	}
 	ft_freetab(file);
-	ft_freetab(c->map);
+	if (c->map)
+		ft_freetab(c->map);
 	free(c->t);
 	free(c);
 	return (0);
