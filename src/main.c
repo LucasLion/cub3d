@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/06/06 15:52:19 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/06 17:16:08 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void init_image(t_cub *c)
 
 int	main(int argc, char **argv)
 {
+	return (0);
 	char	**file;
 	t_cub	*c;
 
