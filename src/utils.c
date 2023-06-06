@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:50:12 by llion             #+#    #+#             */
-/*   Updated: 2023/06/06 12:51:47 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/06 13:50:29 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	init_cub(t_cub *c, char **file)
 	c->tilesize_H_2d = c->tilesize_H / 8;
 	//c->true_screen_height = c->map_height * c->tilesize_V;
 	//c->true_screen_width = c->map_width * c->tilesize_H;
-	c->true_screen_height = c->map_height * c->tilesize_V;
+	c->true_screen_height = SCREEN_HEIGHT;
 	c->true_screen_width = c->view_ang * 4;
 	c->mlx = mlx_init(c->true_screen_width, c->true_screen_height, "CUB3D", true);
 	c->player = ft_calloc(1, sizeof(t_player));

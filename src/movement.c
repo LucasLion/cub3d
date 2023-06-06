@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/06 13:06:51 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/06 14:20:59 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	mouse_move(t_cub *c)
 	mlx_get_mouse_pos(c->mlx, &x, &y);
 	x -= c->true_screen_width / 2;
 	c->player->ang -= ((float)x / 400);
+	if (c->player->ang < 0)
+			c->player->ang += (2 * PI);
 	mlx_set_mouse_pos(c->mlx, c->true_screen_width / 2, c->true_screen_height / 2);
 }
 

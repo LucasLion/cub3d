@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:46:22 by llion             #+#    #+#             */
-/*   Updated: 2023/06/05 16:35:20 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/06 13:58:21 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	loop_h(t_cub *c, t_point offset, int ang, t_point *end)
 	k = 0;
 	while (k < c->map_height)
 	{
-		if (end->y >= 0 && end->y < (c->true_screen_height) && end->x >= 0 && end->x < (c->true_screen_width) )
+		if (end->y >= 0 && end->y < (c->tilesize_H *c->map_height) && end->x >= 0 && end->x < (c->tilesize_H *c->map_width))
 		{
 			i = end->y / c->tilesize_V;
 			j = end->x / c->tilesize_H;
@@ -82,7 +82,7 @@ void	loop_v(t_cub *c, t_point offset, int ang, t_point *end)
 	k = 0;
 	while (k < (c->map_width))
 	{
-		if (end->y >= 0 && end->y < (c->true_screen_height) && end->x >= 0 && end->x < (c->true_screen_width))
+		if (end->y >= 0 && end->y < (c->tilesize_H *c->map_height) && end->x >= 0 && end->x < (c->tilesize_H *c->map_width))
 		{
 			i = end->y / c->tilesize_V;
 			j = end->x / c->tilesize_H;
