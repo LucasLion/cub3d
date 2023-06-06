@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/06/06 12:49:20 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/06 14:50:00 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void draw_rectangle(mlx_image_t *img, int y_start, int y_end, unsigned long int 
 	int i;
 	int j;
 
-	i = 0;	
+	i = 2;	
 	while ( i < img->width)
 	{
 		j = y_start;
@@ -59,9 +59,9 @@ void init_image(t_cub *c)
 {
 	mlx_image_t	*img;
 
-	img = mlx_new_image(c->mlx, c->true_screen_width, c->true_screen_height);
-	draw_rectangle(img, 0, c->true_screen_height / 2, c->t->ceiling);
-	draw_rectangle(img, c->true_screen_height / 2, img->height, c->t->floor);
+	img = mlx_new_image(c->mlx, c->true_screen_width - 1 , SCREEN_HEIGHT - 1);
+	draw_rectangle(img, 0, SCREEN_HEIGHT / 2, c->t->ceiling);
+	draw_rectangle(img, SCREEN_HEIGHT  / 2, img->height, c->t->floor);
 	if (!img || (mlx_image_to_window(c->mlx, img, 0,0 ))< 0)
 		return ;
 	img->instances[0].z = 0;

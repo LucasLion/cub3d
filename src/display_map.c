@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/05 12:19:49 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/06 14:34:20 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@ void	put_square(t_cub *c, int x, int y, long int color)
 	mlx_image_t	*img;
 
 	i = 0;
-	img = mlx_new_image(c->mlx, c->tilesize_H_2d, c->tilesize_V_2d);
+	img = mlx_new_image(c->mlx, c->tilesize_2d, c->tilesize_2d);
 	
-	while (i < c->tilesize_H_2d)
+	while (i < c->tilesize_2d)
 	{
 		j = 0;
-		while (j < c->tilesize_V_2d)
+		while (j < c->tilesize_2d)
 		{
 			mlx_put_pixel(img, i, j, color); 
 			j++;
 		}
 		i++;
 	}
-	if (!img || (mlx_image_to_window(c->mlx, img, y * c->tilesize_H_2d , x * c->tilesize_V_2d ))< 0)
+	if (!img || (mlx_image_to_window(c->mlx, img, y * c->tilesize_2d , x * c->tilesize_2d ))< 0)
 		return ;
 	img->instances[0].z = 1;
 }
@@ -43,18 +43,18 @@ void	put_square_big(t_cub *c, int x, int y, long int color)
 	mlx_image_t	*img;
 
 	i = 0;
-	img = mlx_new_image(c->mlx, c->tilesize_H, c->tilesize_V);
-	while (i < c->tilesize_H - 1)
+	img = mlx_new_image(c->mlx, c->tilesize, c->tilesize);
+	while (i < c->tilesize - 1)
 	{
 		j = 0;
-		while (j < c->tilesize_V - 1)
+		while (j < c->tilesize - 1)
 		{
 			mlx_put_pixel(img, i, j, color); 
 			j++;
 		}
 		i++;
 	}
-	if (!img || (mlx_image_to_window(c->mlx, img, y * c->tilesize_H , x * c->tilesize_V ))< 0)
+	if (!img || (mlx_image_to_window(c->mlx, img, y * c->tilesize , x * c->tilesize ))< 0)
 		return ;
 	img->instances[0].z = 1;
 }

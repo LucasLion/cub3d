@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:46:22 by llion             #+#    #+#             */
-/*   Updated: 2023/06/05 16:35:20 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/06 14:29:10 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	loop_h(t_cub *c, t_point offset, int ang, t_point *end)
 	k = 0;
 	while (k < c->map_height)
 	{
-		if (end->y >= 0 && end->y < (c->true_screen_height) && end->x >= 0 && end->x < (c->true_screen_width) )
+		if (end->y >= 0 && end->y < (c->tilesize *c->map_height) && end->x >= 0 && end->x < (c->tilesize *c->map_width))
 		{
-			i = end->y / c->tilesize_V;
-			j = end->x / c->tilesize_H;
+			i = end->y / c->tilesize;
+			j = end->x / c->tilesize;
 			if (i < 0 || j <  0  || i > c->map_height || j > c->map_width || (c->map[i][j] == '1') || (c->map[i][j] == '2'))
 			{
 				if (c->map[i][j] == '2')
@@ -58,16 +58,16 @@ void check_horizontal(t_cub *c, t_point *start, t_point *end, int ray)
 	
 	if (ra > PI) 
 	{
-		end->y = (int)(start->y /c->tilesize_V) * c->tilesize_V + c->tilesize_V;
+		end->y = (int)(start->y /c->tilesize) * c->tilesize + c->tilesize;
 		end->x = ((end->y - start->y) * atan) + start->x;
-		offset.y = c->tilesize_V;
+		offset.y = c->tilesize;
 		offset.x = (offset.y * atan);	
 	}
 	if (ra < PI) 
 	{
-		end->y = ((int)(start->y /c->tilesize_V) * c->tilesize_V - 0.001);
+		end->y = ((int)(start->y /c->tilesize) * c->tilesize - 0.001);
 		end->x = (end->y - start->y) * atan + start->x;
-		offset.y = - c->tilesize_V;
+		offset.y = - c->tilesize;
 		offset.x = (offset.y * atan);	
 	}
 	loop_h(c, offset, ray, end);
@@ -82,10 +82,10 @@ void	loop_v(t_cub *c, t_point offset, int ang, t_point *end)
 	k = 0;
 	while (k < (c->map_width))
 	{
-		if (end->y >= 0 && end->y < (c->true_screen_height) && end->x >= 0 && end->x < (c->true_screen_width))
+		if (end->y >= 0 && end->y < (c->tilesize *c->map_height) && end->x >= 0 && end->x < (c->tilesize *c->map_width))
 		{
-			i = end->y / c->tilesize_V;
-			j = end->x / c->tilesize_H;
+			i = end->y / c->tilesize;
+			j = end->x / c->tilesize;
 			if (i < 0 || j <  0  || i > c->map_height || j > c->map_width || (c->map[i][j] == '1') || (c->map[i][j] == '2'))
 			{
 				if (c->map[i][j] == '2')
@@ -118,16 +118,16 @@ void check_vertical(t_cub *c, t_point *start, t_point *end, int ray)
 	ntan = -tan(ra);
 	if (ra > (PI / 2) && ra < (PI / 2 * 3)) 
 	{
-		end->x = (int)(start->x /c->tilesize_H) * c->tilesize_H - 0.001;
+		end->x = (int)(start->x /c->tilesize) * c->tilesize - 0.001;
 		end->y = ((end->x - start->x) * ntan) + start->y;
-		offset.x = - c->tilesize_H;
+		offset.x = - c->tilesize;
 		offset.y = (offset.x * ntan);	
 	}
 	if (ra < (PI /2) || (ra > PI / 2 * 3)) 
 	{
-		end->x = ((int)(start->x /c->tilesize_H) * c->tilesize_H + c->tilesize_H);
+		end->x = ((int)(start->x /c->tilesize) * c->tilesize + c->tilesize);
 		end->y = (end->x - start->x) * ntan + start->y;
-		offset.x = c->tilesize_H;
+		offset.x = c->tilesize;
 		offset.y = (offset.x * ntan);	
 	}
 	loop_v(c, offset, ray, end);
@@ -135,8 +135,8 @@ void check_vertical(t_cub *c, t_point *start, t_point *end, int ray)
 
 t_point	reduce_point(t_point p, t_cub *c)
 {
-	p.x =  (p.x) / c->tilesize_H * c->tilesize_H_2d;
-	p.y =  (p.y) /  c->tilesize_V * c->tilesize_V_2d;
+	p.x =  (p.x) / c->tilesize * c->tilesize_2d;
+	p.y =  (p.y) /  c->tilesize * c->tilesize_2d;
 	return (p);
 }
 

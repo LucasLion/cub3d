@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/06 13:54:53 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/06 14:50:21 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ void	mouse_move(t_cub *c)
 	mlx_get_mouse_pos(c->mlx, &x, &y);
 	x -= c->true_screen_width / 2;
 	c->player->ang -= ((float)x / 400);
-	mlx_set_mouse_pos(c->mlx, c->true_screen_width / 2, c->true_screen_height / 2);
+	if (c->player->ang < 0)
+			c->player->ang += (2 * PI);
+	mlx_set_mouse_pos(c->mlx, c->true_screen_width / 2, SCREEN_HEIGHT / 2);
 }
 
 void	toggle_door(float i, float j, t_cub *c)
@@ -31,8 +33,8 @@ void	toggle_door(float i, float j, t_cub *c)
 
 	futur_pos.x = c->player->p_pos.x + cos(c->player->ang) * SPEED * 15;
 	futur_pos.y = c->player->p_pos.y - (sin(c->player->ang) * SPEED * 15);
-	k = futur_pos.x / c->tilesize_H;
-	l = futur_pos.y / c->tilesize_V;
+	k = futur_pos.x / c->tilesize;
+	l = futur_pos.y / c->tilesize;
 	if (c->map[l][k] == '2')
 		c->map[l][k] = '3';
 	else if (c->map[l][k] == '3')
@@ -105,8 +107,8 @@ int check_collision(float x, float y, t_cub *c)
 	int j;
 	int i;
 
-	j = x / c->tilesize_H;
-	i = y / c->tilesize_V;
+	j = x / c->tilesize;
+	i = y / c->tilesize;
 	if (c->map[i][j] == '1' || c->map[i][j] == '2')
 		return (0);
 	return (1);
@@ -187,7 +189,7 @@ void	check_movement(t_cub *c)
 int	player_out(t_cub *c)
 {
 	if (c->player->p_pos.x <= 0 || c->player->p_pos.y <= 0 \
-			|| c->player->p_pos.x >= SCREEN_WIDTH || c->player->p_pos.y >=SCREEN_HEIGHT)
+			|| c->player->p_pos.x >= c->true_screen_width || c->player->p_pos.y >= SCREEN_HEIGHT)
 		return (ft_error("YOU WENT OFF OF THE MAP YOU FOOL!!\nVANISH NOW..."));
 	return (1);
 }
