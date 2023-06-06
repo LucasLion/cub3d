@@ -1,6 +1,7 @@
 NO ./textures/unnamed.png
             WE           ./textures/unnamed.png
     EA  ./textures/unnamed.png
+SO ./textures/unnamed.png
 
 F 255,0,0
 C 0,230,168
