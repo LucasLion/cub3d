@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/06/06 14:51:12 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/06 15:43:39 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 #define DEFINITION 8
 #define DEPTH 1.7
 #define SCREEN_HEIGHT 1080
-#define SCREEN_WIDTH 800
+#define SCREEN_WIDTH 1920
 #define SPEED 6
 
 typedef struct	s_point
@@ -81,6 +81,7 @@ typedef struct	s_cub
 	int					tilesize;
 	int					tilesize_2d;
 	int					true_screen_width;
+	int					true_screen_height;
 	int					view_ang;
 	mlx_t				*mlx;
 	char				**map;
