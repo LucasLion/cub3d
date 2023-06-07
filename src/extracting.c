@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:59:49 by llion             #+#    #+#             */
-/*   Updated: 2023/06/01 11:01:14 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/07 13:34:44 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,37 +30,42 @@ int	get_nb_lines_in_map_file(int fd, char **argv)
 	return (num_lines);
 }
 
+void	loop_map_start(char **f, int *i, int *k)
+{
+	int	j;
+
+	j = 0;
+	while (f[*i][j] == ' ')
+		j++;
+	if (f[*i][j] == '\n')
+	{
+		(*i)++;
+		return ;
+	}
+	if (!((f[*i][j] == 'N' && f[*i][j + 1] == 'O') || (f[*i][j] == 'S'
+				&& f[*i][j + 1] == 'O') || (f[*i][j] == 'W' && f[*i][j
+				+ 1] == 'E') || (f[*i][j] == 'E' && f[*i][j + 1] == 'A')
+			|| (f[*i][j] == 'F' && f[*i][j + 1] == ' ') || (f[*i][j] == 'C'
+				&& f[*i][j + 1] == ' ')))
+		return ;
+	else
+		(*k)++;
+	(*i)++;
+}
+
 int	get_nb_line_map_start(char **f, t_cub *c)
 {
-	int		i;
-	int		j;
-	int		k;
+	int	i;
+	int	j;
+	int	k;
 
 	i = 0;
 	k = 0;
 	while (i < ft_tablen(f) && k < 6)
-	{
-		j = 0;
-		while (f[i][j] == ' ')
-			j++;
-		if (f[i][j] == '\n')
-		{
-			i++;
-			continue;
-		}
-		if (!((f[i][j] == 'N' && f[i][j + 1] == 'O') || (f[i][j] == 'S' \
-				&& f[i][j + 1] == 'O') || (f[i][j] == 'W' \
-				&& f[i][j + 1] == 'E') || (f[i][j] == 'E' \
-				&& f[i][j + 1] == 'A') || (f[i][j] == 'F' \
-				&& f[i][j + 1] == ' ') || (f[i][j] == 'C' \
-				&& f[i][j + 1] == ' ')))
-			return (0);
-		else
-			k++;
-		i++;
-	}
+		loop_map_start(f, &i, &k);
 	return (i);
 }
+
 char	**get_file(char **argv)
 {
 	char	**map;
@@ -87,7 +92,7 @@ char	**get_map(char **f, int i)
 {
 	char	**map;
 	int		j;
-	
+
 	j = 0;
 	map = ft_calloc(ft_tablen(f) - i + 1, sizeof(char *));
 	if (!map)
@@ -98,7 +103,7 @@ char	**get_map(char **f, int i)
 		{
 			if (f[i][0] == '\n')
 				i++;
-			else 
+			else
 			{
 				map[j] = ft_strdup(f[i]);
 				i++;

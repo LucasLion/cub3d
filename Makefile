@@ -6,7 +6,7 @@
 #    By: amouly <amouly@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 15:27:43 by llion             #+#    #+#              #
-#    Updated: 2023/06/06 11:19:55 by llion            ###   ########.fr        #
+#    Updated: 2023/06/07 14:32:31 by amouly           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ endef
 NAME		= cub3d 
 CC			= gcc
 RM			= rm -rf
-FLAGS		= -Wall -Werror -Wextra -ggdb3
+FLAGS		= -Wall -Werror -Wextra -g3
 LIBFT		= libft/libft.a
 MLX			= MLX42/build/libmlx42.a
 HEADERS		= -Iinclude -Ilibft/include -L/Users/$(USER)/.brew/Cellar/glfw/3.3.8/lib -lglfw  \
@@ -35,12 +35,17 @@ SRC			=	main.c				\
 				player.c 			\
 				display_map.c 		\
 				display_3d.c 		\
+				display_3d2.c 		\
 				movement.c			\
+				movement2.c			\
+				movement3.c			\
 				find_pixel.c 		\
 				rays_check.c		\
+				rays_check2.c		\
 				utils.c				\
-				animations.c				\
-				rays.c
+				animations.c		\
+				rays.c				\
+				rays2.c
 					
 MAP			= maps/map.cub
 OBJ			= $(addprefix obj/,$(notdir $(SRC:.c=.o)))
@@ -59,7 +64,7 @@ $(LIBFT): libft/Makefile
 	@$(MAKE) -C libft
 
 libft/Makefile: libft/src/*.c libft/include/*.h
-	@$(MAKE) -C libft
+	@$(MAKE) -sC libft
 
 debug: $(OBJ) $(LIBFT) $(MLX)
 	@$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(MLX) $(HEADERS) -fsanitize=address -o $(NAME)	
