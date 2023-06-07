@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/06 15:30:25 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/07 09:35:20 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	mouse_move(t_cub *c)
 	c->player->ang -= ((float)x / 400);
 	if (c->player->ang < 0)
 			c->player->ang += (2 * PI);
+	if (c->player->ang > 2 * PI)
+			c->player->ang -= (2 * PI);
 	mlx_set_mouse_pos(c->mlx, c->true_screen_width / 2, SCREEN_HEIGHT / 2);
 }
 
@@ -97,8 +99,11 @@ void	move_player(mlx_key_data_t keydata, void *param)
 	if (keydata.action == MLX_RELEASE)
 		release_key(keydata, param);
 	if (keydata.key == MLX_KEY_L && keydata.action == MLX_PRESS)
-	//if (mlx_is_key_down(c->mlx, MLX_KEY_L))
-		animation(c);
+	{
+		//if (c->player->img)
+		//	mlx_delete_image(c->mlx, c->player->img);
+		//animation(c);
+	}
 
 }
 
@@ -189,9 +194,8 @@ void	check_movement(t_cub *c)
 int	player_out(t_cub *c)
 {
 	if (c->player->p_pos.x <= 0 || c->player->p_pos.y <= 0 \
-			|| c->player->p_pos.x >= c->tilesize * c->map_width || c->player->p_pos.y >= c->tilesize * c->map_height)
-		return (ft_error("YOU WENT OFF OF THE MAP YOU FOOL!!\nVANISH NOW..."));
-	return (1);
+		|| c->player->p_pos.x >= c->tilesize * c->map_width || c->player->p_pos.y >= c->tilesize * c->map_height)
+	return (ft_error("YOU WENT OFF OF THE MAP YOU FOOL!!\nVANISH NOW..."));
 }
 
 void	ft_hook(void *param)
@@ -202,7 +206,7 @@ void	ft_hook(void *param)
 	check_movement(c);
 	mouse_move(c);
 	draw_rays(c);
-	display_3d_map(c);
+	//display_3d_map(c);
 	player_out(c);
 
 }

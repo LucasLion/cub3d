@@ -6,61 +6,39 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 11:20:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/06 14:55:56 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/06 16:37:37 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-mlx_image_t	**load_animation(t_cub *c)
+mlx_texture_t	**load_animation(t_cub *c)
 {
-	mlx_texture_t	*t[5];
-	mlx_image_t		**img;
-	int				i;
+	mlx_texture_t	**t;
 
-	i = 0;
-	img = ft_calloc(sizeof(mlx_image_t), 5);
+	t = ft_calloc(sizeof(mlx_texture_t *), 5);
 	t[0] = mlx_load_png("./textures/anim1.png");
 	t[1] = mlx_load_png("./textures/anim2.png");
 	t[2] = mlx_load_png("./textures/anim3.png");
 	t[3] = mlx_load_png("./textures/anim4.png");
 	t[4] = mlx_load_png("./textures/anim5.png");
-	while (i < 5)
-	{
-		img[i] = mlx_texture_to_image(c->mlx, t[i]);
-		i++;
-	}
-	return (img);
+	return (t);
 }
 
 void	draw_anim(t_cub *c, int x)
 {
-	mlx_image_t	**img;
-
-	img = load_animation(c);
-	if (x == 0)
-		mlx_delete_image(c->mlx, img[4]);
-	else if (x == 1)
-		mlx_delete_image(c->mlx, img[0]);
-	else if (x == 2)
-		mlx_delete_image(c->mlx, img[1]);
-	else if (x == 3)
-		mlx_delete_image(c->mlx, img[2]);
-	else if (x == 4)
-		mlx_delete_image(c->mlx, img[3]);
-	printf("x: %d\n", x);
-	mlx_image_to_window(c->mlx, img[x], c->true_screen_width - 4 * img[x]->width, SCREEN_HEIGHT - img[x]->height);
 }
 
 int	animation(t_cub *c)
 {
-	static float	x = 0;
+	static int	x = 0;
 
-	while (x <= 4)
+	while (x <= 60)
 	{
-		draw_anim(c, x);
-		x += 0.2;
+		c->player->img = mlx_texture_to_image(c->mlx, c->player->texture[x]);
+		mlx_image_to_window(c->mlx, c->player->img, 100, 100);
+		x++;
 	}
-	draw_anim(c, 0);
+	x = 0;
 	return (1);
 }

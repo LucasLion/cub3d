@@ -40,7 +40,6 @@
 - [OK] Re formater en remplacant tous les screen Height et screen width
 - [OK] rendre independant l'affichage de la 3d et de la map 3d
 - [OK] changer la maniere de se deplacer (pouvoir avancer et translater en meme temps)
-- [  ] selon l'orientation des murs, placer des ombres
 - [OK] gerer le probleme de fish-eye
 - [OK] ajouter des textures
 
@@ -48,15 +47,20 @@
 
 - [OK] Collision contre les murs
 - [OK] Un système de minicarte.
-- [  ] Porte qui peuvent être ouvertes/fermées.
+- [OK] Porte qui peuvent être ouvertes/fermées.
 - [  ] Animations (des sprites animés).
 - [OK] Faites pivoter le point de vue avec la souris.
+ 
+## BugFix
+
+- [OK] Capper hauteur de largeur d'ecran
+- [  ] input bulletproof
+- [  ] couleur de la map
 
 ## Misc
 
 - [OK] Reformater le code avec une bonne gestion d'erreurs
 - [OK] Reflechir a des structures de donnees plus pertinentes
-- [  ] GNL leak
 - [  ] Gestions des leaks
 - [  ] norminette
 
