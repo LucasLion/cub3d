@@ -1,8 +1,8 @@
 
-NO ./brick.png
-SO ./brick.png
-WE ./brick.png
-EA ./brick.png   
+NO ./textures/unnamed.png
+SO ./textures/unnamed.png
+WE ./textures/unnamed.png
+EA ./textures/unnamed.png 
 
 F 195,203,110
 C 228,230,168

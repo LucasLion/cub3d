@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/07 13:14:14 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/07 15:25:20 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void	check_a(t_cub *c)
 	t_point	futur_pos;
 
 	futur_pos.x = c->player->p_pos.x + cos(c->player->ang + (PI / 2)) * SPEED
-		* 10;
+		* 5;
 	futur_pos.y = c->player->p_pos.y - sin(c->player->ang + (PI / 2)) * SPEED
-		* 10;
+		* 5;
 	if (check_collision(futur_pos.x, c->player->p_pos.y, c))
 		c->player->p_pos.x += cos(c->player->ang + (PI / 2)) * SPEED;
 	if (check_collision(c->player->p_pos.x, futur_pos.y, c))
@@ -55,9 +55,9 @@ void	check_d(t_cub *c)
 	t_point	futur_pos;
 
 	futur_pos.x = c->player->p_pos.x + cos(c->player->ang - (PI / 2)) * SPEED
-		* 10;
+		* 5;
 	futur_pos.y = c->player->p_pos.y - sin(c->player->ang - (PI / 2)) * SPEED
-		* 10;
+		* 5;
 	if (check_collision(futur_pos.x, c->player->p_pos.y, c))
 		c->player->p_pos.x += cos(c->player->ang - (PI / 2)) * SPEED;
 	if (check_collision(c->player->p_pos.x, futur_pos.y, c))

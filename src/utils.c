@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:50:12 by llion             #+#    #+#             */
-/*   Updated: 2023/06/07 14:43:37 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/07 16:00:23 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_error(char *str)
 
 int	free_function(char **file, t_cub *c)
 {
-	if (c->t != NULL)
+	if (c->t)
 	{
 		mlx_delete_texture(c->textures[0]);
 		mlx_delete_texture(c->textures[1]);

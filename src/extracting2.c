@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:59:49 by llion             #+#    #+#             */
-/*   Updated: 2023/06/07 14:40:38 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/07 15:53:24 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,10 @@ t_textures	*get_textures(t_cub *c, char **file)
 	if (get_colors(c, file, tmp) == 0)
 	{
 		printf("Wrong colors\n");
+		free(tmp->no);
+		free(tmp->ea);
+		free(tmp->so);
+		free(tmp->we);
 		free(tmp);
 		return (NULL);
 	}
