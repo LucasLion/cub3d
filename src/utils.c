@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:50:12 by llion             #+#    #+#             */
-/*   Updated: 2023/06/07 11:08:52 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/07 14:43:37 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,6 @@ int	ft_error(char *str)
 	exit(EXIT_FAILURE);
 }
 
-void cursor(t_cub *c)
-{
-	mlx_texture_t *t;
-	mlx_win_cursor_t *cursor;
-
-	t = mlx_load_png(c->t->NO);
-	cursor = mlx_create_cursor(t);
-	mlx_set_cursor_mode(c->mlx, MLX_MOUSE_HIDDEN);
-}
-
 int	free_function(char **file, t_cub *c)
 {
 	if (c->t != NULL)
@@ -36,6 +26,10 @@ int	free_function(char **file, t_cub *c)
 		mlx_delete_texture(c->textures[1]);
 		mlx_delete_texture(c->textures[2]);
 		mlx_delete_texture(c->textures[3]);
+		free(c->t->no);
+		free(c->t->ea);
+		free(c->t->so);
+		free(c->t->we);
 	}
 	ft_freetab(file);
 	if (c->map)
@@ -45,7 +39,7 @@ int	free_function(char **file, t_cub *c)
 	return (0);
 }
 
-void init_cub_2(t_cub *c)
+void	init_cub_2(t_cub *c)
 {
 	c->map_height = ft_tablen(c->map);
 	c->map_width = map_width(c->map);
@@ -54,15 +48,15 @@ void init_cub_2(t_cub *c)
 	c->tilesize_2d = c->tilesize / 8;
 	if (SCREEN_WIDTH < c->view_ang * 1.5)
 		c->true_screen_width = c->view_ang;
-	else if (SCREEN_WIDTH < c->view_ang * 2.5 &&  SCREEN_WIDTH >= c->view_ang * 1.5)
+	else if (SCREEN_WIDTH < c->view_ang * 2.5 && SCREEN_WIDTH >= c->view_ang
+		* 1.5)
 		c->true_screen_width = c->view_ang * 2;
-	else if (SCREEN_WIDTH < c->view_ang * 3.5 &&  SCREEN_WIDTH >= c->view_ang * 2.5)
+	else if (SCREEN_WIDTH < c->view_ang * 3.5 && SCREEN_WIDTH >= c->view_ang
+		* 2.5)
 		c->true_screen_width = c->view_ang * 3;
 	else
 		c->true_screen_width = c->view_ang * 4;
 }
-
-
 
 int	init_cub(t_cub *c, char **file)
 {
@@ -71,10 +65,10 @@ int	init_cub(t_cub *c, char **file)
 	if (c->t == NULL)
 		return (0);
 	c->textures = ft_calloc(sizeof(mlx_texture_t *), 6);
-	c->textures[0] = mlx_load_png(c->t->NO);
-	c->textures[1] = mlx_load_png(c->t->SO);
-	c->textures[2] = mlx_load_png(c->t->WE);
-	c->textures[3] = mlx_load_png(c->t->EA);
+	c->textures[0] = mlx_load_png(c->t->no);
+	c->textures[1] = mlx_load_png(c->t->so);
+	c->textures[2] = mlx_load_png(c->t->we);
+	c->textures[3] = mlx_load_png(c->t->ea);
 	c->textures[4] = mlx_load_png("./textures/door.png");
 	c->t_exit = load_texture_anim(c);
 	c->t->nb_elems = 0;
@@ -85,9 +79,8 @@ int	init_cub(t_cub *c, char **file)
 		return (ft_error("Empty file"));
 	c->mlx = mlx_init(c->true_screen_width, SCREEN_HEIGHT, "CUB3D", true);
 	c->player = ft_calloc(1, sizeof(t_player));
-	cursor(c);
+	mlx_set_cursor_mode(c->mlx, MLX_MOUSE_HIDDEN);
 	if (!c->mlx)
 		return (ft_error("MLX failed"));
 	return (1);
 }
-
