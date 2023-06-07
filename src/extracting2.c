@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:59:49 by llion             #+#    #+#             */
-/*   Updated: 2023/06/05 14:09:07 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/07 09:30:07 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	trim(int *count, char **direction, char *texture, int *err)
 	fd = open(*direction,  O_RDONLY);
 	if (fd == - 1)
 	{
-		printf("Probleme avec path\n");
+		printf("Invalid file\n");
 		close(fd);
 		*err = 1;
 		return;
@@ -108,20 +108,15 @@ t_textures	*get_textures(t_cub *c, char **file)
 	
 	error = 0;
 	tmp = ft_calloc(1, sizeof(t_textures));
-	if (get_textures_wall(c, file, tmp, &error) == 0)
+	if (get_textures_wall(c, file, tmp, &error) == 0 || error == 1)
 	{
-		printf("Pas le bon nombre de textures\n");
+		printf("Wrong textures\n");
 		free (tmp);
 		tmp = NULL;
 	}
 	if (get_colors(c, file, tmp) == 0)
 	{	
-		printf("Pas le bon nombre de couleurs\n");
-		free (tmp);
-		tmp = NULL;
-	}
-	if (error == 1)
-	{
+		printf("Wrong colors\n");
 		free (tmp);
 		tmp = NULL;
 	}
