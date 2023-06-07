@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/07 09:35:20 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/07 09:38:49 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,7 +195,8 @@ int	player_out(t_cub *c)
 {
 	if (c->player->p_pos.x <= 0 || c->player->p_pos.y <= 0 \
 		|| c->player->p_pos.x >= c->tilesize * c->map_width || c->player->p_pos.y >= c->tilesize * c->map_height)
-	return (ft_error("YOU WENT OFF OF THE MAP YOU FOOL!!\nVANISH NOW..."));
+		return (ft_error("YOU WENT OFF OF THE MAP YOU FOOL!!\nVANISH NOW..."));
+	return (1);
 }
 
 void	ft_hook(void *param)
@@ -206,7 +207,7 @@ void	ft_hook(void *param)
 	check_movement(c);
 	mouse_move(c);
 	draw_rays(c);
-	//display_3d_map(c);
+	display_3d_map(c);
 	player_out(c);
 
 }

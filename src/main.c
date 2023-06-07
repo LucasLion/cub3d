@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/06/07 09:34:02 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/07 09:44:05 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void init_image(t_cub *c)
 
 int	main(int argc, char **argv)
 {
-	return (0);
 	char	**file;
 	t_cub	*c;
 
@@ -100,5 +99,6 @@ int	main(int argc, char **argv)
 	mlx_loop(c->mlx);
 	mlx_terminate(c->mlx);
 	free_function(file, c);
+	
 	return (0);
 }
