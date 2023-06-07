@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/06 14:27:16 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/07 11:22:57 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ void	set_struct_ray_H(t_cub *c, int i, t_point wall_hit, double len_ray)
 		c->rays[i].color = 0x0000ffff;
 		c->rays[i].dir = 'S';
 	}
-	if (c->rays[i].h_door == 1)
-		c->rays[i].door = 1;
+	if (c->rays[i].h_special == 1)
+		c->rays[i].special = 1;
+	if (c->rays[i].h_special == 2)
+		c->rays[i].special = 2;
 }
 
 void	set_struct_ray_V(t_cub *c, int i, t_point wall_hit, double len_ray)
@@ -65,8 +67,10 @@ void	set_struct_ray_V(t_cub *c, int i, t_point wall_hit, double len_ray)
 		c->rays[i].color = 0xff00ffff;
 		c->rays[i].dir = 'W'; 
 	}
-	if (c->rays[i].v_door == 1)
-		c->rays[i].door = 1;
+	if (c->rays[i].v_special == 1)
+		c->rays[i].special = 1;
+	if (c->rays[i].v_special == 2)
+		c->rays[i].special = 2;
 }
 
 void vert_or_hor(t_cub *c, int i)
@@ -117,7 +121,7 @@ void draw_rays(t_cub *c)
 	if (c->img2d)
 		mlx_delete_image(c->mlx, c->img2d);
 	c->img2d = mlx_new_image(c->mlx, c->tilesize_2d * c->map_width , c->tilesize_2d * c->map_height);
-	if (!c->img2d || (mlx_image_to_window(c->mlx, c->img2d, 0, 0) < 0))
+	if (!c->img2d || (mlx_image_to_window(c->mlx, c->img2d, 50 , 50) < 0))
 		return ;
 	while (i < c->view_ang)
 	{
@@ -127,9 +131,9 @@ void draw_rays(t_cub *c)
 			c->rays[i].ang -= 2 * PI;
 		else if (c->rays[i].ang  < 0)
 			c->rays[i].ang  += (2 * PI);
-		c->rays[i].door = 0;
-		c->rays[i].h_door = 0;
-		c->rays[i].v_door = 0;
+		c->rays[i].special = 0;
+		c->rays[i].h_special = 0;
+		c->rays[i].v_special = 0;
 		vert_or_hor(c, i);
 		fish_eye(c, i);
 		i++;

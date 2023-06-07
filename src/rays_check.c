@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:46:22 by llion             #+#    #+#             */
-/*   Updated: 2023/06/06 14:29:10 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/07 11:16:22 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,13 @@ void	loop_h(t_cub *c, t_point offset, int ang, t_point *end)
 		{
 			i = end->y / c->tilesize;
 			j = end->x / c->tilesize;
-			if (i < 0 || j <  0  || i > c->map_height || j > c->map_width || (c->map[i][j] == '1') || (c->map[i][j] == '2'))
+			if (i < 0 || j <  0  || i > c->map_height || j > c->map_width\
+				|| (c->map[i][j] == '1') || (c->map[i][j] == '2') || (c->map[i][j] == 'P'))
 			{
 				if (c->map[i][j] == '2')
-					c->rays[ang].h_door = 1;
+					c->rays[ang].h_special = 1;
+				if (c->map[i][j] == 'P')
+					c->rays[ang].h_special = 2;
 				k = c->map_height;
 				break;
 			}
@@ -86,10 +89,13 @@ void	loop_v(t_cub *c, t_point offset, int ang, t_point *end)
 		{
 			i = end->y / c->tilesize;
 			j = end->x / c->tilesize;
-			if (i < 0 || j <  0  || i > c->map_height || j > c->map_width || (c->map[i][j] == '1') || (c->map[i][j] == '2'))
+			if (i < 0 || j <  0  || i > c->map_height || j > c->map_width \
+				|| (c->map[i][j] == '1') || (c->map[i][j] == '2') || (c->map[i][j] == 'P'))
 			{
 				if (c->map[i][j] == '2')
-					c->rays[ang].v_door = 1;
+					c->rays[ang].v_special = 1;
+				if (c->map[i][j] == 'P')
+					c->rays[ang].v_special = 2;
 				k = c->map_width;
 				break;
 			}
@@ -135,8 +141,8 @@ void check_vertical(t_cub *c, t_point *start, t_point *end, int ray)
 
 t_point	reduce_point(t_point p, t_cub *c)
 {
-	p.x =  (p.x) / c->tilesize * c->tilesize_2d;
-	p.y =  (p.y) /  c->tilesize * c->tilesize_2d;
+	p.x =  ((p.x) / c->tilesize * c->tilesize_2d);
+	p.y =  ((p.y) /  c->tilesize * c->tilesize_2d);
 	return (p);
 }
 

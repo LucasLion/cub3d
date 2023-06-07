@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/06 14:34:20 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/07 11:11:41 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	put_square(t_cub *c, int x, int y, long int color)
 		}
 		i++;
 	}
-	if (!img || (mlx_image_to_window(c->mlx, img, y * c->tilesize_2d , x * c->tilesize_2d ))< 0)
+	if (!img || (mlx_image_to_window(c->mlx, img, y * c->tilesize_2d + 50 , x * c->tilesize_2d + 50 ))< 0)
 		return ;
 	img->instances[0].z = 1;
 }
@@ -73,7 +73,7 @@ int	display_2d_map(t_cub *c)
 			if (c->map[i][j] == '0' || c->map[i][j] == 'W' || c->map[i][j] == 'E' \
 				|| c->map[i][j] == 'S' || c->map[i][j] == 'N')
 			{
-				put_square(c, i, j, 0xffffff55);
+				put_square(c, i, j, 0xffffffff);
 				if (c->map[i][j] != '0')
 				{
 					c->player->m_pos.x = i;
@@ -81,9 +81,9 @@ int	display_2d_map(t_cub *c)
 				}
 			}
 			else if (c->map[i][j] == '1' )
-				put_square(c, i, j, 0x00000055);
+				put_square(c, i, j, 0x000000ff);
 			else if (c->map[i][j] == '2')
-				put_square(c, i, j, 0xff000055);
+				put_square(c, i, j, 0xff0000ff);
 			j++;
 		}
 		i++;

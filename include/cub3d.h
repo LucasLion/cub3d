@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/06/07 10:03:26 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/07 10:55:06 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ typedef struct	s_rays
 	t_point				wall;
 	char				dir;
 	long unsigned int	color;	
-	int					door;
-	int					v_door;
-	int					h_door;
+	int					special;
+	int					v_special;
+	int					h_special;
 }				t_rays;
 
 
@@ -75,6 +75,7 @@ typedef struct	s_player
 
 typedef struct	s_cub
 {
+	int					static_var;
 	int					screen_width;
 	int					screen_height;
 	int					map_width;

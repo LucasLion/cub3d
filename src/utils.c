@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:50:12 by llion             #+#    #+#             */
-/*   Updated: 2023/06/07 10:36:42 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/07 11:08:52 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ int	init_cub(t_cub *c, char **file)
 	c->mlx = mlx_init(c->true_screen_width, SCREEN_HEIGHT, "CUB3D", true);
 	c->player = ft_calloc(1, sizeof(t_player));
 	cursor(c);
-	c->i_exit = mlx_texture_to_image(c->mlx, c->t_exit[0]);
-	mlx_image_to_window(c->mlx, c->i_exit, 100, 100);
 	if (!c->mlx)
 		return (ft_error("MLX failed"));
 	return (1);

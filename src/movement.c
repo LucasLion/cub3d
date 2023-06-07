@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/07 10:36:41 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/07 11:23:43 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,7 @@ void	ft_hook(void *param)
 	t_cub *c;
 
 	c = param;
-	animation(c);
+	//animation(c);
 	check_movement(c);
 	mouse_move(c);
 	draw_rays(c);

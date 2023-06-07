@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 11:20:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/07 10:38:12 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/07 11:06:03 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,15 @@ mlx_texture_t	**load_texture_anim(t_cub *c)
 int	animation(t_cub *c)
 {
 	static int	x = 0;
+
+	c->static_var = x;
 	if (x >= 14)
 		x = 0;
-	if (c->i_exit)
-		mlx_delete_image(c->mlx, c->i_exit);
-	c->i_exit = mlx_texture_to_image(c->mlx, c->t_exit[x]);
-	//mlx_delete_texture(c->t_exit[x]);
-	mlx_image_to_window(c->mlx, c->i_exit, 100, 100);
+	if (c->t_exit[x])
+		mlx_delete_texture(c->t_exit[x]);
+	//if (c->i_exit)
+	//	mlx_delete_image(c->mlx, c->i_exit);
+	//c->i_exit = mlx_texture_to_image(c->mlx, c->t_exit[x]);
 	x++;
 	return (1);
 }
