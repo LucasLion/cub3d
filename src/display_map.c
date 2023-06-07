@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/07 11:11:41 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/07 11:53:21 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,12 @@ int	display_2d_map(t_cub *c)
 				put_square(c, i, j, 0x000000ff);
 			else if (c->map[i][j] == '2')
 				put_square(c, i, j, 0xff0000ff);
+			else if (c->map[i][j] == 'P')
+			{
+				c->portal_pos.x = j * 64.0;
+				c->portal_pos.y = i * 64.0;
+				put_square(c, i, j, 0x00ff00ff);
+			}
 			j++;
 		}
 		i++;

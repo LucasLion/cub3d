@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/07 11:00:33 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/07 11:30:21 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void calculate_pix_x(t_cub *c, int i, mlx_texture_t **t)
 	}
 	if (c->rays[i].special == 1)
 		*t = c->textures[4];
-	//if (c->rays[i].special == 2)
-	//	*t = c->t_exit[c->static_var];
+	if (c->rays[i].special == 2)
+		*t = c->t_exit[c->static_var];
 }
 
 
