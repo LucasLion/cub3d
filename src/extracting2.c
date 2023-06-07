@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:59:49 by llion             #+#    #+#             */
-/*   Updated: 2023/06/07 09:30:07 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/07 09:40:06 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,20 @@ uint32_t	split_and_convert(char *line, uint8_t transp)
 	uint8_t red;
 	uint8_t green;
 	uint8_t blue;
+	int i = 0;
 	
 	tmp = ft_split(line, ',');
+	while (tmp[i])
+		i++;
+	if (i != 3)
+	{
+		ft_freetab(tmp);
+		return (0);
+	}
 	red = ft_atoi(tmp[0]);
 	green = ft_atoi(tmp[1]);
 	blue = ft_atoi(tmp[2]);
+	ft_freetab(tmp);
 	tmp = NULL;
 	return ((red << 24) | (green  << 16) | (blue << 8) | (transp));
 }
@@ -95,7 +104,7 @@ int get_colors(t_cub *c, char **file, t_textures *t)
 		ft_freetab(line);
 		i++;
 	}
-	if (a == 2)
+	if (a == 2 && t->floor != 0 && t->ceiling != 0)
 		return (1);
 	return (0);
 }
@@ -112,13 +121,13 @@ t_textures	*get_textures(t_cub *c, char **file)
 	{
 		printf("Wrong textures\n");
 		free (tmp);
-		tmp = NULL;
+		return (NULL);
 	}
 	if (get_colors(c, file, tmp) == 0)
 	{	
 		printf("Wrong colors\n");
 		free (tmp);
-		tmp = NULL;
+		return (NULL);
 	}
 	return (tmp);	
 }
