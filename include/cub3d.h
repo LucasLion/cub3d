@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/06/07 09:40:14 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/07 10:03:26 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ typedef struct	s_cub
 	long unsigned int	color;
 	t_textures			*t;	
 	mlx_texture_t		**textures;
-	mlx_image_t			*i_door;
-	mlx_texture_t		*t_door;
+	mlx_image_t			*i_exit;
+	mlx_texture_t		**t_exit;
 	int					nb_line_map_start;
 	int					line_H;
 	t_point				start;
@@ -168,8 +168,8 @@ t_point	reduce_point(t_point p, t_cub *c);
 
 int				animation(t_cub *c);
 mlx_texture_t	**load_animation(t_cub *c);
-mlx_image_t		*load_image(t_cub *c, int x);
+void			load_image(t_cub *c, int x);
 void			draw_anim(t_cub *c, int x);
-mlx_texture_t	*load_texture_anim(t_cub *c, int x);
+mlx_texture_t	**load_texture_anim(t_cub *c);
 
 #endif

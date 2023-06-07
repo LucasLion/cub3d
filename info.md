@@ -54,7 +54,7 @@
 ## BugFix
 
 - [OK] Capper hauteur de largeur d'ecran
-- [  ] input bulletproof
+- [OK] input bulletproof
 - [  ] couleur de la map
 
 ## Misc

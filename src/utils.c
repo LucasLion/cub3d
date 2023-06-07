@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:50:12 by llion             #+#    #+#             */
-/*   Updated: 2023/06/06 17:54:06 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/07 10:13:46 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,13 @@ int	init_cub(t_cub *c, char **file)
 	c->t = get_textures(c, file);
 	if (c->t == NULL)
 		return (0);
-	c->textures = ft_calloc(5, sizeof(mlx_texture_t *));
+	c->textures = ft_calloc(sizeof(mlx_texture_t *), 6);
 	c->textures[0] = mlx_load_png(c->t->NO);
 	c->textures[1] = mlx_load_png(c->t->SO);
 	c->textures[2] = mlx_load_png(c->t->WE);
 	c->textures[3] = mlx_load_png(c->t->EA);
 	c->textures[4] = mlx_load_png("./textures/door.png");
+	c->t_exit = load_texture_anim(c);
 	c->t->nb_elems = 0;
 	c->map = get_map(file, c->nb_line_map_start);
 	init_cub_2(c);
@@ -85,6 +86,8 @@ int	init_cub(t_cub *c, char **file)
 	c->mlx = mlx_init(c->true_screen_width, SCREEN_HEIGHT, "CUB3D", true);
 	c->player = ft_calloc(1, sizeof(t_player));
 	cursor(c);
+	c->i_exit = mlx_texture_to_image(c->mlx, c->t_exit[0]);
+	mlx_image_to_window(c->mlx, c->i_exit, 100, 100);
 	if (!c->mlx)
 		return (ft_error("MLX failed"));
 	return (1);
