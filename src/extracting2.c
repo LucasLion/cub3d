@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:59:49 by llion             #+#    #+#             */
-/*   Updated: 2023/06/05 14:09:07 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/07 09:29:36 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,20 @@ uint32_t	split_and_convert(char *line, uint8_t transp)
 	uint8_t red;
 	uint8_t green;
 	uint8_t blue;
+	int i = 0;
 	
 	tmp = ft_split(line, ',');
+	while (tmp[i])
+		i++;
+	if (i != 3)
+	{
+		ft_freetab(tmp);
+		return (0);
+	}
 	red = ft_atoi(tmp[0]);
 	green = ft_atoi(tmp[1]);
 	blue = ft_atoi(tmp[2]);
+	ft_freetab(tmp);
 	tmp = NULL;
 	return ((red << 24) | (green  << 16) | (blue << 8) | (transp));
 }
@@ -35,7 +44,7 @@ void	trim(int *count, char **direction, char *texture, int *err)
 	fd = open(*direction,  O_RDONLY);
 	if (fd == - 1)
 	{
-		printf("Probleme avec path\n");
+		printf("Wrong path\n");
 		close(fd);
 		*err = 1;
 		return;
@@ -95,7 +104,7 @@ int get_colors(t_cub *c, char **file, t_textures *t)
 		ft_freetab(line);
 		i++;
 	}
-	if (a == 2)
+	if (a == 2 && t->floor != 0 && t->ceiling != 0)
 		return (1);
 	return (0);
 }
@@ -108,22 +117,17 @@ t_textures	*get_textures(t_cub *c, char **file)
 	
 	error = 0;
 	tmp = ft_calloc(1, sizeof(t_textures));
-	if (get_textures_wall(c, file, tmp, &error) == 0)
+	if (get_textures_wall(c, file, tmp, &error) == 0 || error == 1)
 	{
-		printf("Pas le bon nombre de textures\n");
+		printf("Problem with textures\n");
 		free (tmp);
-		tmp = NULL;
+		return (NULL);
 	}
 	if (get_colors(c, file, tmp) == 0)
 	{	
-		printf("Pas le bon nombre de couleurs\n");
+		printf("Problem with colors\n");
 		free (tmp);
-		tmp = NULL;
-	}
-	if (error == 1)
-	{
-		free (tmp);
-		tmp = NULL;
+		return (NULL);
 	}
 	return (tmp);	
 }

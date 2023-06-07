@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/06/06 17:43:10 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/07 09:34:02 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void init_image(t_cub *c)
 {
 	mlx_image_t	*img;
 
-	img = mlx_new_image(c->mlx, c->true_screen_width , SCREEN_HEIGHT - 1);
+	img = mlx_new_image(c->mlx, c->true_screen_width - 1 , SCREEN_HEIGHT - 1);
 	draw_rectangle(img, 0, SCREEN_HEIGHT / 2, c->t->ceiling);
 	draw_rectangle(img, SCREEN_HEIGHT  / 2, img->height, c->t->floor);
 	if (!img || (mlx_image_to_window(c->mlx, img, 0,0 ))< 0)
@@ -82,16 +82,19 @@ int	main(int argc, char **argv)
 	else
 		return (-1);
 	if (init_cub(c, file) == 0)
+	{
+		free_function(file, c);
 		return (-1);
+	}
 	if (parsing(file, c) == 0)
 	{
 		free_function(file, c);
 		return (-1);
 	}
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
+	init_image(c);
 	display_2d_map(c);
 	init_player(c);
-	init_image(c);
 	mlx_key_hook(c->mlx, &move_player, c);
 	mlx_loop_hook(c->mlx, &ft_hook, c);
 	mlx_loop(c->mlx);
