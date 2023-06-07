@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 15:06:29 by llion             #+#    #+#             */
-/*   Updated: 2023/06/07 09:42:07 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/07 10:36:30 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ t_player	*init_player(t_cub *c)
 		c->player->ang = PI / 2 * 3 ;
 	else if (c->map[i][j] == 'W')
 		c->player->ang = PI;
-	//c->player->texture = load_animation(c);
 	return (c->player);
 }

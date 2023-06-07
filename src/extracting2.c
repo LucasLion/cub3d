@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:59:49 by llion             #+#    #+#             */
-/*   Updated: 2023/06/07 09:40:06 by llion            ###   ########.fr       */
+/*   Updated: 2023/06/07 10:39:30 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,12 @@ void	trim(int *count, char **direction, char *texture, int *err)
 	{
 		printf("Invalid file\n");
 		close(fd);
+		//free(*direction);
 		*err = 1;
 		return;
 	}
 	close (fd);
+	//free(*direction);
 	(*count)++;
 }
 
