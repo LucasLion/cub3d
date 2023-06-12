@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/06/07 14:37:29 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/12 14:51:31 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,10 @@ void	init(t_cub *c)
 	display_2d_map(c);
 	init_player(c);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
+	mlx_key_hook(c->mlx, &move_player, c);
+	mlx_loop_hook(c->mlx, &ft_hook, c);
+	mlx_loop(c->mlx);
+	mlx_terminate(c->mlx);
 }
 
 int	main(int argc, char **argv)
@@ -71,7 +75,10 @@ int	main(int argc, char **argv)
 	if (parse_file(argc, argv) != 0)
 		file = get_file(argv);
 	else
+	{
+		free_function(file, c);
 		return (-1);
+	}
 	if (init_cub(c, file) == 0)
 	{
 		free_function(file, c);
@@ -83,10 +90,6 @@ int	main(int argc, char **argv)
 		return (-1);
 	}
 	init(c);
-	mlx_key_hook(c->mlx, &move_player, c);
-	mlx_loop_hook(c->mlx, &ft_hook, c);
-	mlx_loop(c->mlx);
-	mlx_terminate(c->mlx);
 	free_function(file, c);
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: amouly <amouly@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 15:27:43 by llion             #+#    #+#              #
-#    Updated: 2023/06/07 14:32:31 by amouly           ###   ########.fr        #
+#    Updated: 2023/06/07 16:16:04 by amouly           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ $(NAME) : $(OBJ) $(LIBFT) $(MLX)
 	$(call echo,COMPILED,cub3d,32)
 
 $(LIBFT): libft/Makefile
-	@$(MAKE) -C libft
+	@$(MAKE) -sC libft
 
 libft/Makefile: libft/src/*.c libft/include/*.h
 	@$(MAKE) -sC libft

@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:50:12 by llion             #+#    #+#             */
-/*   Updated: 2023/06/07 16:00:23 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/12 15:09:58 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,26 @@ int	free_function(char **file, t_cub *c)
 {
 	if (c->t)
 	{
-		mlx_delete_texture(c->textures[0]);
-		mlx_delete_texture(c->textures[1]);
-		mlx_delete_texture(c->textures[2]);
-		mlx_delete_texture(c->textures[3]);
+		if (c->textures[0] != NULL)
+			mlx_delete_texture(c->textures[0]);
+		if (c->textures[1] != NULL)
+			mlx_delete_texture(c->textures[1]);
+		if (c->textures[2] != NULL)
+			mlx_delete_texture(c->textures[2]);
+		if (c->textures[3] != NULL)
+			mlx_delete_texture(c->textures[3]);
 		free(c->t->no);
 		free(c->t->ea);
 		free(c->t->so);
 		free(c->t->we);
+		free(c->textures);
 	}
-	ft_freetab(file);
+	if (file)
+		ft_freetab(file);
 	if (c->map)
 		ft_freetab(c->map);
-	free(c->t);
 	free(c);
+	free(c->t);
 	return (0);
 }
 
@@ -49,10 +55,10 @@ void	init_cub_2(t_cub *c)
 	if (SCREEN_WIDTH < c->view_ang * 1.5)
 		c->true_screen_width = c->view_ang;
 	else if (SCREEN_WIDTH < c->view_ang * 2.5 && SCREEN_WIDTH >= c->view_ang
-		* 1.5)
+			* 1.5)
 		c->true_screen_width = c->view_ang * 2;
 	else if (SCREEN_WIDTH < c->view_ang * 3.5 && SCREEN_WIDTH >= c->view_ang
-		* 2.5)
+			* 2.5)
 		c->true_screen_width = c->view_ang * 3;
 	else
 		c->true_screen_width = c->view_ang * 4;
@@ -69,9 +75,11 @@ int	init_cub(t_cub *c, char **file)
 	c->textures[1] = mlx_load_png(c->t->so);
 	c->textures[2] = mlx_load_png(c->t->we);
 	c->textures[3] = mlx_load_png(c->t->ea);
+	if (c->textures[0] == NULL || c->textures[1] == NULL
+		|| c->textures[2] == NULL || c->textures[3] == NULL)
+		return (0);
 	c->textures[4] = mlx_load_png("./textures/door.png");
 	c->t_exit = load_texture_anim(c);
-	c->t->nb_elems = 0;
 	c->map = get_map(file, c->nb_line_map_start);
 	init_cub_2(c);
 	c->rays = ft_calloc(c->view_ang, sizeof(t_rays));
