@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:50:12 by llion             #+#    #+#             */
-/*   Updated: 2023/06/12 15:09:58 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/12 15:14:19 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ void	init_cub_2(t_cub *c)
 	if (SCREEN_WIDTH < c->view_ang * 1.5)
 		c->true_screen_width = c->view_ang;
 	else if (SCREEN_WIDTH < c->view_ang * 2.5 && SCREEN_WIDTH >= c->view_ang
-			* 1.5)
+		* 1.5)
 		c->true_screen_width = c->view_ang * 2;
 	else if (SCREEN_WIDTH < c->view_ang * 3.5 && SCREEN_WIDTH >= c->view_ang
-			* 2.5)
+		* 2.5)
 		c->true_screen_width = c->view_ang * 3;
 	else
 		c->true_screen_width = c->view_ang * 4;
