@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/06/12 14:51:31 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/12 15:52:05 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	draw_rectangle(mlx_image_t *img, int y_start, int y_end,
 	int	i;
 	int	j;
 
-	i = 2;
+	i = 0;
 	while (i < img->width)
 	{
 		j = y_start;
@@ -72,6 +72,7 @@ int	main(int argc, char **argv)
 	t_cub	*c;
 
 	c = ft_calloc(1, sizeof(t_cub));
+	file = 0;
 	if (parse_file(argc, argv) != 0)
 		file = get_file(argv);
 	else
