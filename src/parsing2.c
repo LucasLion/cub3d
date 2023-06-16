@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 16:43:14 by llion             #+#    #+#             */
-/*   Updated: 2023/06/16 09:25:44 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/16 09:36:55 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	parse_file(int argc, char **av)
 		return (1);
 	}
 	else
-		return (0);
+		return (ft_error("Wrong number of arguments"));
 }
 
 int	check_spaces(char c, char **m, int i, int j)
