@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 17:31:32 by llion             #+#    #+#             */
-/*   Updated: 2023/06/07 13:15:40 by amouly           ###   ########.fr       */
+/*   Updated: 2023/06/16 09:27:55 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ int	parse_number_players(char **map)
 			j++;
 		}
 		i++;
+		if (i > 50 || j > 50)
+			return (ft_error("Map too big"));
 	}
 	if (nb_players != 1)
 		return (ft_error("Wrong number of players"));
