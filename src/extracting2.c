@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:59:49 by llion             #+#    #+#             */
-/*   Updated: 2023/06/07 15:53:24 by amouly           ###   ########.fr       */
+/*   Updated: 2023/07/05 14:00:21 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,13 @@ int	get_textures_wall(t_cub *c, char **file, t_textures *t, int *err)
 	while (i < c->nb_line_map_start)
 	{
 		line = ft_split(file[i], ' ');
-		if (ft_strncmp(line[0], "NO", 2) == 0)
+		if (ft_strncmp(line[0], "NO", 3) == 0)
 			trim(&count, &t->no, line[1], err);
-		else if (ft_strncmp(line[0], "SO", 2) == 0)
+		else if (ft_strncmp(line[0], "SO", 3) == 0)
 			trim(&count, &t->so, line[1], err);
-		else if (ft_strncmp(line[0], "WE", 2) == 0)
+		else if (ft_strncmp(line[0], "WE", 3) == 0)
 			trim(&count, &t->we, line[1], err);
-		else if (ft_strncmp(line[0], "EA", 2) == 0)
+		else if (ft_strncmp(line[0], "EA", 3) == 0)
 			trim(&count, &t->ea, line[1], err);
 		ft_freetab(line);
 		i++;
@@ -120,8 +120,8 @@ t_textures	*get_textures(t_cub *c, char **file)
 	tmp = ft_calloc(1, sizeof(t_textures));
 	if (get_textures_wall(c, file, tmp, &error) == 0 || error == 1)
 	{
-		printf("Wrong textures\n");
 		free(tmp);
+		ft_error("Wrong textures");
 		return (NULL);
 	}
 	if (get_colors(c, file, tmp) == 0)

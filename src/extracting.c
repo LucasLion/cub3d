@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:59:49 by llion             #+#    #+#             */
-/*   Updated: 2023/06/07 13:34:44 by amouly           ###   ########.fr       */
+/*   Updated: 2023/07/05 11:51:14 by llion            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	get_nb_lines_in_map_file(int fd, char **argv)
 	return (num_lines);
 }
 
-void	loop_map_start(char **f, int *i, int *k)
+void	loop_map_start(char **f, int *i, int *k, int *z)
 {
 	int	j;
 
@@ -39,7 +39,7 @@ void	loop_map_start(char **f, int *i, int *k)
 		j++;
 	if (f[*i][j] == '\n')
 	{
-		(*i)++;
+		(*z)++;
 		return ;
 	}
 	if (!((f[*i][j] == 'N' && f[*i][j + 1] == 'O') || (f[*i][j] == 'S'
@@ -50,20 +50,24 @@ void	loop_map_start(char **f, int *i, int *k)
 		return ;
 	else
 		(*k)++;
-	(*i)++;
+	(*z)++;
 }
 
 int	get_nb_line_map_start(char **f, t_cub *c)
 {
 	int	i;
-	int	j;
 	int	k;
+	int	z;
 
 	i = 0;
 	k = 0;
-	while (i < ft_tablen(f) && k < 6)
-		loop_map_start(f, &i, &k);
-	return (i);
+	z = 0;
+	while (i < ft_tablen(f) && k < 6 && z < ft_tablen(f))
+	{
+		loop_map_start(f, &i, &k, &z);
+		i++;
+	}
+	return (z);
 }
 
 char	**get_file(char **argv)
