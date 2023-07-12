@@ -6,11 +6,27 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/07 13:14:29 by amouly           ###   ########.fr       */
+/*   Updated: 2023/07/12 17:36:55 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+void	pause_game(t_cub *c)
+{
+	if (c->pause == 0)
+	{
+		c->pause = 1;
+		mlx_set_cursor_mode(c->mlx, MLX_MOUSE_NORMAL);
+		return ;
+	}
+	if (c->pause == 1)
+	{
+		c->pause = 0;
+		mlx_set_cursor_mode(c->mlx, MLX_MOUSE_HIDDEN);
+		return ;
+	}
+}
 
 void	press_key(mlx_key_data_t keydata, void *param)
 {
@@ -63,6 +79,8 @@ void	move_player(mlx_key_data_t keydata, void *param)
 		toggle_door(c->player->p_pos.x, c->player->p_pos.y, c);
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		mlx_close_window(c->mlx);
+	if (keydata.key == MLX_KEY_T && keydata.action == MLX_PRESS)
+		pause_game(c);
 	if (keydata.action == MLX_PRESS)
 		press_key(keydata, param);
 	if (keydata.action == MLX_RELEASE)

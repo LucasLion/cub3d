@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:50:12 by llion             #+#    #+#             */
-/*   Updated: 2023/07/05 12:29:39 by llion            ###   ########.fr       */
+/*   Updated: 2023/07/12 17:25:16 by amouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ void	init_cub_2(t_cub *c)
 		c->true_screen_width = c->view_ang * 3;
 	else
 		c->true_screen_width = c->view_ang * 4;
+	c->pause = 0;
+	c->rays = ft_calloc(c->view_ang, sizeof(t_rays));
+	c->player = ft_calloc(1, sizeof(t_player));
 }
 
 int	init_cub(t_cub *c, char **file)
@@ -84,11 +87,9 @@ int	init_cub(t_cub *c, char **file)
 	if (c->map == NULL)
 		return (ft_error("No map"));
 	init_cub_2(c);
-	c->rays = ft_calloc(c->view_ang, sizeof(t_rays));
 	if (!c->map)
 		return (ft_error("Empty file"));
 	c->mlx = mlx_init(c->true_screen_width, SCREEN_HEIGHT, "CUB3D", true);
-	c->player = ft_calloc(1, sizeof(t_player));
 	mlx_set_cursor_mode(c->mlx, MLX_MOUSE_HIDDEN);
 	if (!c->mlx)
 		return (ft_error("MLX failed"));
