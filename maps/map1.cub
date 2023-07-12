@@ -1,10 +1,12 @@
 NO ./textures/unnamed.png
 SO    ./textures/unnamed.png
-W    ./textures/unnamed.png
-EA  ./textures/unnamed.png
+
 
 F 195,203,110
 C 228,230,168
+
+WE   ./textures/unnamed.png
+EA  ./textures/unnamed.png
 
 1111111111111111111111111111
 10000000000000N0010000000001
@@ -19,3 +21,4 @@ C 228,230,168
 100001111000000011111000001 
 1000000000000000000000000001
 111111111111111111111111111
+
