@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 16:43:14 by llion             #+#    #+#             */
-/*   Updated: 2023/07/16 11:28:06 by llion@student    ###   ########.fr       */
+/*   Updated: 2023/07/16 11:42:05 by llion@student    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	parse_file(int argc, char **av)
 
 int	check_spaces(char c, char **m, int i, int j)
 {
-	if (c == '0')
+	if (c == '0' || c == 'E' || c == 'N' || c == 'S' || c == 'W')
 	{
 		if ((m[i][j + 1] == ' ' || m[i][j + 1] == 0 || m[i][j + 1] == '\n')
 			|| (m[i][j - 1] == ' ' || m[i][j - 1] == 0 || m[i][j - 1] == '\n')

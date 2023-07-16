@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:50:12 by llion             #+#    #+#             */
-/*   Updated: 2023/07/16 11:30:25 by llion@student    ###   ########.fr       */
+/*   Updated: 2023/07/16 11:39:25 by llion@student    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	init_cub(t_cub *c, char **file)
 		|| c->textures[2] == NULL || c->textures[3] == NULL)
 		return (ft_error("Missing Texture"));
 	c->textures[4] = mlx_load_png("./textures/door.png");
-	c->t_exit = load_texture_anim(c);
+	c->t_exit = load_texture_anim();
 	c->map = get_map(file, c->nb_line_map_start);
 	if (c->map == NULL)
 		return (ft_error("No map"));
