@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/07/12 17:36:55 by amouly           ###   ########.fr       */
+/*   Updated: 2023/07/16 11:29:43 by llion@student    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	move_player(mlx_key_data_t keydata, void *param)
 
 	c = param;
 	if (keydata.action == MLX_RELEASE && keydata.key == MLX_KEY_SPACE)
-		toggle_door(c->player->p_pos.x, c->player->p_pos.y, c);
+		toggle_door(c);
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		mlx_close_window(c->mlx);
 	if (keydata.key == MLX_KEY_T && keydata.action == MLX_PRESS)

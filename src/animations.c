@@ -6,13 +6,13 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 11:20:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/07 14:21:39 by amouly           ###   ########.fr       */
+/*   Updated: 2023/07/16 11:30:43 by llion@student    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-mlx_texture_t	**load_texture_anim(t_cub *c)
+mlx_texture_t	**load_texture_anim(void)
 {
 	mlx_texture_t	**t;
 

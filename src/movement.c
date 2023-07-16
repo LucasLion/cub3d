@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/07/12 17:25:53 by amouly           ###   ########.fr       */
+/*   Updated: 2023/07/16 11:29:16 by llion@student    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	mouse_move(t_cub *c)
 	mlx_set_mouse_pos(c->mlx, c->true_screen_width / 2, SCREEN_HEIGHT / 2);
 }
 
-void	toggle_door(float i, float j, t_cub *c)
+void	toggle_door(t_cub *c)
 {
 	int		k;
 	int		l;

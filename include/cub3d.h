@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:15:02 by llion             #+#    #+#             */
-/*   Updated: 2023/07/12 16:54:09 by amouly           ###   ########.fr       */
+/*   Updated: 2023/07/16 11:32:48 by llion@student    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ typedef struct s_cub
 	int					true_screen_width;
 	int					true_screen_height;
 	int					view_ang;
-	int 				pause;
+	int					pause;
 	t_point				portal_pos;
 	mlx_t				*mlx;
 	char				**map;
@@ -109,7 +109,7 @@ typedef struct s_cub
 
 int						ft_error(char *str);
 int						get_nb_lines_in_map_file(int fd, char **argv);
-int						get_nb_line_map_start(char **f, t_cub *c);
+int						get_nb_line_map_start(char **f);
 char					**get_file(char **argv);
 char					**get_description(char **map);
 char					**get_map(char **file, int i);
@@ -179,7 +179,7 @@ int						animation(t_cub *c);
 mlx_texture_t			**load_animation(t_cub *c);
 void					load_image(t_cub *c, int x);
 void					draw_anim(t_cub *c, int x);
-mlx_texture_t			**load_texture_anim(t_cub *c);
+mlx_texture_t			**load_texture_anim(void);
 
 /* ----------- MOVEMENT ----------- */
 
@@ -190,7 +190,7 @@ void					release_key(mlx_key_data_t keydata, void *param);
 void					move_player(mlx_key_data_t keydata, void *param);
 int						check_collision(float x, float y, t_cub *c);
 void					check_movement(t_cub *c);
-void					toggle_door(float i, float j, t_cub *c);
+void					toggle_door(t_cub *c);
 
 /* ----------- PARSING ----------- */
 

@@ -6,7 +6,7 @@
 #    By: amouly <amouly@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 15:27:43 by llion             #+#    #+#              #
-#    Updated: 2023/07/12 16:50:36 by amouly           ###   ########.fr        #
+#    Updated: 2023/07/16 11:24:05 by llion@student    ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ endef
 NAME		= cub3D 
 CC			= gcc
 RM			= rm -rf
-FLAGS		= -Wall -Werror -Wextra -g3
+CFLAGS		= -Wall -Werror -Wextra -g3
 LIBFT		= libft/libft.a
 MLX			= libmlx42.a
 HEADERS		= -Iinclude -Ilibft/include -L/Users/$(USER)/.brew/Cellar/glfw/3.3.8/lib -lglfw  \
@@ -54,7 +54,7 @@ all:  $(NAME)
 
 obj/%.o : src/%.c
 	@mkdir -p obj
-	@$(CC) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME) : $(OBJ) $(LIBFT) $(MLX)
 	@$(CC) $(FLAGS) $(OBJ) -Llibft -lft $(HEADERS) $(MLX) -o $(NAME)	

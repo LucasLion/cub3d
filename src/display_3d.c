@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:43:09 by llion             #+#    #+#             */
-/*   Updated: 2023/06/07 14:45:22 by amouly           ###   ########.fr       */
+/*   Updated: 2023/07/16 11:28:19 by llion@student    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,6 @@ void	pix_draw(t_cub *c, mlx_texture_t *texture, int start_y)
 
 void	draw_pixels(t_cub *c, mlx_texture_t *texture)
 {
-	int	pixel;
-
-	pixel = 0;
 	if (c->line_h < SCREEN_HEIGHT)
 		pix_draw(c, texture, c->start.y);
 	else

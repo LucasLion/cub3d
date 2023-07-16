@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:59:49 by llion             #+#    #+#             */
-/*   Updated: 2023/07/05 11:51:14 by llion            ###   ########.fr       */
+/*   Updated: 2023/07/16 11:26:53 by llion@student    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	loop_map_start(char **f, int *i, int *k, int *z)
 	(*z)++;
 }
 
-int	get_nb_line_map_start(char **f, t_cub *c)
+int	get_nb_line_map_start(char **f)
 {
 	int	i;
 	int	k;

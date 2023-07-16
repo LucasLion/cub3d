@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 16:43:14 by llion             #+#    #+#             */
-/*   Updated: 2023/06/16 09:36:55 by amouly           ###   ########.fr       */
+/*   Updated: 2023/07/16 11:28:06 by llion@student    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,11 @@ void	parse_loop(t_cub *c, int *i, char **f)
 int	parse_infos(char **f, t_cub *c)
 {
 	int	i;
-	int	j;
 
 	i = 0;
 	c->t->nb_elems = 0;
 	while (i < ft_tablen(f) && c->t->nb_elems < 6)
-	{
-		j = 0;
 		parse_loop(c, &i, f);
-	}
 	c->nb_line_map_start = i;
 	return (1);
 }

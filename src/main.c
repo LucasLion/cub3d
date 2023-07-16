@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 01:37:53 by llion             #+#    #+#             */
-/*   Updated: 2023/06/16 09:40:35 by amouly           ###   ########.fr       */
+/*   Updated: 2023/07/16 11:25:59 by llion@student    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	map_width(char **map)
 {
-	int	i;
-	int	width;
+	int		i;
+	size_t	width;
 
 	i = 0;
 	width = 0;
@@ -31,8 +31,8 @@ int	map_width(char **map)
 void	draw_rectangle(mlx_image_t *img, int y_start, int y_end,
 		unsigned long int color)
 {
-	int	i;
-	int	j;
+	size_t	i;
+	int		j;
 
 	i = 0;
 	while (i < img->width)

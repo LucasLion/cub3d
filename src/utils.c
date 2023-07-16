@@ -6,7 +6,7 @@
 /*   By: amouly <amouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:50:12 by llion             #+#    #+#             */
-/*   Updated: 2023/07/12 17:25:16 by amouly           ###   ########.fr       */
+/*   Updated: 2023/07/16 11:30:25 by llion@student    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	free_function(char **file, t_cub *c)
 		ft_freetab(file);
 	if (c->map)
 		ft_freetab(c->map);
-	free(c);
 	free(c->t);
+	free(c);
 	return (0);
 }
 
@@ -69,7 +69,7 @@ void	init_cub_2(t_cub *c)
 
 int	init_cub(t_cub *c, char **file)
 {
-	c->nb_line_map_start = get_nb_line_map_start(file, c);
+	c->nb_line_map_start = get_nb_line_map_start(file);
 	c->t = get_textures(c, file);
 	if (c->t == NULL)
 		return (0);
